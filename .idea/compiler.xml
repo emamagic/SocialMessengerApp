@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="Limoo.app" target="11" />
+      <module name="Limoo.application" target="11" />
+      <module name="Limoo.buildSrc" target="11" />
+      <module name="Limoo.core" target="11" />
+      <module name="Limoo.countrycodepicker" target="11" />
+      <module name="Limoo.data.cache" target="11" />
+      <module name="Limoo.data.network" target="11" />
+      <module name="Limoo.data.repository-impl" target="11" />
+      <module name="Limoo.emoji" target="11" />
+      <module name="Limoo.features.signin" target="11" />
+      <module name="Limoo.libs.countrycodepicker" target="11" />
+      <module name="Limoo.libs.emoji" target="11" />
+      <module name="Limoo.navigation" target="11" />
+      <module name="Limoo.signin" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

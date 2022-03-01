@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_color"
+        android:fillViewport="true"
+        android:layoutDirection="ltr"
+        android:paddingLeft="@dimen/limoo_root_padding"
+        android:paddingRight="@dimen/limoo_root_padding"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_signupF_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_10d"
+                android:src="@drawable/ic_logo_signin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/appCompatTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_medium_margin"
+                android:text="@string/signup_signin"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_18s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_signupF_logo" />
+
+            <TextView
+                android:id="@+id/appCompatTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:text="@string/write_your_phone_number"
+                android:textColor="@color/limoo_grey_2"
+                android:textSize="@dimen/limoo_14s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+            <TextView
+                android:id="@+id/txt_signup_with_server_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:padding="2dp"
+                android:text="@string/signup_with_private_server"
+                android:textColor="@color/limoo_secondary"
+                android:textSize="@dimen/limoo_12s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+
+            <com.emamagic.core.widget.LimooValidatorInput
+                android:id="@+id/validator_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_large_margin"
+                android:layout_marginBottom="28dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/txt_terms_policy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_signup_with_server_name"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:state_default="@drawable/bg_signup_phone_number_default"
+                app:state_fail="@drawable/bg_signup_phone_number_failed"
+                app:state_focused="@drawable/bg_signup_phone_number_focused">
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textSize="@dimen/limoo_14s"
+                    android:textStyle="bold" />
+
+
+                <com.emamagic.core.widget.ClickableDrawableEditText
+                    android:id="@+id/inputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/limoo_input_height"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:drawableLeft="@drawable/ic_iran_flag"
+                    android:drawablePadding="12dp"
+                    android:textSize="@dimen/limoo_input_text_size"
+                    android:hint="@string/example_phone_number"
+                    android:inputType="phone"
+                    android:maxLength="15"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textColorHint="@color/limoo_grey_3" />
+
+
+                <TextView
+                    android:id="@+id/validatorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:text="@string/wrong_input_phone_number"
+                    android:textColor="@color/limoo_error_state"
+                    android:textSize="@dimen/limoo_12s"
+                    android:visibility="invisible" />
+
+            </com.emamagic.core.widget.LimooValidatorInput>
+
+            <TextView
+                android:id="@+id/txt_terms_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/limoo_medium_margin"
+                android:text="@string/limoo_rules"
+                android:textSize="@dimen/limoo_12s"
+                android:lineSpacingExtra="@dimen/limoo_10d"
+                app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/validator_input"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/limoo_button_height"
+                android:layout_marginBottom="@dimen/limoo_medium_margin"
+                android:background="@drawable/bg_limoo_disable_submit"
+                android:gravity="center"
+                android:text="@string/receive_verification_code"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_16s"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txt_signup_with_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_signup_with_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/limoo_very_large_margin"
+                android:text="@string/signup_with_username"
+                android:textColor="@color/limoo_secondary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>

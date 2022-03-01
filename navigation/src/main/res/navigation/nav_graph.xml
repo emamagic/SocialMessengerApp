@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/conversationFragment">
+
+<!--    <fragment android:id="@+id/homeFragment"-->
+<!--        android:label=""-->
+<!--        android:name="com.emamagic.home.HomeFragment">-->
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_moviesFragment"-->
+<!--            app:destination="@id/moviesFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_movieFragment"-->
+<!--            app:destination="@id/movieFragment" />-->
+<!--    </fragment>-->
+
+
+</navigation>

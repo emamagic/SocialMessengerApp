@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_rly"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="24dp"
+    android:paddingRight="14dp"
+    android:paddingLeft="14dp">
+
+  <TextView
+      android:id="@+id/title_tv"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      android:visibility="gone"
+      android:layout_marginEnd="10dp"
+      android:layout_marginBottom="10dp"
+      android:text="@string/select_country"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:textColor="@android:color/secondary_text_light" />
+
+  <EditText
+      android:id="@+id/search_edt"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_below="@+id/title_tv"
+      android:layout_marginBottom="16dp"
+      android:background="@drawable/bg_search_country_default"
+      android:drawableLeft="@drawable/ic_search_n"
+      android:drawablePadding="8dp"
+      android:hint="@string/search_hint"
+      android:imeOptions="flagNoExtractUi"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="#172A42"
+      android:textColorHint="#989A9E"
+      android:textSize="12sp" />
+
+
+  <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/search_edt"
+      card_view:cardElevation="2dp"
+      card_view:cardCornerRadius="16dp"
+      card_view:cardUseCompatPadding="true">
+
+    <ListView
+        android:id="@+id/country_dialog_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:dividerHeight="2dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"/>
+
+  </androidx.cardview.widget.CardView>
+
+  <TextView
+      android:id="@+id/no_result_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/search_edt"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="50dp"
+      android:text="@string/no_result_found"
+      android:textColor="@android:color/primary_text_light"
+      android:visibility="gone"
+      />
+
+</RelativeLayout>
