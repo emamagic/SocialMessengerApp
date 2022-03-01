@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply from:   "$rootDir/android-common-build.gradle"
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+
+    implementation project(Modules.application)
+    implementation project(Modules.navigation)
+    implementation project(Modules.entity)
+    implementation project(Modules.commonJvm)
+    implementation Libs.kotlin_coroutines
+    implementation (Libs.navigation_component_fragment)
+    implementation (Libs.navigation_component_ui)
+    implementation Libs.view_model_scope
+}

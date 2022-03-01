@@ -1,0 +1,530 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="search">جست و جو</string>
+
+    <string name="registration_code">کد فعال سازی</string>
+
+    <string name="in_progress">in_progress</string>
+    <string name="hint_input_message">enter the message</string>
+
+
+    <!--
+        Toast
+        -->
+    <string name="error">Error</string>
+    <string name="info">Info</string>
+    <string name="toast_press_again_to_exit">press again to exit</string>
+
+
+    <!--
+        Main bottom navigation items
+        -->
+    <string name="messages">پیام‌ها</string>
+    <string name="works">کار ها</string>
+    <string name="contacts">همکاران</string>
+    <string name="more">بیشتر</string>
+
+
+    <!--
+        Error message
+        -->
+    <string name="error_network">در ارتباط با سرور مشکل ایجاد شده است.</string>
+    <string name="error_request">request_error</string>
+    <string name="error_unexpected">unexpected_error</string>
+    <string name="error_invalid_phone_number">شماره %s معتبر نمیباشد</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_workspace_name">نام باید حداقل 2 کاراکتر و حداکثر 15 کاراکتر باشد.</string>
+
+
+    <!--
+        View toolbar title
+        -->
+    <string name="toolbar_title_add_member">افزودن افراد</string>
+    <string name="toolbar_title_create_group">ایجاد گروه</string>
+    <string name="toolbar_title_edit_group">ویرایش گروه</string>
+    <string name="toolbar_title_create_workspace">ایجاد فضای کاری</string>
+    <string name="toolbar_title_edit_workspace">ویرایش فضای کاری</string>
+    <string name="toolbar_title_login">Sign in</string>
+
+
+    <!--
+        Conversation type
+        -->
+    <string name="pinned_groups">گروه‌های سنجاق‌ شده</string>
+    <string name="public_groups">گروه‌های عمومی</string>
+    <string name="private_groups">گروه‌های خصوصی</string>
+    <string name="direct_messages">پیام‌های شخصی</string>
+    <string name="group_messages">پیام‌های گروهی</string>
+    <string name="town_square_fa">میدان شهر</string>
+    <string name="town_square_en">Town Square</string>
+
+
+    <!--
+        Conversation option
+        -->
+    <string name="channel_option_pin">افزودن به سنجاق‌ شده‌ها</string>
+    <string name="channel_option_unpin">حذف از سنجاق ‌شده‌ها</string>
+    <string name="channel_option_mute">روشن کردن اعلانات</string>
+    <string name="channel_option_unmute">بی صدا کردن</string>
+    <string name="channel_option_files">فایل ها</string>
+    <string name="channel_option_view_members">مشاهدهٔ اعضای گروه</string>
+    <string name="channel_option_edit_info">ویرایش اطلاعات گروه</string>
+
+
+    <!--
+        Custom ImagePicker default title
+        -->
+    <string name="pick_image_intent_text">انتخاب کنید</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">دریافت کد</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="password">Password</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="forgot_your_passsword">Forgot your passsword?</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="verify">Verify</string>
+    <string name="myid">my_id</string>
+    <string name="no_data" />
+    <string name="reload" />
+    <string name="forward_message">ارجاع</string>
+    <string name="delete_message">حذف پیام</string>
+    <string name="edit_message">ویرایش پیام</string>
+    <string name="reply">پاسخ</string>
+
+    <string name="iran_country_code">+98</string>
+    <string name="not_a_member">عضو لیمو نیستید؟</string>
+    <string name="sign_up">ثبت‌نام کنید</string>
+    <string name="enter_to_limoo">ورود به لیمو</string>
+    <string name="register">تایید ورود</string>
+    <string name="verification_code_has_been_sent">کد تایید برای شماره تلفن زیر ارسال شده‌است.\nلطفا آن را در کادر زیر وارد کنید.</string>
+    <string name="verify_short">تایید کد</string>
+    <string name="change_number">تصحیح شماره</string>
+    <string name="invalid_otp">"کد وارد شده صحیح نمی‌باشد"</string>
+    <string name="incorrect_otp">"کد وارد شده معتبر نمی‌باشد"</string>
+    <string name="invalid_phone_number">"شمارهٔ واردشده صحیح نمی‌باشد"</string>
+    <string name="add_info">تکمیل ثبت‌نام</string>
+    <string name="first_name">نام</string>
+    <string name="last_name">نام خانوادگی</string>
+    <string name="email">ایمیل</string>
+    <string name="invalid_email">ایمیل وارد شده معتبر نمی‌باشد</string>
+    <string name="enter_name">نام خود را وارد کنید</string>
+    <string name="enter_last_name">نام خانوادگی خود را وارد کنید</string>
+    <string name="join">عضویت</string>
+    <string name="from">از طرف</string>
+    <string name="dismiss_invitation_and_create_workspace">تعویق عضویت و ساخت فضای کاری</string>
+    <string name="dismiss_invitation">تعویق عضویت</string>
+    <string name="share">اشتراک</string>
+    <string name="upload_pic">بارگذاری تصویر</string>
+    <string name="workspace_name">نام فضای کاری</string>
+    <string name="workspace_organization_name">نام سازمان</string>
+    <string name="workspace_addr">آدرس فضای کاری</string>
+    <string name="limoo_workspace">%1$sworkspace/</string>
+    <string name="verify_to_create_workspace">تایید و افزودن افراد</string>
+    <string name="submit_to_create_workspace">تایید و ارسال درخواست</string>
+    <string name="free_workspace">فضای کاری آزاد</string>
+    <string name="new_workspace_organization">فضای کاری جدید در سازمان</string>
+    <string name="enter_workspace_name">نام محیط کاری را وارد کنید</string>
+    <string name="create_group">ساخت گروه</string>
+    <string name="add_member">افزودن عضو</string>
+    <string name="settings">تنظیمات</string>
+    <string name="workspace_setting">تنظیمات فضا</string>
+    <string name="group_name">نام گروه</string>
+    <string name="group_type">نوع گروه</string>
+    <string name="verify_to_create_group">تایید و ایجاد گروه</string>
+    <string name="enter_group_name">نام گروه را وارد کنید</string>
+    <string name="confirm_and_start">تایید و شروع کار</string>
+    <string name="save">ذخیره</string>
+    <string name="cancel">لغو</string>
+    <string name="private_group">گروه خصوصی</string>
+    <string name="public_group">گروه عمومی</string>
+    <string name="call">برقراری تماس</string>
+    <string name="message">ارسال پیام</string>
+    <string name="name">نام</string>
+    <string name="address">آدرس</string>
+    <string name="submit">تایید</string>
+    <string name="explain">توضیحات</string>
+    <string name="bio">جایگاه</string>
+    <string name="add_new_task">افزودن کار جدید</string>
+    <string name="phone_num">شمارهٔ تماس</string>
+    <string name="view_profile">مشاهدهٔ نمایه</string>
+    <string name="invite_to_group">دعوت کردن به گروه</string>
+    <string name="view_shared_files">ٰمشاهدهٔ فایل‌های مشترک</string>
+    <string name="no">خیر</string>
+    <string name="yes">بله</string>
+    <string name="u_sure">آیا از خروج اطمینان دارید؟</string>
+
+    <string name="group_members">مشاهدهٔ اعضای گروه</string>
+    <string name="edit_group">ویرایش اطلاعات گروه</string>
+
+    <string name="createWorkspace">ساخت فضای کاری</string>
+    <string name="invitation_title_workspace">دعوت به فضای کاری</string>
+    <string name="invitation_title_workspace2">تکمیل ثبت‌نام</string>
+    <string name="join_workspaces">عضویت در فضاها و ورود به سامانه</string>
+    <string name="thread">رشته پاسخ</string>
+    <string name="remind_me">یادآوری کن</string>
+    <string name="make_task">ساختن کار</string>
+    <string name="calendar">تقویم</string>
+    <string name="file_management">مدیریت فایل‌ها</string>
+    <string name="reminders">یادآورها</string>
+    <string name="this_place_is_under_construction">this place is under construction!</string>
+    <string name="all_threads">رشته‌ها</string>
+    <string name="organization">سازمان</string>
+
+    <plurals name="TransferControlView_n_items">
+        <item quantity="one">%d Item</item>
+        <item quantity="other">%d Items</item>
+    </plurals>
+    <string name="forwarded_from">باز ارسال شده از</string>
+
+    <!--
+        attachment_type_selector
+        -->
+    <string name="attachment_type_selector__audio">صدا</string>
+    <string name="attachment_type_selector__audio_description">صوت</string>
+    <string name="attachment_type_selector__contact">مخاطب</string>
+    <string name="attachment_type_selector__contact_description">مخاطب</string>
+    <string name="attachment_type_selector__camera">دوربین</string>
+    <string name="attachment_type_selector__camera_description">دوربین</string>
+    <string name="attachment_type_selector__location">مکان</string>
+    <string name="attachment_type_selector__location_description">اشتراک‌گذاری مکان</string>
+    <string name="attachment_type_selector__gif">گیف</string>
+    <string name="attachment_type_selector__gif_description">گیف</string>
+    <string name="attachment_type_selector__gallery_description">تصویر با ویدئو</string>
+    <string name="attachment_type_selector__file_description">فایل</string>
+    <string name="attachment_type_selector__gallery">گالری</string>
+    <string name="attachment_type_selector__file">فایل</string>
+    <string name="attachment_type_selector__drawer_description">تغییر حالت نگه دارنده پیوست</string>
+
+    <!--
+        AttchmentManager
+        -->
+    <string name="AttachmentManager_cant_open_media_selection">امکان یافتن برنامه‌ای برای انتخاب مدیا وجود ندارد.</string>
+    <string name="AttachmentManager_requires_location">لیمو برای به اشتراک گذاشتن لوکیشن به دسترسی مکان نیاز دارد.</string>
+    <string name="AttachmentManager_requires_the_external_storage_permission_in_order_to_attach_photos_videos_or_audio">Limoo برای ارسال فایل‌های تصویری و صوتی نیاز به دسترسی به حافظه دارد اما این دسترسی به طور همیشگی رد شده است. لطفا به بخش برنامه در تنظیمات تلفن همراه خود رفته و پس از یافتن Limoo وارد بخش دسترسی ها شده و گزینه حافظه را فعال کنید.</string>
+    <string name="AttachmentManager_requires_contacts_permission_in_order_to_attach_contact_information">Limoo برای جستجو مخاطبان نیاز به دسترسی به مجوز مخاطبان دارد اما این دسترسی به Limoo داده نشده است. لطفا به بخش برنامه ها در تنظیمات تلفن همراه خود رفته در ادامه پس از یافتن Limoo وارد بخش دسترسی ها شده و گزینه مخاطبان را فعال کنید.</string>
+    <string name="AttachmentManager_requires_location_information_in_order_to_attach_a_location">Limoo برای استفاده از سرویس مکانیاب،  نیازمند دسترسی به سرویس مکان دارد ولی این دسترسی قطع شده است. لطفا برای ادامه دادن، به بخش منوی تنظیمات برنامه رفته، \"اجازه ها\" را انتخاب کرده و گزینه ی \"مکان\" را فعال نمایید.</string>
+    <string name="AttachmentManager_requires_the_camera_permission_in_order_to_take_photos_but_it_has_been_permanently_denied">Limoo جهت گرفتن عکس نیاز به دسترسی دوربین دارد، اما به طور دائم رد شده است. لطفاً به منوی تنظیمات برنامه ها رفته، \"Permissions\" را انتخاب کرده، و \"Camera\" را فعال کنید.</string>
+
+
+    <!--
+        Permission
+        -->
+    <string name="permission_required">مجوز لازم است</string>
+    <string name="Permissions_continue">ادامه</string>
+    <string name="call_requires_the_call_permission_but_it_has_been_permanently_denied">Limoo جهت تماس گرفتن نیاز به دسترسی تماس دارد، اما به طور دائم رد شده است. لطفاً به منوی تنظیمات برنامه ها رفته، \"Permissions\" را انتخاب کرده، و \"Call\" را فعال کنید.</string>
+
+    <!--
+        Permission gps power
+        -->
+
+    <string name="gps_power_change_title">مکان نمای شما فعال نمیباشد</string>
+    <string name="gps_power_change_description">برای به اشتراک گذاشتن مکان با دیگر افراد باید مکان نمای خود را روشن نمایید.</string>
+    <string name="gps_power_change_on">روشن کردن</string>
+    <string name="gps_power_change_cancell">لغو</string>
+
+    <!--
+        Toast
+        -->
+    <string name="toast_unable_to_parallel_download">امکان دانلود همزمان چند فایل وجود ندارد</string>
+    <string name="toast_unable_to_open_media">برنامه ای برای بازکردن این رسانه وجود ندارد.</string>
+    <string name="toast_workspace_dit_admission_not_permitted">شما اجازهٔ ویرایش این فضای کاری را ندارید</string>
+    <string name="toast_invalid_contact_phone_number">شماره اضافه شده معتبر نمی‌باشد.</string>
+
+    <!--
+        Other
+        -->
+    <string name="unknown_file">فایل ناشناخته</string>
+    <string name="not_now">حالا نه</string>
+    <string name="no_result_found">چیزی یافت نشد</string>
+    <string name="add_phone_number">شماره تلفن را وارد کنید</string>
+    <string name="last_messages">%1$d  پیام پیشین </string>
+    <string name="send_response">ارسال پاسخ</string>
+    <string name="forward_message_succes">ارجاع موفق</string>
+    <string name="view_image">مشاهده تصویر</string>
+    <string name="view_image_activity_subtitle">توسط : %s در تاریخ %s ساعت %s</string>
+    <string name="confirm_delete">حذف شود؟</string>
+    <string name="added_to_conversation">کاربر %s توسط %s عضو گروه شد.</string>
+    <string name="joined_conversation">کاربر %s عضو گروه شد.</string>
+    <string name="send_again">ارسال مجدد</string>
+    <string name="retry">تلاش مجدد</string>
+    <string name="click_plus_to_add_member">برای اضافه کردن شماره تلفن روی + تپ کنید.</string>
+    <string name="select_member_to_add">برای اضافه کردن به فضای کاری کاربری را انتخاب نمایید یا شماره تلفن را وارد کنید.</string>
+    <string name="delete_user">حذف کاربر</string>
+    <string name="give_admin_permission">ادمین  کردن کاربر</string>
+    <string name="removed_from_conversation">کاربر %s توسط %s از گروه حذف شد.</string>
+    <string name="error_workspace_name_already_exist">ادرس فضای کاری تکراری است.</string>
+    <string name="connected">متصل به سرور</string>
+    <string name="not_connected">عدم دسترسی به اینترنت …</string>
+    <string name="ccontact_doesnt_have_any_number">مخاطب شماره ای برای ارسال ندارد </string>
+    <string name="coming_soon">به زودی</string>
+    <string name="send_invitation_to_phone_number">افزودن با شماره تلفن</string>
+    <string name="invite_contacts">دعوت از مخاطبین</string>
+    <string name="contacts_list">لیست مخاطبین</string>
+    <string name="send">ارسال</string>
+    <string name="skip_adding_member">تعویق افزودن افراد</string>
+    <string name="toolbar_title_add_member_to_workspace">افزودن افراد به فضای کاری</string>
+    <string name="search_in">جست و جو در</string>
+    <string name="search_field">عنوان مورد جست و جو</string>
+    <string name="network_setting">تنظیمات شبکه</string>
+    <string name="error_connecting_network">خطا در اتصال به اینترنت</string>
+    <string name="search_result_count">%d نتیجه پیدا شده است</string>
+    <string name="search_no_result_found">نتیجه‌ای پیدا نشده است</string>
+    <string name="no_group_is_selected">گروه یا شخصی انتخاب نشده است</string>
+    <string name="are_selected"> انتخاب شدند </string>
+    <string name="and_others_selected"> و %d نفر دیگر انتخاب شدند</string>
+    <string name="verification_code_has_been_expired">کد تایید منقضی شد.</string>
+    <string name="send_verification_code_again">ارسال مجدد کد</string>
+    <string name="response">پاسخ</string>
+    <string name="download">دانلود</string>
+    <string name="downloading">در حال دانلود</string>
+    <string name="open">باز کردن</string>
+    <string name="read_more">نمایش کامل</string>
+    <string name="read_less">نمایش ناقص</string>
+    <string name="read_more2">ادامه پیام</string>
+    <string name="hint_input_caption">insert caption</string>
+    <string name="leave_conversation">ترک گروه</string>
+    <string name="copy">کپی</string>
+    <string name="view_video">مشاهده ویدئو</string>
+    <string name="remove_pic">حذف تصویر</string>
+    <string name="edit_pic">تغییر تصویر</string>
+    <string name="slash"> / </string>
+    <string name="save_changes">ذخیره تغییرات</string>
+    <string name="selected_files">فایل های انتخاب شده</string>
+    <string name="download_failed">دانلود فایل به مشکل برخورد کرد،مجددا تلاش کنید.</string>
+    <string name="saving_information">در حال ثبت مشخصات</string>
+    <string name="sending_invitation">در حال ارسال دعوت نامه</string>
+    <string name="send_invitation">ارسال دعوت نامه</string>
+    <string name="create_workspace_description">کاربر گرامی؛ \n برای استفاده از پیام‌رسان لیمو یک فضای کاری جدید بسازید.</string>
+    <string name="other_groups">گروه‌های دیگر</string>
+    <string name="join_other_groups">عضویت در گروه‌های دیگر</string>
+    <string name="is_typing">%s در حال نوشتن است…</string>
+    <string name="member">%d عضو</string>
+    <string name="left_conversation">کاربر %s گروه را ترک کرد.</string>
+    <string name="system">سیستم</string>
+    <string name="change_conversation_name">کاربر %s نام گروه را از %s به %s تغییر داد.</string>
+    <string name="transition_avatar">transition_avatar</string>
+    <string name="in_conversation">در گروه %s</string>
+    <string name="in_direct">در گفت و گوی شخصی با %s</string>
+    <string name="admin">admin</string>
+    <string name="remove_admin_permission">حذف ادمین بودن کاربر</string>
+    <string name="error_downloading">خطا در دانلود</string>
+    <string name="forbidden_access_to_chat">شما به این گروه دسترسی ندارید.</string>
+    <string name="archive_conversation">بایگانی گروه</string>
+    <string name="archived_conversation">گروه‌های بایگانی شده</string>
+    <string name="new_conversation_created">گروه عمومی %s توسط %s ساخته شد.</string>
+    <string name="unread_message">سایر خوانده نشده‌ها</string>
+    <string name="change_conversation_icon">کاربر %s ایکون گروه را تغییر داد.</string>
+    <string name="mark_unread">خوانده نشده</string>
+    <string name="new_messages">پیام‌های جدید</string>
+
+    <string name="do_not_disturb">مزاحم نشوید</string>
+    <string name="start">شروع</string>
+    <string name="end">پایان</string>
+    <string name="notification">اعلان‌ها</string>
+    <string name="do_not_disturb_summery">نشان ندادن اعلان در زمان مشخص</string>
+    <string name="set">تنظیم</string>
+    <string name="account">حساب کاربری</string>
+    <string name="workspace_membership_settings">تنظیمات شخصی فضا</string>
+    <string name="account_settings">تنظیمات حساب کاربری</string>
+    <string name="nickname">نام نمایشی</string>
+    <string name="position">سمت در این فضای کاری</string>
+    <string name="first_name_error">نام نباید خالی باشد.</string>
+    <string name="last_name_error">نام خانوادگی نباید خالی باشد.</string>
+    <string name="email_error">ایمیل نباید خالی باشد.</string>
+    <string name="phone_num_error">شماره تماس نباید خالی باشد.</string>
+    <string name="saved_successfully">ذخیره شد.</string>
+    <string name="nickname_error">نام نمایشی نمیتواند خالی باشد.</string>
+    <string name="position_error">"سمت در این فضای کاری" نمیتواند خالی باشد.</string>
+    <string name="exit">خروج</string>
+    <string name="conversation">گروه</string>
+    <string name="choose_conversation">انتخاب گروه</string>
+    <string name="choose_workspace">انتخاب فضای کاری</string>
+    <string name="percent">%</string>
+    <string name="download_requires_the_external_storage_permission">Limoo برای دانلود فایل‌ها نیاز به دسترسی به حافظه دارد اما این دسترسی به طور همیشگی رد شده است. لطفا به بخش برنامه در تنظیمات تلفن همراه خود رفته و پس از یافتن Limoo وارد بخش دسترسی ها شده و گزینه حافظه را فعال کنید.</string>
+    <string name="link">لینک مستقیم</string>
+    <string name="copied_to_clipboard">لینک ساخته شده در کلیپ برد ذخیره شد.</string>
+    <string name="all_conversation_members">همه اعضای گروه</string>
+    <string name="numbered_new_messages">%d پیام‌ جدید</string>
+    <string name="click_for_sync_all_threads">%d threads. click for update.</string>
+    <string name="new_threads">رشته‌های جدید</string>
+    <string name="invite_member">افزودن عضو</string>
+    <string name="view_members">مشاهده اعضا</string>
+    <string name="start_direct_conversation">شروع پیام شخصی</string>
+    <string name="workspace_members">اعضای فضای کاری</string>
+    <string name="about_limoo">درباره لیمو</string>
+    <string name="close">بستن</string>
+    <string name="about_limoo_content">همه ارتباطات تیم شما در یک مکان. قابل جست‌و‌جوی فوری و قابل دسترسی در همه جا.\n برای اطلاعات بیشتر به %s سر بزنید.</string>
+    <string name="version"> نسخه : %s</string>
+    <string name="version_number">%s - %s</string>
+    <string name="our_site">سایت ما</string>
+    <string name="at_sign">\@</string>
+    <string name="no_current_workspace">فضای کاری جاری  وجود ندارد.</string>
+    <string name="no_current_user">کاربر فعلی وجود ندارد.</string>
+    <string name="privacy_policy">قوانین و شرایط استفاده</string>
+    <string name="privacy_policy_description">۱. شماره تلفن همراه شما جهت ساختن حساب کاربری یا ورود به حساب کاربری که از پیش ساخته‌اید، ضروری است.\n۲. هر شماره تلفن همراه که در لیمو ثبت شده است، یک حساب کاربری در لیمو به شمار می‌رود و نمی‌توان با یک شماره تلفن همراه بیش از یک حساب کاربری در لیمو داشت.\n۳. به ازای هر شماره تلفن همراه - که شناسه‌ی حساب کاربری شما در لیمو است - شما می‌توانید در تعداد بیشماری فضای کاری عضو باشید که یا خود آن‌ها را ساخته‌اید یا دیگران شما را به آن‌ها دعوت کرده‌اند.\n۴. از آن‌جایی که عضویت یا عدم عضویت کاربران در فضاهای کاربری مختلف بر اساس شماره تلفن همراه آن‌ها مشخص می‌گردد، و ساختار لیمو اساسا از فضاهای کاری تشکیل می‌گردد، ورود به فضاهای کاری در لیمو مستلزم احراز هویت کاربر با استفاده از شماره تلفن همراه اوست. بنابراین در صورتی که پیش از این در اپلیکیشن - در پلتفرم‌های مختلف شامل وب، اندروید، ویندوز و … - احراز هویت شما انجام نشده باشد و نشست فعالی نداشته باشد، باید ابتدا در صفحه «ورود / ثبت‌نام» شماره تلفن همراه خود را وارد نمایید تا کد ورود به شماره وارد شده پیامک گردد. به این ترتیب شما می‌توانید با وارد کردن کد ورود اقدام به ورود / ثبت‌نام در لیمو نمائید.\n۵. شماره تلفن همراه شما در لیمو به منظورهای زیر مورد استفاده قرار می‌گیرد: الف) ورود / ثبت‌نام در سامانه لیمو با استفاده از ارسال پیامک کد ورود ب) ارسال تعداد پیام‌های ناخوانده در لیمو به صورت پیامکی به کاربر با استفاده از الگوریتم مشخص ج) اطلاع‌رسانی دریافت پیام‌های #فوری در لیمو که کاربر دریافت کرده است به صورت پیامکی د) ارسال پیامک‌های اطلاع‌رسانی مربوط به لیمو، شامل و نه محدود به: اطلاع‌رسانی‌های قطع و وصلی سرویس لیمو، اطلاع‌رسانی‌های قابلیت‌ها جدید ارائه‌شده در لیمو و … .\n۶. از شماره تلفن همراه شما به هیچ عنوان در جهت اهداف تبلیغاتی نامربوط به لیمو و کسب و کار آن استفاده نخواهد شد.\n۷. شماره تلفن همراه شما در نزد لیمو محفوظ بوده و بدون اجازه کاربر - مگر به دستور نهاد قضائی رسمی و پس از اطلاع به کاربر - در اختیار اشخاص ثالث قرار نخواهد گرفت.</string>
+    <string name="no_thread">هیچ رشته‌‌ای ندارید.</string>
+    <string name="not_supported_system_message">پیام سیستمی پشتیبانی نمیشود.</string>
+    <string name="unarchive_conversation">فعال کردن گروه</string>
+    <string name="you_are_watching_an_archived_conversation">شما در حال مشاهده گروه آرشیو شده هستید.\nامکان ارسال پیام در این گروه وجود ندارد.</string>
+    <string name="you_are_not_allowed_to_send_message">شما امکان ارسال پیام در این گروه را ندارید.</string>
+    <string name="convert_to_admin">تبدیل به مدیر فضای کاری</string>
+    <string name="delete_user_from_workspace">حذف از فضای کاری</string>
+    <string name="convert_to_user">"تبدیل به عضو عادی "</string>
+    <string name="label">برچسب</string>
+    <string name="open_thread">پاسخ</string>
+    <string name="followThread">رشته را دنبال کن</string>
+    <string name="unFollowThread">رشته را دنبال نکن</string>
+    <string name="continue_with_limoo_servers">ادامه با سرور ابری لیمو</string>
+    <string name="continue_with_private_server">ادامه با سرور اختصاصی</string>
+    <string name="limoo_server_information">با انتخاب گزینه (ادامه با سرور ابری لیمو) شما به سرور ابری لیمو به آدرس  https://web.limoo.im متصل خواهید شد این سرویس به صورت SaaS(Software As A Service) ارائه میگردد.</string>
+    <string name="private_server_information">با انتخاب گزینه (اتصال به سرور اختصاصی) به سروری اختصاصی که لیمو بر روی آن نصب شده است متصل میگردید. این سرویس به صورت On-premises ارائه میگردد.</string>
+    <string name="server_not_available">سرور شناسایی نشد</string>
+    <string name="host_hint">https://limoo.example.com</string>
+    <string name="error_host_must_start_with_http">آدرس سرور باید با فرمت https://limoo.example.com باشد.</string>
+
+
+    <string name="availability_status">وضیعت اتصال</string>
+    <string name="offline">آفلاین</string>
+    <string name="online">آنلاین</string>
+    <string name="last_activity_hour">آخرین حضور: %s</string>
+    <string name="last_activity_days">%s روز پیش</string>
+    <string name="last_activity_day">دیروز, %s</string>
+
+
+    <string name="call_room_title_direct">ساخت تماس تصویری</string>
+    <string name="call_room_title_public">ساخت جلسه تصویری</string>
+    <string name="room_name_direct">نام تماس تصویری</string>
+    <string name="room_name_public">نام جلسه تصویری</string>
+    <string name="call_room_create">ایجاد</string>
+    <string name="call_room_cancel">انصراف</string>
+
+
+    <string name="grinning_emoji">:grin:</string>
+    <string name="tears_of_joy_emoji">:joy:</string>
+    <string name="astonished_emoji">:astonished:</string>
+    <string name="like_emoji">:+1:</string>
+    <string name="dislike_emoji">:-1:</string>
+    <string name="more_emoji">-1</string>
+
+    <string name="grinning_emoji_send">grin</string>
+    <string name="tears_of_joy_emoji_send">joy</string>
+    <string name="astonished_emoji_send">astonished</string>
+    <string name="like_emoji_send">+1</string>
+    <string name="dislike_emoji_send">-1</string>
+
+    <string name="no_files">فایلی یافت نشد</string>
+    <string name="all_result">همه</string>
+    <string name="all_organization_workspaces">همه فضاهای کاری</string>
+    <string name="continue_message">ادامه پیام</string>
+    <string name="shrink_message">کوچک کردن پیام</string>
+    <string name="image_saved">image saved in gallery</string>
+    <string name="video_saved">video saved in gallery</string>
+    <string name="document_saved">document saved in gallery</string>
+    <string name="audio_saved">audio saved in gallery</string>
+    <string name="type">نوع</string>
+    <string name="description_to_admin">شرح درخواست به مدیر</string>
+    <string name="success_message_create_workspace_organization">درخواست ساخت فضای کاری به مدیر سازمان ارسال شد، با موافقت مدیر، فضای کاری شما ساخته خواهد شد.</string>
+    <string name="request_to_join_workspace">درخواست شما برای اضافه شدن به این فضا به مدیر فضا کاری ارسال شد</string>
+    <string name="request_to_leave_workspace">آیا مطمئن هستید که می خواهید این فضا را ترک کنید؟</string>
+    <string name="add_to_workspace"> %s نفر به فضای کاری شما دعوت شدند و پیامک دعوت برای آنها ارسال شد. اعضای دعوت شده باید وارد لیمو شده و دعوت شما را بپذیرند تا عضویت آنها در فضا نهایی شود</string>
+    <string name="add_to_workspace_organization"> %s نفر به فضای کاری شما اضافه شدند و پیامک دعوت برای آن‌ها ارسال شد</string>
+    <string name="default_country_code">IR</string>
+    <string name="should_update_app">برای ادامه نیاز به بروز رسانی لیمو دارید.</string>
+    <string name="has_no_store_to_update">برای به روز رسانی ابتدا باید یکی از برنامه های گوگل پلی یا بازار را نصب کنید</string>
+    <string name="voice_message">پیام صوتی</string>
+
+
+    <string name="task_done">کارها\u200cی انجام شده</string>
+    <string name="task_todo">کار ها\u200cی دردست انجام</string>
+    <string name="task_list_empty">کاری وجود ندارد</string>
+    <string name="assigneeToSb">سپرده شده به %s</string>
+    <string name="createdBySb">ساخته‌شده توسط %s</string>
+    <string name="no_organization_id">There is no organization Id</string>
+    <string name="txt_add_member_organization">عضوی برای افزودن وجود ندارد!</string>
+    <string name="empty_name">لطفا نام را وارد کنید</string>
+
+    <string name="permission_camera_message">دسترسی دوربین نیاز است</string>
+    <string name="permission_audio_message">دسترسی میکروفن نیاز است</string>
+    <string name="accept_permission">مجاز است</string>
+    <string name="denied_permission">مجاز نیست</string>
+    <string name="wrong_response">مشکلی رخ داده است</string>
+    <string name="login_with_username">ورود با نام کاربری</string>
+    <string name="login_with_phoneNumber">ورود با شماره تلفن</string>
+    <string name="username">نام کاربری</string>
+
+    <string name="sms_sent">کد ارسالی به شماره %s را وارد کنید.</string>
+    <string name="signup_with_private_server"><u>یا ورود با آدرس اختصاصی</u></string>
+    <string name="signup_with_username"><u>ورود با نام کاربری و رمز عبور</u></string>
+    <string name="signup_with_phone"><u>ورود با شماره تلفن</u></string>
+    <string name="wrong_server_name"><p><font color="#B13A42">سازمانی در لیمو با این آدرس یافت نشد.</font><font color="#305BBF">نیاز به راهنمایی دارید؟</font></p></string>
+    <string name="limoo_rules"><p><font color='#6F7275'>با ورود یا ثبت نام در لیمو شما </font>شرایط و قوانین استفاده <font color="#6F7275">از سرویس لیمو و </font>قوانین حریم خصوصی <font color='#6F7275'> آن را می پذیرید.</font></p></string>
+    <string name="wrong_password"><p>رمز عبور صحیح نیست.<font color="#305BBF;"> رمز عبور خود را فراموش کرده اید؟</font></p></string>
+    <string name="receive_verification_code">دریافت کد</string>
+    <string name="wrong_input_phone_number">شماره وارد شده صحیح نیست.</string>
+    <string name="example_phone_number">۹۱۲***۱۱۲۰</string>
+    <string name="phone_number">شماره موبایل</string>
+    <string name="write_your_phone_number">شماره موبایل خود را جهت دریافت کد وارد کنید.</string>
+    <string name="signup_signin">ورود / ثبت‌نام</string>
+    <string name="write_your_server_name">آدرس اختصاصی مربوط به سازمان خود را وارد کنید.</string>
+    <string name="private_server_link">آدرس اختصاصی سازمان</string>
+    <string name="example_server_name">برای مثال: https://example.com</string>
+    <string name="submit_server_name">ورود به سازمان</string>
+    <string name="enter">ورود</string>
+    <string name="write_your_name_pass">نام کاربری و رمز خود را وارد کنید.</string>
+    <string name="write_your_name">نام کاربری خود را وارد کنید</string>
+    <string name="enter_to_workspace">ورود به فضای کاری</string>
+    <string name="pass">رمز عبور</string>
+    <string name="write_your_pass">رمز عبور خود را وارد کنید</string>
+    <string name="code_verification">وارد کردن کد</string>
+    <string name="resend_verification_code">ارسال مجدد کد</string>
+    <string name="record_code">ثبت کد و گام بعدی</string>
+    <string name="upload_edit_image">بارگذاری و ویرایش تصویر</string>
+    <string name="create_workspace">ایجاد فضای کاری</string>
+    <string name="create_workspace_organization">درخواست ایجاد فضای کاری تحت سازمان</string>
+    <string name="create_workspace_title">با ایجاد یک فضای کاری جدید وارد لیمو شده از امکانات ما بهره\u200cمند شوید.</string>
+    <string name="create_workspace_organization_title">با ایجاد یک فضای کاری جدید با همکاران خود در تعامل باشید و از امکامات ما بهره\u200cمند شوید.</string>
+    <string name="choose_workspace_name">یک نام برای فضای کاری خود انتخاب کنید.</string>
+    <string name="record_workspace">ثبت فضای کاری</string>
+    <string name="your_workspace_record_successfully">فضای کاری شما با موفقیت ثبت شد.</string>
+    <string name="record_workspace_title">شما میتوانید از لیست مخاطبین خود و یا وارد نمودن شماره مستقیم، افراد را به فضای کاری خود دعوت کنید.</string>
+    <string name="invite_later">بعدا دعوت میکنم</string>
+    <string name="user_name">%s عزیز،</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="write_your_family">نام خانوادگی خود را وارد کنید</string>
+    <string name="example_email">برای مثال: example@gmail.com</string>
+    <string name="wrong_email">ایمیل وارد شده صحیح نیست!</string>
+    <string name="profile_completed">تکمیل پروفایل</string>
+    <string name="next">بعدی</string>
+    <string name="ignore">رد کردن</string>
+    <string name="intro_one_title">درباره کار حرف بزن!</string>
+    <string name="intro_one_description">لیمو مرکز ارتباط سازمان شماست. در گروه\u200cها و پیام\u200cهای شخصی به صورت متمرکز، چابک و دسته\u200cبندی شده چک کنید. جلسه\u200cهای تصویری برگزار کنید و از قابلیت\u200cهای ارتباطی دیگر لذت ببرید.</string>
+    <string name="intro_two_title">مرکز اتصال به سایر ابزار\u200cها</string>
+    <string name="intro_two_description">بات\u200cها در لیمو به شما اجازه میدهند تا به نرم\u200cافزار\u200cهای دیگر تیم خود متصل شوید و از اتفاقات آن\u200cها در لیمو باخبر شوید. مخزن بات\u200cها اجازه نصب بات\u200cهای پرکاربرد را به شما میدهند.</string>
+    <string name="intro_three_title">فضای کاری:سازمان مجازی شما!</string>
+    <string name="intro_three_title_when_only_define_organization">سازمان شما!</string>
+    <string name="intro_three_description">هرکدام از سازمان\u200cها، تیم\u200cها یا پروژه\u200cهای شما میتوانند یک فضای کاری در لیمو داشته باشند.هر فضای کاری گروه\u200cها و اعضای خود را دارد.</string>
+    <string name="intro_three_description_when_only_define_organization">هرکدام از تیم\u200cها،دپارتمان\u200cها یا پروژه\u200cهای سازمان شما میتوانند فضای کاری جدا داشته باشند. وارد سازمان شوید و فضای کاری مورد نظر خود را انتخاب کنید و در آن عضو شوید.</string>
+    <string name="add">افزودن</string>
+    <string name="add_again">افزودن مجدد</string>
+    <string name="verify_enter">تایید و ورود</string>
+    <string name="wrong_otp_code">کد تایید نادرست است!</string>
+    <string name="confirmation_workspace">تایید فضای کاری</string>
+    <string name="choose_workspace_des">شما به فضاهای کاری زیر دعوت شده\u200cاید. برای قبول دعوت هرکدام را انتخاب کنید:</string>
+    <string name="no_workspace_selected">شما هیچ فضایی را انتخاب نکرده\u200cاید!</string>
+    <string name="invalid_schem_url">آدرس شما باید با //:https شروع شود.</string>
+    <string name="undefin_url_server">این ادرس تعریف نشده است.</string>
+    <string name="crete_free_workspace">ساخت فضای کاری آزاد</string>
+    <string name="crete_organization_workspace">ساخت فضای کاری تحت سازمان</string>
+
+</resources>
