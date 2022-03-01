@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27685185185185185" />
+        <entry key="application/src/main/res/drawable/rounded_btn_grey.xml" value="0.146" />
+        <entry key="application/src/main/res/drawable/rounded_btn_red.xml" value="0.146" />
         <entry key="core/src/main/res/drawable/bg_corroct_toast.xml" value="0.2005" />
         <entry key="core/src/main/res/drawable/bg_limoo_disable_submit.xml" value="0.1945" />
         <entry key="core/src/main/res/drawable/bg_signup_phone_number_default.xml" value="0.1945" />
@@ -14,6 +16,15 @@
         <entry key="core/src/main/res/drawable/simple_round_transparent.xml" value="0.2005" />
         <entry key="core/src/main/res/layout/dialog_alert.xml" value="0.34322916666666664" />
         <entry key="core/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
+        <entry key="features/signin/src/main/res/drawable/ic_arrow_doown.xml" value="0.133" />
+        <entry key="features/signin/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.133" />
+        <entry key="features/signin/src/main/res/drawable/ic_sms_logo.xml" value="0.199" />
+        <entry key="features/signin/src/main/res/drawable/text_handle.xml" value="0.199" />
+        <entry key="features/signin/src/main/res/layout/fragment_otp.xml" value="0.34322916666666664" />
+        <entry key="features/signin/src/main/res/layout/fragment_signin_with_phone.xml" value="0.34322916666666664" />
+        <entry key="features/signin/src/main/res/layout/fragment_signin_with_server_name.xml" value="0.34322916666666664" />
+        <entry key="features/signin/src/main/res/layout/fragment_signin_with_user_name.xml" value="0.34322916666666664" />
+        <entry key="features/signin/src/main/res/layout/fragment_signin_with_username.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_signup_phone.xml" value="0.34322916666666664" />
       </map>
     </option>

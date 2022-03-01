@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="pinFieldLibraryAccent">#EBF0F6</color>
+    <color name="inactivePinFieldColor">#D8E1ED</color>
+    <color name="pinFieldLibraryTransparent">#00000000</color>
+
+</resources>

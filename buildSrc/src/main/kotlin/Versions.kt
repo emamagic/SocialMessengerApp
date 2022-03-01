@@ -11,6 +11,7 @@ object Versions {
     const val tools = "7.1.1"
     const val gradle = "1.6.10"
     const val hilt = "2.38.1"
+    const val hilt_nav_graph_scope = "1.0.0"
     const val dagger = "2.40.5"
     const val retrofit = "2.9.0"
     const val logging_interceptor = "4.9.3"
@@ -35,5 +36,6 @@ object Versions {
     const val room = "2.4.1"
     const val lottie = "3.4.0"
     const val work_manager = "2.7.1"
+    const val leak_canary = "2.8.1"
 
 }

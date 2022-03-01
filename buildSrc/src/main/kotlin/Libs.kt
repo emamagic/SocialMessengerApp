@@ -13,10 +13,7 @@ object Libs {
     // Hilt
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hilt_kapt = "com.google.dagger:hilt-compiler:${Versions.hilt}"
-
-    // Dagger2
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val dagger_kapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val hilt_nav_graph_scope = "androidx.hilt:hilt-navigation-fragment:${Versions.hilt_nav_graph_scope}"
 
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -87,4 +84,7 @@ object Libs {
 
     // WorkManager
     const val work_manager = "androidx.work:work-runtime-ktx:${Versions.work_manager}"
+
+    // LeakCanary
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
 }

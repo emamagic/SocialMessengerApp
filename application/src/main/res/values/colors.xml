@@ -5,10 +5,6 @@
     <color name="default_color">#FCFCFC</color>
 
 
-    <color name="pinFieldLibraryAccent">#EBF0F6</color>
-    <color name="inactivePinFieldColor">#D8E1ED</color>
-    <color name="pinFieldLibraryTransparent">#00000000</color>
-
     <color name="limoo_info_state">#305BBF</color>
     <color name="limoo_success_state">#30BF69</color>
     <color name="limoo_warning_state">#D9B221</color>

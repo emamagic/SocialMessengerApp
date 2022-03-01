@@ -5,7 +5,7 @@ apply {
 
 dependencies {
   implementation "androidx.cardview:cardview:1.0.0"
-  api 'io.michaelrocks:libphonenumber-android:8.12.5'
+  api 'io.michaelrocks:libphonenumber-android:8.12.44'
   implementation 'androidx.annotation:annotation:1.1.0'
   implementation 'com.google.android.material:material:1.4.0-rc01'
 }

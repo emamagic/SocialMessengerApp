@@ -16,7 +16,6 @@ dependencyResolutionManagement {
 rootProject.name = "Limoo"
 include (
         ':app',
-        ':features:signin',
         ':application',
         ':data:network',
         ':data:cache',
@@ -26,5 +25,7 @@ include (
         ':domain:common-jvm',
         ':navigation',
         ':libs:emoji',
-        ':libs:countrycodepicker'
+        ':libs:countrycodepicker',
+        ':features:signin',
+        ':features:signup',
 )

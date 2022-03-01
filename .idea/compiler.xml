@@ -12,10 +12,12 @@
       <module name="Limoo.data.repository-impl" target="11" />
       <module name="Limoo.emoji" target="11" />
       <module name="Limoo.features.signin" target="11" />
+      <module name="Limoo.features.signup" target="11" />
       <module name="Limoo.libs.countrycodepicker" target="11" />
       <module name="Limoo.libs.emoji" target="11" />
       <module name="Limoo.navigation" target="11" />
       <module name="Limoo.signin" target="11" />
+      <module name="Limoo.signup" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

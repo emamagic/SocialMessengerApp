@@ -1,6 +1,6 @@
 package com.emamagic.signin.contract
 
-import com.emamagic.core.base.Action
+import com.emamagic.application.base.Action
 
 sealed class SigninAction : Action {
 

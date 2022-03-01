@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layoutDirection="ltr"
+        android:paddingLeft="@dimen/limoo_root_padding"
+        android:paddingRight="@dimen/limoo_root_padding"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/limoo_10d"
+                android:src="@drawable/ic_sms_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/appCompatTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_large_margin"
+                android:text="@string/code_verification"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_18s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+
+            <TextView
+                android:id="@+id/txt_sms_sent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:text="@string/sms_sent"
+                android:textColor="@color/limoo_grey_2"
+                android:textSize="@dimen/limoo_14s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+
+            <com.emamagic.signin.otp.pin.SquarePinField
+                android:id="@+id/squareField_pin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="92dp"
+                android:inputType="number"
+                android:textSelectHandle="@drawable/text_handle"
+                android:textSize="16sp"
+                app:cornerRadius="4dp"
+                app:fieldBgColor="@color/limoo_secondary_light_9"
+                app:highlightColor="@color/limoo_primary"
+                app:highlightType="currentField"
+                app:isCursorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_sms_sent"
+                app:lineThickness="1dp"
+                app:noOfFields="5" />
+
+            <TextView
+                android:id="@+id/txt_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_large_margin"
+                android:layout_marginBottom="97dp"
+                android:textColor="@color/limoo_grey_2"
+                android:textSize="@dimen/limoo_12s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/squareField_pin"
+                tools:text="00:45" />
+
+            <TextView
+                android:id="@+id/text_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_medium_margin"
+                android:text="@string/resend_verification_code"
+                android:textColor="@color/limoo_grey_3"
+                android:textSize="@dimen/limoo_12s"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_timer"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/limoo_button_height"
+                android:layout_marginBottom="@dimen/limoo_very_large_margin"
+                android:background="@drawable/bg_limoo_disable_submit"
+                android:gravity="center"
+                android:enabled="false"
+                android:text="@string/record_code"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_16s"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_error"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>

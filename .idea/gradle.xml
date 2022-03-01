@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/domain/repository" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/signin" />
+            <option value="$PROJECT_DIR$/features/signup" />
             <option value="$PROJECT_DIR$/libs" />
             <option value="$PROJECT_DIR$/libs/countrycodepicker" />
             <option value="$PROJECT_DIR$/libs/emoji" />
