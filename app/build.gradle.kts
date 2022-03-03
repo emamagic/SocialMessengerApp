@@ -45,6 +45,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -52,11 +53,11 @@ android {
 
 dependencies {
 
-//    implementation(project(Modules.network))
-//    implementation(project(Modules.repositoryImpl))
-//    implementation(project(Modules.cache))
-//    implementation(project(Modules.repository))
-//    implementation(project(Modules.safe))
+    implementation(project(Modules.network))
+    implementation(project(Modules.repositoryImpl))
+    implementation(project(Modules.cache))
+    implementation(project(Modules.repository))
+    implementation(project(Modules.safe))
     implementation(project(Modules.application))
     implementation(project(Modules.navigation))
 

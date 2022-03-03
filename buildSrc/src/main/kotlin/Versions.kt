@@ -18,7 +18,6 @@ object Versions {
     const val moshi = "2.9.0"
     const val timber = "5.0.1"
     const val multidex = "2.0.1"
-    const val coroutine = "1.3.9"
     const val java_x = "1"
     const val kotlin_reflect = "1.6.10"
     const val life_cycle_scope = "2.2.0"

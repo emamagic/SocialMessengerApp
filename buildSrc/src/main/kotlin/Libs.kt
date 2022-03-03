@@ -29,9 +29,6 @@ object Libs {
     // Multidex
     const val multidex = "androidx.multidex:multidex:${Versions.multidex}"
 
-    // Coroutines
-    const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}"
-
     // JavaX
     const val java_x = "javax.inject:javax.inject:${Versions.java_x}"
 

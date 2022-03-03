@@ -19,6 +19,7 @@ include (
         ':application',
         ':data:network',
         ':data:cache',
+        ':safe',
         ':data:repository-impl',
         ':domain:repository',
         ':domain:entity',

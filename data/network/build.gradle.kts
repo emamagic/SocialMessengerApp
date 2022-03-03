@@ -1,7 +1,5 @@
 plugins {
     id("com.android.library")
-    kotlin ("android")
-    kotlin("kapt")
 }
 
 apply {
@@ -15,5 +13,7 @@ dependencies {
     implementation(Libs.logging_interceptor)
     implementation(Libs.gson_converter)
     implementation(Libs.kotlin_coroutines)
+    implementation(Libs.hilt)
+    "kapt"(Libs.hilt_kapt)
 
 }

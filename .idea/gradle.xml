@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/libs/countrycodepicker" />
             <option value="$PROJECT_DIR$/libs/emoji" />
             <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/safe" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
