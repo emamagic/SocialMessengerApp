@@ -13,4 +13,5 @@ object Modules {
     const val countryPicker = ":libs:countrycodepicker"
     const val signin = ":features:signin"
     const val signup = ":features:signup"
+    const val conversation = ":features:conversation"
 }

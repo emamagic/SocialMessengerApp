@@ -29,4 +29,5 @@ include (
         ':libs:countrycodepicker',
         ':features:signin',
         ':features:signup',
+        ':features:conversation',
 )

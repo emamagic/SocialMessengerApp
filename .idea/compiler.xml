@@ -5,12 +5,14 @@
       <module name="Limoo.app" target="11" />
       <module name="Limoo.application" target="11" />
       <module name="Limoo.buildSrc" target="11" />
+      <module name="Limoo.conversation" target="11" />
       <module name="Limoo.core" target="11" />
       <module name="Limoo.countrycodepicker" target="11" />
       <module name="Limoo.data.cache" target="11" />
       <module name="Limoo.data.network" target="11" />
       <module name="Limoo.data.repository-impl" target="11" />
       <module name="Limoo.emoji" target="11" />
+      <module name="Limoo.features.conversation" target="11" />
       <module name="Limoo.features.signin" target="11" />
       <module name="Limoo.features.signup" target="11" />
       <module name="Limoo.libs.countrycodepicker" target="11" />

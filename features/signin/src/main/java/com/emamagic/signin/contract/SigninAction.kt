@@ -6,7 +6,8 @@ sealed class SigninAction : Action {
 
     data class SubmitPhoneNumber(val phoneNumber: String, val countryCode: String): SigninAction()
     object InvalidPhoneNumber: SigninAction()
-    object ConfigUpdate: SigninAction()
+    data class GetServerConfig(val hostName: String): SigninAction()
+    object ServerConfigLoaded: SigninAction()
     object NeedToSignup: SigninAction()
 
 }

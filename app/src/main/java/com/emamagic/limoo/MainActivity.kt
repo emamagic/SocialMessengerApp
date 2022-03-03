@@ -13,26 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
-    private lateinit var navHostFragment: NavHostFragment
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        setUpNavigateUpArrow()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    private fun setUpNavigateUpArrow() {
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.host_fragment_container) as NavHostFragment
-        navController = navHostFragment.findNavController()
-        setupActionBarWithNavController(navController)
     }
 
 }

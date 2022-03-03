@@ -14,5 +14,6 @@ dependencies {
     implementation(Libs.room)
     implementation(Libs.room_coroutine)
     kapt(Libs.room_kapt)
+    implementation(Libs.pref_manager)
 
 }

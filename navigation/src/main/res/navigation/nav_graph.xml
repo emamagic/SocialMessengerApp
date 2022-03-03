@@ -7,4 +7,8 @@
     <include
         app:graph="@navigation/signin_graph"/>
 
+    <fragment android:id="@+id/conversation_fragment"
+        android:name="com.emamagic.conversation.ConversationFragment"/>
+
+
 </navigation>

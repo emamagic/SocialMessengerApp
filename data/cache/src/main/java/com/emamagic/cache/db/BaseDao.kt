@@ -1,4 +1,4 @@
-package com.emamagic.cache
+package com.emamagic.cache.db
 
 import androidx.room.*
 

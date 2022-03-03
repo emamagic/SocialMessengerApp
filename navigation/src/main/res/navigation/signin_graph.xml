@@ -27,6 +27,10 @@
 
 
     <fragment android:id="@+id/otp_fragment"
-        android:name="com.emamagic.signin.otp.OtpFragment"/>
+        android:name="com.emamagic.signin.otp.OtpFragment">
+        <action
+            android:id="@+id/action_otp_fragment_to_conversation_fragment"
+            app:destination="@id/conversation_fragment" />
+    </fragment>
 
 </navigation>

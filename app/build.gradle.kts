@@ -64,6 +64,7 @@ dependencies {
     // Features
     implementation(project(Modules.signin))
     implementation(project(Modules.signup))
+    implementation(project(Modules.signup))
 
 
     implementation(Libs.multidex)
@@ -74,9 +75,9 @@ dependencies {
     kapt(Libs.hilt_kapt)
     implementation(Libs.leak_canary)
 
-//    implementation(Libs.lottie)
-//    implementation(Libs.retrofit)
-//    implementation(Libs.logging_interceptor)
+    // Di
+    implementation(Libs.retrofit)
+    implementation(Libs.logging_interceptor)
 
 }
 

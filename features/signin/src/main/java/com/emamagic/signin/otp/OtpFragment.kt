@@ -37,7 +37,7 @@ class OtpFragment :
     }
 
     override fun onClickListeners() {
-
+        binding.btnSubmit.setOnClickListener { viewModel.submitOtpEvent() }
     }
 
     class ExpirationTimer(timer: TextView, val finished: () -> Unit) : CountDownTimer(60000, 1000) {

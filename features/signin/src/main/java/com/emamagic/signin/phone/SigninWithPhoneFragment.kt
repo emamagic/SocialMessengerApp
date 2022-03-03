@@ -37,7 +37,7 @@ class SigninWithPhoneFragment :
     }
 
     override fun renderViewState(viewState: SigninState) {
-
+        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
     override fun init() {

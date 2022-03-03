@@ -6,6 +6,7 @@ import com.emamagic.application.base.BaseViewModel
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import com.emamagic.signin.contract.redux.SigninStore
+import com.emamagic.signin.otp.OtpFragmentDirections
 import com.emamagic.signin.phone.SigninWithPhoneFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,6 +16,10 @@ import javax.inject.Inject
 class SigninViewModel @Inject constructor(
     private val store: SigninStore
 ): BaseViewModel<SigninState, SigninAction>(store = store) {
+
+    init {
+        getServerConfigEvent("https://test.limonadapp.ir")
+    }
 
     // ---------------- singin with phone ----------------
     fun typingPhoneNumberEvent(input: String) = viewModelScope.launch {
@@ -35,8 +40,11 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitPhoneNumberEvent() = viewModelScope.launch {
-        store.setEffect(BaseEffect.ShowLoading())
-//        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+    }
+
+    fun getServerConfigEvent(hostName: String) = viewModelScope.launch {
+        store.dispatch(SigninAction.GetServerConfig(hostName))
     }
 
     // ---------------- singin with username ----------------
@@ -61,6 +69,10 @@ class SigninViewModel @Inject constructor(
 
     fun otpExpired() = viewModelScope.launch {
 
+    }
+
+    fun submitOtpEvent() = viewModelScope.launch {
+        store.setEffect(BaseEffect.NavigateTo(OtpFragmentDirections.actionOtpFragmentToConversationFragment()))
     }
 
 }

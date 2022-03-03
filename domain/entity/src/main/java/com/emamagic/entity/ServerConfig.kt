@@ -1,4 +1,3 @@
 package com.emamagic.entity
 
-class MyClass {
-}
+class ServerConfig

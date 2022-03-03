@@ -1,14 +1,8 @@
-package com.emamagic.application.base
+package com.emamagic.cache.pref
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-
-//const val KEY_TOKEN_PHONE_NUMBER = "KEY_TOKEN_PHONE_NUMBER"
-//const val KEY_IS_NOT_FIRST_OPEN_SHOW_CASE_CHILD = "KEY_IS_FIRST_OPEN_SHOW_CASE_CHILD"
-//const val KEY_IS_NOT_FIRST_OPEN_GUIDE_CHILD = "KEY_IS_NOT_FIRST_OPEN_GUIDE_CHILD"
-//const val KEY_IS_NOT_FIRST_OPEN_GUIDE_DEVICE = "KEY_IS_NOT_FIRST_OPEN_GUIDE_DEVICE"
-//const val KEY_IS_NOT_FIRST_OPEN_GUIDE_ADD_CHILD = "KEY_IS_NOT_FIRST_OPEN_GUIDE_ADD_CHILD"
 
 fun prefManager(context: Context): SharedPreferences
         = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
