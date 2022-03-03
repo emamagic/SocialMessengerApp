@@ -84,4 +84,7 @@ object Libs {
 
     // LeakCanary
     const val leak_canary = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
+
+    // Pref Manager
+    const val pref_manager = "androidx.preference:preference-ktx:${Versions.pref_manager}"
 }

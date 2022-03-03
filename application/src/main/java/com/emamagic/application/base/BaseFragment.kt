@@ -1,16 +1,12 @@
 package com.emamagic.application.base
 
-import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -20,10 +16,11 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.emamagic.application.R
-import com.emamagic.application.extension.gone
-import com.emamagic.application.extension.visible
-import com.emamagic.application.utils.ToastyMode
+import com.emamagic.application.utils.*
+import com.emamagic.application.utils.interfaces.TodoCallback
+import com.emamagic.application.utils.interfaces.UndoCallback
 import com.emamagic.application.utils.keyboard.getRootView
+import com.emamagic.application.utils.view.ViewHelper
 
 abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action, VM : BaseViewModel<STATE, ACTION>> :
     Fragment() {
@@ -98,24 +95,40 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action
 
     open fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean = false
 
+    open fun enableUiComponent(): Boolean = false
+
+    open fun disableUiComponent(): Boolean = false
+
+    open fun showDialog(message: String, proceedTitle: String?, cancelTitle: String?): Boolean = false
+
+    open fun showSnackBar(message: String, timeOut: Long? = 3000): Boolean = false
+
     private fun renderDefaultViewEffect(viewEffect: BaseEffect) {
         when (viewEffect) {
-            is BaseEffect.ShowToast -> if (viewEffect.mode == ToastyMode.MODE_TOAST_DEFAULT) {
-                Toast.makeText(requireContext(), viewEffect.message, Toast.LENGTH_SHORT).show()
-            } else {
-                toasty(viewEffect.message, viewEffect.mode)
-            }
+            is BaseEffect.Toast -> toasty(viewEffect.message, viewEffect.mode)
             is BaseEffect.ShowLoading -> showLoading(viewEffect.isDim)
             is BaseEffect.HideLoading -> hideLoading()
+            is BaseEffect.HideKeyboard -> ViewHelper.hideKeyboard(requireView())
+            is BaseEffect.Dialog ->
+                if (!showDialog(viewEffect.message, viewEffect.proceedTitle, viewEffect.cancelTitle))
+                    throw Exception("BaseFragment -> ShowDialog Does Not Implemented")
+            is BaseEffect.SnackBar ->
+                if (!showSnackBar(viewEffect.message, viewEffect.timeOut))
+                    throw Exception("BaseFragment -> ShowSnackBar Does Not Implemented")
+            is BaseEffect.EnableUiComponent ->
+                if (!enableUiComponent())
+                    throw Exception("BaseFragment -> EnableUiComponent Does Not Implemented")
+            is BaseEffect.DisableUiComponent ->
+                if (!disableUiComponent())
+                    throw Exception("BaseFragment -> DisableUiComponent Does Not Implemented")
             is BaseEffect.NavigateTo -> findNavController().navigate(
                 viewEffect.directions,
                 getExtras()
             )
             is BaseEffect.NavigateBack -> findNavController().navigateUp()
-            is BaseEffect.ShowAlert -> {}
             else ->
                 if (!renderCustomViewEffect(viewEffect))
-                    throw Exception("RenderViewEffect Does Not Implemented")
+                    throw Exception("BaseFragment -> RenderViewEffect Does Not Implemented")
         }
     }
 
@@ -128,62 +141,13 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action
         requireActivity().onBackPressedDispatcher.addCallback(owner, callback!!)
     }
 
-    private fun showLoading(isDim: Boolean = false) {
-        if (isDim) loading.setBackgroundColor(Color.parseColor("#cc000000"))
+    open fun showLoading(isDim: Boolean = false) {
+        if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
         loading.visible()
     }
 
-    private fun hideLoading() {
+    open fun hideLoading() {
         loading.gone()
-    }
-
-    private fun toasty(title: String, @ToastyMode selectedMode: Int? = null) {
-        val layout = layoutInflater.inflate(
-            R.layout.layout_toast,
-            requireView().findViewById(R.id.toast_root)
-        )
-        when (selectedMode) {
-
-            ToastyMode.MODE_TOAST_SUCCESS -> {
-                layout.findViewById<ImageView>(R.id.toast_img)
-                    .setImageResource(R.drawable.ic_corroct_toast)
-                layout.findViewById<ConstraintLayout>(R.id.toast_root)
-                    .setBackgroundResource(R.drawable.bg_corroct_toast)
-            }
-            ToastyMode.MODE_TOAST_WARNING -> {
-                layout.findViewById<ImageView>(R.id.toast_img)
-                    .setImageResource(R.drawable.ic_warning_toast)
-                layout.findViewById<ConstraintLayout>(R.id.toast_root)
-                    .setBackgroundResource(R.drawable.bg_warning_toast)
-                layout.findViewById<TextView>(R.id.toast_txt)
-                    .setTextColor(resources.getColor(android.R.color.black))
-            }
-            ToastyMode.MODE_TOAST_ERROR -> {
-                layout.findViewById<ImageView>(R.id.toast_img)
-                    .setImageResource(R.drawable.ic_error_toast)
-                layout.findViewById<ConstraintLayout>(R.id.toast_root)
-                    .setBackgroundResource(R.drawable.bg_error_toast)
-            }
-            else -> {
-                Toast.makeText(requireContext(), title, Toast.LENGTH_LONG).show()
-            }
-
-        }
-
-        layout.findViewById<TextView>(R.id.toast_txt).text = title
-        if (selectedMode != null) {
-            Toast(requireActivity()).apply {
-                setGravity(Gravity.BOTTOM, 0, 100)
-                duration = Toast.LENGTH_LONG
-                view = layout
-            }.show()
-        }
-    }
-
-
-    interface DialogListener {
-        fun onAccept(dialog: Dialog)
-        fun onDecline(dialog: Dialog)
     }
 
     override fun onDestroyView() {

@@ -36,5 +36,6 @@ object Versions {
     const val lottie = "3.4.0"
     const val work_manager = "2.7.1"
     const val leak_canary = "2.8.1"
+    const val pref_manager = "1.2.0"
 
 }

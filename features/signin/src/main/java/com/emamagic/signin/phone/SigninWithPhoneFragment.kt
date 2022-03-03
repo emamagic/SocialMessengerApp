@@ -4,14 +4,13 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
 import com.emamagic.application.base.BaseFragment
-import com.emamagic.application.extension.clickPartOfText
-import com.emamagic.application.extension.onTextChange
-import com.emamagic.application.extension.setColor
-import com.emamagic.application.utils.ViewHelper
+import com.emamagic.application.utils.clickPartOfText
+import com.emamagic.application.utils.onTextChange
+import com.emamagic.application.utils.setColor
+import com.emamagic.application.utils.toasty
+import com.emamagic.application.utils.view.TypeFaceHelper
 import com.emamagic.signin.R
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
@@ -33,12 +32,6 @@ class SigninWithPhoneFragment :
 
         binding.inputEditText.onTextChange {
             viewModel.typingPhoneNumberEvent(it)
-//            if ((it.length == 10 && it.first() != '0') || (it.length == 11 && it.first() == '0')) {
-//                ViewHelper.hideKeyboard(requireView())
-////                btn_submit.enable()
-//            } else if (it.length == 9 || (it.length == 11 && it.first() != '0')){
-////                btn_submit.disable()
-//            }
         }
 
     }
@@ -75,9 +68,20 @@ class SigninWithPhoneFragment :
         }
     }
 
+    override fun enableUiComponent(): Boolean {
+        binding.btnSubmit.enable()
+        return true
+    }
+
+    override fun disableUiComponent(): Boolean {
+        binding.btnSubmit.disable()
+        return true
+    }
+
     private fun setupCountryPicker() {
         setCountryFlag(com.emamagic.application.R.drawable.ic_iran_flag)
         countryPicker = CountryCodePicker(requireContext())
+        countryPicker.typeFace = TypeFaceHelper.getTypeface()
         countryPicker.hideNameCode(true)
         countryPicker.hidePhoneCode(true)
         countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.application.R.string.default_country_code))

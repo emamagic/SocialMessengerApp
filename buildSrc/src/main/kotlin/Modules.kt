@@ -8,6 +8,7 @@ object Modules {
     const val repositoryImpl = ":data:repository-impl"
     const val repository = ":domain:repository"
     const val safe = ":safe"
+    const val emoji = ":libs:emoji"
     const val entity = ":domain:entity"
     const val countryPicker = ":libs:countrycodepicker"
     const val signin = ":features:signin"

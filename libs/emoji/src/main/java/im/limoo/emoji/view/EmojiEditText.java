@@ -9,7 +9,7 @@ import android.widget.EditText;
 import im.limoo.emoji.EmojiManager;
 import im.limoo.emoji.R;
 
-public class EmojiEditText extends EditText {
+public class EmojiEditText extends androidx.appcompat.widget.AppCompatEditText {
     private int mEmojiconSize;
     private int mEmojiconAlignment;
     private int mEmojiconTextSize;

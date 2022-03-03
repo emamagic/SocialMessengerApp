@@ -2,12 +2,9 @@ package com.emamagic.signin.user_name
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
 import com.emamagic.application.base.BaseFragment
-import com.emamagic.application.extension.onTextChange
-import com.emamagic.signin.R
+import com.emamagic.application.utils.onTextChange
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState

@@ -30,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.emamagic.application.widget.FontTextView
                 android:id="@+id/appCompatTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_signupF_logo" />
 
-            <TextView
+            <com.emamagic.application.widget.FontTextView
                 android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
-            <TextView
+            <com.emamagic.application.widget.FontTextView
                 android:id="@+id/txt_signup_with_server_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:state_fail="@drawable/bg_signup_phone_number_failed"
                 app:state_focused="@drawable/bg_signup_phone_number_focused">
 
-                <TextView
+                <com.emamagic.application.widget.FontTextView
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,15 +100,15 @@
                     android:layout_marginTop="@dimen/limoo_small_margin"
                     android:drawableLeft="@drawable/ic_iran_flag"
                     android:drawablePadding="12dp"
-                    android:textSize="@dimen/limoo_input_text_size"
                     android:hint="@string/example_phone_number"
                     android:inputType="phone"
                     android:maxLength="15"
                     android:textColor="@color/limoo_secondary_dark"
-                    android:textColorHint="@color/limoo_grey_3" />
+                    android:textColorHint="@color/limoo_grey_3"
+                    android:textSize="@dimen/limoo_input_text_size" />
 
 
-                <TextView
+                <com.emamagic.application.widget.FontTextView
                     android:id="@+id/validatorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,26 +120,25 @@
 
             </com.emamagic.application.widget.LimooValidatorInput>
 
-            <TextView
+            <com.emamagic.application.widget.FontTextView
                 android:id="@+id/txt_terms_policy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/limoo_medium_margin"
+                android:lineSpacingExtra="@dimen/limoo_10d"
                 android:text="@string/limoo_rules"
                 android:textSize="@dimen/limoo_12s"
-                android:lineSpacingExtra="@dimen/limoo_10d"
                 app:layout_constraintBottom_toTopOf="@+id/btn_submit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/validator_input"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
-            <Button
+            <com.emamagic.application.widget.FontButtonWithProgress
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/limoo_button_height"
                 android:layout_marginBottom="@dimen/limoo_medium_margin"
-                android:background="@drawable/bg_limoo_disable_submit"
                 android:gravity="center"
                 android:text="@string/receive_verification_code"
                 android:textColor="@color/limoo_secondary_dark"
@@ -149,7 +148,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            <com.emamagic.application.widget.FontTextView
                 android:id="@+id/txt_signup_with_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

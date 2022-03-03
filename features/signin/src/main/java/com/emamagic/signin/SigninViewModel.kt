@@ -18,7 +18,12 @@ class SigninViewModel @Inject constructor(
 
     // ---------------- singin with phone ----------------
     fun typingPhoneNumberEvent(input: String) = viewModelScope.launch {
-
+            if ((input.length == 10 && input.first() != '0') || (input.length == 11 && input.first() == '0')) {
+                store.setEffect(BaseEffect.HideKeyboard)
+                store.setEffect(BaseEffect.EnableUiComponent)
+            } else if (input.length == 9 || (input.length == 11 && input.first() != '0')){
+                store.setEffect(BaseEffect.DisableUiComponent)
+            }
     }
 
     fun signinWithServerNameClickedEvent() = viewModelScope.launch {
@@ -30,7 +35,8 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitPhoneNumberEvent() = viewModelScope.launch {
-        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+        store.setEffect(BaseEffect.ShowLoading())
+//        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
     }
 
     // ---------------- singin with username ----------------

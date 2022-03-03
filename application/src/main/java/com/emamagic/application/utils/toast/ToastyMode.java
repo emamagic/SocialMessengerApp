@@ -1,4 +1,4 @@
-package com.emamagic.application.utils;
+package com.emamagic.application.utils.toast;
 
 import androidx.annotation.IntDef;
 

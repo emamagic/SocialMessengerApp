@@ -12,6 +12,10 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="FontButtonWithProgress">
+        <attr name="is_enable" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="CircleColorImageView">
         <attr name="circleColor" format="color" />
         <attr name="foregroundImageTintColor" format="color" />

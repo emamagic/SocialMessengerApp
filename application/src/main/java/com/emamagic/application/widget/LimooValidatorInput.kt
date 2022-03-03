@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import com.emamagic.application.R
-import com.emamagic.application.extension.onTextChange
+import com.emamagic.application.utils.onTextChange
 
 class LimooValidatorInput @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

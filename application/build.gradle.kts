@@ -16,6 +16,7 @@ android {
 
 dependencies {
 
+    implementation(project(Modules.emoji))
 //    implementation(project(Modules.navigator))
 //    implementation(project(Modules.repository))
 //    implementation(project(Modules.commonEntity))
@@ -24,6 +25,7 @@ dependencies {
     implementation(Libs.navigation_component_ui)
     implementation(Libs.kotlin_coroutines)
     implementation(Libs.swipe_refresh)
+    implementation(Libs.pref_manager)
 
     implementation(Libs.glide)
     kapt(Libs.glide_kapt)
