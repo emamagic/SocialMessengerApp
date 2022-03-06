@@ -18,7 +18,6 @@ dependencies {
 
     implementation(project(Modules.emoji))
     implementation(project(Modules.repository))
-    implementation(project(Modules.entity))
     implementation(project(Modules.commonJvm))
     implementation(project(Modules.navigation))
 

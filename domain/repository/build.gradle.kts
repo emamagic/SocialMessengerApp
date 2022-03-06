@@ -11,7 +11,6 @@ java {
 dependencies {
 
     implementation(project(Modules.commonJvm))
-    implementation(project(Modules.entity))
     implementation(Libs.java_x)
 
 }

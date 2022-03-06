@@ -1,10 +1,9 @@
 package com.emamagic.safe.error
 
-import com.emamagic.common_jvm.ErrorEntity
-import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.safe.policy.MemoryPolicy
 import com.emamagic.safe.policy.RetryPolicy
-import retrofit2.Response
+import com.emamagic.safe.util.Response
+import com.emamagic.safe.util.ResultWrapper
 
 interface ErrorHandler {
 
@@ -12,7 +11,8 @@ interface ErrorHandler {
         key: String,
         retryPolicy: RetryPolicy = RetryPolicy(),
         memoryPolicy: MemoryPolicy = MemoryPolicy(),
-        remoteFetch: suspend () -> Response<ResultType>): ResultWrapper<ResultType>
+        remoteFetch: suspend () -> Response<ResultType>
+    ): ResultWrapper<ResultType>
 
     suspend fun <ResultType, RequestType> get(
         key: String,

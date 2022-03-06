@@ -8,7 +8,7 @@ import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.net.NetworkRequest
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.emamagic.safe.General
+import com.emamagic.safe.util.General
 import kotlinx.coroutines.*
 
 class ConnectionLiveData(context: Context, val lifecycleScope: CoroutineScope? = null) : LiveData<ConnectivityStatus>(), ConnectivityPublisherDelegate {

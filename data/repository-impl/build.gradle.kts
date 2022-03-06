@@ -12,7 +12,6 @@ dependencies {
     implementation(project(Modules.network))
     implementation(project(Modules.cache))
     implementation(project(Modules.commonJvm))
-    implementation(project(Modules.entity))
     implementation(project(Modules.repository))
     implementation(Libs.kotlin_reflect)
     implementation(Libs.java_x)

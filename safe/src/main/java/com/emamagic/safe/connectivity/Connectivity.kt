@@ -1,6 +1,6 @@
 package com.emamagic.safe.connectivity
 
-import com.emamagic.safe.General
+import com.emamagic.safe.util.General
 
 class Connectivity(val status: Int, val callback: (() -> Unit?)? = null) {
     companion object {

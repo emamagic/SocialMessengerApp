@@ -1,27 +1,36 @@
 package com.emamagic.repository_impl.repository
 
-import com.emamagic.common_jvm.ResultWrapper
-import com.emamagic.network.dto.ServerConfigDto
+import com.emamagic.common_jvm.ServerConfigResult
+import com.emamagic.entity.ServerConfig
 import com.emamagic.network.service.ConfigService
 import com.emamagic.repository.UserRepository
+import com.emamagic.repository_impl.mapper.ResponseMapper
 import com.emamagic.safe.SafeApi
 import com.emamagic.safe.policy.MemoryPolicy
-import com.emamagic.safe.store.Resource
-import okhttp3.Cache
+import com.emamagic.safe.util.ResultWrapper
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class UserRepositoryImpl @Inject constructor(
     private val serverConfigService: ConfigService
-): SafeApi(), UserRepository {
+) : SafeApi(), UserRepository {
 
-    override suspend fun getServerUpdate(hostName: String): ResultWrapper<*> =
+    override suspend fun getServerUpdate(hostName: String): ServerConfigResult =
         get(
-        key = "salam",
-        memoryPolicy = MemoryPolicy(expires = 5000, shouldRefresh = { oldValue ->  (oldValue.data as ServerConfigDto).config.authServices == hostName })
-        ) {
-        serverConfigService.getServerConfig()
-    }
+            key = "salam",
+            memoryPolicy = MemoryPolicy(
+                expires = 5000,
+                shouldRefresh = { oldValue -> (oldValue.data as ServerConfig).config.authServices == hostName }
+            ))
+        {
+            ResponseMapper(serverConfigService.getServerConfig())
+        }.run {
+            when (this) {
+                is ResultWrapper.Success -> ServerConfigResult.Success(data!!)
+                is ResultWrapper.Failed -> ServerConfigResult.Error(error?.message ?: "error")
+                is ResultWrapper.Loading -> ServerConfigResult.Loading
+            }
+        }
 
 }

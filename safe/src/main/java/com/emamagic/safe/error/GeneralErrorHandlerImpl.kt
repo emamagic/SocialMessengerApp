@@ -1,10 +1,6 @@
 package com.emamagic.safe.error
 
 import android.database.sqlite.SQLiteException
-import com.emamagic.common_jvm.ErrorEntity
-import com.emamagic.common_jvm.NoInternetException
-import com.emamagic.common_jvm.ServerConnectionException
-import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketException
 import java.net.UnknownHostException
@@ -20,9 +16,9 @@ abstract class GeneralErrorHandlerImpl : ErrorHandler {
             is UnknownHostException,
             is ServerConnectionException -> ErrorEntity.Server(message = "${throwable.message}")
             is HttpException -> ErrorEntity.Api(
-                message = throwable.response()?.message(),
-                code = throwable.code(),
-                errorBody = throwable.response()?.errorBody()?.string()
+                message = throwable.messages,
+                code = throwable.code,
+                errorBody = throwable.errorBody
             )
             else -> ErrorEntity.Unknown(message = "${throwable.message}")
         }

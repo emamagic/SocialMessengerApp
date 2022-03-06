@@ -1,4 +1,4 @@
-package com.emamagic.safe
+package com.emamagic.safe.util
 
 import kotlinx.coroutines.sync.Mutex
 

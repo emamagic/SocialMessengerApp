@@ -1,24 +1,19 @@
 package com.emamagic.safe
 
-import com.emamagic.common_jvm.ErrorEntity
-import com.emamagic.common_jvm.NoInternetException
-import com.emamagic.common_jvm.ResultWrapper
-import com.emamagic.common_jvm.ServerConnectionException
+import com.emamagic.safe.error.NoInternetException
+import com.emamagic.safe.error.ServerConnectionException
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
+import com.emamagic.safe.error.ErrorEntity
 import com.emamagic.safe.error.GeneralErrorHandlerImpl
-import com.emamagic.safe.policy.CachePolicy
 import com.emamagic.safe.policy.MemoryPolicy
 import com.emamagic.safe.policy.RetryPolicy
+import com.emamagic.safe.util.General
+import com.emamagic.safe.util.Response
+import com.emamagic.safe.util.ResultWrapper
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.sync.withLock
-import retrofit2.Response
 import java.io.IOException
-import java.lang.Exception
 
 abstract class SafeApi : GeneralErrorHandlerImpl() {
 
@@ -90,7 +85,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         var result: ResultWrapper<ResultType>
         return try {
             val response = call()
-            if (response.isSuccessful) {
+            if (response.isSuccessful()) {
                 response.body()?.let {
                     result = ResultWrapper.Success(
                         data = it,
@@ -101,7 +96,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                 }
             }
             result = ResultWrapper.Failed(
-                error = ErrorEntity.Api(response.errorBody()?.string()),
+                error = ErrorEntity.Api(response.errorBody()),
             )
             return result
         } catch (t: Throwable) {
@@ -122,7 +117,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         var result: ResultWrapper<ResultType>
         return try {
             val response = call()
-            if (response.isSuccessful) {
+            if (response.isSuccessful()) {
                 response.body()?.let {
                     result = ResultWrapper.Success(
                         data = converter(it),
@@ -133,7 +128,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                 }
             }
             result = ResultWrapper.Failed(
-                error = ErrorEntity.Api(response.errorBody()?.string()),
+                error = ErrorEntity.Api(response.errorBody()),
             )
             return result
         } catch (t: Throwable) {

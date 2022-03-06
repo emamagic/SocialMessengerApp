@@ -21,7 +21,7 @@ class OtpFragment :
     BaseFragment<FragmentOtpBinding, SigninState, SigninAction, SigninViewModel>()  {
 
     override val viewModel: SigninViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.singin_modules)
-    private lateinit var expirationTimer: ExpirationTimer
+    private var expirationTimer: ExpirationTimer? = null
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -33,7 +33,7 @@ class OtpFragment :
 
     override fun init() {
         expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.otpExpired() }
-        expirationTimer.start()
+        expirationTimer?.start()
     }
 
     override fun onClickListeners() {
@@ -59,7 +59,8 @@ class OtpFragment :
 
     override fun onDestroy() {
         super.onDestroy()
-        expirationTimer.cancel()
+        expirationTimer?.cancel()
+        expirationTimer = null
     }
 
 }

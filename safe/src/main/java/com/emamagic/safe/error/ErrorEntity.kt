@@ -1,4 +1,4 @@
-package com.emamagic.common_jvm
+package com.emamagic.safe.error
 
 sealed class ErrorEntity(
         val message: String? = null,

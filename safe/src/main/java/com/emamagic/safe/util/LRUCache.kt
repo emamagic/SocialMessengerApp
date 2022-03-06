@@ -1,8 +1,8 @@
-package com.emamagic.safe
+package com.emamagic.safe.util
 
 import android.util.Log
-import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.safe.policy.MemoryPolicy
+import com.emamagic.safe.util.ResultWrapper
 import java.util.*
 
 private const val CAPACITY = 10

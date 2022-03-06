@@ -4,6 +4,7 @@ import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseMiddleware
 import com.emamagic.application.base.Store
 import com.emamagic.application.interactor.SinginUseCase
+import com.emamagic.common_jvm.onSuccess
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import javax.inject.Inject
@@ -26,11 +27,9 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
 
 
     private suspend fun getServerConfig(hostName: String, store: Store<SigninState, SigninAction>) {
-        singinUseCase.getServerConfig(hostName).manageResult(store).let {
-//            store.dispatch(SigninAction.ServerConfigLoaded)
+        singinUseCase.getServerConfig(hostName).onSuccess {
             store.setEffect(BaseEffect.Toast("loaded"))
         }
-
     }
 
 }

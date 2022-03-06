@@ -1,6 +1,6 @@
 package com.emamagic.safe.policy
 
-import com.emamagic.common_jvm.ResultWrapper
+import com.emamagic.safe.util.ResultWrapper
 import java.util.*
 
 data class MemoryPolicy(

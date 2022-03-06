@@ -6,11 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.emamagic.common_jvm.NoInternetException
-import com.emamagic.common_jvm.ServerConnectionException
 import okhttp3.Interceptor
 import okhttp3.Response
-import okhttp3.ResponseBody
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class ClientInterceptor @Inject constructor(private val app: Application): Interceptor {
