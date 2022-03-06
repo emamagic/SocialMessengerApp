@@ -17,6 +17,7 @@
       <module name="Limoo.features.signup" target="11" />
       <module name="Limoo.libs.countrycodepicker" target="11" />
       <module name="Limoo.libs.emoji" target="11" />
+      <module name="Limoo.libs.safe" target="11" />
       <module name="Limoo.navigation" target="11" />
       <module name="Limoo.safe" target="11" />
       <module name="Limoo.signin" target="11" />
