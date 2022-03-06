@@ -141,6 +141,7 @@
                 android:layout_marginBottom="@dimen/limoo_medium_margin"
                 android:gravity="center"
                 android:text="@string/receive_verification_code"
+                app:is_enable="true"
                 android:textColor="@color/limoo_secondary_dark"
                 android:textSize="@dimen/limoo_16s"
                 android:textStyle="bold"

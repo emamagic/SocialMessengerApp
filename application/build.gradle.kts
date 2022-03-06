@@ -17,16 +17,13 @@ android {
 dependencies {
 
     implementation(project(Modules.emoji))
-//    implementation(project(Modules.navigator))
     implementation(project(Modules.repository))
-//    implementation(project(Modules.commonEntity))
+    implementation(project(Modules.entity))
     implementation(project(Modules.commonJvm))
-    implementation(Libs.navigation_component_fragment)
-    implementation(Libs.navigation_component_ui)
-    implementation(Libs.kotlin_coroutines)
+    implementation(project(Modules.navigation))
+
     implementation(Libs.swipe_refresh)
     implementation(Libs.java_x)
-
     implementation(Libs.glide)
     kapt(Libs.glide_kapt)
 }

@@ -9,11 +9,9 @@ apply {
 dependencies {
 
     implementation(project(Modules.commonJvm))
-    implementation(Libs.retrofit)
-    implementation(Libs.logging_interceptor)
-    implementation(Libs.gson_converter)
-    implementation(Libs.kotlin_coroutines)
-    implementation(Libs.hilt)
-    "kapt"(Libs.hilt_kapt)
+    api(Libs.retrofit)
+    api(Libs.logging_interceptor)
+    api(Libs.gson_converter)
+    implementation(Libs.java_x)
 
 }

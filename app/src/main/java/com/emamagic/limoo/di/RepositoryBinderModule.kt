@@ -1,4 +1,4 @@
-package com.emamagic.repository_impl.di
+package com.emamagic.limoo.di
 
 import com.emamagic.repository.UserRepository
 import com.emamagic.repository_impl.repository.UserRepositoryImpl

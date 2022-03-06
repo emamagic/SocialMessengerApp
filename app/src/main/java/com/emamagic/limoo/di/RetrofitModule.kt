@@ -1,4 +1,4 @@
-package com.emamagic.network.di
+package com.emamagic.limoo.di
 
 import com.emamagic.network.interceptor.ClientInterceptor
 import com.emamagic.network.interceptor.ServerConnection

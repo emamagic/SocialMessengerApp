@@ -64,20 +64,14 @@ dependencies {
     // Features
     implementation(project(Modules.signin))
     implementation(project(Modules.signup))
-    implementation(project(Modules.signup))
+    implementation(project(Modules.conversation))
 
 
     implementation(Libs.multidex)
-    implementation(Libs.navigation_component_fragment)
-    implementation(Libs.navigation_component_ui)
     implementation(Libs.hilt)
-    implementation(Libs.hilt_nav_graph_scope)
     kapt(Libs.hilt_kapt)
     implementation(Libs.leak_canary)
 
-    // Di
-    implementation(Libs.retrofit)
-    implementation(Libs.logging_interceptor)
 
 }
 

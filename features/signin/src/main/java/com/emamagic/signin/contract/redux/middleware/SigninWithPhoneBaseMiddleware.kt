@@ -1,5 +1,6 @@
 package com.emamagic.signin.contract.redux.middleware
 
+import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseMiddleware
 import com.emamagic.application.base.Store
 import com.emamagic.application.interactor.SinginUseCase
@@ -26,7 +27,8 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
 
     private suspend fun getServerConfig(hostName: String, store: Store<SigninState, SigninAction>) {
         singinUseCase.getServerConfig(hostName).manageResult(store).let {
-            store.dispatch(SigninAction.ServerConfigLoaded)
+//            store.dispatch(SigninAction.ServerConfigLoaded)
+            store.setEffect(BaseEffect.Toast("loaded"))
         }
 
     }

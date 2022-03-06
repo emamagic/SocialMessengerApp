@@ -24,7 +24,7 @@ object Versions {
     const val view_model_scope = "2.2.0"
     const val kotlin_coroutines = "1.6.0"
     const val store_version = "4.0.1"
-    const val gson_converter = "2.9.0"
+    const val gson = "2.9.0"
     const val swipe_refresh = "1.1.0"
     const val auto_image_slider = "1.4.0"
     const val shimmer = "0.5.0"

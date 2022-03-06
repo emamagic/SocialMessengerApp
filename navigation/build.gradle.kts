@@ -9,7 +9,7 @@ apply {
 
 dependencies {
 
-    implementation (Libs.navigation_component_fragment)
-    implementation (Libs.navigation_component_ui)
+    api (Libs.navigation_component_fragment)
+    api (Libs.navigation_component_ui)
 
 }

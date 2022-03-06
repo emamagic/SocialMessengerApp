@@ -18,7 +18,10 @@ object Libs {
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.moshi}"
-    const val gson_converter = "com.squareup.retrofit2:converter-gson:${Versions.gson_converter}"
+    const val gson_converter = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
+
+    // Gson
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 
     // Logging Interceptor
     const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor}"
@@ -75,6 +78,7 @@ object Libs {
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val room_kapt = "androidx.room:room-compiler:${Versions.room}"
     const val room_coroutine = "androidx.room:room-ktx:${Versions.room}"
+    const val room_common = "androidx.room:room-common:${Versions.room}"
 
     // Lottie
     const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"

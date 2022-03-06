@@ -18,7 +18,7 @@ class SigninViewModel @Inject constructor(
 ): BaseViewModel<SigninState, SigninAction>(store = store) {
 
     init {
-        getServerConfigEvent("https://test.limonadapp.ir")
+//        getServerConfigEvent("https://test.limonadapp.ir")
     }
 
     // ---------------- singin with phone ----------------
@@ -40,6 +40,7 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitPhoneNumberEvent() = viewModelScope.launch {
+//        store.dispatch(SigninAction.GetServerConfig(""))
         store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
     }
 

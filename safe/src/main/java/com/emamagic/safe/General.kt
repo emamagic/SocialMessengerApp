@@ -7,6 +7,8 @@ internal object General {
     val  getMutex = Mutex()
 
 
+    val cache = LRUCache(10)
+
     var shouldRetryNetworkCall = true
 
     const val DISCONNECT = 0
