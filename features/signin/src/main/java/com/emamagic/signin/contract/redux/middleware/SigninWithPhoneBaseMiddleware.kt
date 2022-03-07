@@ -18,7 +18,7 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
         currentState: SigninState,
         store: Store<SigninState, SigninAction>
     ) {
-
+        super.process(action, currentState, store)
         when (action) {
             is SigninAction.GetServerConfig -> getServerConfig(action.hostName, store)
         }

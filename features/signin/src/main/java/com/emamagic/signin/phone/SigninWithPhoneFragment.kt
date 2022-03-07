@@ -50,21 +50,16 @@ class SigninWithPhoneFragment :
         binding.txtSignupWithUsername.setOnClickListener { viewModel.signinWithUserNameClickedEvent() }
         binding.btnSubmit.setOnClickListener { viewModel.submitPhoneNumberEvent() }
 
-        binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی", setColor(com.emamagic.application.R.color.limoo_secondary), true) {
+        binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی",
+            setColor(com.emamagic.application.R.color.limoo_secondary), true) {
 //            val intent = Intent(Intent.ACTION_VIEW)
 //            intent.data = Uri.parse("")
 //            startActivity(intent)
         }
 
-        binding.txtTermsPolicy.clickPartOfText("شرایط و قوانین استفاده", setColor(com.emamagic.application.R.color.limoo_secondary), true) {
-//            if (fragmentManager != null) {
-//                InformationDialog().also {
-//                    val b = Bundle()
-//                    b.putString(InformationDialog.CONTENT, getString(R.string.privacy_policy_description))
-//                    it.arguments = b
-//                    it.show(requireFragmentManager(), "confirm dialog")
-//                }
-//            }
+        binding.txtTermsPolicy.clickPartOfText("شرایط و قوانین استفاده",
+            setColor(com.emamagic.application.R.color.limoo_secondary), true) {
+            viewModel.submitTermsPolicyEvent()
         }
     }
 

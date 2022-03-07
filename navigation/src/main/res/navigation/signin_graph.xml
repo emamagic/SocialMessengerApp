@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_signin_with_phone_fragment_to_otp_fragment"
             app:destination="@id/otp_fragment" />
+        <action
+            android:id="@+id/action_signin_with_phone_fragment_to_terms_policy_fragment"
+            app:destination="@id/terms_policy_fragment" />
     </fragment>
 
 
@@ -31,6 +34,13 @@
         <action
             android:id="@+id/action_otp_fragment_to_conversation_fragment"
             app:destination="@id/conversation_fragment" />
+    </fragment>
+
+    <fragment android:id="@+id/terms_policy_fragment"
+        android:name="com.emamagic.signin.phone.TermsPolicyDialog">
+        <argument
+            android:name="description"
+            app:argType="string" />
     </fragment>
 
 </navigation>

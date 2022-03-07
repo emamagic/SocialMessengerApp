@@ -22,6 +22,7 @@
         <entry key="features/signin/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.133" />
         <entry key="features/signin/src/main/res/drawable/ic_sms_logo.xml" value="0.199" />
         <entry key="features/signin/src/main/res/drawable/text_handle.xml" value="0.199" />
+        <entry key="features/signin/src/main/res/layout/dialog_terms_policy.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_otp.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_signin_with_phone.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_signin_with_server_name.xml" value="0.34322916666666664" />

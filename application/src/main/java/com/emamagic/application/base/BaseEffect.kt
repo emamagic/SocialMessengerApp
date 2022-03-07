@@ -35,6 +35,8 @@ sealed interface BaseEffect {
 
     object DisableUiComponent : BaseEffect
 
+    object NeedToSignUp: BaseEffect
+
 }
 
 /*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/

@@ -1,5 +1,7 @@
 package com.emamagic.signin
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseViewModel
@@ -9,16 +11,20 @@ import com.emamagic.signin.contract.redux.SigninStore
 import com.emamagic.signin.otp.OtpFragmentDirections
 import com.emamagic.signin.phone.SigninWithPhoneFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class SigninViewModel @Inject constructor(
+    @ApplicationContext
+    private val app: Context,
     private val store: SigninStore
 ): BaseViewModel<SigninState, SigninAction>(store = store) {
 
     init {
-//        getServerConfigEvent("https://test.limonadapp.ir")
+        getServerConfigEvent("https://test.limonadapp.ir")
     }
 
     // ---------------- singin with phone ----------------
@@ -40,12 +46,18 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitPhoneNumberEvent() = viewModelScope.launch {
-//        store.dispatch(SigninAction.GetServerConfig(""))
         store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
     }
 
     fun getServerConfigEvent(hostName: String) = viewModelScope.launch {
         store.dispatch(SigninAction.GetServerConfig(hostName))
+    }
+
+    fun submitTermsPolicyEvent() = viewModelScope.launch {
+        store.setEffect(BaseEffect.NavigateTo(
+            SigninWithPhoneFragmentDirections
+                .actionSigninWithPhoneFragmentToTermsPolicyFragment(app.getString(R.string.privacy_policy_description))
+        ))
     }
 
     // ---------------- singin with username ----------------
