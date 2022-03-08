@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseFragment
+import com.emamagic.application.base.SigninEffect
 import com.emamagic.application.utils.clickPartOfText
 import com.emamagic.application.utils.onTextChange
 import com.emamagic.application.utils.setColor
@@ -40,6 +42,13 @@ class SigninWithPhoneFragment :
         if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
+    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
+        when (viewEffect) {
+            SigninEffect.InvalidPhoneNumber -> binding.validatorInput.invalidateInput()
+        }
+        return true
+    }
+
     override fun init() {
         setupCountryPicker()
     }
@@ -48,7 +57,9 @@ class SigninWithPhoneFragment :
 
         binding.txtSignupWithServerName.setOnClickListener { viewModel.signinWithServerNameClickedEvent() }
         binding.txtSignupWithUsername.setOnClickListener { viewModel.signinWithUserNameClickedEvent() }
-        binding.btnSubmit.setOnClickListener { viewModel.submitPhoneNumberEvent() }
+        binding.btnSubmit.setOnClickListener {
+            viewModel.submitPhoneNumberEvent(binding.inputEditText.text.toString(), countryPicker.selectedCountryCodeWithPlus)
+        }
 
         binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی",
             setColor(com.emamagic.application.R.color.limoo_secondary), true) {
@@ -95,6 +106,14 @@ class SigninWithPhoneFragment :
 
     override fun onCountrySelect(flag: Int) {
         setCountryFlag(flag)
+    }
+
+    override fun showLoading(isDim: Boolean) {
+        binding.btnSubmit.showProgress()
+    }
+
+    override fun hideLoading() {
+        binding.btnSubmit.hideProgress()
     }
 
 }

@@ -19,18 +19,18 @@ class SigninWithServerNameFragment :
     override val viewModel: SigninViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.singin_modules)
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun renderViewState(viewState: SigninState) {
-        TODO("Not yet implemented")
+
     }
 
     override fun init() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onClickListeners() {
-        TODO("Not yet implemented")
+
     }
 }

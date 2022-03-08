@@ -1,10 +1,9 @@
 package com.emamagic.signin.contract.redux.middleware
 
-import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseMiddleware
 import com.emamagic.application.base.Store
 import com.emamagic.application.interactor.SinginUseCase
-import com.emamagic.common_jvm.onSuccess
+import com.emamagic.entity.PhoneNumber
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import javax.inject.Inject
@@ -20,16 +19,25 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
     ) {
         super.process(action, currentState, store)
         when (action) {
-            is SigninAction.GetServerConfig -> getServerConfig(action.hostName, store)
+            is SigninAction.GetServerConfig -> getServerConfig(action.hostName)
+            is SigninAction.SubmitPhoneNumber -> submitPhoneNumber(action.phoneNumber)
         }
 
     }
 
 
-    private suspend fun getServerConfig(hostName: String, store: Store<SigninState, SigninAction>) {
-        singinUseCase.getServerConfig(hostName).onSuccess {
-            store.setEffect(BaseEffect.Toast("loaded"))
+    private suspend fun getServerConfig(hostName: String) {
+        singinUseCase.getServerConfig(hostName).manageResult {
+
         }
+
+    }
+
+    private suspend fun submitPhoneNumber(phoneNumber: PhoneNumber) {
+//            store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+
+            singinUseCase.submitPhoneNumber(phoneNumber)
+
     }
 
 }

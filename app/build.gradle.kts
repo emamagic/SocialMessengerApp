@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin ("android")
-    id("androidx.navigation.safeargs")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -28,11 +27,22 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            resValue("string", "host", "web.limoo.im")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+//        getByName("alpha") {
+//            resValue("string", "host", "alpha.limonadapp.ir")
+//            buildConfigField ("String", "BASE_FILE_SERVER_URL", "https://alpha.limonadapp.ir/fileserver/")
+//            applicationIdSuffix = ".alpha"
+//        }
+//        getByName("debug") {
+//            resValue("string", "host", "test.limonadapp.ir")
+//            buildConfigField("String", "BASE_FILE_SERVER_URL", "https://test.limonadapp.ir/fileserver/")
+//            applicationIdSuffix = ".debug"
+//        }
     }
 
     buildFeatures {

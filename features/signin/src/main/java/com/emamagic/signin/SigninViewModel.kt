@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseViewModel
+import com.emamagic.application.base.SigninEffect
+import com.emamagic.entity.PhoneNumber
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import com.emamagic.signin.contract.redux.SigninStore
@@ -38,15 +40,23 @@ class SigninViewModel @Inject constructor(
     }
 
     fun signinWithServerNameClickedEvent() = viewModelScope.launch {
-//        store.dispatch()
+        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToSigninWithServerNameFragment()))
     }
 
     fun signinWithUserNameClickedEvent() = viewModelScope.launch {
-//        store.dispatch()
+        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToSigninWithUsernameFragment()))
     }
 
-    fun submitPhoneNumberEvent() = viewModelScope.launch {
-        store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+    fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = viewModelScope.launch {
+        if (phoneNum.isNotEmpty() && ((phoneNum.length == 10 && phoneNum.first() != '0') || (phoneNum.length == 11 && phoneNum.first() == '0'))) {
+            val phoneNumber = if (phoneNum.length == 11)
+                PhoneNumber(countryCode + phoneNum.substring(1))
+            else
+                PhoneNumber(countryCode + phoneNum)
+            store.dispatch(SigninAction.SubmitPhoneNumber(phoneNumber))
+        } else {
+            store.setEffect(SigninEffect.InvalidPhoneNumber)
+        }
     }
 
     fun getServerConfigEvent(hostName: String) = viewModelScope.launch {

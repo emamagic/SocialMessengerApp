@@ -1,10 +1,10 @@
 package com.emamagic.safe.policy
 
-import com.emamagic.safe.util.ResultWrapper
+import com.emamagic.safe.util.SafeWrapper
 import java.util.*
 
 data class MemoryPolicy<ResultType>(
-    val shouldRefresh: (oldValue: ResultWrapper<ResultType>) -> Boolean = { false },
+    val shouldRefresh: (oldValue: SafeWrapper<ResultType>) -> Boolean = { false },
     val expires: Long = -1
 )  {
     private val createAt: Date = Date()

@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply from:   "$rootDir/android-common-build.gradle"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     buildFeatures {
@@ -19,8 +18,6 @@ dependencies {
     implementation project(Modules.application)
     implementation project(Modules.navigation)
     implementation project(Modules.commonJvm)
-    implementation Libs.navigation_component_fragment
-    implementation Libs.navigation_component_ui
     implementation Libs.view_model_scope
     implementation Libs.hilt
     implementation Libs.hilt_nav_graph_scope

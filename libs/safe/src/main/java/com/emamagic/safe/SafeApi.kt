@@ -11,7 +11,7 @@ import com.emamagic.safe.policy.MemoryPolicy
 import com.emamagic.safe.policy.RetryPolicy
 import com.emamagic.safe.util.General
 import com.emamagic.safe.util.Response
-import com.emamagic.safe.util.ResultWrapper
+import com.emamagic.safe.util.SafeWrapper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
@@ -27,7 +27,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         retryPolicy: RetryPolicy,
         memoryPolicy: MemoryPolicy<ResultType>,
         remoteFetch: suspend () -> Response<ResultType>
-    ): ResultWrapper<ResultType> =
+    ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse (key = key, memoryPolicy = memoryPolicy) {
                 retryIO(
@@ -43,7 +43,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         memoryPolicy: MemoryPolicy<ResultType>,
         remoteFetch: suspend () -> Response<RequestType>,
         mapping: (RequestType) -> ResultType,
-    ): ResultWrapper<ResultType> =
+    ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse(key = key, memoryPolicy = memoryPolicy, {
                 retryIO(
@@ -56,7 +56,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     override suspend fun <ResultType> fresh(
         retryPolicy: RetryPolicy,
         remoteFetch: suspend () -> Response<ResultType>
-    ): ResultWrapper<ResultType> =
+    ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse {
                 retryIO(
@@ -70,7 +70,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         retryPolicy: RetryPolicy,
         remoteFetch: suspend () -> Response<RequestType>,
         mapping: (RequestType) -> ResultType
-    ): ResultWrapper<ResultType> =
+    ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse(key = null, memoryPolicy = null, {
                 retryIO(
@@ -96,72 +96,72 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         when (cachePolicy.type) {
             CachePolicy.Type.NEVER -> {
                 try {
-                    send(ResultWrapper.Loading())
+                    send(SafeWrapper.LoadingFetch())
                     val response = retryIO(retryPolicy, this) { remoteFetch() }
                     onFetchSuccess()
-                    send(ResultWrapper.Success(mapping(response)))
+                    send(SafeWrapper.Success(mapping(response)))
                 } catch (t: Throwable) {
                     onFetchFailed(getError(t))
-                    send(ResultWrapper.Failed(getError(t)))
+                    send(SafeWrapper.Failed(getError(t)))
                 }
             }
             CachePolicy.Type.ALWAYS -> {
                 val loading = launch {
-                    localFetch().collect { send(ResultWrapper.Loading(it)) }
+                    localFetch().collect { send(SafeWrapper.LoadingFetch(it)) }
                 }
                 try {
                     localStore(retryIO(retryPolicy, this) { remoteFetch() })
                     onFetchSuccess()
                     loading.cancel()
-                    localFetch().collect { send(ResultWrapper.Success(it)) }
+                    localFetch().collect { send(SafeWrapper.Success(it)) }
                 } catch (t: Throwable) {
                     onFetchFailed(getError(t))
                     loading.cancel()
-                    localFetch().collect { send(ResultWrapper.Failed(getError(t), it)) }
+                    localFetch().collect { send(SafeWrapper.Failed(getError(t), it)) }
                 }
             }
             CachePolicy.Type.CLEAR -> {
                 val data = localFetch().firstOrNull()
                 if (data == null) {
                     try {
-                        send(ResultWrapper.Loading())
+                        send(SafeWrapper.LoadingFetch())
                         val response = retryIO(retryPolicy, this) { remoteFetch() }
                         onFetchSuccess()
-                        send(ResultWrapper.Success(mapping(response)))
+                        send(SafeWrapper.Success(mapping(response)))
                     } catch (t: Throwable) {
                         onFetchFailed(getError(t))
-                        send(ResultWrapper.Failed(getError(t)))
+                        send(SafeWrapper.Failed(getError(t)))
                     }
                 } else {
-                    localFetch().collect { send(ResultWrapper.Success(it)) }
+                    localFetch().collect { send(SafeWrapper.Success(it)) }
                     localDelete()
                 }
             }
             CachePolicy.Type.REFRESH -> {
                 try {
                     localStore(retryIO(retryPolicy, this) { remoteFetch() })
-                    localFetch().collect { send(ResultWrapper.Success(it)) }
+                    localFetch().collect { send(SafeWrapper.Success(it)) }
                 } catch (t: Throwable) {
                     onFetchFailed(getError(t))
-                    send(ResultWrapper.Failed(getError(t)))
+                    send(SafeWrapper.Failed(getError(t)))
                 }
             }
             CachePolicy.Type.EXPIRES -> {
                 if ((cachePolicy.createAt + cachePolicy.expires) > System.currentTimeMillis()) {
-                    localFetch().collect { send(ResultWrapper.Success(it)) }
+                    localFetch().collect { send(SafeWrapper.Success(it)) }
                 } else {
                     val loading = launch {
-                        localFetch().collect { send(ResultWrapper.Loading(it)) }
+                        localFetch().collect { send(SafeWrapper.LoadingFetch(it)) }
                     }
                     try {
                         localStore(retryIO(retryPolicy, null) { remoteFetch() })
                         onFetchSuccess()
                         loading.cancel()
-                        localFetch().collect { send(ResultWrapper.Success(it)) }
+                        localFetch().collect { send(SafeWrapper.Success(it)) }
                     } catch (t: Throwable) {
                         onFetchFailed(getError(t))
                         loading.cancel()
-                        localFetch().collect { send(ResultWrapper.Failed(getError(t), it)) }
+                        localFetch().collect { send(SafeWrapper.Failed(getError(t), it)) }
                     }
                 }
             }
@@ -171,20 +171,20 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
                 if (shouldFetch(data)) {
                     val loading = launch {
-                        localFetch().collect { send(ResultWrapper.Loading(it)) }
+                        localFetch().collect { send(SafeWrapper.LoadingFetch(it)) }
                     }
                     try {
                         localStore(retryIO(retryPolicy, null) { remoteFetch() })
                         onFetchSuccess()
                         loading.cancel()
-                        localFetch().collect { send(ResultWrapper.Success(it)) }
+                        localFetch().collect { send(SafeWrapper.Success(it)) }
                     } catch (t: Throwable) {
                         onFetchFailed(getError(t))
                         loading.cancel()
-                        localFetch().collect { send(ResultWrapper.Failed(getError(t), it)) }
+                        localFetch().collect { send(SafeWrapper.Failed(getError(t), it)) }
                     }
                 } else {
-                    localFetch().collect { send(ResultWrapper.Success(it)) }
+                    localFetch().collect { send(SafeWrapper.Success(it)) }
                 }
             }
             else -> throw Exception("This cache policy does not implemented")
@@ -195,29 +195,29 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     private inline fun <ResultType> handleResponse(
         key: String? = null,
         memoryPolicy: MemoryPolicy<ResultType>? = null,
-        call: () -> Response<ResultType>): ResultWrapper<ResultType> {
+        call: () -> Response<ResultType>): SafeWrapper<ResultType> {
         if (key != null)
-            General.cache[key]?.let { result -> return result as ResultWrapper<ResultType> }
-        var result: ResultWrapper<ResultType>
+            General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        var safe: SafeWrapper<ResultType>
         return try {
             val response = call()
             if (response.isSuccessful()) {
                 response.body()?.let {
-                    result = ResultWrapper.Success(
+                    safe = SafeWrapper.Success(
                         data = it,
                         code = response.code()
                     )
-                    key?.let { key -> General.cache.put(key, result, memoryPolicy!!.isExpired()) }
-                    return result
+                    key?.let { key -> General.cache.put(key, safe, memoryPolicy!!.isExpired()) }
+                    return safe
                 }
             }
-            result = ResultWrapper.Failed(
+            safe = SafeWrapper.Failed(
                 error = ErrorEntity.Api(response.errorBody()),
             )
-            return result
+            return safe
         } catch (t: Throwable) {
-            result = ResultWrapper.Failed(getError(t))
-            result
+            safe = SafeWrapper.Failed(getError(t))
+            safe
         }
     }
 
@@ -227,29 +227,29 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         memoryPolicy: MemoryPolicy<ResultType>? = null,
         call: () -> Response<RequestType>,
         noinline converter: (RequestType) -> ResultType
-    ): ResultWrapper<ResultType> {
+    ): SafeWrapper<ResultType> {
         if (key != null)
-            General.cache[key]?.let { result -> return result as ResultWrapper<ResultType> }
-        var result: ResultWrapper<ResultType>
+            General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        var safe: SafeWrapper<ResultType>
         return try {
             val response = call()
             if (response.isSuccessful()) {
                 response.body()?.let {
-                    result = ResultWrapper.Success(
+                    safe = SafeWrapper.Success(
                         data = converter(it),
                         code = response.code()
                     )
-                    key?.let { key -> General.cache.put(key, result , memoryPolicy!!.isExpired()) }
-                    return result
+                    key?.let { key -> General.cache.put(key, safe , memoryPolicy!!.isExpired()) }
+                    return safe
                 }
             }
-            result = ResultWrapper.Failed(
+            safe = SafeWrapper.Failed(
                 error = ErrorEntity.Api(response.errorBody()),
             )
-            return result
+            return safe
         } catch (t: Throwable) {
-            result = ResultWrapper.Failed(getError(t))
-            result
+            safe = SafeWrapper.Failed(getError(t))
+            safe
         }
 
     }

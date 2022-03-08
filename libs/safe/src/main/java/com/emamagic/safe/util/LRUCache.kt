@@ -1,8 +1,6 @@
 package com.emamagic.safe.util
 
 import android.util.Log
-import com.emamagic.safe.policy.MemoryPolicy
-import java.util.*
 
 private const val CAPACITY = 10
 private const val TAG = "LRUCache"
@@ -22,7 +20,7 @@ class LRUCache constructor(
         var key: String?= null,
         var prev: Node? = null,
         var next: Node? = null,
-        var value: ResultWrapper<*>? = null,
+        var value: SafeWrapper<*>? = null,
         var isExpire: Boolean? = null
     )
 
@@ -47,7 +45,7 @@ class LRUCache constructor(
         tail = head
     }
 
-    fun put(key: String, value: ResultWrapper<*>, isExpire: Boolean? = false) {
+    fun put(key: String, value: SafeWrapper<*>, isExpire: Boolean? = false) {
         if (map.containsKey(key)) {
             val old: Node = map[key]!!
             old.isExpire = isExpire
@@ -68,7 +66,7 @@ class LRUCache constructor(
         }
     }
 
-    operator fun get(key: String): ResultWrapper<*>? {
+    operator fun get(key: String): SafeWrapper<*>? {
         if (map.containsKey(key)) {
             val n: Node = map[key]!!
             delete(n)
@@ -83,7 +81,7 @@ class LRUCache constructor(
 
 
     fun print() {
-        val currentValue: ResultWrapper<*>? = head.value
+        val currentValue: SafeWrapper<*>? = head.value
         if (currentValue == null) {
             builder.append("[]")
         } else {

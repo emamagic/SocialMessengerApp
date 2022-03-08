@@ -41,6 +41,6 @@ sealed interface BaseEffect {
 
 /*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/
 
-sealed class HomeEffect : BaseEffect {
-    object StopShimmer : HomeEffect()
+sealed class SigninEffect : BaseEffect {
+    object InvalidPhoneNumber : SigninEffect()
 }
