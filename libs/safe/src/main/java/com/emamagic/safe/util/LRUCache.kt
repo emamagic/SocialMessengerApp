@@ -15,14 +15,14 @@ class LRUCache constructor(
     private val builder = StringBuilder()
 
     private val map = hashMapOf<String, Node>()
-    private var head = Node(null, null, null, null)
-    private var tail = Node(null, null, null, null)
+    private var head = Node()
+    private var tail = Node()
 
     data class Node(
+        var key: String?= null,
         var prev: Node? = null,
         var next: Node? = null,
-        var key: String?,
-        var value: ResultWrapper<*>?,
+        var value: ResultWrapper<*>? = null,
         var isExpire: Boolean? = null
     )
 
