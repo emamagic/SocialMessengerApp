@@ -21,7 +21,7 @@ class UserRepositoryImpl @Inject constructor(
             key = "salam",
             memoryPolicy = MemoryPolicy(
                 expires = 5000,
-                shouldRefresh = { it.data!!.config.authServices == hostName }
+                shouldRefresh = { it.data?.config?.authServices == hostName }
             ))
         {
             ResponseMapper(serverConfigService.getServerConfig())
