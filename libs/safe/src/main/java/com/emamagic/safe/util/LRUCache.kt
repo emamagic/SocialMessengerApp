@@ -23,7 +23,7 @@ class LRUCache constructor(
         var next: Node? = null,
         var key: String?,
         var value: ResultWrapper<*>?,
-        var memoryPolicy: MemoryPolicy? = MemoryPolicy()
+        var isExpire: Boolean? = null
     )
 
     private fun delete(node: Node) {
@@ -47,15 +47,15 @@ class LRUCache constructor(
         tail = head
     }
 
-    fun put(key: String, value: ResultWrapper<*>, memoryPolicy: MemoryPolicy? = null) {
+    fun put(key: String, value: ResultWrapper<*>, isExpire: Boolean? = false) {
         if (map.containsKey(key)) {
             val old: Node = map[key]!!
-            old.memoryPolicy = memoryPolicy
+            old.isExpire = isExpire
             old.value = value
             delete(old)
             updateHead(old)
         } else {
-            val newNode = Node(key = key, value = value, memoryPolicy = memoryPolicy)
+            val newNode = Node(key = key, value = value, isExpire = isExpire)
             if (map.size >= capacity!!) {
                 map.remove(tail.key)
                 // remove last node
@@ -72,7 +72,7 @@ class LRUCache constructor(
         if (map.containsKey(key)) {
             val n: Node = map[key]!!
             delete(n)
-            if (!n.memoryPolicy!!.shouldRefresh(n.value!!) && !isExpired(n)) {
+            if (!n.isExpire!!) {
                 updateHead(n)
                 return n.value
             }
@@ -81,14 +81,6 @@ class LRUCache constructor(
         return null
     }
 
-    private fun isExpired(node: Node): Boolean {
-        val policy = node.memoryPolicy!!
-        val result = if (policy.expires != -1L) {
-            (Date().time - policy.createAt.time) > policy.expires
-        } else false
-        Log.e(TAG, "isExpired: $result")
-        return result
-    }
 
     fun print() {
         val currentValue: ResultWrapper<*>? = head.value

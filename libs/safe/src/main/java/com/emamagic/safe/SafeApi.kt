@@ -25,7 +25,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     override suspend fun <ResultType> get(
         key: String,
         retryPolicy: RetryPolicy,
-        memoryPolicy: MemoryPolicy,
+        memoryPolicy: MemoryPolicy<ResultType>,
         remoteFetch: suspend () -> Response<ResultType>
     ): ResultWrapper<ResultType> =
         withContext(Dispatchers.IO) {
@@ -40,7 +40,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     override suspend fun <ResultType, RequestType> get(
         key: String,
         retryPolicy: RetryPolicy,
-        memoryPolicy: MemoryPolicy,
+        memoryPolicy: MemoryPolicy<ResultType>,
         remoteFetch: suspend () -> Response<RequestType>,
         mapping: (RequestType) -> ResultType,
     ): ResultWrapper<ResultType> =
@@ -194,7 +194,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     private inline fun <ResultType> handleResponse(
         key: String? = null,
-        memoryPolicy: MemoryPolicy? = null,
+        memoryPolicy: MemoryPolicy<ResultType>? = null,
         call: () -> Response<ResultType>): ResultWrapper<ResultType> {
         if (key != null)
             General.cache[key]?.let { result -> return result as ResultWrapper<ResultType> }
@@ -207,7 +207,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                         data = it,
                         code = response.code()
                     )
-                    key?.let { key -> General.cache.put(key, result, memoryPolicy) }
+                    key?.let { key -> General.cache.put(key, result, memoryPolicy!!.isExpired()) }
                     return result
                 }
             }
@@ -224,7 +224,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     private inline fun <RequestType, ResultType> handleResponse(
         key: String? = null,
-        memoryPolicy: MemoryPolicy? = null,
+        memoryPolicy: MemoryPolicy<ResultType>? = null,
         call: () -> Response<RequestType>,
         noinline converter: (RequestType) -> ResultType
     ): ResultWrapper<ResultType> {
@@ -239,7 +239,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                         data = converter(it),
                         code = response.code()
                     )
-                    key?.let { key -> General.cache.put(key, result , memoryPolicy) }
+                    key?.let { key -> General.cache.put(key, result , memoryPolicy!!.isExpired()) }
                     return result
                 }
             }

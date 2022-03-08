@@ -3,9 +3,16 @@ package com.emamagic.safe.policy
 import com.emamagic.safe.util.ResultWrapper
 import java.util.*
 
-data class MemoryPolicy(
-    val shouldRefresh: (oldValue: ResultWrapper<*>) -> Boolean = { false },
+data class MemoryPolicy<ResultType>(
+    val shouldRefresh: (oldValue: ResultWrapper<ResultType>) -> Boolean = { false },
     val expires: Long = -1
 )  {
-    val createAt: Date = Date()
+    private val createAt: Date = Date()
+
+    fun isExpired(): Boolean {
+        val result = if (expires != -1L) {
+            (Date().time - createAt.time) > expires
+        } else false
+        return result
+    }
 }
