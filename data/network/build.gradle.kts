@@ -9,6 +9,7 @@ apply {
 dependencies {
 
     implementation(project(Modules.commonJvm))
+    implementation(project(Modules.safe))
     api(Libs.retrofit)
     api(Libs.logging_interceptor)
     api(Libs.gson_converter)

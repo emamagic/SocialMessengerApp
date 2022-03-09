@@ -14,7 +14,7 @@ sealed class SafeWrapper<T>(
     override fun toString(): String {
         return when(this) {
             is Success -> "Success [data=$data]"
-            is Failed -> "Error[exception=${error?.message}]"
+            is Failed -> "Error[exception=${error?.throwable?.message}]"
             is LoadingFetch -> "LoadingFetch"
         }
     }

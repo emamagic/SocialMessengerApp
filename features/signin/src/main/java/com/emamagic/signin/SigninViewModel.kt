@@ -48,7 +48,7 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = viewModelScope.launch {
-        if (phoneNum.isNotEmpty() && ((phoneNum.length == 10 && phoneNum.first() != '0') || (phoneNum.length == 11 && phoneNum.first() == '0'))) {
+        if (phoneNum.isNotEmpty() && ((phoneNum.length == 10 && phoneNum.first() == '9') || (phoneNum.length == 11 && phoneNum.first() == '0'))) {
             val phoneNumber = if (phoneNum.length == 11)
                 PhoneNumber(countryCode + phoneNum.substring(1))
             else

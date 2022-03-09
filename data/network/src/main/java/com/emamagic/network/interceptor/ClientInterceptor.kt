@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.emamagic.common_jvm.NoInternetException
+import com.emamagic.safe.error.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

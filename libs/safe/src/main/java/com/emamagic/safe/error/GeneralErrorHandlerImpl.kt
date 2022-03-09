@@ -11,16 +11,14 @@ abstract class GeneralErrorHandlerImpl : ErrorHandler {
         return when (throwable) {
             is IOException,
             is NoInternetException,
-            is SocketException -> ErrorEntity.Network(message = "${throwable.message}")
-            is SQLiteException -> ErrorEntity.Database(message = "${throwable.message}")
+            is SocketException -> ErrorEntity.Network(throwable = throwable)
+            is SQLiteException -> ErrorEntity.Database(throwable = throwable)
             is UnknownHostException,
-            is ServerConnectionException -> ErrorEntity.Server(message = "${throwable.message}")
+            is ServerConnectionException -> ErrorEntity.Server(throwable = throwable)
             is HttpException -> ErrorEntity.Api(
-                message = throwable.messages,
-                code = throwable.code,
-                errorBody = throwable.errorBody
+                throwable = throwable
             )
-            else -> ErrorEntity.Unknown(message = "${throwable.message}")
+            else -> ErrorEntity.Unknown(throwable = throwable)
         }
     }
 

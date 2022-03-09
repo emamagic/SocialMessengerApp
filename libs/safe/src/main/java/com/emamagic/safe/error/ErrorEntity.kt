@@ -1,13 +1,21 @@
 package com.emamagic.safe.error
 
 sealed class ErrorEntity(
-        val message: String? = null,
-        val code: Int? = null,
-        val errorBody: String? = null
+    var throwable: Throwable? = null
 ) {
-    class Network(message: String) : ErrorEntity(message = message)
-    class Api(message: String? ,code: Int?= null ,errorBody: String? = null) : ErrorEntity(message = message ,code = code ,errorBody = errorBody)
-    class Database(message: String): ErrorEntity(message = message)
-    class Server(message: String): ErrorEntity(message = message)
-    class Unknown(message: String) : ErrorEntity(message = message)
+    class Network(throwable: Throwable? = null) :
+        ErrorEntity(throwable = throwable)
+
+    class Api(
+        throwable: Throwable? = null
+    ) : ErrorEntity(throwable = throwable)
+
+    class Database(throwable: Throwable? = null) :
+        ErrorEntity(throwable = throwable)
+
+    class Server(throwable: Throwable? = null) :
+        ErrorEntity(throwable = throwable)
+
+    class Unknown(throwable: Throwable? = null) :
+        ErrorEntity(throwable = throwable)
 }

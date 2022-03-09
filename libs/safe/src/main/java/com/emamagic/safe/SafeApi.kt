@@ -1,11 +1,8 @@
 package com.emamagic.safe
 
-import com.emamagic.safe.error.NoInternetException
-import com.emamagic.safe.error.ServerConnectionException
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
-import com.emamagic.safe.error.ErrorEntity
-import com.emamagic.safe.error.GeneralErrorHandlerImpl
+import com.emamagic.safe.error.*
 import com.emamagic.safe.policy.CachePolicy
 import com.emamagic.safe.policy.MemoryPolicy
 import com.emamagic.safe.policy.RetryPolicy
@@ -212,7 +209,11 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                 }
             }
             safe = SafeWrapper.Failed(
-                error = ErrorEntity.Api(response.errorBody()),
+                error = ErrorEntity.Api(
+                    throwable =
+                    HttpException(code = response.code(), messages = "Api Error", errorBody = response.errorBody()
+                    )
+                ),
             )
             return safe
         } catch (t: Throwable) {
@@ -244,7 +245,11 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
                 }
             }
             safe = SafeWrapper.Failed(
-                error = ErrorEntity.Api(response.errorBody()),
+                error = ErrorEntity.Api(
+                    throwable =
+                    HttpException(response.code(), messages = "Api Error", errorBody = response.errorBody()
+                    )
+                ),
             )
             return safe
         } catch (t: Throwable) {

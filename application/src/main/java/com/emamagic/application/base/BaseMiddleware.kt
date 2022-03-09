@@ -18,14 +18,17 @@ abstract class BaseMiddleware<STATE : State, ACTION : Action> {
         store: Store<STATE, ACTION>,
     ) { this.store = store }
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(success: (T) -> Unit) {
+    protected suspend fun <T> ResultWrapper<T>.manageResult(success: suspend (T) -> Unit) {
         store.setEffect(BaseEffect.ShowLoading())
         when (this) {
             is ResultWrapper.Success -> {
                 success(data!!)
                 store.setEffect(BaseEffect.HideLoading)
             }
-            is ResultWrapper.Failed -> onError(error!!)
+            is ResultWrapper.Failed -> {
+                store.setEffect(BaseEffect.HideLoading)
+                onError(error!!)
+            }
             is ResultWrapper.LoadingFetch -> TODO()
             ResultWrapper.Loading -> TODO()
         }.exhaustive
@@ -35,7 +38,7 @@ abstract class BaseMiddleware<STATE : State, ACTION : Action> {
         var message = "Unknown Error"
         if (!error.display_message.isNullOrEmpty()) message = error.display_message!!
         else if(!error.message.isNullOrEmpty()) message = error.message!!
-        Logger.e("Error -> message: $message  statusCode: ${error.statusCode}")
+        Logger.e("Error -> message: $message  statusCode: ${error.statusCode} errorType: ${error.errorType}")
         store.setEffect(BaseEffect.Toast(message, ToastyMode.MODE_TOAST_ERROR))
     }
 

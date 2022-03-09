@@ -13,6 +13,6 @@ class SinginUseCase @Inject constructor(
 
     suspend fun getServerConfig(hostName: String): ResultWrapper<ServerConfig> = userRepository.getServerUpdate(hostName)
 
-    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Status> = userRepository.submitPhoneNumber(phoneNumber)
+    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = userRepository.submitPhoneNumber(phoneNumber)
 
 }

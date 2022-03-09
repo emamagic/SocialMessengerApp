@@ -3,6 +3,7 @@ package com.emamagic.limoo.di
 import com.emamagic.network.interceptor.ClientInterceptor
 import com.emamagic.network.interceptor.ServerConnection
 import com.emamagic.network.service.ConfigService
+import com.emamagic.network.service.UserService
 import com.emamagic.network.util.Const
 import dagger.Lazy
 import dagger.Module
@@ -55,6 +56,9 @@ object RetrofitModule {
 
     @Provides
     fun provideConfigService(retrofit: Retrofit): ConfigService = retrofit.create(ConfigService::class.java)
+
+    @Provides
+    fun provideUserService(retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
 
 
 }

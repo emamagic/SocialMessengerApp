@@ -1,6 +1,6 @@
 package com.emamagic.network.interceptor
 
-import com.emamagic.common_jvm.ServerConnectionException
+import com.emamagic.safe.error.ServerConnectionException
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody

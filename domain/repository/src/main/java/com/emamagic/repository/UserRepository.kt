@@ -9,5 +9,5 @@ interface UserRepository {
 
     suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig>
 
-    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Status>
+    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean>
 }

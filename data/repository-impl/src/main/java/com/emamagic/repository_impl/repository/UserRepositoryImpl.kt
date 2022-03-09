@@ -5,6 +5,7 @@ import com.emamagic.entity.PhoneNumber
 import com.emamagic.entity.ServerConfig
 import com.emamagic.entity.Status
 import com.emamagic.network.service.ConfigService
+import com.emamagic.network.service.UserService
 import com.emamagic.repository.UserRepository
 import com.emamagic.repository_impl.util.toError
 import com.emamagic.repository_impl.util.toResponse
@@ -16,17 +17,11 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepositoryImpl @Inject constructor(
-    private val serverConfigService: ConfigService
+    private val serverConfigService: ConfigService,
+    private val userService: UserService,
 ) : SafeApi(), UserRepository {
 
-    override suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig> =
-        get(
-            key = "salam",
-            memoryPolicy = MemoryPolicy(
-                expires = 5000,
-                shouldRefresh = { it.data?.config?.authServices == hostName }
-            ))
-        {
+    override suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig> = fresh {
             serverConfigService.getServerConfig().toResponse()
         }.run {
             when (this) {
@@ -36,8 +31,14 @@ class UserRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Status> {
-        TODO("Not yet implemented")
+    override suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = fresh {
+        userService.phoneVerification(phoneNumber).toResponse()
+    }.run {
+        when (this) {
+            is SafeWrapper.Success -> ResultWrapper.Success(true)
+            is SafeWrapper.Failed -> ResultWrapper.Failed(error.toError())
+            is SafeWrapper.LoadingFetch -> TODO()
+        }
     }
 
 }
