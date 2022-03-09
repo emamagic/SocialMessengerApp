@@ -37,9 +37,15 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
     }
 
     private suspend fun submitPhoneNumber(phoneNumber: PhoneNumber) {
-            singinUseCase.submitPhoneNumber(phoneNumber).manageResult {
-                if (it!!) store.setEffect(BaseEffect.NavigateTo(SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()))
+        store.setEffect(BaseEffect.ShowLoading())
+        singinUseCase.submitPhoneNumber(phoneNumber).manageResult {
+            if (it!!) {
+                store.setEffect(BaseEffect.NavigateTo(
+                    SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()
+                ))
             }
+            store.setEffect(BaseEffect.HideLoading)
+        }
     }
 
 }

@@ -18,20 +18,19 @@ abstract class BaseMiddleware<STATE : State, ACTION : Action> {
         store: Store<STATE, ACTION>,
     ) { this.store = store }
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(supportLoading: Boolean = true, success: suspend (T?) -> Unit) {
-        if (supportLoading) store.setEffect(BaseEffect.ShowLoading())
+    protected suspend fun <T> ResultWrapper<T>.manageResult(success: suspend (T?) -> Unit) {
         when (this) {
             is ResultWrapper.Success -> {
                 success(data)
             }
             is ResultWrapper.Failed -> {
                 onError(error!!)
+                store.setEffect(BaseEffect.HideLoading)
             }
             is ResultWrapper.LoadingFetch -> TODO()
             ResultWrapper.Loading -> TODO()
 
         }.exhaustive
-        if (supportLoading) store.setEffect(BaseEffect.HideLoading)
     }
 
     private suspend fun onError(error: Error) {
