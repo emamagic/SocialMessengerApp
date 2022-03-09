@@ -18,28 +18,28 @@ abstract class BaseMiddleware<STATE : State, ACTION : Action> {
         store: Store<STATE, ACTION>,
     ) { this.store = store }
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(success: suspend (T) -> Unit) {
-        store.setEffect(BaseEffect.ShowLoading())
+    protected suspend fun <T> ResultWrapper<T>.manageResult(supportLoading: Boolean = true, success: suspend (T?) -> Unit) {
+        if (supportLoading) store.setEffect(BaseEffect.ShowLoading())
         when (this) {
             is ResultWrapper.Success -> {
-                success(data!!)
-                store.setEffect(BaseEffect.HideLoading)
+                success(data)
             }
             is ResultWrapper.Failed -> {
-                store.setEffect(BaseEffect.HideLoading)
                 onError(error!!)
             }
             is ResultWrapper.LoadingFetch -> TODO()
             ResultWrapper.Loading -> TODO()
+
         }.exhaustive
+        if (supportLoading) store.setEffect(BaseEffect.HideLoading)
     }
 
     private suspend fun onError(error: Error) {
-        var message = "Unknown Error"
-        if (!error.display_message.isNullOrEmpty()) message = error.display_message!!
-        else if(!error.message.isNullOrEmpty()) message = error.message!!
+        val message: String = if (!error.display_message.isNullOrEmpty()) error.display_message!!
+        else if(!error.message.isNullOrEmpty()) error.message!!
+        else "${error.throwable?.message}  ${error.throwable?.cause} \n ${error.throwable?.stackTraceToString()}"
         Logger.e("Error -> message: $message  statusCode: ${error.statusCode} errorType: ${error.errorType}")
-        store.setEffect(BaseEffect.Toast(message, ToastyMode.MODE_TOAST_ERROR))
+        store.setEffect(BaseEffect.Toast("Error Happened", ToastyMode.MODE_TOAST_ERROR))
     }
 
 

@@ -43,5 +43,4 @@ sealed interface BaseEffect {
 
 sealed class SigninEffect : BaseEffect {
     object InvalidPhoneNumber : SigninEffect()
-    object PhoneVerified : SigninEffect()
 }

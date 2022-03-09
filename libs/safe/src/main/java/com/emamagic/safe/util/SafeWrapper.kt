@@ -7,7 +7,7 @@ sealed class SafeWrapper<T>(
     val error: ErrorEntity? = null,
     val code: Int? = null,
 ) {
-    class Success<T>(data: T, code: Int? = null) : SafeWrapper<T>(data = data, code = code)
+    class Success<T>(data: T?, code: Int? = null) : SafeWrapper<T>(data = data, code = code)
     class Failed<T>(error: ErrorEntity, data: T? = null) : SafeWrapper<T>(data = data ,error = error)
     class LoadingFetch<T>(data: T? = null) : SafeWrapper<T>(data = data)
 

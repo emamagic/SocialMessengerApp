@@ -1,7 +1,6 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.network.interceptor.ClientInterceptor
-import com.emamagic.network.interceptor.ServerConnection
 import com.emamagic.network.service.ConfigService
 import com.emamagic.network.service.UserService
 import com.emamagic.network.util.Const
@@ -30,10 +29,9 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideOkHttp(loggingInterceptor: HttpLoggingInterceptor, clientInterceptor: ClientInterceptor, serverInterceptor: ServerConnection): OkHttpClient {
+    fun provideOkHttp(loggingInterceptor: HttpLoggingInterceptor, clientInterceptor: ClientInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(serverInterceptor)
             .addInterceptor(clientInterceptor)
             .readTimeout(15 , TimeUnit.SECONDS)
             .writeTimeout(15 , TimeUnit.SECONDS)

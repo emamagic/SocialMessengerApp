@@ -6,8 +6,8 @@ import com.emamagic.entity.PhoneNumber
 sealed class SigninAction : Action {
 
     data class SubmitPhoneNumber(val phoneNumber: PhoneNumber): SigninAction()
+
     data class GetServerConfig(val hostName: String): SigninAction()
     object ServerConfigLoaded: SigninAction()
-    object NeedToSignup: SigninAction()
 
 }

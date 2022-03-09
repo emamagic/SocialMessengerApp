@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface UserService {
 
-    @POST("api/v1/user/phone_verification")
+    @POST("user/phone_verification")
     suspend fun phoneVerification(@Body phoneNumber: PhoneNumber): Response<ResponseBody>
 
 

@@ -1,5 +1,6 @@
 package com.emamagic.safe
 
+import android.util.Log
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
 import com.emamagic.safe.error.*
@@ -26,7 +27,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         remoteFetch: suspend () -> Response<ResultType>
     ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
-            handleResponse (key = key, memoryPolicy = memoryPolicy) {
+            handleResponse(key = key, memoryPolicy = memoryPolicy) {
                 retryIO(
                     retryPolicy,
                     this
@@ -187,35 +188,39 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
             else -> throw Exception("This cache policy does not implemented")
         }
     }
-    
+
 
     private inline fun <ResultType> handleResponse(
         key: String? = null,
         memoryPolicy: MemoryPolicy<ResultType>? = null,
-        call: () -> Response<ResultType>): SafeWrapper<ResultType> {
+        call: () -> Response<ResultType>
+    ): SafeWrapper<ResultType> {
         if (key != null)
             General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
         var safe: SafeWrapper<ResultType>
         return try {
             val response = call()
             if (response.isSuccessful()) {
-                response.body()?.let {
-                    safe = SafeWrapper.Success(
-                        data = it,
-                        code = response.code()
-                    )
-                    key?.let { key -> General.cache.put(key, safe, memoryPolicy!!.isExpired()) }
-                    return safe
-                }
+                safe = SafeWrapper.Success(
+                    data = response.body(),
+                    code = response.code()
+                )
+                key?.let { General.cache.put(it, safe, memoryPolicy!!.isExpired()) }
+                safe
+            } else {
+                safe = SafeWrapper.Failed(
+                    error = ErrorEntity.Api(
+                        throwable =
+                        HttpException(
+                            code = response.code(),
+                            messages = "Api Error",
+                            errorBody = response.errorBody()
+                        )
+                    ),
+                )
+                safe
             }
-            safe = SafeWrapper.Failed(
-                error = ErrorEntity.Api(
-                    throwable =
-                    HttpException(code = response.code(), messages = "Api Error", errorBody = response.errorBody()
-                    )
-                ),
-            )
-            return safe
+
         } catch (t: Throwable) {
             safe = SafeWrapper.Failed(getError(t))
             safe
@@ -235,23 +240,27 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         return try {
             val response = call()
             if (response.isSuccessful()) {
-                response.body()?.let {
-                    safe = SafeWrapper.Success(
-                        data = converter(it),
-                        code = response.code()
-                    )
-                    key?.let { key -> General.cache.put(key, safe , memoryPolicy!!.isExpired()) }
-                    return safe
-                }
+                safe = SafeWrapper.Success(
+                    data = converter(response.body()!!),
+                    code = response.code()
+                )
+                key?.let { General.cache.put(it, safe, memoryPolicy!!.isExpired()) }
+                safe
+
+            } else {
+                safe = SafeWrapper.Failed(
+                    error = ErrorEntity.Api(
+                        throwable =
+                        HttpException(
+                            response.code(),
+                            messages = "Api Error",
+                            errorBody = response.errorBody()
+                        )
+                    ),
+                )
+                safe
             }
-            safe = SafeWrapper.Failed(
-                error = ErrorEntity.Api(
-                    throwable =
-                    HttpException(response.code(), messages = "Api Error", errorBody = response.errorBody()
-                    )
-                ),
-            )
-            return safe
+
         } catch (t: Throwable) {
             safe = SafeWrapper.Failed(getError(t))
             safe

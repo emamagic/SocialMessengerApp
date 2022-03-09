@@ -1,5 +1,6 @@
 package com.emamagic.repository_impl.util
 
+import android.util.Log
 import com.emamagic.common_jvm.ServerConnectionException
 import com.emamagic.entity.Error
 import com.emamagic.safe.error.ErrorEntity
