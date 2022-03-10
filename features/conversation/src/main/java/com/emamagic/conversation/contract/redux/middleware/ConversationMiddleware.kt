@@ -35,8 +35,8 @@ class ConversationMiddleware @Inject constructor(
     }
 
     private suspend fun getCurrentUser() {
-        val result = commonUserCase.getCurrentUser()
-        if (result.succeeded) ""
+        val result = commonUserCase.getCurrentUser().manageResult()
+        if (result) ""
         else throw NoCurrentUserFoundException()
 
     }

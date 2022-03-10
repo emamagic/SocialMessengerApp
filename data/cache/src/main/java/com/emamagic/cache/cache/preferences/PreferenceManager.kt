@@ -1,9 +1,11 @@
-package com.emamagic.cache.pref
+package com.emamagic.cache.cache.preferences
 
 import android.content.SharedPreferences
+import com.emamagic.cache.cache.CacheInitializer
+import com.orhanobut.hawk.Hawk
 
 
-val pref: SharedPreferences by lazy { PrefInitializer.get() }
+val pref: SharedPreferences by lazy { CacheInitializer.getPrefs() }
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
     val editor = this.edit()
@@ -21,7 +23,8 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
         is Boolean -> edit { it.putBoolean(key, value) }
         is Float -> edit { it.putFloat(key, value) }
         is Long -> edit { it.putLong(key, value) }
-        else -> throw UnsupportedOperationException("Not yet implemented")
+        else -> Hawk.put(key, value)
+        //throw UnsupportedOperationException("Not yet implemented")
     }
 }
 
@@ -30,13 +33,22 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
  * [T] is the type of value
  * @param defaultValue optional default value - will take null for strings, false for bool and -1 for numeric values if [defaultValue] is not specified
  */
-inline operator fun <reified T : Any> SharedPreferences.get(key: String, defaultValue: T? = null): T? {
+inline fun <reified T : Any> SharedPreferences.getPrefs(key: String, defaultValue: T? = null): T? {
     return when (T::class) {
         String::class -> getString(key, defaultValue as? String) as T?
         Int::class -> getInt(key, defaultValue as? Int ?: -1) as T?
         Boolean::class -> getBoolean(key, defaultValue as? Boolean ?: false) as T?
         Float::class -> getFloat(key, defaultValue as? Float ?: -1f) as T?
         Long::class -> getLong(key, defaultValue as? Long ?: -1) as T?
-        else -> throw UnsupportedOperationException("Not yet implemented")
+        else -> Hawk.get(key, null)
+//            throw UnsupportedOperationException("Not yet implemented")
     }
+}
+
+object PrefKeys {
+
+    const val BASE_URL = "base_url"
+    const val USER_ID = "user_id"
+    const val CURRENT_WORKSPACE_ID = "current_workspace_id"
+
 }

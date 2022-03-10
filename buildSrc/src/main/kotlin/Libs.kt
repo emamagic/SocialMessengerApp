@@ -89,8 +89,11 @@ object Libs {
     // LeakCanary
     const val leak_canary = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
 
-    // Pref Manager
+    // Pref
     const val pref_manager = "androidx.preference:preference-ktx:${Versions.pref_manager}"
+    const val hawk = "com.orhanobut:hawk:${Versions.hawk}"
+    const val data_store = "androidx.datastore:datastore-preferences:${Versions.data_store}"
+    const val data_store_proto = "androidx.datastore:datastore:${Versions.data_store}"
 
     // PersistentCookieJar
     const val persistent_cookie_jar = "com.github.franmontiel:PersistentCookieJar:${Versions.persistent_cookie_jar}"

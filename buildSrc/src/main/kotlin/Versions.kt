@@ -1,6 +1,6 @@
 object Versions {
 
-    const val nav_version = "2.3.5"
+    const val nav_version = "2.4.1"
     const val androidx_core = "1.7.0"
     const val androidx_appcompat = "1.4.0"
     const val material = "1.4.0"
@@ -37,6 +37,8 @@ object Versions {
     const val work_manager = "2.7.1"
     const val leak_canary = "2.8.1"
     const val pref_manager = "1.2.0"
+    const val hawk = "2.0.1"
+    const val data_store = "1.0.0"
     const val persistent_cookie_jar = "v1.0.1"
 
 }
