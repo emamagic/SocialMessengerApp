@@ -1,11 +1,13 @@
 package com.emamagic.repository_impl.util
 
 import android.util.Log
+import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.common_jvm.ServerConnectionException
 import com.emamagic.entity.Error
 import com.emamagic.safe.error.ErrorEntity
 import com.emamagic.safe.error.HttpException
 import com.emamagic.safe.error.NoInternetException
+import com.emamagic.safe.util.SafeWrapper
 import com.google.gson.Gson
 import retrofit2.Response
 
@@ -26,7 +28,7 @@ fun <T> Response<T>.toResponse(): com.emamagic.safe.util.Response<T> =
 
 fun ErrorEntity?.toError(): Error {
     var message: String? = "${this?.throwable?.message}  ${this?.throwable?.cause}"
-    var displayMessage: String?  = null
+    var displayMessage: String? = null
     var statusCode: Int? = null
     var error: Error? = null
     val errorType: String? = this!!::class.simpleName
@@ -34,7 +36,8 @@ fun ErrorEntity?.toError(): Error {
         is ErrorEntity.Api -> {
             (throwable as HttpException).errorBody?.let {
                 try {
-                    error = Gson().fromJson((throwable as HttpException).errorBody, Error::class.java)
+                    error =
+                        Gson().fromJson((throwable as HttpException).errorBody, Error::class.java)
                     message = error?.message
                     displayMessage = error?.display_message
                     statusCode = error?.statusCode
@@ -46,15 +49,17 @@ fun ErrorEntity?.toError(): Error {
             }
         }
         is ErrorEntity.Network -> {
-            throwable = com.emamagic.common_jvm.NoInternetException("${throwable?.message}  ${throwable?.cause}")
+            throwable =
+                com.emamagic.common_jvm.NoInternetException("${throwable?.message}  ${throwable?.cause}")
         }
         is ErrorEntity.Server -> {
             throwable = ServerConnectionException("${throwable?.message}  ${throwable?.cause}")
         }
-        else -> { /* Do Nothing */ }
+        else -> { /* Do Nothing */
+        }
     }
 
-    return Error (
+    return Error(
         id = error?.id,
         message = message,
         requestId = error?.requestId,
@@ -66,3 +71,21 @@ fun ErrorEntity?.toError(): Error {
         throwable = throwable
     )
 }
+
+fun <T,E> SafeWrapper<T>.toResult(
+    success: ((T) -> Unit)? = null,
+    failed: (() -> Unit)? = null,
+    customData: E? = null
+): ResultWrapper<E> =
+    when (this) {
+        is SafeWrapper.Success -> {
+            success?.invoke(data!!)
+            val mData = customData ?: data!! as E
+            ResultWrapper.Success(mData)
+        }
+        is SafeWrapper.Failed -> {
+            failed?.invoke()
+            ResultWrapper.Failed(error.toError())
+        }
+        is SafeWrapper.LoadingFetch -> TODO()
+    }

@@ -1,13 +1,17 @@
 package com.emamagic.repository
 
 import com.emamagic.common_jvm.ResultWrapper
-import com.emamagic.entity.PhoneNumber
-import com.emamagic.entity.ServerConfig
-import com.emamagic.entity.Status
+import com.emamagic.entity.*
 
 interface UserRepository {
 
     suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig>
 
-    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean>
+    suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean>
+
+    suspend fun otpVerification(code: String, phoneNumber: String, deviceId: String): ResultWrapper<User>
+
+    suspend  fun getCurrentUser(shouldFetch: Boolean = false): ResultWrapper<User>
+
+    suspend fun getMyWorkspaces(shouldFetch: Boolean = false): ResultWrapper<List<Workspace>>
 }

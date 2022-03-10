@@ -16,26 +16,30 @@ abstract class BaseMiddleware<STATE : State, ACTION : Action> {
         action: ACTION,
         currentState: STATE,
         store: Store<STATE, ACTION>,
-    ) { this.store = store }
+    ) {
+        this.store = store
+    }
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(success: suspend (T?) -> Unit) {
-        when (this) {
+    protected suspend fun <T> ResultWrapper<T>.manageResult(success: (suspend (T) -> Unit)? = null): Boolean {
+        (return when (this) {
             is ResultWrapper.Success -> {
-                success(data)
+                success?.invoke(data!!)
+                true
             }
             is ResultWrapper.Failed -> {
                 onError(error!!)
                 store.setEffect(BaseEffect.HideLoading)
+                false
             }
             is ResultWrapper.LoadingFetch -> TODO()
             ResultWrapper.Loading -> TODO()
 
-        }.exhaustive
+        }).exhaustive
     }
 
     private suspend fun onError(error: Error) {
         val message: String = if (!error.display_message.isNullOrEmpty()) error.display_message!!
-        else if(!error.message.isNullOrEmpty()) error.message!!
+        else if (!error.message.isNullOrEmpty()) error.message!!
         else "${error.throwable?.message}  ${error.throwable?.cause} \n ${error.throwable?.stackTraceToString()}"
         Logger.e("Error -> message: $message  statusCode: ${error.statusCode} errorType: ${error.errorType}")
         store.setEffect(BaseEffect.Toast("Error Happened", ToastyMode.MODE_TOAST_ERROR))

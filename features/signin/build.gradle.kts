@@ -4,6 +4,6 @@ apply {
 
 dependencies {
 
-    "implementation"(project(Modules.countryPicker))
+    "api"(project(Modules.countryPicker))
 
 }

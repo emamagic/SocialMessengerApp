@@ -3,7 +3,8 @@ package com.emamagic.application.interactor
 import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.entity.PhoneNumber
 import com.emamagic.entity.ServerConfig
-import com.emamagic.entity.Status
+import com.emamagic.entity.User
+import com.emamagic.entity.Workspace
 import com.emamagic.repository.UserRepository
 import javax.inject.Inject
 
@@ -13,6 +14,9 @@ class SinginUseCase @Inject constructor(
 
     suspend fun getServerConfig(hostName: String): ResultWrapper<ServerConfig> = userRepository.getServerUpdate(hostName)
 
-    suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = userRepository.submitPhoneNumber(phoneNumber)
+    suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = userRepository.phoneNumberRegistration(phoneNumber)
+
+    suspend fun otpVerification(code: String, phoneNumber: String, deviceId: String): ResultWrapper<User> = userRepository.otpVerification(code, phoneNumber, deviceId)
+
 
 }

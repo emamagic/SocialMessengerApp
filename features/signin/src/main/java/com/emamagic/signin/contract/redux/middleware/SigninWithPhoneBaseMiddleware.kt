@@ -2,7 +2,6 @@ package com.emamagic.signin.contract.redux.middleware
 
 import com.emamagic.application.base.BaseEffect
 import com.emamagic.application.base.BaseMiddleware
-import com.emamagic.application.base.SigninEffect
 import com.emamagic.application.base.Store
 import com.emamagic.application.interactor.SinginUseCase
 import com.emamagic.common_jvm.succeeded
@@ -24,7 +23,7 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
         super.process(action, currentState, store)
         when (action) {
             is SigninAction.GetServerConfig -> getServerConfig(action.hostName)
-            is SigninAction.SubmitPhoneNumber -> submitPhoneNumber(action.phoneNumber)
+            is SigninAction.SubmitPhoneNumberRegistration -> submitPhoneNumber(action.phoneNumber)
         }
     }
 
@@ -38,8 +37,8 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
 
     private suspend fun submitPhoneNumber(phoneNumber: PhoneNumber) {
         store.setEffect(BaseEffect.ShowLoading())
-        singinUseCase.submitPhoneNumber(phoneNumber).manageResult {
-            if (it!!) {
+        singinUseCase.phoneNumberRegistration(phoneNumber).manageResult {
+            if (it) {
                 store.setEffect(BaseEffect.NavigateTo(
                     SigninWithPhoneFragmentDirections.actionSigninWithPhoneFragmentToOtpFragment()
                 ))

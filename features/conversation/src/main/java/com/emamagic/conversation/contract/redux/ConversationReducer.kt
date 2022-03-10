@@ -10,6 +10,8 @@ class ConversationReducer: Reducer<ConversationState, ConversationAction> {
         currentState: ConversationState,
         action: ConversationAction
     ): ConversationState {
-        TODO("Not yet implemented")
+        return when (action) {
+            else -> currentState
+        }
     }
 }

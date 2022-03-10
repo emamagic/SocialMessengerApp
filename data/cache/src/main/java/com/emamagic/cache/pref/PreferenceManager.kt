@@ -1,11 +1,9 @@
 package com.emamagic.cache.pref
 
-import android.content.Context
 import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
 
-fun prefManager(context: Context): SharedPreferences
-        = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+
+val pref: SharedPreferences by lazy { PrefInitializer.get() }
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
     val editor = this.edit()

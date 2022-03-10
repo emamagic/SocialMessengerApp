@@ -5,9 +5,11 @@ import com.emamagic.entity.PhoneNumber
 
 sealed class SigninAction : Action {
 
-    data class SubmitPhoneNumber(val phoneNumber: PhoneNumber): SigninAction()
+    data class SubmitPhoneNumberRegistration(val phoneNumber: PhoneNumber): SigninAction()
 
     data class GetServerConfig(val hostName: String): SigninAction()
     object ServerConfigLoaded: SigninAction()
+
+    data class SubmitOtpVerification(val code: String, val phoneNumber: String, val deviceId: String): SigninAction()
 
 }

@@ -80,7 +80,8 @@ dependencies {
     implementation(Libs.multidex)
     implementation(Libs.hilt)
     kapt(Libs.hilt_kapt)
-    implementation(Libs.leak_canary)
+    debugImplementation(Libs.leak_canary)
+    implementation(Libs.persistent_cookie_jar)
 
 
 }

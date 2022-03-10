@@ -4,3 +4,4 @@ import java.io.IOException
 
 class NoInternetException(message: String? = null): IOException(message)
 class ServerConnectionException(message: String? = null): IOException(message)
+class NoCurrentUserFoundException(message: String? = null): IOException(message)

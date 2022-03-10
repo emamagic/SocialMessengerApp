@@ -1,6 +1,5 @@
 package com.emamagic.safe
 
-import android.util.Log
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
 import com.emamagic.safe.error.*

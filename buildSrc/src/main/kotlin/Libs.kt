@@ -91,4 +91,7 @@ object Libs {
 
     // Pref Manager
     const val pref_manager = "androidx.preference:preference-ktx:${Versions.pref_manager}"
+
+    // PersistentCookieJar
+    const val persistent_cookie_jar = "com.github.franmontiel:PersistentCookieJar:${Versions.persistent_cookie_jar}"
 }

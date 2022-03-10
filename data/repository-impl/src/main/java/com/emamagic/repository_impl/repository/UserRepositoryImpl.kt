@@ -3,15 +3,15 @@ package com.emamagic.repository_impl.repository
 import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.entity.PhoneNumber
 import com.emamagic.entity.ServerConfig
-import com.emamagic.entity.Status
+import com.emamagic.entity.User
+import com.emamagic.entity.Workspace
 import com.emamagic.network.service.ConfigService
 import com.emamagic.network.service.UserService
 import com.emamagic.repository.UserRepository
-import com.emamagic.repository_impl.util.toError
 import com.emamagic.repository_impl.util.toResponse
+import com.emamagic.repository_impl.util.toResult
 import com.emamagic.safe.SafeApi
 import com.emamagic.safe.policy.MemoryPolicy
-import com.emamagic.safe.util.SafeWrapper
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,22 +23,24 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig> = fresh {
             serverConfigService.getServerConfig().toResponse()
-        }.run {
-            when (this) {
-                is SafeWrapper.Success -> ResultWrapper.Success(data!!)
-                is SafeWrapper.Failed -> ResultWrapper.Failed(error.toError())
-                is SafeWrapper.LoadingFetch -> TODO()
-            }
-        }
+        }.toResult()
 
-    override suspend fun submitPhoneNumber(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = fresh {
-        userService.phoneVerification(phoneNumber).toResponse()
-    }.run {
-        when (this) {
-            is SafeWrapper.Success -> ResultWrapper.Success(true)
-            is SafeWrapper.Failed -> ResultWrapper.Failed(error.toError())
-            is SafeWrapper.LoadingFetch -> TODO()
-        }
-    }
+    override suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = fresh {
+        userService.phoneRegistration(phoneNumber).toResponse()
+    }.toResult(customData = true)
+
+    override suspend fun otpVerification(code: String, phoneNumber: String, deviceId: String): ResultWrapper<User> = fresh {
+        userService.otpVerification(phoneNumber, code, deviceId).toResponse()
+    }.toResult()
+
+    override suspend fun getCurrentUser(shouldFetch: Boolean): ResultWrapper<User> = get("CurrentUser" ,
+        memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })) {
+        userService.getCurrentUser().toResponse()
+    }.toResult()
+
+    override suspend fun getMyWorkspaces(shouldFetch: Boolean): ResultWrapper<List<Workspace>> = get("MyWorkspaces",
+        memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })) {
+        userService.getMyWorkspaces().toResponse()
+    }.toResult()
 
 }
