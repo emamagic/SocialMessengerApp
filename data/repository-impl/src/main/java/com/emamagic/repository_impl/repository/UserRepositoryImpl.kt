@@ -27,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = fresh {
         userService.phoneRegistration(phoneNumber).toResponse()
-    }.toResult(customData = true)
+    }.toResult(shouldReturn = true)
 
     override suspend fun otpVerification(code: String, phoneNumber: String, deviceId: String): ResultWrapper<User> = fresh {
         userService.otpVerification(phoneNumber, code, deviceId).toResponse()

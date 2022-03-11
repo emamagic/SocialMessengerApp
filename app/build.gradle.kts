@@ -81,7 +81,6 @@ dependencies {
     implementation(Libs.hilt)
     kapt(Libs.hilt_kapt)
     debugImplementation(Libs.leak_canary)
-    implementation(Libs.persistent_cookie_jar)
 
 
 }

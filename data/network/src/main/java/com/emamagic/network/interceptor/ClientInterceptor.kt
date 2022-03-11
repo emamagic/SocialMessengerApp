@@ -5,15 +5,15 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.emamagic.safe.error.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
+import okio.IOException
 import javax.inject.Inject
 
 class ClientInterceptor @Inject constructor(private val app: Application): Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!isInternetAvailable(app)) throw NoInternetException("Please Check Your Connectivity")
+        if (!isInternetAvailable(app)) throw IOException("Please Check Your Connectivity")
         return chain.proceed(chain.request())
     }
 

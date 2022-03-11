@@ -9,7 +9,7 @@ apply {
 dependencies {
 
     implementation(project(Modules.commonJvm))
-    implementation(project(Modules.safe))
+    api(project(Modules.cookieJar))
     api(Libs.retrofit)
     api(Libs.logging_interceptor)
     api(Libs.gson_converter)

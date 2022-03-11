@@ -1,6 +1,7 @@
 package com.emamagic.limoo.di
 
 import android.content.Context
+import com.emamagic.network.interceptor.ClientAuthenticator
 import com.emamagic.network.interceptor.ClientInterceptor
 import com.emamagic.network.interceptor.HostSelectionInterceptor
 import com.emamagic.network.service.ConfigService
@@ -8,11 +9,12 @@ import com.emamagic.network.service.ConversationService
 import com.emamagic.network.service.UserService
 import com.emamagic.network.util.Const
 import com.emamagic.network.util.ResponseConverter
+import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.CookiePersistor
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Lazy
 import dagger.Module
@@ -23,8 +25,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Modifier
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -33,11 +33,9 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     @Provides
-    fun provideClearableCookieJar(
-        @ApplicationContext context: Context
-    ): PersistentCookieJar =
-        PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
-
+    fun provideCookiePersistor(@ApplicationContext context: Context): CookiePersistor {
+        return SharedPrefsCookiePersistor(context)
+    }
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
@@ -52,11 +50,13 @@ object RetrofitModule {
         loggingInterceptor: HttpLoggingInterceptor,
         clientInterceptor: ClientInterceptor,
         hostSelectionInterceptor: HostSelectionInterceptor,
-        persistentCookieJar: PersistentCookieJar
+        persistentCookieJar: PersistentCookieJar,
+        clientAuthenticator: ClientAuthenticator
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor(hostSelectionInterceptor)
+            .authenticator(clientAuthenticator)
             .addInterceptor(clientInterceptor)
             .cookieJar(persistentCookieJar)
             .readTimeout(15, TimeUnit.SECONDS)

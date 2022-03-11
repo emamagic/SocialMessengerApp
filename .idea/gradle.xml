@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/features/signin" />
             <option value="$PROJECT_DIR$/features/signup" />
             <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/cookie-jar" />
             <option value="$PROJECT_DIR$/libs/countrycodepicker" />
             <option value="$PROJECT_DIR$/libs/emoji" />
             <option value="$PROJECT_DIR$/libs/safe" />

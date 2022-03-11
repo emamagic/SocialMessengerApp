@@ -9,6 +9,7 @@ object Modules {
     const val repository = ":domain:repository"
     const val safe = ":libs:safe"
     const val emoji = ":libs:emoji"
+    const val cookieJar = ":libs:cookie-jar"
     const val entity = ":domain:entity"
     const val countryPicker = ":libs:countrycodepicker"
     const val signin = ":features:signin"

@@ -1,12 +1,10 @@
 package com.emamagic.repository_impl.util
 
-import android.util.Log
 import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.common_jvm.ServerConnectionException
 import com.emamagic.entity.Error
 import com.emamagic.safe.error.ErrorEntity
 import com.emamagic.safe.error.HttpException
-import com.emamagic.safe.error.NoInternetException
 import com.emamagic.safe.util.SafeWrapper
 import com.google.gson.Gson
 import retrofit2.Response
@@ -73,18 +71,18 @@ fun ErrorEntity?.toError(): Error {
 }
 
 fun <T,E> SafeWrapper<T>.toResult(
-    success: ((T) -> Unit)? = null,
-    failed: (() -> Unit)? = null,
-    customData: E? = null
+    onSuccess: ((T) -> Unit)? = null,
+    onFailed: (() -> Unit)? = null,
+    shouldReturn: E? = null
 ): ResultWrapper<E> =
     when (this) {
         is SafeWrapper.Success -> {
-            success?.invoke(data!!)
-            val mData = customData ?: data!! as E
+            onSuccess?.invoke(data!!)
+            val mData = shouldReturn ?: data!! as E
             ResultWrapper.Success(mData)
         }
         is SafeWrapper.Failed -> {
-            failed?.invoke()
+            onFailed?.invoke()
             ResultWrapper.Failed(error.toError())
         }
         is SafeWrapper.LoadingFetch -> TODO()
