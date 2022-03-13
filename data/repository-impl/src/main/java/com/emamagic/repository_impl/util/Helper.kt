@@ -1,7 +1,10 @@
 package com.emamagic.repository_impl.util
 
+import android.util.Log
+import com.emamagic.common_jvm.NoCurrentUserFoundException
 import com.emamagic.common_jvm.ResultWrapper
 import com.emamagic.common_jvm.ServerConnectionException
+import com.emamagic.common_jvm.UserShouldNotBeLoginException
 import com.emamagic.entity.Error
 import com.emamagic.safe.error.ErrorEntity
 import com.emamagic.safe.error.HttpException
@@ -53,7 +56,15 @@ fun ErrorEntity?.toError(): Error {
         is ErrorEntity.Server -> {
             throwable = ServerConnectionException("${throwable?.message}  ${throwable?.cause}")
         }
-        else -> { /* Do Nothing */
+        else -> {
+            when (throwable) {
+                is NoCurrentUserFoundException -> {
+                    Log.e("TAG", "toError: NoCurrentUserFoundException")
+                }
+                is UserShouldNotBeLoginException -> {
+                    Log.e("TAG", "toError: UserShouldNotBeLoginException")
+                }
+            }
         }
     }
 

@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 // TODO it is not implemented yet
-class NetworkInterceptor @Inject constructor() : Interceptor {
+class CacheInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
 

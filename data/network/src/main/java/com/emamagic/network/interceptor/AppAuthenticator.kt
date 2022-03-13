@@ -1,14 +1,18 @@
 package com.emamagic.network.interceptor
 
+import com.emamagic.common_jvm.UserShouldNotBeLoginException
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.google.gson.JsonObject
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 import javax.inject.Provider
+import javax.inject.Singleton
 
-class ClientAuthenticator @Inject constructor(
+@Singleton
+class AppAuthenticator @Inject constructor(
     private val persistentCookieJar: PersistentCookieJar,
     private val okHttpClient: Provider<OkHttpClient>
 ) : Authenticator {
@@ -25,8 +29,7 @@ class ClientAuthenticator @Inject constructor(
     private fun refreshToken(
         persistentCookieJar: PersistentCookieJar,
         okHttpClient: OkHttpClient
-    ): Boolean {
-        synchronized(this) {
+    ): Boolean = synchronized(this) {
             val refreshToken = persistentCookieJar.getRefreshToken()!!
             clearCookies(persistentCookieJar)
             val jsonType = "application/json; charset=utf-8".toMediaTypeOrNull()
@@ -37,14 +40,16 @@ class ClientAuthenticator @Inject constructor(
                 .addHeader("Refresh", refreshToken)
                 .post(body)
                 .build()
-            val response = okHttpClient.newBuilder().cookieJar(persistentCookieJar).build()
+            val response = okHttpClient
+                .newBuilder()
+                .build()
                 .newCall(okhttpRequest).execute()
             return response.isSuccessful
         }
-    }
+
 
     private fun logout() {
-        // TODO throw custom exception
+        throw UserShouldNotBeLoginException()
     }
 
     private fun clearCookies(persistentCookieJar: PersistentCookieJar) {

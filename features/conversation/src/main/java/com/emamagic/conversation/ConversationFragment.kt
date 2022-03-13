@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.emamagic.application.base.BaseFragment
+import com.emamagic.application.conversation
 import com.emamagic.conversation.contract.ConversationAction
 import com.emamagic.conversation.contract.ConversationState
 import com.emamagic.conversation.databinding.FragmentConversationBinding
@@ -19,6 +20,11 @@ class ConversationFragment: BaseFragment<FragmentConversationBinding, Conversati
     }
 
     override fun renderViewState(viewState: ConversationState) {
+
+//        binding.recyclerConversation.withModels {
+//
+//        }
+
 
     }
 

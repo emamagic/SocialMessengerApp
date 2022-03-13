@@ -1,17 +1,15 @@
 package com.emamagic.limoo.di
 
 import android.content.Context
-import com.emamagic.network.interceptor.ClientAuthenticator
-import com.emamagic.network.interceptor.ClientInterceptor
+import com.emamagic.network.interceptor.AppAuthenticator
+import com.emamagic.network.interceptor.ConnectivityInterceptor
 import com.emamagic.network.interceptor.HostSelectionInterceptor
 import com.emamagic.network.service.ConfigService
 import com.emamagic.network.service.ConversationService
 import com.emamagic.network.service.UserService
 import com.emamagic.network.util.Const
 import com.emamagic.network.util.ResponseConverter
-import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.CookiePersistor
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.gson.FieldNamingPolicy
@@ -48,16 +46,16 @@ object RetrofitModule {
     @Provides
     fun provideOkHttp(
         loggingInterceptor: HttpLoggingInterceptor,
-        clientInterceptor: ClientInterceptor,
+        connectivityInterceptor: ConnectivityInterceptor,
         hostSelectionInterceptor: HostSelectionInterceptor,
         persistentCookieJar: PersistentCookieJar,
-        clientAuthenticator: ClientAuthenticator
+        appAuthenticator: AppAuthenticator
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor(hostSelectionInterceptor)
-            .authenticator(clientAuthenticator)
-            .addInterceptor(clientInterceptor)
+            .authenticator(appAuthenticator)
+            .addInterceptor(connectivityInterceptor)
             .cookieJar(persistentCookieJar)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)

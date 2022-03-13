@@ -1,5 +1,6 @@
 package com.emamagic.safe
 
+import android.util.Log
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
 import com.emamagic.safe.error.*
@@ -279,7 +280,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
             try {
                 return block()
             } catch (e: IOException) {
-                if (index == retryPolicy.times - 2 && (e is NoInternetException || e is ServerConnectionException)) {
+                if (index == retryPolicy.times - 2) {
                     ConnectivityPublisher.notifySubscribers(Connectivity(General.DISCONNECT))
                 }
             }

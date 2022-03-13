@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27685185185185185" />
+        <entry key="application/src/main/res/drawable/ic_available.xml" value="0.176" />
+        <entry key="application/src/main/res/drawable/ic_unavailable_status.xml" value="0.176" />
         <entry key="application/src/main/res/drawable/rounded_btn_grey.xml" value="0.146" />
         <entry key="application/src/main/res/drawable/rounded_btn_red.xml" value="0.146" />
         <entry key="application/src/main/res/layout/dialog_alert.xml" value="0.34322916666666664" />
+        <entry key="application/src/main/res/layout/row_conversation.xml" value="0.2640625" />
         <entry key="core/src/main/res/drawable/bg_corroct_toast.xml" value="0.2005" />
         <entry key="core/src/main/res/drawable/bg_limoo_disable_submit.xml" value="0.1945" />
         <entry key="core/src/main/res/drawable/bg_signup_phone_number_default.xml" value="0.1945" />

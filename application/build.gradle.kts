@@ -18,13 +18,19 @@ dependencies {
 
     implementation(project(Modules.emoji))
     implementation(project(Modules.repository))
-    implementation(project(Modules.commonJvm))
-    implementation(project(Modules.navigation))
+    api(project(Modules.commonJvm))
+    api(project(Modules.navigation))
 
     implementation(Libs.swipe_refresh)
     implementation(Libs.java_x)
     implementation(Libs.glide)
     kapt(Libs.glide_kapt)
+
+    api(Libs.epoxy)
+    kapt(Libs.epoxy_kapt)
+    api(Libs.epoxy_data_binding)
+    api(Libs.epoxy_paging)
+
 }
 
 kapt {

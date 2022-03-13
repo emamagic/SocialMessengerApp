@@ -69,7 +69,6 @@ dependencies {
     implementation(project(Modules.repository))
     implementation(project(Modules.safe))
     implementation(project(Modules.application))
-    implementation(project(Modules.navigation))
 
     // Features
     implementation(project(Modules.signin))
