@@ -1,8 +1,10 @@
+import com.google.protobuf.gradle.*
 plugins {
     id("com.android.library")
     kotlin ("android")
     kotlin("kapt")
     id("kotlin-parcelize")
+    id ("com.google.protobuf") version "0.8.17"
 }
 
 apply {
@@ -11,6 +13,7 @@ apply {
 
 dependencies {
 
+    implementation(project(Modules.commonJvm))
     implementation(Libs.room)
     implementation(Libs.room_coroutine)
     implementation(Libs.java_x)
@@ -19,5 +22,21 @@ dependencies {
     implementation(Libs.hawk)
     implementation(Libs.data_store_proto)
     implementation(Libs.data_store)
+    api(Libs.proto)
 
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                id("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }

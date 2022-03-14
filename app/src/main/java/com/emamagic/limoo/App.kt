@@ -3,6 +3,7 @@ package com.emamagic.limoo
 import androidx.multidex.MultiDexApplication
 import com.emamagic.application.utils.view.TypeFaceHelper
 import com.emamagic.cache.cache.CacheInitializer
+import com.emamagic.cache.cache.data_store.getUser
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -16,6 +17,7 @@ class App : MultiDexApplication() {
     private fun init() {
         TypeFaceHelper.generateTypeface(this)
         CacheInitializer.init(this)
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.emamagic.entity
 
 data class User(
+    val id: String,
     val avatarHash: String,
     val createAt: Long,
     val deleteAt: Long,

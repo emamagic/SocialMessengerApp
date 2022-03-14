@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.emamagic.cache";
+option java_multiple_files = true;
+
+message User{
+  string id = 1;
+  string username = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string nickName = 5;
+  string phoneNumber = 6;
+  string avatarHash = 7;
+  string email = 8;
+}

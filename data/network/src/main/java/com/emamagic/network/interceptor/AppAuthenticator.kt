@@ -30,21 +30,23 @@ class AppAuthenticator @Inject constructor(
         persistentCookieJar: PersistentCookieJar,
         okHttpClient: OkHttpClient
     ): Boolean = synchronized(this) {
-            val refreshToken = persistentCookieJar.getRefreshToken()!!
-            clearCookies(persistentCookieJar)
-            val jsonType = "application/json; charset=utf-8".toMediaTypeOrNull()
-            val jsonContent = JsonObject().toString()
-            val body = jsonContent.toRequestBody(jsonType)
-            val okhttpRequest = Request.Builder()
-                .url("https://test.limonadapp.ir/Limonad/j_spring_jwt_security_check")
-                .addHeader("Refresh", refreshToken)
-                .post(body)
-                .build()
-            val response = okHttpClient
-                .newBuilder()
-                .build()
-                .newCall(okhttpRequest).execute()
-            return response.isSuccessful
+            persistentCookieJar.getRefreshToken()?.let { refreshToken ->
+                clearCookies(persistentCookieJar)
+                val jsonType = "application/json; charset=utf-8".toMediaTypeOrNull()
+                val jsonContent = JsonObject().toString()
+                val body = jsonContent.toRequestBody(jsonType)
+                val okhttpRequest = Request.Builder()
+                    .url("https://test.limonadapp.ir/Limonad/j_spring_jwt_security_check")
+                    .addHeader("Refresh", refreshToken)
+                    .post(body)
+                    .build()
+                val response = okHttpClient
+                    .newBuilder()
+                    .build()
+                    .newCall(okhttpRequest).execute()
+                return response.isSuccessful
+            }
+            return@synchronized false
         }
 
 

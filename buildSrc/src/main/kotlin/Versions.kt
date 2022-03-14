@@ -39,6 +39,7 @@ object Versions {
     const val pref_manager = "1.2.0"
     const val hawk = "2.0.1"
     const val data_store = "1.0.0"
+    const val proto = "3.18.0"
     const val persistent_cookie_jar = "v1.0.1"
 
 }
