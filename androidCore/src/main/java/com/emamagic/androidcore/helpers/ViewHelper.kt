@@ -5,14 +5,13 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
-import com.emamagic.androidcore.R
 import java.util.*
 
 object ViewHelper {
 
     @JvmStatic
     fun dpToPx(context: Context, dp: Float): Int {
-        return dpToPx(context, dp)
+        return (dp * context.resources.displayMetrics.density + 0.5f).toInt()
     }
 
     @JvmStatic
