@@ -2,13 +2,10 @@ package com.emamagic.signin.otp
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
-import com.emamagic.application.base.BaseFragment
+import com.emamagic.base.base.BaseFragment
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
@@ -24,20 +21,13 @@ class OtpFragment :
     private var expirationTimer: ExpirationTimer? = null
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-
+        expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.otpExpired() }
+        expirationTimer?.start()
+        binding.btnSubmit.setOnClickListener { viewModel.submitOtpEvent(binding.squareFieldPin.text.toString()) }
     }
 
     override fun renderViewState(viewState: SigninState) {
 
-    }
-
-    override fun init() {
-        expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.otpExpired() }
-        expirationTimer?.start()
-    }
-
-    override fun onClickListeners() {
-        binding.btnSubmit.setOnClickListener { viewModel.submitOtpEvent(binding.squareFieldPin.text.toString()) }
     }
 
     class ExpirationTimer(timer: TextView, val finished: () -> Unit) : CountDownTimer(60000, 1000) {

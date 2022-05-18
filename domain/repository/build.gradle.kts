@@ -10,7 +10,7 @@ java {
 
 dependencies {
 
-    implementation(project(Modules.commonJvm))
+    implementation(project(Modules.core))
     implementation(Libs.java_x)
 
 }

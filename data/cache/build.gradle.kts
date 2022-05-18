@@ -13,7 +13,7 @@ apply {
 
 dependencies {
 
-    implementation(project(Modules.commonJvm))
+    implementation(project(Modules.core))
     implementation(Libs.room)
     implementation(Libs.room_coroutine)
     implementation(Libs.java_x)
@@ -28,7 +28,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.14.0"
+        artifact = "com.google.protobuf:protoc:3.15.0"
     }
     generateProtoTasks {
         all().forEach { task ->

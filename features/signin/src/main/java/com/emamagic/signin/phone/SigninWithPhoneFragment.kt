@@ -3,16 +3,15 @@ package com.emamagic.signin.phone
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import com.emamagic.application.base.BaseEffect
-import com.emamagic.application.base.BaseFragment
-import com.emamagic.application.base.SigninEffect
-import com.emamagic.application.utils.clickPartOfText
-import com.emamagic.application.utils.onTextChange
-import com.emamagic.application.utils.setColor
-import com.emamagic.application.utils.toasty
-import com.emamagic.application.utils.view.TypeFaceHelper
+import com.emamagic.androidcore.clickPartOfText
+import com.emamagic.androidcore.getDrawableCompat
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.base.base.BaseFragment
+import com.emamagic.mvi.SigninEffect
+import com.emamagic.androidcore.helpers.TypeFaceHelper
+import com.emamagic.androidcore.onTextChange
+import com.emamagic.androidcore.setColor
 import com.emamagic.signin.R
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
@@ -32,29 +31,10 @@ class SigninWithPhoneFragment :
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
 
+        setupCountryPicker()
         binding.inputEditText.onTextChange {
             viewModel.typingPhoneNumberEvent(it)
         }
-
-    }
-
-    override fun renderViewState(viewState: SigninState) {
-        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
-    }
-
-    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
-        when (viewEffect) {
-            SigninEffect.InvalidPhoneNumber -> binding.validatorInput.invalidateInput()
-        }
-        return true
-    }
-
-    override fun init() {
-        setupCountryPicker()
-    }
-
-    override fun onClickListeners() {
-
         binding.txtSignupWithServerName.setOnClickListener { viewModel.signinWithServerNameClickedEvent() }
         binding.txtSignupWithUsername.setOnClickListener { viewModel.signinWithUserNameClickedEvent() }
         binding.btnSubmit.setOnClickListener {
@@ -62,16 +42,30 @@ class SigninWithPhoneFragment :
         }
 
         binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی",
-            setColor(com.emamagic.application.R.color.limoo_secondary), true) {
+            setColor(com.emamagic.base.R.color.limoo_secondary), true) {
 //            val intent = Intent(Intent.ACTION_VIEW)
 //            intent.data = Uri.parse("")
 //            startActivity(intent)
         }
 
         binding.txtTermsPolicy.clickPartOfText("شرایط و قوانین استفاده",
-            setColor(com.emamagic.application.R.color.limoo_secondary), true) {
+            setColor(com.emamagic.base.R.color.limoo_secondary), true) {
             viewModel.submitTermsPolicyEvent()
         }
+        binding.inputEditText.setDrawableClickListener { countryPicker.mRlyClickConsumer.performClick() }
+
+    }
+
+    override fun renderViewState(viewState: SigninState) {
+//        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
+    }
+
+    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
+        when (viewEffect) {
+            SigninEffect.InvalidPhoneNumber -> binding.validatorInput.invalidateInput()
+            else -> {}
+        }
+        return true
     }
 
     override fun enableUiComponent(): Boolean {
@@ -85,18 +79,20 @@ class SigninWithPhoneFragment :
     }
 
     private fun setupCountryPicker() {
-        setCountryFlag(com.emamagic.application.R.drawable.ic_iran_flag)
-        countryPicker = CountryCodePicker(requireContext())
+        setCountryFlag(com.emamagic.base.R.drawable.ic_iran_flag)
+        countryPicker = CountryCodePicker(
+            requireContext()
+        )
         countryPicker.typeFace = TypeFaceHelper.getTypeface()
         countryPicker.hideNameCode(true)
         countryPicker.hidePhoneCode(true)
-        countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.application.R.string.default_country_code))
+        countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.base.R.string.default_country_code))
         countryPicker.setOnCountrySelected(this)
     }
 
     private fun setCountryFlag(flag: Int) {
-        val selectedFlag = ContextCompat.getDrawable(requireContext(), flag)
-        val arrowDown = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_drop_down)
+        val selectedFlag = getDrawableCompat(flag)
+        val arrowDown = getDrawableCompat(R.drawable.ic_arrow_drop_down)
         val finalDrawable = LayerDrawable(arrayOf(selectedFlag, arrowDown))
         finalDrawable.setLayerInset(0, 0, 0, selectedFlag?.intrinsicWidth!!, 0)
         finalDrawable.setLayerInset(1, selectedFlag.intrinsicWidth -10  , -5, 0, -5)

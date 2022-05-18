@@ -1,9 +1,9 @@
 package com.emamagic.signin.contract
 
-import com.emamagic.application.base.Action
+import com.emamagic.mvi.Action
 import com.emamagic.entity.PhoneNumber
 
-sealed class SigninAction : Action {
+sealed class SigninAction : com.emamagic.mvi.Action {
 
     data class SubmitPhoneNumberRegistration(val phoneNumber: PhoneNumber): SigninAction()
 

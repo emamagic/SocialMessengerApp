@@ -1,6 +1,6 @@
 package com.emamagic.repository
 
-import com.emamagic.common_jvm.ResultWrapper
+import com.emamagic.core.ResultWrapper
 import com.emamagic.entity.*
 
 interface UserRepository {

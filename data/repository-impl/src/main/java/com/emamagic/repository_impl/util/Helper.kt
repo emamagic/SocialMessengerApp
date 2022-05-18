@@ -1,11 +1,11 @@
 package com.emamagic.repository_impl.util
 
 import android.util.Log
-import com.emamagic.common_jvm.NoCurrentUserFoundException
-import com.emamagic.common_jvm.ResultWrapper
-import com.emamagic.common_jvm.ServerConnectionException
-import com.emamagic.common_jvm.UserShouldNotBeLoginException
-import com.emamagic.entity.Error
+import com.emamagic.core.NoCurrentUserFoundException
+import com.emamagic.core.ResultWrapper
+import com.emamagic.core.ServerConnectionException
+import com.emamagic.core.UserShouldNotBeLoginException
+import com.emamagic.core.Error
 import com.emamagic.safe.error.ErrorEntity
 import com.emamagic.safe.error.HttpException
 import com.emamagic.safe.util.SafeWrapper
@@ -51,7 +51,7 @@ fun ErrorEntity?.toError(): Error {
         }
         is ErrorEntity.Network -> {
             throwable =
-                com.emamagic.common_jvm.NoInternetException("${throwable?.message}  ${throwable?.cause}")
+                com.emamagic.core.NoInternetException("${throwable?.message}  ${throwable?.cause}")
         }
         is ErrorEntity.Server -> {
             throwable = ServerConnectionException("${throwable?.message}  ${throwable?.cause}")
@@ -81,8 +81,8 @@ fun ErrorEntity?.toError(): Error {
     )
 }
 
-fun <T,E> SafeWrapper<T>.toResult(
-    onSuccess: ((T) -> Unit)? = null,
+suspend fun <T,E> SafeWrapper<T>.toResult(
+    onSuccess: (suspend (T) -> Unit)? = null,
     onFailed: (() -> Unit)? = null,
     shouldReturn: E? = null
 ): ResultWrapper<E> =

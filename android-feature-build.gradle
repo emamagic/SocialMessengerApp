@@ -15,7 +15,7 @@ kapt {
 
 dependencies {
 
-    implementation project(Modules.application)
+    implementation project(Modules.base)
     implementation Libs.view_model_scope
     implementation Libs.hilt
     implementation Libs.hilt_nav_graph_scope

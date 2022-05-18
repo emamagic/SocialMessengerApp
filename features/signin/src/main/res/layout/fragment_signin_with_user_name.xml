@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
 
-            <com.emamagic.application.widget.LimooValidatorInput
+            <com.emamagic.base.widget.LimooValidatorInput
                 android:id="@+id/validator_input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,9 +97,9 @@
                     android:textSize="@dimen/limoo_12s"
                     android:visibility="invisible" />
 
-            </com.emamagic.application.widget.LimooValidatorInput>
+            </com.emamagic.base.widget.LimooValidatorInput>
 
-            <com.emamagic.application.widget.LimooValidatorInput
+            <com.emamagic.base.widget.LimooValidatorInput
                 android:id="@+id/validator_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,14 +146,15 @@
                     android:textSize="@dimen/limoo_12s"
                     android:visibility="invisible" />
 
-            </com.emamagic.application.widget.LimooValidatorInput>
+            </com.emamagic.base.widget.LimooValidatorInput>
 
-            <Button
+            <com.emamagic.base.widget.progress_button.FontButtonWithProgress
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/limoo_button_height"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="@dimen/limoo_medium_margin"
+                app:is_enable="false"
                 android:background="@drawable/bg_limoo_enable_submit"
                 android:gravity="center"
                 android:text="@string/enter_to_workspace"

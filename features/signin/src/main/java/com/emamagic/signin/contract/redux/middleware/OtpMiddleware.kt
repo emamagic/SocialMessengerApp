@@ -1,9 +1,8 @@
 package com.emamagic.signin.contract.redux.middleware
 
-import com.emamagic.application.base.BaseEffect
-import com.emamagic.application.base.BaseMiddleware
-import com.emamagic.application.base.Store
-import com.emamagic.application.interactor.SinginUseCase
+import com.emamagic.mvi.BaseMiddleware
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.base.interactor.SinginUseCase
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import com.emamagic.signin.otp.OtpFragmentDirections
@@ -16,7 +15,7 @@ class OtpMiddleware @Inject constructor(
     override suspend fun process(
         action: SigninAction,
         currentState: SigninState,
-        store: Store<SigninState, SigninAction>
+        store: com.emamagic.mvi.Store<SigninState, SigninAction>
     ) {
         super.process(action, currentState, store)
 

@@ -68,7 +68,7 @@ dependencies {
     implementation(project(Modules.cache))
     implementation(project(Modules.repository))
     implementation(project(Modules.safe))
-    implementation(project(Modules.application))
+    implementation(project(Modules.base))
 
     // Features
     implementation(project(Modules.signin))

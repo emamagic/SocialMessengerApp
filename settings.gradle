@@ -17,20 +17,22 @@ dependencyResolutionManagement {
 rootProject.name = "Limoo"
 include (
         ':app',
-        ':application',
+        ':base',
         ':data:network',
         ':data:cache',
-        ':libs:safe',
+        ':data:db',
+        ':safe',
         ':data:repository-impl',
         ':domain:repository',
         ':domain:entity',
-        ':domain:common-jvm',
+        ':core',
         ':navigation',
-        ':libs:emoji',
-        ':libs:countrycodepicker',
-        ':libs:cookie-jar',
+        ':emoji',
+        ':country-picker',
+        ':cookie-jar',
         ':features:signin',
         ':features:signup',
         ':features:conversation',
+        ':androidCore',
+        ':mvi'
 )
-include ''

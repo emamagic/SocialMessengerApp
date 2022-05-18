@@ -1,25 +1,24 @@
 package com.emamagic.network.interceptor
 
-import com.emamagic.common_jvm.UserShouldNotBeLoginException
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.emamagic.network.publisher.Event
+import com.emamagic.network.publisher.NotificationCenter
+import com.emamagic.network.util.Const
+import com.franmontiel.persistentcookiejar.persistence.CookiePersistor
 import com.google.gson.JsonObject
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
-@Singleton
 class AppAuthenticator @Inject constructor(
-    private val persistentCookieJar: PersistentCookieJar,
+    private val cookiePersistor: CookiePersistor,
     private val okHttpClient: Provider<OkHttpClient>
 ) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
         // TODO cancel other requestToken() call when token refreshed
-        if (!refreshToken(persistentCookieJar, okHttpClient.get())) {
+        if (!refreshToken(cookiePersistor, okHttpClient.get())) {
             logout()
             return null
         }
@@ -27,11 +26,10 @@ class AppAuthenticator @Inject constructor(
     }
 
     private fun refreshToken(
-        persistentCookieJar: PersistentCookieJar,
+        cookiePersistor: CookiePersistor,
         okHttpClient: OkHttpClient
     ): Boolean = synchronized(this) {
-            persistentCookieJar.getRefreshToken()?.let { refreshToken ->
-                clearCookies(persistentCookieJar)
+        cookiePersistor.getRefreshToken()?.let { refreshToken ->
                 val jsonType = "application/json; charset=utf-8".toMediaTypeOrNull()
                 val jsonContent = JsonObject().toString()
                 val body = jsonContent.toRequestBody(jsonType)
@@ -51,12 +49,7 @@ class AppAuthenticator @Inject constructor(
 
 
     private fun logout() {
-        throw UserShouldNotBeLoginException()
-    }
-
-    private fun clearCookies(persistentCookieJar: PersistentCookieJar) {
-        persistentCookieJar.clear()
-        persistentCookieJar.clearSession()
+        NotificationCenter.notifySubscribers(Event(Const.LOGGED_OUT))
     }
 
 }

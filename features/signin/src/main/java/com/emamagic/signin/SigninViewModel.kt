@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.Settings
 import androidx.lifecycle.viewModelScope
-import com.emamagic.application.base.BaseEffect
-import com.emamagic.application.base.BaseViewModel
-import com.emamagic.application.base.SigninEffect
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.base.base.BaseViewModel
+import com.emamagic.mvi.SigninEffect
 import com.emamagic.entity.PhoneNumber
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
@@ -66,25 +66,38 @@ class SigninViewModel @Inject constructor(
     }
 
     fun submitTermsPolicyEvent() = viewModelScope.launch {
-        store.setEffect(BaseEffect.NavigateTo(
+        store.setEffect(
+            BaseEffect.NavigateTo(
             SigninWithPhoneFragmentDirections
-                .actionSigninWithPhoneFragmentToTermsPolicyFragment(context.getString(R.string.privacy_policy_description))
+                .actionSigninWithPhoneFragmentToTermsPolicyFragment(R.string.privacy_policy_description)
         ))
     }
 
     // ---------------- singin with username ----------------
 
-    fun submitUserNameEvent() = viewModelScope.launch {
-
+    fun submitUserNameEvent(userName: String, pass: String) = viewModelScope.launch {
+        if (userName.isEmpty()) {
+            store.setEffect(SigninEffect.InvalidUsername)
+            return@launch
+        }
+        if (pass.isEmpty()) {
+            store.setEffect(SigninEffect.InvalidPass)
+            return@launch
+        }
     }
 
-    fun typingUserNameEvent(input: String) = viewModelScope.launch {
-
+    fun typingUserNameOrPassEvent(userName: String, pass: String) = viewModelScope.launch {
+        if (userName.trim().isNotEmpty() && pass.trim().isNotEmpty()) {
+            store.setEffect(BaseEffect.EnableUiComponent)
+        } else {
+            store.setEffect(BaseEffect.DisableUiComponent)
+        }
     }
 
-    fun typingPasswordEvent(input: String) = viewModelScope.launch {
-
+    fun signinWithPhoneClickedEvent() = viewModelScope.launch {
+        store.setEffect(BaseEffect.NavigateBack)
     }
+
 
     // ---------------- singin with server name ----------------
 

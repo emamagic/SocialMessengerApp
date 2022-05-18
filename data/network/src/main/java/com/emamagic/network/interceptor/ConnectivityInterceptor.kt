@@ -5,10 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.emamagic.common_jvm.NoInternetException
+import com.emamagic.core.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
-import okio.IOException
 import javax.inject.Inject
 
 class ConnectivityInterceptor @Inject constructor(private val app: Application): Interceptor {

@@ -4,14 +4,15 @@ buildscript {
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")
+        maven(url = "https://oss.jfrog.org/libs-snapshot")
         jcenter()
     }
     dependencies {
         classpath(Build.tools)
         classpath(Build.safe_args)
         classpath(Build.hilt)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-        // NOTE: Do not place your application dependencies here; they belong
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
+        // NOTE: Do not place your base dependencies here; they belong
         // in the individual module build.gradle files
     }
 }

@@ -2,10 +2,8 @@ package com.emamagic.signin.server_name
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
-import com.emamagic.application.base.BaseFragment
+import com.emamagic.base.base.BaseFragment
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
@@ -26,11 +24,5 @@ class SigninWithServerNameFragment :
 
     }
 
-    override fun init() {
 
-    }
-
-    override fun onClickListeners() {
-
-    }
 }

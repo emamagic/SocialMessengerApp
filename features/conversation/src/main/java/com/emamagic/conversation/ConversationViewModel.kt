@@ -1,7 +1,7 @@
 package com.emamagic.conversation
 
 import androidx.lifecycle.viewModelScope
-import com.emamagic.application.base.BaseViewModel
+import com.emamagic.base.base.BaseViewModel
 import com.emamagic.conversation.contract.ConversationAction
 import com.emamagic.conversation.contract.ConversationState
 import com.emamagic.conversation.contract.redux.ConversationStore

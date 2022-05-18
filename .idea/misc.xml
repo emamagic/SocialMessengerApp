@@ -20,6 +20,7 @@
         <entry key="core/src/main/res/drawable/simple_round_transparent.xml" value="0.2005" />
         <entry key="core/src/main/res/layout/dialog_alert.xml" value="0.34322916666666664" />
         <entry key="core/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
+        <entry key="emoji/src/main/res/drawable/selector_emoji_travel.xml" value="0.2235" />
         <entry key="features/conversation/src/main/res/layout/fragment_conversation.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/drawable/ic_arrow_doown.xml" value="0.133" />
         <entry key="features/signin/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.133" />

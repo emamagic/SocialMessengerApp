@@ -234,7 +234,7 @@ open class PinField : AppCompatEditText {
     fun invalidInput() {
         tmpHighlightSingleFieldType = highlightSingleFieldType
         tmpHighlightPaint.color = highlightPaint.color
-        highlightPaint.color = ContextCompat.getColor(context, com.emamagic.application.R.color.limoo_error_state)
+        highlightPaint.color = ContextCompat.getColor(context, com.emamagic.base.R.color.limoo_error_state)
         highlightSingleFieldType = HighlightType.ALL_FIELDS
         handler.postDelayed({reset()}, 1500)
     }

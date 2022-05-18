@@ -31,27 +31,35 @@ val getUser: Flow<User> = userStore.data.catch { exception ->
     }
 }
 
-suspend fun setUser(
-    id: String,
-    username: String,
-    firstName: String,
-    lastName: String,
-    nickName: String,
-    phoneNumber: String,
-    avatarHash: String,
-    email: String
-) {
+suspend fun setUser(user: com.emamagic.entity.User) {
     userStore.updateData { preference ->
-        preference.toBuilder()
-            .setId(id)
-            .setUsername(username)
-            .setFirstName(firstName)
-            .setLastName(lastName)
-            .setNickName(nickName)
-            .setPhoneNumber(phoneNumber)
-            .setAvatarHash(avatarHash)
-            .setEmail(email)
-            .build()
+
+      val userBuilder =  preference.toBuilder()
+        if (user.id.isNotEmpty()) {
+            userBuilder.id = user.id
+        }
+        if (!user.username.isNullOrEmpty()) {
+            userBuilder.username = user.username
+        }
+        if (!user.firstName.isNullOrEmpty()) {
+            userBuilder.firstName = user.firstName
+        }
+        if (!user.lastName.isNullOrEmpty()) {
+            userBuilder.lastName = user.lastName
+        }
+        if (!user.nickname.isNullOrEmpty()) {
+            userBuilder.nickName = user.nickname
+        }
+        if (!user.phoneNumber.isNullOrEmpty()) {
+            userBuilder.phoneNumber = user.phoneNumber
+        }
+        if (!user.avatarHash.isNullOrEmpty()) {
+            userBuilder.avatarHash = user.avatarHash
+        }
+        if (!user.email.isNullOrEmpty()) {
+            userBuilder.email = user.email
+        }
+            userBuilder.build()
     }
 
 }

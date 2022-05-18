@@ -1,10 +1,10 @@
 package com.emamagic.conversation.contract.redux
 
-import com.emamagic.application.base.Reducer
+import com.emamagic.mvi.Reducer
 import com.emamagic.conversation.contract.ConversationAction
 import com.emamagic.conversation.contract.ConversationState
 
-class ConversationReducer: Reducer<ConversationState, ConversationAction> {
+class ConversationReducer: com.emamagic.mvi.Reducer<ConversationState, ConversationAction> {
 
     override fun reduce(
         currentState: ConversationState,

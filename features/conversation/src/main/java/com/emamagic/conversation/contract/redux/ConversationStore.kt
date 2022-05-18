@@ -1,6 +1,6 @@
 package com.emamagic.conversation.contract.redux
 
-import com.emamagic.application.base.BaseStore
+import com.emamagic.mvi.BaseStore
 import com.emamagic.conversation.contract.ConversationAction
 import com.emamagic.conversation.contract.ConversationState
 import com.emamagic.conversation.contract.redux.middleware.ConversationMiddleware

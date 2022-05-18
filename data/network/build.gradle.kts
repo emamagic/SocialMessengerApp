@@ -8,7 +8,7 @@ apply {
 
 dependencies {
 
-    implementation(project(Modules.commonJvm))
+    implementation(project(Modules.core))
     api(project(Modules.cookieJar))
     api(Libs.retrofit)
     api(Libs.logging_interceptor)

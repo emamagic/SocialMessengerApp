@@ -1,11 +1,10 @@
 package com.emamagic.signin.contract
 
-import com.emamagic.application.base.State
-import com.emamagic.signin.R
+import com.emamagic.mvi.State
 
 data class SigninState(
     val serverConfigLoaded: Boolean
-) : State {
+) : com.emamagic.mvi.State {
     companion object {
         fun initialize(): SigninState =
             SigninState(

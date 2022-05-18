@@ -1,6 +1,6 @@
 package com.emamagic.signin.contract.redux
 
-import com.emamagic.application.base.BaseStore
+import com.emamagic.mvi.BaseStore
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
 import com.emamagic.signin.contract.redux.middleware.OtpMiddleware

@@ -14,6 +14,7 @@ object Libs {
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hilt_kapt = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val hilt_nav_graph_scope = "androidx.hilt:hilt-navigation-fragment:${Versions.hilt_nav_graph_scope}"
+    const val hilt_core = "com.google.dagger:hilt-core:${Versions.hilt}"
 
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -36,7 +37,7 @@ object Libs {
     const val java_x = "javax.inject:javax.inject:${Versions.java_x}"
 
     // Kotlin Reflect
-    const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_reflect}"
+    const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
 
     // LifeCycle Scope
     const val life_cycle_scope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.life_cycle_scope}"
@@ -99,4 +100,9 @@ object Libs {
 
     // PersistentCookieJar
     const val persistent_cookie_jar = "com.github.franmontiel:PersistentCookieJar:${Versions.persistent_cookie_jar}"
+
+    // Rxjava
+    const val rx_java = "io.reactivex.rxjava3:rxjava:${Versions.rx_java}"
+    const val rx_android = "io.reactivex.rxjava3:rxandroid:${Versions.rx_java}"
+
 }

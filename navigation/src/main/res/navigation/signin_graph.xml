@@ -4,7 +4,8 @@
     android:id="@+id/singin_modules"
     app:startDestination="@id/signin_with_phone_fragment">
 
-    <fragment android:id="@+id/signin_with_phone_fragment"
+    <fragment
+        android:id="@+id/signin_with_phone_fragment"
         android:name="com.emamagic.signin.phone.SigninWithPhoneFragment">
         <action
             android:id="@+id/action_signin_with_phone_fragment_to_signin_with_server_name_fragment"
@@ -18,6 +19,9 @@
         <action
             android:id="@+id/action_signin_with_phone_fragment_to_terms_policy_fragment"
             app:destination="@id/terms_policy_fragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="android-app://limoo.im.app/signin"/>
     </fragment>
 
 
@@ -37,10 +41,10 @@
     </fragment>
 
     <fragment android:id="@+id/terms_policy_fragment"
-        android:name="com.emamagic.signin.phone.TermsPolicyDialog">
+        android:name="com.emamagic.signin.policy.TermsPolicyDialog">
         <argument
             android:name="description"
-            app:argType="string" />
+            app:argType="reference" />
     </fragment>
 
 </navigation>

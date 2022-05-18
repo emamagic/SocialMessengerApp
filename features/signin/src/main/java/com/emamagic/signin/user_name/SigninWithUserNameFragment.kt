@@ -3,8 +3,10 @@ package com.emamagic.signin.user_name
 import android.os.Bundle
 import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import com.emamagic.application.base.BaseFragment
-import com.emamagic.application.utils.onTextChange
+import com.emamagic.androidcore.onTextChange
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.base.base.BaseFragment
+import com.emamagic.mvi.SigninEffect
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction
 import com.emamagic.signin.contract.SigninState
@@ -19,22 +21,36 @@ class SigninWithUserNameFragment :
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.inputEditTextUsername.onTextChange { viewModel.typingUserNameEvent(it) }
-        binding.inputEditTextPassword.onTextChange { viewModel.typingPasswordEvent(it) }
-
-
-
+        binding.inputEditTextUsername.onTextChange { viewModel.typingUserNameOrPassEvent(it, binding.inputEditTextPassword.text.toString()) }
+        binding.inputEditTextPassword.onTextChange { viewModel.typingUserNameOrPassEvent(binding.inputEditTextUsername.text.toString(), it) }
+        binding.btnSubmit.setOnClickListener {
+            viewModel.submitUserNameEvent(
+            binding.inputEditTextUsername.text.toString(),
+            binding.inputEditTextPassword.text.toString())
+        }
+        binding.txtSignupWithPhone.setOnClickListener { viewModel.signinWithPhoneClickedEvent() }
     }
 
     override fun renderViewState(viewState: SigninState) {
 
     }
 
-    override fun init() {}
+    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
+        when (viewEffect) {
+            SigninEffect.InvalidUsername -> binding.validatorInputUsername.invalidateInput()
+            SigninEffect.InvalidPass -> binding.validatorInputPassword.invalidateInput()
+            else -> {}
+        }
+        return true
+    }
 
-    override fun onClickListeners() {
+    override fun enableUiComponent(): Boolean {
+        binding.btnSubmit.enable()
+        return true
+    }
 
-        binding.btnSubmit.setOnClickListener { viewModel.submitUserNameEvent() }
-
+    override fun disableUiComponent(): Boolean {
+        binding.btnSubmit.disable()
+        return true
     }
 }

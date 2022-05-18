@@ -7,8 +7,6 @@ import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** An interceptor that allows runtime changes to the URL hostname.  */
-@Singleton
 class HostSelectionInterceptor @Inject constructor() : Interceptor {
 
     @Volatile

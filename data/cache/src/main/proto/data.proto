@@ -5,11 +5,11 @@ option java_multiple_files = true;
 
 message User{
   string id = 1;
-  string username = 2;
-  string firstName = 3;
-  string lastName = 4;
-  string nickName = 5;
-  string phoneNumber = 6;
-  string avatarHash = 7;
-  string email = 8;
+  optional string username = 2;
+  optional string firstName = 3;
+  optional string lastName = 4;
+  optional string nickName = 5;
+  optional string phoneNumber = 6;
+  optional string avatarHash = 7;
+  optional string email = 8;
 }
