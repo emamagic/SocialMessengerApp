@@ -34,5 +34,7 @@ include (
         ':features:signup',
         ':features:conversation',
         ':androidCore',
-        ':mvi'
+        ':mvi',
+        ':hilt-core'
+
 )

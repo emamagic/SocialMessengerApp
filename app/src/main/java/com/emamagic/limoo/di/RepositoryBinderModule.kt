@@ -23,10 +23,4 @@ abstract class RepositoryBinderModule {
     @Binds
     abstract fun bindConversationRepository(conversationRepositoryImpl: ConversationRepositoryImpl): ConversationRepository
 
-    @Binds
-    abstract fun bindPersistentCookieJar(persistentCookieJar: PersistentCookieJar): ClearableCookieJar
-
-    @Binds
-    abstract fun bindCookieCache(cookieCache: SetCookieCache): CookieCache
-
 }

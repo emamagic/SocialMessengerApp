@@ -16,6 +16,9 @@ object Libs {
     const val hilt_nav_graph_scope = "androidx.hilt:hilt-navigation-fragment:${Versions.hilt_nav_graph_scope}"
     const val hilt_core = "com.google.dagger:hilt-core:${Versions.hilt}"
 
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val dagger_kapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.moshi}"
@@ -104,5 +107,8 @@ object Libs {
     // Rxjava
     const val rx_java = "io.reactivex.rxjava3:rxjava:${Versions.rx_java}"
     const val rx_android = "io.reactivex.rxjava3:rxandroid:${Versions.rx_java}"
+
+    // Coil
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
 
 }

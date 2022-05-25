@@ -8,6 +8,5 @@ import javax.inject.Singleton
 
 @Singleton
 class ConversationRepositoryImpl @Inject constructor(
-    private val conversationService: ConversationService
 ): SafeApi(), ConversationRepository {
 }

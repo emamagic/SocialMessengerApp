@@ -12,7 +12,7 @@ object Versions {
     const val gradle = "1.6.10"
     const val hilt = "2.38.1"
     const val hilt_nav_graph_scope = "1.0.0"
-    const val dagger = "2.40.5"
+    const val dagger = "2.42"
     const val retrofit = "2.9.0"
     const val logging_interceptor = "4.9.3"
     const val moshi = "2.9.0"
@@ -32,7 +32,7 @@ object Versions {
     const val epoxy = "5.0.0-beta03"
     const val annotation = "1.3.0"
     const val glide = "4.12.0"
-    const val room = "2.4.1"
+    const val room = "2.4.2"
     const val lottie = "3.4.0"
     const val work_manager = "2.7.1"
     const val leak_canary = "2.8.1"
@@ -42,5 +42,6 @@ object Versions {
     const val proto = "3.18.0"
     const val persistent_cookie_jar = "v1.0.1"
     const val rx_java = "3.0.0"
+    const val coil = "2.1.0"
 
 }

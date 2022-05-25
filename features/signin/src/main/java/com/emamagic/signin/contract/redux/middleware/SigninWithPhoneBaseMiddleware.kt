@@ -1,5 +1,6 @@
 package com.emamagic.signin.contract.redux.middleware
 
+import android.util.Log
 import com.emamagic.mvi.BaseMiddleware
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.base.interactor.SinginUseCase
@@ -21,14 +22,14 @@ class SigninWithPhoneBaseMiddleware @Inject constructor(
     ) {
         super.process(action, currentState, store)
         when (action) {
-            is SigninAction.GetServerConfig -> getServerConfig(action.hostName)
+            is SigninAction.GetServerConfig -> getServerConfig()
             is SigninAction.SubmitPhoneNumberRegistration -> submitPhoneNumber(action.phoneNumber)
         }
     }
 
 
-    private suspend fun getServerConfig(hostName: String) {
-        val result = singinUseCase.getServerConfig(hostName)
+    private suspend fun getServerConfig() {
+        val result = singinUseCase.getServerConfig()
         if (result.succeeded) {
 
         }

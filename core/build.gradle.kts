@@ -10,4 +10,5 @@ java {
 
 dependencies {
     api(project(Modules.entity))
+    implementation(Libs.java_x)
 }

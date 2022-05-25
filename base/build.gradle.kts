@@ -23,8 +23,6 @@ dependencies {
 
     implementation(Libs.swipe_refresh)
     implementation(Libs.java_x)
-    implementation(Libs.glide)
-    kapt(Libs.glide_kapt)
 
     api(Libs.epoxy)
     kapt(Libs.epoxy_kapt)

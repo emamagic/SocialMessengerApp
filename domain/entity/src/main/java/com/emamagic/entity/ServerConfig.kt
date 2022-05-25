@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ServerConfig(val config: Config, val organization: Organization? = null)
 data class Config(
+    @SerializedName("fileServerUrl")
     val fileServerUrl: String,
     val videoCallType: String,
     val deploymnetType: String,
@@ -13,7 +14,8 @@ data class Config(
     val authType: String,
     val authServices: String,
     val defaultAuthServices: String,
-    val keycloakConfig: Keycloak
+    val keycloakConfig: Keycloak,
+    val server: Server
 )
 data class Keycloak(
     val realm: String,
@@ -26,4 +28,8 @@ data class Keycloak(
 data class Organization(
     val backgroundHash: String? = null,
     val logoHash: String? = null
+)
+data class Server(
+    val protocol: String,
+    val host: String
 )

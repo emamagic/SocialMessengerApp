@@ -16,20 +16,18 @@
 
 package com.franmontiel.persistentcookiejar.cache;
 
+import androidx.annotation.NonNull;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
-import javax.inject.Inject;
-
 import okhttp3.Cookie;
 
 public class SetCookieCache implements CookieCache {
 
-    private Set<IdentifiableCookie> cookies;
+    private final Set<IdentifiableCookie> cookies;
 
-    @Inject
     public SetCookieCache() {
         cookies = new HashSet<>();
     }
@@ -47,6 +45,7 @@ public class SetCookieCache implements CookieCache {
         cookies.clear();
     }
 
+    @NonNull
     @Override
     public Iterator<Cookie> iterator() {
         return new SetCookieCacheIterator();
@@ -54,7 +53,7 @@ public class SetCookieCache implements CookieCache {
 
     private class SetCookieCacheIterator implements Iterator<Cookie> {
 
-        private Iterator<IdentifiableCookie> iterator;
+        private final Iterator<IdentifiableCookie> iterator;
 
         public SetCookieCacheIterator() {
             iterator = cookies.iterator();

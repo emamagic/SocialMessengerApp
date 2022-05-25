@@ -32,4 +32,15 @@ public interface ClearableCookieJar extends CookieJar {
      * Clear all the cookies from persistence and from the cache.
      */
     void clear();
+
+    /**
+     * Getting access token
+     * */
+    String getAccessToken();
+
+    /**
+     * Getting refresh token
+     * */
+    String getRefreshToken();
+
 }

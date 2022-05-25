@@ -18,4 +18,5 @@ object Modules {
     const val androidCore = ":androidCore"
     const val db = ":data:db"
     const val mvi = ":mvi"
+    const val hiltCore = ":hilt-core"
 }

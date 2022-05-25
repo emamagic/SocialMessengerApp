@@ -18,15 +18,13 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.emamagic.androidcore.gone
-import com.emamagic.androidcore.hideKeyboard
+import com.emamagic.androidcore.*
 import com.emamagic.base.R
-import com.emamagic.androidcore.keyboard.getRootView
-import com.emamagic.androidcore.setColor
-import com.emamagic.androidcore.visible
+import com.emamagic.mvi.Action
 import com.emamagic.mvi.BaseEffect
+import com.emamagic.mvi.State
 
-abstract class BaseFragment<DB : ViewDataBinding, STATE : com.emamagic.mvi.State, ACTION : com.emamagic.mvi.Action, VM : BaseViewModel<STATE, ACTION>> :
+abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action, VM : BaseViewModel<STATE, ACTION>> :
     Fragment() {
 
     private var _binding: DB? = null
@@ -103,8 +101,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : com.emamagic.mvi.State
 
     private fun renderDefaultViewEffect(viewEffect: BaseEffect) {
         when (viewEffect) {
-//            toasty(viewEffect.message, viewEffect.mode)
-            is BaseEffect.Toast -> {}
+            is BaseEffect.Toast -> Toast.makeText(requireContext(), viewEffect.message, Toast.LENGTH_SHORT).show()
             is BaseEffect.ShowLoading -> showLoading(viewEffect.isDim)
             is BaseEffect.HideLoading -> hideLoading()
             is BaseEffect.HideKeyboard -> hideKeyboard()

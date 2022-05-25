@@ -6,12 +6,12 @@ import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.androidcore.clickPartOfText
 import com.emamagic.androidcore.getDrawableCompat
-import com.emamagic.mvi.BaseEffect
-import com.emamagic.base.base.BaseFragment
-import com.emamagic.mvi.SigninEffect
 import com.emamagic.androidcore.helpers.TypeFaceHelper
 import com.emamagic.androidcore.onTextChange
 import com.emamagic.androidcore.setColor
+import com.emamagic.base.base.BaseFragment
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.mvi.SigninEffect
 import com.emamagic.signin.R
 import com.emamagic.signin.SigninViewModel
 import com.emamagic.signin.contract.SigninAction

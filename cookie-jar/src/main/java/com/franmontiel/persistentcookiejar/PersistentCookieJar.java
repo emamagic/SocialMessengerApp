@@ -17,16 +17,11 @@
 package com.franmontiel.persistentcookiejar;
 
 import androidx.annotation.NonNull;
-
 import com.franmontiel.persistentcookiejar.cache.CookieCache;
 import com.franmontiel.persistentcookiejar.persistence.CookiePersistor;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.inject.Inject;
-
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
@@ -35,7 +30,6 @@ public class PersistentCookieJar implements ClearableCookieJar {
     private final CookieCache cache;
     private final CookiePersistor persistor;
 
-    @Inject
     public PersistentCookieJar(CookieCache cache, CookiePersistor persistor) {
         this.cache = cache;
         this.persistor = persistor;
@@ -97,6 +91,26 @@ public class PersistentCookieJar implements ClearableCookieJar {
     synchronized public void clear() {
         cache.clear();
         persistor.clear();
+    }
+
+    @Override
+    public String getAccessToken() {
+        return getToken(true);
+    }
+
+    @Override
+    public String getRefreshToken() {
+        return getToken(false);
+    }
+
+    private String getToken(boolean isAccessToken) {
+        String tokenType = (isAccessToken) ? "ACCESSTOKEN" : "REFRESHTOKEN";
+        for (Cookie currentCookie : cache) {
+            if (currentCookie.name().equals(tokenType)) {
+                return currentCookie.value();
+            }
+        }
+        return null;
     }
 
 }

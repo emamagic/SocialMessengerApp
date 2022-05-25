@@ -1,14 +1,18 @@
 package com.emamagic.limoo.di
 
 import android.content.Context
+import coil.Coil
+import coil.ImageLoader
 import com.emamagic.network.interceptor.AppAuthenticator
 import com.emamagic.network.interceptor.ConnectivityInterceptor
+import com.emamagic.network.interceptor.DownloadProgressInterceptor
 import com.emamagic.network.interceptor.HostSelectionInterceptor
 import com.emamagic.network.service.ConfigService
-import com.emamagic.network.service.ConversationService
 import com.emamagic.network.service.UserService
 import com.emamagic.network.util.Const
+import com.emamagic.network.util.DownloadProgressResponseBody
 import com.emamagic.network.util.ResponseConverter
+import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.persistence.CookiePersistor
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -20,22 +24,18 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object NetworkModule {
-
-    @Provides
-    fun provideCookiePersistor(@ApplicationContext context: Context): CookiePersistor {
-        return SharedPrefsCookiePersistor(
-            context
-        )
-    }
+object OkhttpModule {
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
@@ -45,56 +45,34 @@ object NetworkModule {
         return loggingInterceptor
     }
 
+
     @Singleton
     @Provides
     fun provideOkHttp(
+        @ApplicationContext applicationContext: Context,
         loggingInterceptor: HttpLoggingInterceptor,
         connectivityInterceptor: ConnectivityInterceptor,
         hostSelectionInterceptor: HostSelectionInterceptor,
-        persistentCookieJar: PersistentCookieJar,
-        appAuthenticator: AppAuthenticator
+        appAuthenticator: AppAuthenticator,
+        persistentCookieJar: ClearableCookieJar,
+        threadPoolExecutor: ThreadPoolExecutor
     ): OkHttpClient {
-        return OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(connectivityInterceptor)
             .addInterceptor(hostSelectionInterceptor)
             .authenticator(appAuthenticator)
-            .addInterceptor(connectivityInterceptor)
             .cookieJar(persistentCookieJar)
+            .dispatcher(Dispatcher(threadPoolExecutor))
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(8, TimeUnit.SECONDS)
             .build()
+        Coil.setImageLoader {
+            ImageLoader.Builder(applicationContext).okHttpClient(client).build()
+        }
+        return client
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(client: Lazy<OkHttpClient>): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(
-                ResponseConverter(
-                    GsonBuilder()
-                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                        .create()
-                )
-            )
-            .baseUrl(Const.BASE_URL)
-            .callFactory { request ->
-                // this bellow fun ,called in background thread
-                client.get().newCall(request)
-            }
-            .build()
-    }
-
-    @Provides
-    fun provideConfigService(retrofit: Retrofit): ConfigService =
-        retrofit.create(ConfigService::class.java)
-
-    @Provides
-    fun provideUserService(retrofit: Retrofit): UserService =
-        retrofit.create(UserService::class.java)
-
-    @Provides
-    fun provideConversationService(retrofit: Retrofit): ConversationService =
-        retrofit.create(ConversationService::class.java)
 
 }

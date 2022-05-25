@@ -11,7 +11,7 @@ class SinginUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun getServerConfig(hostName: String): ResultWrapper<ServerConfig> = userRepository.getServerUpdate(hostName)
+    suspend fun getServerConfig(): ResultWrapper<ServerConfig> = userRepository.getServerUpdate()
 
     suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = userRepository.phoneNumberRegistration(phoneNumber)
 

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="1.7">
       <module name="Limoo.androidCore" target="11" />
       <module name="Limoo.app" target="11" />
       <module name="Limoo.application" target="11" />
       <module name="Limoo.base" target="11" />
       <module name="Limoo.buildSrc" target="11" />
+      <module name="Limoo.buildSrc.main" target="11" />
+      <module name="Limoo.buildSrc.test" target="11" />
       <module name="Limoo.conversation" target="11" />
       <module name="Limoo.cookie-jar" target="11" />
+      <module name="Limoo.core" target="1.8" />
+      <module name="Limoo.core.main" target="1.8" />
+      <module name="Limoo.core.test" target="1.8" />
       <module name="Limoo.country-picker" target="11" />
       <module name="Limoo.countrycodepicker" target="11" />
       <module name="Limoo.data.cache" target="11" />
@@ -16,6 +21,12 @@
       <module name="Limoo.data.network" target="11" />
       <module name="Limoo.data.repository-impl" target="11" />
       <module name="Limoo.db" target="11" />
+      <module name="Limoo.domain.entity" target="1.8" />
+      <module name="Limoo.domain.entity.main" target="1.8" />
+      <module name="Limoo.domain.entity.test" target="1.8" />
+      <module name="Limoo.domain.repository" target="1.8" />
+      <module name="Limoo.domain.repository.main" target="1.8" />
+      <module name="Limoo.domain.repository.test" target="1.8" />
       <module name="Limoo.emoji" target="11" />
       <module name="Limoo.features.conversation" target="11" />
       <module name="Limoo.features.signin" target="11" />

@@ -5,11 +5,9 @@ import android.content.Context
 import android.graphics.Rect
 import android.util.TypedValue
 import android.view.View
+import com.emamagic.androidcore.getRootView
 import kotlin.math.roundToInt
 
-fun Activity.getRootView(): View {
-    return findViewById(android.R.id.content)
-}
 fun Context.convertDpToPx(dp: Float): Float {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,

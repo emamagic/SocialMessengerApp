@@ -19,9 +19,6 @@ package com.franmontiel.persistentcookiejar.persistence;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import com.franmontiel.persistentcookiejar.token.TokenAccessor;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +26,7 @@ import java.util.Map;
 import okhttp3.Cookie;
 
 @SuppressLint("CommitPrefEdits")
-public class SharedPrefsCookiePersistor implements CookiePersistor, TokenAccessor {
+public class SharedPrefsCookiePersistor implements CookiePersistor {
 
     private final SharedPreferences sharedPreferences;
 
@@ -39,30 +36,6 @@ public class SharedPrefsCookiePersistor implements CookiePersistor, TokenAccesso
 
     public SharedPrefsCookiePersistor(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
-    }
-
-    @Override
-    public String getAccessToken() {
-        for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet()) {
-            String serializedCookie = (String) entry.getValue();
-            Cookie cookie = new SerializableCookie().decode(serializedCookie);
-            if (cookie.name().equals("ACCESSTOKEN")) {
-               return cookie.value();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String getRefreshToken() {
-        for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet()) {
-            String serializedCookie = (String) entry.getValue();
-            Cookie cookie = new SerializableCookie().decode(serializedCookie);
-            if (cookie.name().equals("REFRESHTOKEN")) {
-                return cookie.value();
-            }
-        }
-        return null;
     }
 
     @Override

@@ -1,11 +1,18 @@
 package com.emamagic.base.base
 
 import androidx.lifecycle.ViewModel
+import com.emamagic.core.CoDispatcher
+import com.emamagic.core.DispatcherType
+import com.emamagic.mvi.Action
+import com.emamagic.mvi.State
+import com.emamagic.mvi.Store
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
 /** events are normal fun and states are stream */
-abstract class BaseViewModel<STATE : com.emamagic.mvi.State, ACTION : com.emamagic.mvi.Action> constructor(
-    store: com.emamagic.mvi.Store<STATE, ACTION>
+abstract class BaseViewModel<STATE : State, ACTION : Action> constructor(
+    store: Store<STATE, ACTION>
 ) : ViewModel() {
 
     val viewState: StateFlow<STATE> = store.state

@@ -2,11 +2,13 @@ package com.emamagic.repository_impl.repository
 
 import android.util.Log
 import com.emamagic.cache.cache.data_store.setUser
+import com.emamagic.cache.cache.preferences.pref
 import com.emamagic.core.ResultWrapper
 import com.emamagic.entity.PhoneNumber
 import com.emamagic.entity.ServerConfig
 import com.emamagic.entity.User
 import com.emamagic.entity.Workspace
+import com.emamagic.network.RestProvider
 import com.emamagic.network.publisher.Event
 import com.emamagic.network.publisher.NotificationCenter
 import com.emamagic.network.service.ConfigService
@@ -22,20 +24,24 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepositoryImpl @Inject constructor(
-    private val serverConfigService: ConfigService,
-    private val userService: UserService
+    private val restProvider: RestProvider
 ) : SafeApi(), UserRepository, NotificationCenter.NotificationCenterDelegate {
 
     init {
         NotificationCenter.subscribe(this, Const.LOGGED_OUT)
     }
 
-    override suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig> = fresh {
-            serverConfigService.getServerConfig().toResponse()
-    }.toResult()
+    override suspend fun getServerUpdate(): ResultWrapper<ServerConfig> = fresh {
+            restProvider.configService.getServerConfig().toResponse()
+    }.toResult(onSuccess = {
+        val config = it.config
+        val server = config.server
+        restProvider.setBaseUrlAndApiUrl("${server.protocol}://${server.host}")
+        restProvider.setBaseFileServerUrl(config.fileServerUrl)
+    })
 
     override suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean> = fresh {
-            userService.phoneRegistration(phoneNumber).toResponse()
+            restProvider.coordinatorUserService.phoneRegistration(phoneNumber).toResponse()
     }.toResult(shouldReturn = true)
 
     override suspend fun otpVerification(
@@ -43,18 +49,18 @@ class UserRepositoryImpl @Inject constructor(
         phoneNumber: String,
         deviceId: String
     ): ResultWrapper<User> = fresh {
-        userService.otpVerification(phoneNumber, code, deviceId).toResponse()
+        restProvider.coordinatorUserService.otpVerification(phoneNumber, code, deviceId).toResponse()
     }.toResult()
 
     override suspend fun getCurrentUser(shouldFetch: Boolean): ResultWrapper<User> = get("CurrentUser",
             memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })
         ) {
-            userService.getCurrentUser().toResponse()
+        restProvider.coordinatorUserService.getCurrentUser().toResponse()
         }.toResult(onSuccess = { user -> setUser(user) })
 
     override suspend fun getMyWorkspaces(shouldFetch: Boolean): ResultWrapper<List<Workspace>> = get("MyWorkspaces",
         memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })) {
-        userService.getMyWorkspaces().toResponse()
+        restProvider.coordinatorUserService.getMyWorkspaces().toResponse()
     }.toResult()
 
     override fun receiveData(event: Event) {

@@ -1,5 +1,7 @@
 plugins {
     id("com.android.library")
+    kotlin ("android")
+    kotlin("kapt")
 }
 
 apply {
@@ -14,6 +16,7 @@ dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.repository))
     implementation(Libs.kotlin_reflect)
-    implementation(Libs.java_x)
+    implementation(Libs.hilt)
+    kapt(Libs.hilt_kapt)
 
 }

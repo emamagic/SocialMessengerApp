@@ -1,5 +1,6 @@
 package com.emamagic.androidcore
 
+import android.app.Activity
 import android.content.Context
 import android.text.*
 import android.text.style.ClickableSpan
@@ -117,6 +118,9 @@ inline fun DrawerLayout.onDrawerListener(crossinline listener: (Float, View) -> 
     })
 }
 
+fun Activity.getRootView(): View {
+    return findViewById(android.R.id.content)
+}
 
 private fun FragmentManager.isOnBackStack(backStackName: String): Boolean {
     val backStackCount = backStackEntryCount

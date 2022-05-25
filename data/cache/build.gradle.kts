@@ -2,8 +2,6 @@ import com.google.protobuf.gradle.*
 plugins {
     id("com.android.library")
     kotlin ("android")
-    kotlin("kapt")
-    id("kotlin-parcelize")
     id ("com.google.protobuf") version "0.8.17"
 }
 
@@ -14,10 +12,7 @@ apply {
 dependencies {
 
     implementation(project(Modules.core))
-    implementation(Libs.room)
-    implementation(Libs.room_coroutine)
     implementation(Libs.java_x)
-    kapt(Libs.room_kapt)
     implementation(Libs.pref_manager)
     implementation(Libs.hawk)
     implementation(Libs.data_store_proto)

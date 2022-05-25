@@ -5,7 +5,7 @@ import com.emamagic.entity.*
 
 interface UserRepository {
 
-    suspend fun getServerUpdate(hostName: String): ResultWrapper<ServerConfig>
+    suspend fun getServerUpdate(): ResultWrapper<ServerConfig>
 
     suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean>
 

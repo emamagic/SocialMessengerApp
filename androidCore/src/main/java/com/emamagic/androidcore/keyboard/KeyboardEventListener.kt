@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import com.emamagic.androidcore.getRootView
 
 class KeyboardEventListener(
     private val activity: AppCompatActivity,

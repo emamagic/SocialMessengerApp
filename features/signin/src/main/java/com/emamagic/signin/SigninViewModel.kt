@@ -28,7 +28,7 @@ class SigninViewModel @Inject constructor(
     private lateinit var G_phoneNumber: String
 
     init {
-        getServerConfigEvent("https://test.limonadapp.ir")
+        getServerConfigEvent()
     }
 
     // ---------------- singin with phone ----------------
@@ -61,8 +61,8 @@ class SigninViewModel @Inject constructor(
         }
     }
 
-    fun getServerConfigEvent(hostName: String) = viewModelScope.launch {
-        store.dispatch(SigninAction.GetServerConfig(hostName))
+    fun getServerConfigEvent() = viewModelScope.launch {
+        store.dispatch(SigninAction.GetServerConfig)
     }
 
     fun submitTermsPolicyEvent() = viewModelScope.launch {

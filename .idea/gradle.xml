@@ -30,12 +30,12 @@
             <option value="$PROJECT_DIR$/features/conversation" />
             <option value="$PROJECT_DIR$/features/signin" />
             <option value="$PROJECT_DIR$/features/signup" />
+            <option value="$PROJECT_DIR$/hilt-core" />
             <option value="$PROJECT_DIR$/mvi" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/safe" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

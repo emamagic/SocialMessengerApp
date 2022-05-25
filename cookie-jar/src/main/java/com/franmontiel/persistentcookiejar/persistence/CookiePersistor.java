@@ -16,17 +16,14 @@
 
 package com.franmontiel.persistentcookiejar.persistence;
 
-import com.franmontiel.persistentcookiejar.token.TokenAccessor;
-
 import java.util.Collection;
 import java.util.List;
-
 import okhttp3.Cookie;
 
 /**
  * A CookiePersistor handles the persistent cookie storage.
  */
-public interface CookiePersistor extends TokenAccessor {
+public interface CookiePersistor {
 
     List<Cookie> loadAll();
 

@@ -2,9 +2,12 @@ package com.emamagic.androidcore
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 fun Context.getScreenWidth(): Int =
@@ -37,4 +40,37 @@ fun Fragment.showKeyboard() {
 fun View.showKeyboard() {
     val imm = this.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+}
+
+fun Fragment.hasPermission(vararg permissions: String): Boolean {
+    for (permission in permissions) {
+        if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED)
+            return false
+    }
+    return true
+}
+
+fun Fragment.hasPermission(permission: String) : Boolean =
+    ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED
+
+fun Fragment.getPermissions(
+    permissionListener: PermissionListener,
+    vararg permissions: String
+) {
+    val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            permissionListener.onPermissionGranted(it)
+        }
+    requestPermissionLauncher.launch(permissions)
+}
+
+fun Fragment.getPermission(
+    permission: String,
+    permissionListener: PermissionListener2
+) {
+    val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            permissionListener.onPermissionGranted(it)
+        }
+    requestPermissionLauncher.launch(permission)
 }

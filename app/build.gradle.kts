@@ -77,6 +77,7 @@ dependencies {
 
 
     implementation(Libs.multidex)
+    implementation(Libs.coil)
     implementation(Libs.hilt)
     kapt(Libs.hilt_kapt)
     debugImplementation(Libs.leak_canary)

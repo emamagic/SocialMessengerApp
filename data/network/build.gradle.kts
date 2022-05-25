@@ -13,6 +13,6 @@ dependencies {
     api(Libs.retrofit)
     api(Libs.logging_interceptor)
     api(Libs.gson_converter)
-    implementation(Libs.java_x)
+    implementation(Libs.hilt_core)
 
 }
