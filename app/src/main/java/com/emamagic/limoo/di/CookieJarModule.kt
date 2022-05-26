@@ -12,9 +12,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.migration.DisableInstallInCheck
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
+@DisableInstallInCheck
 @Module
 object CookieJarModule {
 

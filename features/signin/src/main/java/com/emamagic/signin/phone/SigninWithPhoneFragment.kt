@@ -6,7 +6,6 @@ import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.androidcore.clickPartOfText
 import com.emamagic.androidcore.getDrawableCompat
-import com.emamagic.androidcore.helpers.TypeFaceHelper
 import com.emamagic.androidcore.onTextChange
 import com.emamagic.androidcore.setColor
 import com.emamagic.base.base.BaseFragment
@@ -83,7 +82,7 @@ class SigninWithPhoneFragment :
         countryPicker = CountryCodePicker(
             requireContext()
         )
-        countryPicker.typeFace = TypeFaceHelper.getTypeface()
+//        countryPicker.typeFace = TypeFaceImpl.getTypeface()
         countryPicker.hideNameCode(true)
         countryPicker.hidePhoneCode(true)
         countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.base.R.string.default_country_code))

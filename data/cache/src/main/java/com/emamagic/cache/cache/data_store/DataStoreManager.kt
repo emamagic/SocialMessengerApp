@@ -13,12 +13,10 @@ import java.io.IOException
 
 val store: DataStore<Preferences> by lazy { CacheInitializer.getStore() }
 
-
 object StoreKeys {
     val SORT_ORDER = stringPreferencesKey("sort_order")
     val SHOW_COMPLETED = booleanPreferencesKey("show_completed")
 }
-
 
 private val userStore: DataStore<User> by lazy { CacheInitializer.getUserStore() }
 
@@ -33,35 +31,17 @@ val getUser: Flow<User> = userStore.data.catch { exception ->
 
 suspend fun setUser(user: com.emamagic.entity.User) {
     userStore.updateData { preference ->
-
       val userBuilder =  preference.toBuilder()
-        if (user.id.isNotEmpty()) {
-            userBuilder.id = user.id
-        }
-        if (!user.username.isNullOrEmpty()) {
-            userBuilder.username = user.username
-        }
-        if (!user.firstName.isNullOrEmpty()) {
-            userBuilder.firstName = user.firstName
-        }
-        if (!user.lastName.isNullOrEmpty()) {
-            userBuilder.lastName = user.lastName
-        }
-        if (!user.nickname.isNullOrEmpty()) {
-            userBuilder.nickName = user.nickname
-        }
-        if (!user.phoneNumber.isNullOrEmpty()) {
-            userBuilder.phoneNumber = user.phoneNumber
-        }
-        if (!user.avatarHash.isNullOrEmpty()) {
-            userBuilder.avatarHash = user.avatarHash
-        }
-        if (!user.email.isNullOrEmpty()) {
-            userBuilder.email = user.email
-        }
-            userBuilder.build()
+        if (user.id.isNotEmpty()) userBuilder.id = user.id
+        if (!user.username.isNullOrEmpty()) userBuilder.username = user.username
+        if (!user.firstName.isNullOrEmpty()) userBuilder.firstName = user.firstName
+        if (!user.lastName.isNullOrEmpty()) userBuilder.lastName = user.lastName
+        if (!user.nickname.isNullOrEmpty()) userBuilder.nickName = user.nickname
+        if (!user.phoneNumber.isNullOrEmpty()) userBuilder.phoneNumber = user.phoneNumber
+        if (!user.avatarHash.isNullOrEmpty()) userBuilder.avatarHash = user.avatarHash
+        if (!user.email.isNullOrEmpty()) userBuilder.email = user.email
+        userBuilder.build()
     }
-
 }
 
 

@@ -1,5 +1,6 @@
 package com.emamagic.androidcore.helpers
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Typeface
 import android.text.TextPaint
@@ -12,14 +13,14 @@ object TypeFaceHelper {
     private var mTypeFaceNormal: Typeface? = null
     private var mTypeFaceBold: Typeface? = null
 
-    fun generateTypeface(context: Context) {
+    fun init(application: Application) {
         mTypeFaceNormal = Typeface.createFromAsset(
-            context.assets,
+            application.assets,
 //            if (PERSIAN.equals(Prefs.getAppLanguage())) "fonts/IRANYekanMobileRegular.ttf" else "fonts/rmono.ttf"
              IRAN_YEKAN_REG
         )
         mTypeFaceBold = Typeface.createFromAsset(
-            context.assets,
+            application.assets,
              IRAN_YEKAN_BOLD
         )
     }

@@ -10,14 +10,14 @@ interface ErrorHandler {
     suspend fun <ResultType> get(
         key: String,
         retryPolicy: RetryPolicy = RetryPolicy(),
-        memoryPolicy: MemoryPolicy<ResultType> = MemoryPolicy<ResultType>(),
+        memoryPolicy: MemoryPolicy<ResultType> = MemoryPolicy(),
         remoteFetch: suspend () -> Response<ResultType>
     ): SafeWrapper<ResultType>
 
     suspend fun <ResultType, RequestType> get(
         key: String,
         retryPolicy: RetryPolicy = RetryPolicy(),
-        memoryPolicy: MemoryPolicy<ResultType> = MemoryPolicy<ResultType>(),
+        memoryPolicy: MemoryPolicy<ResultType> = MemoryPolicy(),
         remoteFetch: suspend () -> Response<RequestType>,
         mapping: (RequestType) -> ResultType
     ): SafeWrapper<ResultType>
