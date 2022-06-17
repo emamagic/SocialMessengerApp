@@ -8,7 +8,6 @@ apply {
 
 dependencies {
 
-    api(project(Modules.navigation))
-    api(project(Modules.core))
+    implementation(Libs.navigation_component_fragment)
 
 }

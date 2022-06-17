@@ -52,8 +52,8 @@ android {
         abortOnError = false
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
@@ -63,16 +63,15 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.network))
-    implementation(project(Modules.repositoryImpl))
+    implementation(project(Modules.core))
+    implementation(project(Modules.data))
+    implementation(project(Modules.domain))
     implementation(project(Modules.cache))
-    implementation(project(Modules.repository))
-    implementation(project(Modules.safe))
     implementation(project(Modules.base))
 
     // Features
-    implementation(project(Modules.signin))
-    implementation(project(Modules.signup))
+    implementation(project(Modules.login))
+    implementation(project(Modules.profile))
     implementation(project(Modules.conversation))
 
 

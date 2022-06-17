@@ -1,5 +1,6 @@
 package com.emamagic.limoo.di
 
+import com.emamagic.core.AppCoroutineDispatchers
 import com.emamagic.core.CoDispatcher
 import com.emamagic.core.DispatcherType
 import dagger.Module
@@ -8,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.migration.DisableInstallInCheck
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadFactory
@@ -41,5 +43,13 @@ object ThreadPoolModule {
     @Provides
     fun provideSharedDispatcher(threadPoolExecutor: ThreadPoolExecutor): CoroutineDispatcher =
         threadPoolExecutor.asCoroutineDispatcher()
+
+    @Singleton
+    @Provides
+    fun provideAppDispatcher() = AppCoroutineDispatchers(
+        io = Dispatchers.IO,
+        computation = Dispatchers.Default,
+        main = Dispatchers.Main
+    )
 
 }

@@ -18,23 +18,17 @@ rootProject.name = "Limoo"
 include (
         ':app',
         ':base',
-        ':data:network',
-        ':data:cache',
-        ':data:db',
+        ':cache',
         ':safe',
-        ':data:repository-impl',
-        ':domain:repository',
-        ':domain:entity',
+        ':domain',
         ':core',
         ':navigation',
         ':emoji',
         ':country-picker',
         ':cookie-jar',
-        ':features:signin',
-        ':features:signup',
+        ':features:login',
+        ':features:profile',
         ':features:conversation',
-        ':androidCore',
         ':mvi',
-        ':hilt-core'
-
+        ':data'
 )

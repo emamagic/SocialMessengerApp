@@ -6,10 +6,8 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
-
-import com.emamagic.androidcore.Logger;
-import com.emamagic.androidcore.helpers.TypeFaceHelper;
-
+import com.emamagic.base.Logger;
+import com.emamagic.base.helpers.TypeFaceHelper;
 import im.limoo.emoji.view.EmojiEditText;
 
 public class FontEditText extends EmojiEditText {

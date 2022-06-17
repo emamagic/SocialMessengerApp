@@ -17,17 +17,17 @@ android {
 dependencies {
 
     implementation(project(Modules.emoji))
-    implementation(project(Modules.repository))
-    api(project(Modules.androidCore))
-    api(project(Modules.mvi))
-
+    implementation(project(Modules.core))
     implementation(Libs.swipe_refresh)
-    implementation(Libs.java_x)
+    api(project(Modules.mvi))
+    api(project(Modules.navigation))
 
     api(Libs.epoxy)
     kapt(Libs.epoxy_kapt)
     api(Libs.epoxy_data_binding)
     api(Libs.epoxy_paging)
+    implementation(Libs.hilt_core)
+    kapt(Libs.hilt_kapt)
 
 }
 

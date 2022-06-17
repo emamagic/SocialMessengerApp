@@ -18,13 +18,13 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.emamagic.androidcore.*
+import com.emamagic.base.*
 import com.emamagic.base.R
-import com.emamagic.mvi.Action
+import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.State
 
-abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action, VM : BaseViewModel<STATE, ACTION>> :
+abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT, VM : BaseViewModel<STATE, ACTION>> :
     Fragment() {
 
     private var _binding: DB? = null
@@ -48,7 +48,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action
         val loadingId = resources.getIdentifier("loading", "id",requireActivity().packageName)
         loading = requireActivity().getRootView().findViewById(loadingId)!!
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.viewState.collect { renderViewState(it) }
+            viewModel.uiState.collect { renderViewState(it) }
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiEffect.collect { renderDefaultViewEffect(it) }
@@ -63,8 +63,11 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : Action
 
     /**
      * convention naming for fragment class and fragment layout does matter
-     * testOneFragment    (name of fragment)
+     * TestOneFragment    (name of fragment)
      * fragment_test_one  (name of layout)
+     *
+     * It can be potentially removed when obfuscating / minimizing your code in a release build.
+     * In such case you need to add a proguard rule to keep some specific resources to avoid their removal.
      * */
     @LayoutRes
     fun getResId(className: String): Int {

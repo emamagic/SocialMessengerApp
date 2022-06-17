@@ -4,7 +4,7 @@ import androidx.databinding.ViewDataBinding
 import com.airbnb.epoxy.DataBindingEpoxyModel
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
-import com.emamagic.entity.Conversation
+import com.emamagic.domain.entities.Conversation
 
 class ConversationController: PagingDataEpoxyController<Conversation>() {
 

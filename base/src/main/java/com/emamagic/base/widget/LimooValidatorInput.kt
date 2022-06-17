@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
-import com.emamagic.androidcore.onTextChange
+import com.emamagic.base.onTextChange
 import com.emamagic.base.R
 
 class LimooValidatorInput @JvmOverloads constructor(

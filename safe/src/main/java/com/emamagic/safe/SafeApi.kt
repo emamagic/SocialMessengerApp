@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.sync.withLock
 import java.io.IOException
 
+@Suppress("UNCHECKED_CAST")
 abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     override suspend fun <ResultType> get(

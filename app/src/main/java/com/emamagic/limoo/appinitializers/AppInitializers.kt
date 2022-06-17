@@ -1,7 +1,7 @@
 package com.emamagic.limoo.appinitializers
 
 import android.app.Application
-import com.emamagic.androidcore.appinitializer.AppInitializer
+import com.emamagic.base.appinitializer.AppInitializer
 import javax.inject.Inject
 
 class AppInitializers @Inject constructor(

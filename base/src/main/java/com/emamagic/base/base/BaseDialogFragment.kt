@@ -28,8 +28,6 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onDialogCreated(view, savedInstanceState)
-        init()
-        onClickListeners()
     }
 
 
@@ -53,10 +51,6 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>: DialogFragment() {
     }
 
     abstract fun onDialogCreated(view: View, savedInstanceState: Bundle?)
-
-    abstract fun init()
-
-    abstract fun onClickListeners()
 
     override fun dismiss() {
         super.dismiss()

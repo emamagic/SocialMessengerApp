@@ -18,10 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
-import com.emamagic.androidcore.Logger;
-import com.emamagic.androidcore.helpers.InputHelper;
-import com.emamagic.androidcore.helpers.TypeFaceHelper;
-import com.emamagic.androidcore.helpers.ViewHelper;
+import com.emamagic.base.Logger;
+import com.emamagic.base.helpers.InputHelper;
+import com.emamagic.base.helpers.TypeFaceHelper;
+import com.emamagic.base.helpers.ViewHelper;
 import com.emamagic.base.R;
 
 public class FontTextView extends AppCompatTextView {

@@ -3,7 +3,7 @@ package com.emamagic.base.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatButton;
-import com.emamagic.androidcore.helpers.TypeFaceHelper;
+import com.emamagic.base.helpers.TypeFaceHelper;
 
 public class FontButton extends AppCompatButton {
 

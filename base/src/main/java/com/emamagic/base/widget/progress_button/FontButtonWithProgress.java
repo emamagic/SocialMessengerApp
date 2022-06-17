@@ -10,8 +10,7 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
-
-import com.emamagic.androidcore.helpers.ViewHelper;
+import com.emamagic.base.helpers.ViewHelper;
 import com.emamagic.base.R;
 import com.emamagic.base.widget.FontButton;
 

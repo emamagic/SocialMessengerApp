@@ -1,11 +1,11 @@
 package com.emamagic.limoo.di
 
-import com.emamagic.androidcore.appinitializer.AppInitializer
+import com.emamagic.base.appinitializer.AppInitializer
 import com.emamagic.limoo.appinitializers.TypeFaceInitializer
-import com.emamagic.repository.ConversationRepository
-import com.emamagic.repository.UserRepository
-import com.emamagic.repository_impl.repository.ConversationRepositoryImpl
-import com.emamagic.repository_impl.repository.UserRepositoryImpl
+import com.emamagic.data_android.interceptor.repositories.ConversationRepositoryImpl
+import com.emamagic.data_android.interceptor.repositories.UserRepositoryImpl
+import com.emamagic.domain.repositories.ConversationRepository
+import com.emamagic.domain.repositories.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

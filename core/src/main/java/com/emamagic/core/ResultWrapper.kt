@@ -6,7 +6,6 @@ sealed class ResultWrapper<T>(
 ) {
     class Success<T>(data: T) : ResultWrapper<T>(data = data)
     class Failed<T>(error: Error, data: T? = null) : ResultWrapper<T>(error = error, data = data)
-    object Loading : ResultWrapper<Any>()
     class LoadingFetch<T>(data: T? = null) : ResultWrapper<T>(data = data)
 
     override fun toString(): String {
@@ -14,7 +13,6 @@ sealed class ResultWrapper<T>(
             is Success -> "Success [data=$data]"
             is Failed -> "Error[exception=${error?.message}]"
             is LoadingFetch -> "LoadingFetch"
-            Loading -> "Loading"
         }
     }
 }
