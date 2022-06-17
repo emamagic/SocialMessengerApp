@@ -1,4 +1,4 @@
-package com.emamagic.data_android.interceptor.network.interceptor
+package com.emamagic.data_android.interceptor.network.auth
 
 import com.emamagic.data_android.interceptor.Const
 import com.emamagic.data_android.interceptor.network.RestProvider

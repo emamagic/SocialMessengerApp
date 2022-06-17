@@ -4,7 +4,7 @@ import android.content.Context
 import coil.Coil
 import coil.ImageLoader
 import com.emamagic.limoo.BuildConfig
-import com.emamagic.data_android.interceptor.network.interceptor.AppAuthenticator
+import com.emamagic.data_android.interceptor.network.auth.AppAuthenticator
 import com.emamagic.data_android.interceptor.network.interceptor.ConnectivityInterceptor
 import com.emamagic.data_android.interceptor.network.interceptor.HostSelectionInterceptor
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
-@Module(includes = [ThreadPoolModule::class, CookieJarModule::class])
+@Module(includes = [ThreadModule::class, CookieJarModule::class])
 object OkhttpModule {
 
     @Provides

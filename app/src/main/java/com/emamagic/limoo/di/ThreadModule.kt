@@ -8,9 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.migration.DisableInstallInCheck
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.*
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.ThreadPoolExecutor
@@ -20,7 +18,7 @@ import javax.inject.Singleton
 
 @DisableInstallInCheck
 @Module
-object ThreadPoolModule {
+object ThreadModule {
 
     @Singleton
     @Provides
@@ -51,5 +49,10 @@ object ThreadPoolModule {
         computation = Dispatchers.Default,
         main = Dispatchers.Main
     )
+
+    @Singleton
+    @Provides
+    fun provideApplicationScope(dispatchers: AppCoroutineDispatchers): CoroutineScope =
+        CoroutineScope(SupervisorJob() + dispatchers.computation)
 
 }
