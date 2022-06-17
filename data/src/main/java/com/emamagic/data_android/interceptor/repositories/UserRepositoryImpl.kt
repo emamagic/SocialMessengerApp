@@ -2,9 +2,11 @@ package com.emamagic.data_android.interceptor.repositories
 
 import android.util.Log
 import com.emamagic.cache.cache.data_store.setUser
+import com.emamagic.core.AuthUserScope
 import com.emamagic.core.ResultWrapper
 import com.emamagic.data_android.interceptor.Const
 import com.emamagic.data_android.interceptor.network.RestProvider
+import com.emamagic.data_android.interceptor.network.auth.UserAuthSession
 import com.emamagic.domain.publisher.Event
 import com.emamagic.domain.publisher.NotificationCenter
 import com.emamagic.domain.entities.PhoneNumber
@@ -17,11 +19,11 @@ import com.emamagic.domain.repositories.UserRepository
 import com.emamagic.safe.SafeApi
 import com.emamagic.safe.policy.MemoryPolicy
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@AuthUserScope
 class UserRepositoryImpl @Inject constructor(
-    private val restProvider: RestProvider
+    private val restProvider: RestProvider,
+    private val authSession: UserAuthSession
 ) : SafeApi(), UserRepository, NotificationCenter.NotificationCenterDelegate {
 
     init {
