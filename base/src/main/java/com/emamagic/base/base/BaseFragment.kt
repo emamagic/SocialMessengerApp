@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigator
@@ -23,6 +22,7 @@ import com.emamagic.base.R
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.State
+import kotlinx.coroutines.flow.onEach
 
 abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT, VM : BaseViewModel<STATE, ACTION>> :
     Fragment() {
@@ -47,12 +47,10 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         super.onViewCreated(view, savedInstanceState)
         val loadingId = resources.getIdentifier("loading", "id",requireActivity().packageName)
         loading = requireActivity().getRootView().findViewById(loadingId)!!
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.uiState.collect { renderViewState(it) }
-        }
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.uiEffect.collect { renderDefaultViewEffect(it) }
-        }
+
+        viewModel.uiState.collectWhileStarted(this) { renderViewState(it) }
+        viewModel.uiEffect.collectWhileStarted(this) { renderDefaultViewEffect(it) }
+
         onFragmentCreated(view, savedInstanceState)
 //        setInitialFunctionsForRefreshing(viewModel.getInitialFunctions())
     }

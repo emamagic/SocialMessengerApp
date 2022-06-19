@@ -21,6 +21,7 @@ dependencies {
     implementation(Libs.swipe_refresh)
     api(project(Modules.mvi))
     api(project(Modules.navigation))
+    implementation(Libs.life_cycle_scope)
 
     api(Libs.epoxy)
     kapt(Libs.epoxy_kapt)

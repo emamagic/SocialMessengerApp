@@ -43,10 +43,11 @@ object Libs {
     const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
 
     // LifeCycle Scope
-    const val life_cycle_scope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.life_cycle_scope}"
+    const val life_cycle_scope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.coroutine_scope}"
+    const val life_cycle_scope_common = "androidx.lifecycle:lifecycle-common:${Versions.coroutine_scope}"
 
     // ViewModel Scope
-    const val view_model_scope = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.view_model_scope}"
+    const val view_model_scope = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.coroutine_scope}"
 
     // Kotlin Coroutines
     const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlin_coroutines}"
