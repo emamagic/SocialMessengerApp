@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 
 @Module
 @InstallIn(AuthUserComponent::class)
-abstract class AuthBinderModule {
+abstract class RepositoryBinderModule {
 
     @AuthUserScope
     @Binds

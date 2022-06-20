@@ -6,19 +6,19 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.emamagic.cache.User
-import com.emamagic.cache.cache.CacheInitializer
+import com.emamagic.cache.cache.CacheFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import java.io.IOException
 
-val store: DataStore<Preferences> by lazy { CacheInitializer.getStore() }
+val store: DataStore<Preferences> by lazy { CacheFactory.getStore() }
 
 object StoreKeys {
     val SORT_ORDER = stringPreferencesKey("sort_order")
     val SHOW_COMPLETED = booleanPreferencesKey("show_completed")
 }
 
-private val userStore: DataStore<User> by lazy { CacheInitializer.getUserStore() }
+private val userStore: DataStore<User> by lazy { CacheFactory.getUserStore() }
 
 val getUser: Flow<User> = userStore.data.catch { exception ->
     if (exception is IOException) {

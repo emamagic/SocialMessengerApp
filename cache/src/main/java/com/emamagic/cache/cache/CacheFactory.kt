@@ -12,14 +12,14 @@ import com.emamagic.cache.User
 import com.emamagic.cache.cache.data_store.proto.UserSerializer
 import com.orhanobut.hawk.Hawk
 
-object CacheInitializer {
+object CacheFactory {
 
     @Volatile
     private lateinit var app: Application
 
     private val Context.dataStore by preferencesDataStore(name = "com.emamagic.Limoo_store")
 
-    fun init(application: Application) {
+    fun create(application: Application) {
         app = application
         Hawk.init(app)
     }

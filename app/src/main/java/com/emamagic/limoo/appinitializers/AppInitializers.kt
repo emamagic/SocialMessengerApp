@@ -10,5 +10,4 @@ class AppInitializers @Inject constructor(
     fun init(application: Application) {
         initializers.forEach { it.init(application) }
     }
-
 }

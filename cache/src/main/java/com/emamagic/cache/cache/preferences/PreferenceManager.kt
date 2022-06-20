@@ -1,11 +1,11 @@
 package com.emamagic.cache.cache.preferences
 
 import android.content.SharedPreferences
-import com.emamagic.cache.cache.CacheInitializer
+import com.emamagic.cache.cache.CacheFactory
 import com.orhanobut.hawk.Hawk
 
 
-val pref: SharedPreferences by lazy { CacheInitializer.getPrefs() }
+val pref: SharedPreferences by lazy { CacheFactory.getPrefs() }
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
     val editor = this.edit()
