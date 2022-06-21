@@ -7,7 +7,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import com.emamagic.base.Logger;
-import com.emamagic.base.helpers.TypeFaceHelper;
+import com.emamagic.base.helpers.TypeFaceFactory;
 import im.limoo.emoji.view.EmojiEditText;
 
 public class FontEditText extends EmojiEditText {
@@ -48,7 +48,7 @@ public class FontEditText extends EmojiEditText {
         }
         setInputType(getInputType() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         setImeOptions(getImeOptions() | EditorInfo.IME_FLAG_NO_FULLSCREEN);
-        TypeFaceHelper.applyTypeface(this);
+        TypeFaceFactory.applyTypeface(this);
     }
 
     @SuppressLint("SetTextI18n")

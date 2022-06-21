@@ -5,14 +5,14 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.widget.TextView
 
-object TypeFaceHelper {
+object TypeFaceFactory {
 
     const val IRAN_YEKAN_REG = "fonts/IRANYekanMobileRegular.ttf"
     const val IRAN_YEKAN_BOLD = "fonts/IRANYekanMobileBold.ttf"
     private var mTypeFaceNormal: Typeface? = null
     private var mTypeFaceBold: Typeface? = null
 
-    fun init(application: Application) {
+    fun create(application: Application) {
         mTypeFaceNormal = Typeface.createFromAsset(
             application.assets,
 //            if (PERSIAN.equals(Prefs.getAppLanguage())) "fonts/IRANYekanMobileRegular.ttf" else "fonts/rmono.ttf"

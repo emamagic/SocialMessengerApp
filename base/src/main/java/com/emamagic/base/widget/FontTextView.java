@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.emamagic.base.Logger;
 import com.emamagic.base.helpers.InputHelper;
-import com.emamagic.base.helpers.TypeFaceHelper;
+import com.emamagic.base.helpers.TypeFaceFactory;
 import com.emamagic.base.helpers.ViewHelper;
 import com.emamagic.base.R;
 
@@ -82,7 +82,7 @@ public class FontTextView extends AppCompatTextView {
             return;
         }
         setFreezesText(true);
-        TypeFaceHelper.applyTypeface(this);
+        TypeFaceFactory.applyTypeface(this);
     }
 
     public void tintDrawables(@ColorInt int color) {
