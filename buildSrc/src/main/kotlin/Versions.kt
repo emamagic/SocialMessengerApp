@@ -43,5 +43,6 @@ object Versions {
     const val persistent_cookie_jar = "v1.0.1"
     const val rx_java = "3.0.0"
     const val coil = "2.1.0"
+    const val appAuth = "0.11.1"
 
 }

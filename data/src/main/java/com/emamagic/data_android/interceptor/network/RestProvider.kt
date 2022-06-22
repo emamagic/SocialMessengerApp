@@ -1,5 +1,6 @@
 package com.emamagic.data_android.interceptor.network
 
+import com.emamagic.core.AuthUserScope
 import com.emamagic.core.resettableLazy
 import com.emamagic.core.resettableManager
 import com.emamagic.data_android.interceptor.Const
@@ -43,6 +44,11 @@ class RestProvider @Inject constructor(
 
     private val coordinatorLazyMgr = resettableManager()
     private val coordinatorRetrofit: Retrofit by resettableLazy(coordinatorLazyMgr) {
+        retrofitFactory.create(BASE_URL, okHttpClient.get()).provideRetrofit()
+    }
+
+    private val lazyMgr = resettableManager()
+    private val retrofit: Retrofit by resettableLazy(lazyMgr) {
         retrofitFactory.create(API_URL, okHttpClient.get()).provideRetrofit()
     }
 
@@ -76,9 +82,11 @@ class RestProvider @Inject constructor(
 
 
     val userService: UserService
+        get() = retrofit.create()
+    val userServiceCoordinator: UserService
         get() = coordinatorRetrofit.create()
     val configService: ConfigService
-        get() = coordinatorRetrofit.create()
+        get() = retrofit.create()
 
 
     fun getAccessTokenRefresherCall(refreshToken: String): Call {

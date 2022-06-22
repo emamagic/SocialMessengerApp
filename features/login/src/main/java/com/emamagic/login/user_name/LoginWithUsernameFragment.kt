@@ -19,14 +19,10 @@ class LoginWithUsernameFragment :
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.viewModel = viewModel
         binding.inputEditTextUsername.onTextChange { viewModel.typingUserNameOrPassEvent(it, binding.inputEditTextPassword.text.toString()) }
         binding.inputEditTextPassword.onTextChange { viewModel.typingUserNameOrPassEvent(binding.inputEditTextUsername.text.toString(), it) }
-        binding.btnSubmit.setOnClickListener {
-            viewModel.submitUserNameEvent(
-            binding.inputEditTextUsername.text.toString(),
-            binding.inputEditTextPassword.text.toString())
-        }
-        binding.txtSignupWithPhone.setOnClickListener { viewModel.signinWithPhoneClickedEvent() }
+
     }
 
     override fun renderViewState(viewState: LoginState) {

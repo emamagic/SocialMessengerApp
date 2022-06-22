@@ -3,6 +3,9 @@ package com.emamagic.login
 import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.Settings
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import androidx.lifecycle.viewModelScope
 import com.emamagic.base.base.BaseViewModel
 import com.emamagic.core_android.isValidPhoneNumber
@@ -39,6 +42,7 @@ class LoginViewModel @Inject constructor(
     }
 
     // ---------------- singin with phone ----------------
+
     fun typingPhoneNumberEvent(input: String) = withLoadingScope {
             if ((input.length == 10 && input.first() != '0') || (input.length == 11 && input.first() == '0')) {
                 setEffect { BaseEffect.HideKeyboard }
@@ -48,17 +52,17 @@ class LoginViewModel @Inject constructor(
             }
     }
 
-    fun signinWithServerNameClickedEvent() = viewModelScope.launch {
-        navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToLoginWithServerNameFragment())
+    fun changeServerNameClickedEvent() = viewModelScope.launch {
+        navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToChangeServerNameFragment())
     }
 
-    fun signinWithUsernameClickedEvent() = viewModelScope.launch {
+    fun loginWithUsernameClickedEvent() = viewModelScope.launch {
         navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToLoginWithUsernameFragment())
     }
 
     fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = withLoadingScope {
         if (!phoneNum.isValidPhoneNumber()) {
-            setEffect { LoginEffect.InvalidPhoneNumber }
+            setEffect { BaseEffect.InvalidInputValue() }
             return@withLoadingScope
         }
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
@@ -68,7 +72,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun getServerConfigEvent() = withLoadingScope {
+    private fun getServerConfigEvent() = withLoadingScope {
         updateServerConfig(Unit).manageResult()
     }
 
@@ -93,7 +97,9 @@ class LoginViewModel @Inject constructor(
             setEffect { BaseEffect.EmptyInputValue(false) }
             return@withLoadingScope
         }
-        loginWithUsername(LoginWithUsername.Params(username, pass))
+        loginWithUsername(LoginWithUsername.Params(username, pass)).manageResult {
+            navigateTo(LoginWithUsernameFragmentDirections.actionOtpFragmentToConversationFragment())
+        }
     }
 
     fun typingUserNameOrPassEvent(userName: String, pass: String) = withLoadingScope {
@@ -104,13 +110,18 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun signinWithPhoneClickedEvent() = withLoadingScope {
+    fun loginWithPhoneClickedEvent() = withLoadingScope {
         setEffect { BaseEffect.NavigateBack }
     }
 
 
     // ---------------- singin with server name ----------------
 
+    fun changeServerNameClickedEvent(host: String) = viewModelScope.launch {
+        if (host.trim().isEmpty() || host.trim().contains(" ")) {
+            setEffect { BaseEffect.InvalidInputValue() }
+        }
+    }
 
 
     // ---------------- otp ----------------
@@ -121,7 +132,7 @@ class LoginViewModel @Inject constructor(
 
     fun submitOtpEvent(code: String) = withLoadingScope {
         if (code.length != 5) {
-            setEffect { LoginEffect.InvalidOtpCode }
+            setEffect { BaseEffect.InvalidInputValue() }
             return@withLoadingScope
         }
         @SuppressLint("HardwareIds")

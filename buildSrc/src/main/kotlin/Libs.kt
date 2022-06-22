@@ -113,4 +113,6 @@ object Libs {
     // Coil
     const val coil = "io.coil-kt:coil:${Versions.coil}"
 
+    // AppAuth
+    const val appAuth = "net.openid:appauth:${Versions.appAuth}"
 }

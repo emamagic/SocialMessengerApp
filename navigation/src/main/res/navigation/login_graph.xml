@@ -8,8 +8,8 @@
         android:id="@+id/login_with_phone_fragment"
         android:name="com.emamagic.login.phone.LoginWithPhoneFragment">
         <action
-            android:id="@+id/action_login_with_phone_fragment_to_login_with_server_name_fragment"
-            app:destination="@id/login_with_server_name_fragment" />
+            android:id="@+id/action_login_with_phone_fragment_to_change_server_name_fragment"
+            app:destination="@id/change_server_name_fragment" />
         <action
             android:id="@+id/action_login_with_phone_fragment_to_login_with_username_fragment"
             app:destination="@id/login_with_username_fragment" />
@@ -25,8 +25,8 @@
     </fragment>
 
 
-    <fragment android:id="@+id/login_with_server_name_fragment"
-        android:name="com.emamagic.login.server_name.LoginWithServerNameFragment"/>
+    <fragment android:id="@+id/change_server_name_fragment"
+        android:name="com.emamagic.login.server_name.ChangeServerNameFragment"/>
 
 
     <fragment android:id="@+id/login_with_username_fragment"

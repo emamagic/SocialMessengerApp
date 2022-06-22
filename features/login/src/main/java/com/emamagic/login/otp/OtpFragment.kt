@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.base.base.BaseFragment
 import com.emamagic.login.LoginViewModel
@@ -28,6 +29,11 @@ class OtpFragment :
 
     override fun renderViewState(viewState: LoginState) {
 
+    }
+
+    override fun invalidInputValue(message: String?, type: Any?): Boolean {
+        Toast.makeText(requireContext(), "کد وارد شده صحیح نمی باشد.", Toast.LENGTH_SHORT).show()
+        return true
     }
 
     class ExpirationTimer(timer: TextView, val finished: () -> Unit) : CountDownTimer(60000, 1000) {

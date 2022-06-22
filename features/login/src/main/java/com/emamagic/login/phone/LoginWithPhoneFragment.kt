@@ -10,7 +10,6 @@ import com.emamagic.base.onTextChange
 import com.emamagic.base.setColor
 import com.emamagic.base.base.BaseFragment
 import com.emamagic.mvi.BaseEffect
-import com.emamagic.mvi.LoginEffect
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.R
 import com.emamagic.login.contract.LoginAction
@@ -29,13 +28,11 @@ class LoginWithPhoneFragment :
 
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding.viewModel = viewModel
         setupCountryPicker()
         binding.inputEditText.onTextChange {
             viewModel.typingPhoneNumberEvent(it)
         }
-        binding.txtSignupWithServerName.setOnClickListener { viewModel.signinWithServerNameClickedEvent() }
-        binding.txtSignupWithUsername.setOnClickListener { viewModel.signinWithUsernameClickedEvent() }
         binding.btnSubmit.setOnClickListener {
             viewModel.submitPhoneNumberEvent(binding.inputEditText.text.toString(), countryPicker.selectedCountryCodeWithPlus)
         }
@@ -59,11 +56,8 @@ class LoginWithPhoneFragment :
 //        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
-    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
-        when (viewEffect) {
-            LoginEffect.InvalidPhoneNumber -> binding.validatorInput.invalidateInput()
-            else -> {}
-        }
+    override fun invalidInputValue(message: String?, type: Any?): Boolean {
+        binding.validatorInput.invalidateInput()
         return true
     }
 

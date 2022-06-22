@@ -59,7 +59,7 @@ class UserRepositoryImpl @Inject constructor(
     }.toResult()
 
     override suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean> = fresh {
-        restProvider.userService.loginWithUserName(username.username, username.pass).toResponse()
+        restProvider.userServiceCoordinator.loginWithUserName(username.username, username.pass).toResponse()
     }.toResult()
 
     override fun receiveData(event: Event) {

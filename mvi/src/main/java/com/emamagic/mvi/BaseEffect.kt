@@ -39,11 +39,6 @@ sealed interface BaseEffect {
 
     data class EmptyInputValue(val type: Any? = null): BaseEffect
 
-}
+    data class InvalidInputValue(val message: String? = null ,val type: Any? = null): BaseEffect
 
-/*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/
-
-sealed class LoginEffect : BaseEffect {
-    object InvalidPhoneNumber : LoginEffect()
-    object InvalidOtpCode: LoginEffect()
 }

@@ -98,6 +98,8 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
 
     open fun emptyInputValue(type: Any?): Boolean = false
 
+    open fun invalidInputValue(message: String?, type: Any?): Boolean = false
+
     open fun showDialog(message: String, proceedTitle: String?, cancelTitle: String?): Boolean = false
 
     open fun showSnackBar(message: String, timeOut: Long? = 3000): Boolean = false
@@ -125,6 +127,8 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
                 getExtras()
             )
             is BaseEffect.NavigateBack -> findNavController().navigateUp()
+            is BaseEffect.InvalidInputValue -> if (invalidInputValue(viewEffect.message, viewEffect.type))
+                throw Exception("BaseFragment -> InvalidInputValue Does Not Implemented")
             is BaseEffect.NeedToSignIn ->
                 findNavController().navigate(
                     NavDeepLinkRequest.Builder.fromUri("android-app://limoo.im.app/signin".toUri()).build(),

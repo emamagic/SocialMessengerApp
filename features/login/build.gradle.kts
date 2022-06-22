@@ -5,5 +5,5 @@ apply {
 dependencies {
 
     "api"(project(Modules.countryPicker))
-
+    "implementation"(Libs.appAuth)
 }
