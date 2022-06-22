@@ -24,7 +24,11 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/conversation" />
             <option value="$PROJECT_DIR$/features/login" />
+            <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/profile" />
+            <option value="$PROJECT_DIR$/features/workspace-add-member" />
+            <option value="$PROJECT_DIR$/features/workspace-approval" />
+            <option value="$PROJECT_DIR$/features/workspace-create" />
             <option value="$PROJECT_DIR$/mvi" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/safe" />

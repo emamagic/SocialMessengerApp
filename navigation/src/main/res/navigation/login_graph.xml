@@ -44,11 +44,11 @@
             app:destination="@id/conversation_fragment" />
     </fragment>
 
-    <fragment android:id="@+id/terms_policy_fragment"
+    <dialog android:id="@+id/terms_policy_fragment"
         android:name="com.emamagic.login.policy.TermsPolicyDialog">
         <argument
             android:name="description"
             app:argType="reference" />
-    </fragment>
+    </dialog>
 
 </navigation>

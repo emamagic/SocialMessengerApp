@@ -29,7 +29,11 @@ include (
         ':features:login',
         ':features:profile',
         ':features:conversation',
+        'features:onboarding',
+        'features:workspace-approval',
+        'features:workspace-create',
+        'features:workspace-add-member',
         ':mvi',
         ':data',
-        ':core-android'
+        ':core-android',
 )
