@@ -19,6 +19,7 @@ dependencies {
     implementation(project(Modules.emoji))
     implementation(project(Modules.core))
     implementation(Libs.swipe_refresh)
+    api(project(Modules.coreAndroid))
     api(project(Modules.mvi))
     api(project(Modules.navigation))
     implementation(Libs.life_cycle_scope)

@@ -19,9 +19,9 @@ sealed interface BaseEffect {
         val message: String
     ) : BaseEffect
 
-    data class ShowLoading(val isDim: Boolean = false) : BaseEffect
+    data class ShowLoading(val isDim: Boolean = false, val type: Any? = null) : BaseEffect
 
-    object HideLoading : BaseEffect
+    data class HideLoading(val type: Any? = null) : BaseEffect
 
     data class NavigateTo(val directions: NavDirections) : BaseEffect
 
@@ -29,21 +29,21 @@ sealed interface BaseEffect {
 
     object HideKeyboard : BaseEffect
 
-    object EnableUiComponent : BaseEffect
+    data class EnableUiComponent(val type: Any? = null) : BaseEffect
 
-    object DisableUiComponent : BaseEffect
+    data class DisableUiComponent(val type: Any? = null) : BaseEffect
 
     object NeedToSignUp: BaseEffect
 
     object NeedToSignIn: BaseEffect
 
+    data class EmptyInputValue(val type: Any? = null): BaseEffect
+
 }
 
 /*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/
 
-sealed class SigninEffect : BaseEffect {
-    object InvalidPhoneNumber : SigninEffect()
-    object InvalidOtpCode: SigninEffect()
-    object InvalidUsername: SigninEffect()
-    object InvalidPass: SigninEffect()
+sealed class LoginEffect : BaseEffect {
+    object InvalidPhoneNumber : LoginEffect()
+    object InvalidOtpCode: LoginEffect()
 }

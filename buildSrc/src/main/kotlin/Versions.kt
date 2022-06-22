@@ -10,7 +10,7 @@ object Versions {
     const val androidx_espresso = "3.4.0"
     const val tools = "7.1.3"
     const val gradle = "1.6.10"
-    const val hilt = "2.38.1"
+    const val hilt = "2.42"
     const val hilt_nav_graph_scope = "1.0.0"
     const val dagger = "2.42"
     const val retrofit = "2.9.0"

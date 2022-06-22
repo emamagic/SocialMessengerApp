@@ -1,20 +1,23 @@
 package com.emamagic.domain.repositories
 
 import com.emamagic.core.ResultWrapper
-import com.emamagic.domain.entities.PhoneNumber
-import com.emamagic.domain.entities.ServerConfig
-import com.emamagic.domain.entities.User
-import com.emamagic.domain.entities.Workspace
+import com.emamagic.domain.entities.*
+import com.emamagic.domain.interactors.LoginWithPhoneNumber
+import com.emamagic.domain.interactors.LoginWithUsername
+import com.emamagic.domain.interactors.VerifyOtp
 
 interface UserRepository {
 
     suspend fun getServerUpdate(): ResultWrapper<ServerConfig>
 
-    suspend fun phoneNumberRegistration(phoneNumber: PhoneNumber): ResultWrapper<Boolean>
+    suspend fun loginWithPhoneNumber(phoneNumber: LoginWithPhoneNumber.Params): ResultWrapper<Boolean>
 
-    suspend fun otpVerification(code: String, phoneNumber: String, deviceId: String): ResultWrapper<User>
+    suspend fun verifyOtp(params: VerifyOtp.Params): ResultWrapper<User>
 
     suspend  fun getCurrentUser(shouldFetch: Boolean = false): ResultWrapper<User>
 
     suspend fun getMyWorkspaces(shouldFetch: Boolean = false): ResultWrapper<List<Workspace>>
+
+    suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean>
+
 }

@@ -1,22 +1,19 @@
 package com.emamagic.data_android.interceptor.network.services
 
-import com.emamagic.domain.entities.PhoneNumber
 import com.emamagic.domain.entities.User
 import com.emamagic.domain.entities.Workspace
+import com.emamagic.domain.interactors.LoginWithPhoneNumber
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UserService {
 
     @POST("user/phone_verification")
-    suspend fun phoneRegistration(@Body phoneNumber: PhoneNumber): Response<ResponseBody>
+    suspend fun loginWithPhoneNumber(@Body phoneNumber: LoginWithPhoneNumber.Params): Response<ResponseBody>
 
     @POST("j_spring_otptoken_security_check")
-    suspend fun otpVerification(
+    suspend fun verifyOtp(
         @Query("j_phoneNumber") phoneNumber: String,
         @Query("j_otpToken") otpToken: String,
         @Query("j_deviceKey") deviceId: String,
@@ -27,5 +24,12 @@ interface UserService {
 
     @GET("user/my_workspaces")
     suspend fun getMyWorkspaces(): Response<List<Workspace>>
+
+    @FormUrlEncoded
+    @POST("j_spring_security_check")
+    suspend fun loginWithUserName(
+        @Field("j_username") username: String,
+        @Field("j_password") password: String
+    ): Response<ResponseBody>
 
 }

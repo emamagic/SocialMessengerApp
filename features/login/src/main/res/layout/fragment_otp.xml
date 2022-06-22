@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
-            <com.emamagic.signin.otp.pin.SquarePinField
+            <com.emamagic.login.otp.pin.SquarePinField
                 android:id="@+id/squareField_pin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package com.emamagic.base.base
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.emamagic.core.*
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
 
 abstract class BaseViewModel<STATE : State, ACTION : EVENT>: ViewModel(),
-    CoroutinesUseCaseRunner {
+    CoroutinesLoadingRunner {
 
     override val useCaseScope: CoroutineScope
         get() = viewModelScope
@@ -64,6 +65,9 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT>: ViewModel(),
 
     abstract fun handleEvent(event: ACTION)
 
+    open fun navigateTo(directions: NavDirections) {
+        setEffect { BaseEffect.NavigateTo(directions) }
+    }
 
     protected suspend fun <T> ResultWrapper<T>.manageResult(success: (suspend (T) -> Unit)? = null) {
         when (this) {
@@ -71,7 +75,7 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT>: ViewModel(),
                 success?.invoke(data!!)
             }
             is ResultWrapper.Failed -> {
-                setEffect { BaseEffect.HideLoading }
+                setEffect { BaseEffect.HideLoading() }
                 onError(error!!)
             }
             is ResultWrapper.LoadingFetch -> TODO()
@@ -101,21 +105,21 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT>: ViewModel(),
         }
     }
 
-    override fun withUseCaseScope(
+    override fun withLoadingScope(
         loadingUpdater: ((Boolean) -> Unit)?,
         onError: ((Throwable) -> Unit)?,
         onComplete: (() -> Unit)?,
         block: suspend () -> Unit
     ) {
-        super.withUseCaseScope(
+        super.withLoadingScope(
             loadingUpdater = {
-
+                setEffect { BaseEffect.ShowLoading() }
             },
             onError = {
 
             },
             onComplete = {
-
+                setEffect { BaseEffect.HideLoading() }
             },
             block = block)
     }

@@ -75,7 +75,7 @@ class RestProvider @Inject constructor(
         this::TMP_FILE_SERVER_ADDRESS.isInitialized && TMP_FILE_SERVER_ADDRESS != fileServerAddress
 
 
-    val coordinatorUserService: UserService
+    val userService: UserService
         get() = coordinatorRetrofit.create()
     val configService: ConfigService
         get() = coordinatorRetrofit.create()

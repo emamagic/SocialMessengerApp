@@ -14,4 +14,5 @@ object Modules {
     const val conversation = ":features:conversation"
     const val mvi = ":mvi"
     const val data = ":data"
+    const val coreAndroid = ":core-android"
 }

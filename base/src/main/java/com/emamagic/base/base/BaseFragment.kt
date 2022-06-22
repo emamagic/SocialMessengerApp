@@ -92,9 +92,11 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
 
     open fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean = false
 
-    open fun enableUiComponent(): Boolean = false
+    open fun enableUiComponent(type: Any?): Boolean = false
 
-    open fun disableUiComponent(): Boolean = false
+    open fun disableUiComponent(type: Any?): Boolean = false
+
+    open fun emptyInputValue(type: Any?): Boolean = false
 
     open fun showDialog(message: String, proceedTitle: String?, cancelTitle: String?): Boolean = false
 
@@ -103,8 +105,8 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
     private fun renderDefaultViewEffect(viewEffect: BaseEffect) {
         when (viewEffect) {
             is BaseEffect.Toast -> Toast.makeText(requireContext(), viewEffect.message, Toast.LENGTH_SHORT).show()
-            is BaseEffect.ShowLoading -> showLoading(viewEffect.isDim)
-            is BaseEffect.HideLoading -> hideLoading()
+            is BaseEffect.ShowLoading -> showLoading(viewEffect.isDim, viewEffect.type)
+            is BaseEffect.HideLoading -> hideLoading(viewEffect.type)
             is BaseEffect.HideKeyboard -> hideKeyboard()
             is BaseEffect.Dialog ->
                 if (!showDialog(viewEffect.message, viewEffect.proceedTitle, viewEffect.cancelTitle))
@@ -113,10 +115,10 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
                 if (!showSnackBar(viewEffect.message, viewEffect.timeOut))
                     throw Exception("BaseFragment -> ShowSnackBar Does Not Implemented")
             is BaseEffect.EnableUiComponent ->
-                if (!enableUiComponent())
+                if (!enableUiComponent(viewEffect.type))
                     throw Exception("BaseFragment -> EnableUiComponent Does Not Implemented")
             is BaseEffect.DisableUiComponent ->
-                if (!disableUiComponent())
+                if (!disableUiComponent(viewEffect.type))
                     throw Exception("BaseFragment -> DisableUiComponent Does Not Implemented")
             is BaseEffect.NavigateTo -> findNavController().navigate(
                 viewEffect.directions,
@@ -127,7 +129,8 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
                 findNavController().navigate(
                     NavDeepLinkRequest.Builder.fromUri("android-app://limoo.im.app/signin".toUri()).build(),
                     NavOptions.Builder().setPopUpTo(findNavController().currentDestination?.id!!, true).build())
-
+            is BaseEffect.EmptyInputValue -> if (!emptyInputValue(viewEffect.type))
+                throw Exception("BaseFragment -> EmptyInputValue Does Not Implemented")
             else ->
                 if (!renderCustomViewEffect(viewEffect))
                     throw Exception("BaseFragment -> RenderViewEffect Does Not Implemented")
@@ -143,12 +146,12 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         requireActivity().onBackPressedDispatcher.addCallback(owner, callback!!)
     }
 
-    open fun showLoading(isDim: Boolean = false) {
+    open fun showLoading(isDim: Boolean = false, type: Any?) {
         if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
         loading.visible()
     }
 
-    open fun hideLoading() {
+    open fun hideLoading(type: Any?) {
         loading.gone()
     }
 

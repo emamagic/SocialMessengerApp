@@ -30,5 +30,6 @@ include (
         ':features:profile',
         ':features:conversation',
         ':mvi',
-        ':data'
+        ':data',
+        ':core-android'
 )
