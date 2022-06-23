@@ -1,6 +1,5 @@
 package com.emamagic.data_android.interceptor.network
 
-import com.emamagic.core.AuthUserScope
 import com.emamagic.core.resettableLazy
 import com.emamagic.core.resettableManager
 import com.emamagic.data_android.interceptor.Const
@@ -33,22 +32,18 @@ class RestProvider @Inject constructor(
     private lateinit var API_URL: String
     private lateinit var BASE_FILE_SERVER_ADDRESS: String
 
-    init {
-        setBaseUrlAndApiUrl(Const.BASE_URL)
-        setBaseFileServerUrl("https://test.limonadapp.ir/fileserver/")
-    }
 
 //    private val okhttpWithDownloadProgress: OkHttpClient by lazy {
 //        okHttpClient.get().newBuilder().addInterceptor(DownloadProgressInterceptor(DownloadProgressResponseBody())).build()
 //    }
 
-    private val coordinatorLazyMgr = resettableManager()
-    private val coordinatorRetrofit: Retrofit by resettableLazy(coordinatorLazyMgr) {
+    private val coordinatorRetrofitLazyMgr = resettableManager()
+    private val coordinatorRetrofit: Retrofit by resettableLazy(coordinatorRetrofitLazyMgr) {
         retrofitFactory.create(BASE_URL, okHttpClient.get()).provideRetrofit()
     }
 
-    private val lazyMgr = resettableManager()
-    private val retrofit: Retrofit by resettableLazy(lazyMgr) {
+    private val retrofitLazyMgr = resettableManager()
+    private val retrofit: Retrofit by resettableLazy(retrofitLazyMgr) {
         retrofitFactory.create(API_URL, okHttpClient.get()).provideRetrofit()
     }
 
@@ -62,7 +57,8 @@ class RestProvider @Inject constructor(
         BASE_URL = mHost
         API_URL = BASE_URL + "api/v1/"
         if (isHostChanged(host)) {
-            coordinatorLazyMgr.reset()
+            coordinatorRetrofitLazyMgr.reset()
+            retrofitLazyMgr.reset()
         }
         TMP_HOST = mHost
     }

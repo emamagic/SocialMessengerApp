@@ -4,6 +4,7 @@ import com.emamagic.cache.cache.data_store.setUser
 import com.emamagic.cache.cache.preferences.pref
 import com.emamagic.cache.cache.preferences.set
 import com.emamagic.core.AuthUserScope
+import com.emamagic.core.Bridge
 import com.emamagic.core.ResultWrapper
 import com.emamagic.data_android.interceptor.Const
 import com.emamagic.data_android.interceptor.network.RestProvider

@@ -15,11 +15,11 @@ object EntryBridgeModule {
 
     @Bridge
     @Provides
-    fun provideToDoRepository(
+    fun provideUserRepository(
         authUserComponentManager: AuthUserComponentManager
     ): UserRepository {
         return EntryPoints
-            .get(authUserComponentManager, UserEntryPoint::class.java)
+            .get(authUserComponentManager, AuthEntryPoint::class.java)
             .getUserRepository()
     }
 }

@@ -98,10 +98,10 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun submitTermsPolicyEvent() = withLoadingScope {
-        navigateTo(
-            LoginWithPhoneFragmentDirections
-                .actionLoginWithPhoneFragmentToTermsPolicyFragment(R.string.privacy_policy_description)
-        )
+//        navigateTo(
+//            LoginWithPhoneFragmentDirections
+//                .actionLoginWithPhoneFragmentToTermsPolicyFragment(R.string.privacy_policy_description)
+//        )
     }
 
     // ---------------- singin with username ----------------
@@ -147,40 +147,40 @@ class LoginViewModel @Inject constructor(
         }
         setEffect { BaseEffect.ShowLoading() }
         updateServerConfig(host).manageResult { serverConfig ->
-            val authTypes = serverConfig.config.authServices
-                .replace("[", "")
-                .replace("]", "")
-                .split(",")
-            setState {
-                copy(
-                    serverConfigUpdated = serverConfig.getServerHost(),
-                    authTypes = authTypes
-                )
-            }
-            if (serverConfig.config.authType.equals("keycloak", true)) {
-                val keycloak = serverConfig.config.keycloakConfig
-                val authorizationEndpoint =
-                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/auth"
-                val tokenEndpoint =
-                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/token"
-                val resource = keycloak.resource
-                val redirectUri = context.getString(R.string.keycloak_redirect_uri)
-                val scope = context.getString(R.string.keycloak_scope)
-                val responseType = ResponseTypeValues.CODE
-                setEffect {
-                    LoginEffect.Keycloak(
-                        authorizationEndpoint,
-                        tokenEndpoint,
-                        redirectUri,
-                        resource,
-                        scope,
-                        responseType
-                    )
-                }
-                // setState for LoginWithPhoneFragment
-            } else {
+//            val authTypes = serverConfig.config.authServices
+//                .replace("[", "")
+//                .replace("]", "")
+//                .split(",")
+//            setState {
+//                copy(
+//                    serverConfigUpdated = serverConfig.getServerHost(),
+//                    authTypes = authTypes
+//                )
+//            }
+//            if (serverConfig.config.authType.equals("keycloak", true)) {
+//                val keycloak = serverConfig.config.keycloakConfig
+//                val authorizationEndpoint =
+//                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/auth"
+//                val tokenEndpoint =
+//                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/token"
+//                val resource = keycloak.resource
+//                val redirectUri = context.getString(R.string.keycloak_redirect_uri)
+//                val scope = context.getString(R.string.keycloak_scope)
+//                val responseType = ResponseTypeValues.CODE
+//                setEffect {
+//                    LoginEffect.Keycloak(
+//                        authorizationEndpoint,
+//                        tokenEndpoint,
+//                        redirectUri,
+//                        resource,
+//                        scope,
+//                        responseType
+//                    )
+//                }
+//                 setState for LoginWithPhoneFragment
+//            } else {
                 setEffect { BaseEffect.NavigateBack }
-            }
+//            }
         }
     }
 
