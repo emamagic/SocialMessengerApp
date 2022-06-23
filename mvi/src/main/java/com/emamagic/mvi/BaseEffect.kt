@@ -1,5 +1,6 @@
 package com.emamagic.mvi
 
+import androidx.annotation.StringRes
 import androidx.navigation.NavDirections
 
 sealed interface BaseEffect {
@@ -33,12 +34,33 @@ sealed interface BaseEffect {
 
     data class DisableUiComponent(val type: Any? = null) : BaseEffect
 
-    object NeedToSignUp: BaseEffect
+    object NeedToSignUp : BaseEffect
 
-    object NeedToSignIn: BaseEffect
+    object NeedToSignIn : BaseEffect
 
-    data class EmptyInputValue(val type: Any? = null): BaseEffect
+    sealed class InvalidInput : BaseEffect {
+        data class Error(val message: String? = null, val type: Any? = null) : InvalidInput()
+        data class Error2(@StringRes val resId: Int? = null, val type: Any? = null) : InvalidInput()
+    }
+}
+/*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/
 
-    data class InvalidInputValue(val message: String? = null ,val type: Any? = null): BaseEffect
+sealed class LoginEffect : BaseEffect {
+    data class Keycloak(
+        val authorizationEndpoint: String,
+        val tokenEndpoint: String,
+        val keycloakRedirectUri: String,
+        val keycloakResource: String,
+        val keycloakScope: String,
+        val responseType: String
+    ) : LoginEffect()
 
+    data class PerformAuthorization(
+        val authorizationEndpoint: String,
+        val tokenEndpoint: String,
+        val keycloakRedirectUri: String,
+        val keycloakResource: String,
+        val keycloakScope: String,
+        val responseType: String
+    ) : LoginEffect()
 }

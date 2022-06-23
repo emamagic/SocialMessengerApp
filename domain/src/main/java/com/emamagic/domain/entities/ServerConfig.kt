@@ -2,7 +2,9 @@ package com.emamagic.domain.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class ServerConfig(val config: Config, val organization: Organization? = null)
+data class ServerConfig(val config: Config, val organization: Organization? = null) {
+    fun getServerHost() = "${config.server.protocol}://${config.server.host}"
+}
 data class Config(
     @SerializedName("fileServerUrl")
     val fileServerUrl: String,
@@ -14,10 +16,10 @@ data class Config(
     val authType: String,
     val authServices: String,
     val defaultAuthServices: String,
-    val keycloakConfig: Keycloak,
+    val keycloakConfig: KeycloakConfig,
     val server: Server
 )
-data class Keycloak(
+data class KeycloakConfig(
     val realm: String,
     @SerializedName("auth-server-url")
     val authServerUrl: String,

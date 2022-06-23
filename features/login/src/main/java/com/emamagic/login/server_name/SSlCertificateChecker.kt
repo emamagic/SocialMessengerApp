@@ -16,23 +16,26 @@ import java.security.cert.X509Certificate
 
 class SSlCertificateChecker constructor(
     private val activity: Activity,
-    authorizationEndpoint: String,
-    redirectUri: String,
-    clientId: String,
-    scope: String,
-    private val launch: () -> Unit
+    private val authorizationEndpoint: String,
+    private val tokenEndpoint: String,
+    private val redirectUri: String,
+    private val clientId: String,
+    private val scope: String,
+    private val responseType: String,
+    private val launch: (String?, String, String, String, String, String, String) -> Unit
 ) : WebViewClient() {
 
+    private var alias: String? = null
     private var context: Context = activity.applicationContext
     private var webView: WebView = WebView(context)
 
     init {
         webView.webViewClient = this
-        loadUrl(authorizationEndpoint, redirectUri, clientId, scope)
+        loadUrl()
     }
 
     override fun onPageFinished(view: WebView?, url: String?) {
-        launch.invoke()
+        launch.invoke(alias, authorizationEndpoint, tokenEndpoint, redirectUri, clientId, scope, responseType)
         super.onPageFinished(view, url)
     }
 
@@ -41,7 +44,7 @@ class SSlCertificateChecker constructor(
             activity,
             { alias ->
                 if (!alias.isNullOrEmpty()) {
-//                    Prefs.setCertificationAlias(alias)
+                    this.alias = alias
                     val pk: PrivateKey? = KeyChain.getPrivateKey(context, alias)
                     val chain: Array<X509Certificate>? =
                         KeyChain.getCertificateChain(context, alias)
@@ -76,13 +79,8 @@ class SSlCertificateChecker constructor(
     }
 
 
-    private fun loadUrl(
-        authorizationEndpoint: String,
-        redirectUri: String,
-        clientId: String,
-        scope: String
-    ) {
-        webView.loadUrl(buildAuthorizationUrl(authorizationEndpoint, redirectUri, clientId, scope))
+    private fun loadUrl() {
+        webView.loadUrl(buildAuthorizationUrl())
     }
 
     private fun urlEncodeParameter(param: String): String {
@@ -95,16 +93,11 @@ class SSlCertificateChecker constructor(
         return returnString
     }
 
-    private fun buildAuthorizationUrl(
-        authorizationEndpoint: String,
-        redirectUri: String,
-        clientId: String,
-        scope: String
-    ): String {
+    private fun buildAuthorizationUrl(): String {
         var authorizationUrl =
             "$authorizationEndpoint?"
         authorizationUrl += "client_id=" + urlEncodeParameter(clientId)
-        authorizationUrl += "&response_type=code"
+        authorizationUrl += "&response_type=$responseType"
         authorizationUrl += "&redirect_uri=" + urlEncodeParameter(redirectUri)
         authorizationUrl += "&scope=$scope"
         return authorizationUrl

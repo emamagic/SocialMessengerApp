@@ -4,11 +4,12 @@ import com.emamagic.core.ResultWrapper
 import com.emamagic.domain.entities.*
 import com.emamagic.domain.interactors.LoginWithPhoneNumber
 import com.emamagic.domain.interactors.LoginWithUsername
+import com.emamagic.domain.interactors.SaveToCache
 import com.emamagic.domain.interactors.VerifyOtp
 
 interface UserRepository {
 
-    suspend fun getServerUpdate(): ResultWrapper<ServerConfig>
+    suspend fun updateServerUpdate(serverHost: String): ResultWrapper<ServerConfig>
 
     suspend fun loginWithPhoneNumber(phoneNumber: LoginWithPhoneNumber.Params): ResultWrapper<Boolean>
 
@@ -20,4 +21,7 @@ interface UserRepository {
 
     suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean>
 
+    suspend fun getSessionByKeycloak(): ResultWrapper<Boolean>
+
+    suspend fun saveToCache(data: SaveToCache.Params): ResultWrapper<Boolean>
 }

@@ -32,4 +32,7 @@ interface UserService {
         @Field("j_password") password: String
     ): Response<ResponseBody>
 
+    @POST("session/by_keycloak")
+    suspend fun getSessionByKeycloak(): Response<ResponseBody>
+
 }

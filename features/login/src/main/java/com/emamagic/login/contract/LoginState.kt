@@ -3,12 +3,14 @@ package com.emamagic.login.contract
 import com.emamagic.mvi.State
 
 data class LoginState(
-    val serverConfigLoaded: Boolean
+    var serverConfigUpdated: String?,
+    var authTypes: List<String>
 ) : State {
     companion object {
         fun initialize(): LoginState =
             LoginState(
-                serverConfigLoaded = false
+                serverConfigUpdated = null,
+                authTypes = emptyList()
             )
     }
 }

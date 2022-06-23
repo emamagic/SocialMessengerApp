@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.emamagic.login.LoginViewModel" />
     </data>
 
     <ScrollView
@@ -65,7 +62,6 @@
                 android:textColor="@color/limoo_secondary"
                 android:textSize="@dimen/limoo_12s"
                 android:textStyle="bold"
-                android:onClick="@{()-> viewModel.changeServerNameClickedEvent()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
 
@@ -160,7 +156,6 @@
                 android:text="@string/signup_with_username"
                 android:textColor="@color/limoo_secondary"
                 android:textSize="12sp"
-                android:onClick="@{()-> viewModel.loginWithUsernameClickedEvent()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

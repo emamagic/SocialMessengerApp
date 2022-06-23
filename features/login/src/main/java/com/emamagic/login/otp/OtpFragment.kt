@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.base.base.BaseFragment
 import com.emamagic.login.LoginViewModel
-import com.emamagic.login.contract.LoginAction
+import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
 import com.emamagic.login.databinding.FragmentOtpBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,22 +16,22 @@ import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
 class OtpFragment :
-    BaseFragment<FragmentOtpBinding, LoginState, LoginAction, LoginViewModel>()  {
+    BaseFragment<FragmentOtpBinding, LoginState, LoginEvent, LoginViewModel>()  {
 
     override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_modules)
     private var expirationTimer: ExpirationTimer? = null
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.otpExpired() }
+        expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.setEvent(LoginEvent.OtpExpiredEvent) }
         expirationTimer?.start()
-        binding.btnSubmit.setOnClickListener { viewModel.submitOtpEvent(binding.squareFieldPin.text.toString()) }
+        binding.btnSubmit.setOnClickListener { viewModel.setEvent(LoginEvent.SubmitOtpEvent(binding.squareFieldPin.text.toString())) }
     }
 
     override fun renderViewState(viewState: LoginState) {
 
     }
 
-    override fun invalidInputValue(message: String?, type: Any?): Boolean {
+    override fun invalidInput(message: String?, type: Any?): Boolean {
         Toast.makeText(requireContext(), "کد وارد شده صحیح نمی باشد.", Toast.LENGTH_SHORT).show()
         return true
     }

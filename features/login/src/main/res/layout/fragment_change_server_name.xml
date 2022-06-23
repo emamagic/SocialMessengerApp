@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.emamagic.login.LoginViewModel" />
     </data>
 
     <FrameLayout 
@@ -145,7 +142,6 @@
                         android:background="@drawable/bg_limoo_disable_submit"
                         android:gravity="center"
                         android:enabled="false"
-                        android:onClick="@{()->viewModel.changeServerNameClickedEvent(inputEditText.getText().toString())}"
                         android:text="@string/submit_server_name"
                         android:textColor="@color/limoo_secondary_dark"
                         android:textSize="@dimen/limoo_16s"

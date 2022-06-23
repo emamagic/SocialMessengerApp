@@ -9,10 +9,9 @@ import com.emamagic.base.getDrawableCompat
 import com.emamagic.base.onTextChange
 import com.emamagic.base.setColor
 import com.emamagic.base.base.BaseFragment
-import com.emamagic.mvi.BaseEffect
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.R
-import com.emamagic.login.contract.LoginAction
+import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
 import com.emamagic.login.databinding.FragmentLoginWithPhoneBinding
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginWithPhoneFragment :
-    BaseFragment<FragmentLoginWithPhoneBinding, LoginState, LoginAction, LoginViewModel>(),
+    BaseFragment<FragmentLoginWithPhoneBinding, LoginState, LoginEvent, LoginViewModel>(),
     CountryCodePicker.OnCountrySelected {
 
     override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_modules)
@@ -28,14 +27,15 @@ class LoginWithPhoneFragment :
 
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        binding.viewModel = viewModel
         setupCountryPicker()
         binding.inputEditText.onTextChange {
-            viewModel.typingPhoneNumberEvent(it)
+            viewModel.setEvent(LoginEvent.TypingPhoneNumberEvent(it))
         }
         binding.btnSubmit.setOnClickListener {
-            viewModel.submitPhoneNumberEvent(binding.inputEditText.text.toString(), countryPicker.selectedCountryCodeWithPlus)
+            viewModel.setEvent(LoginEvent.SubmitPhoneNumberEvent(binding.inputEditText.text.toString(), countryPicker.selectedCountryCodeWithPlus))
         }
+        binding.txtSignupWithServerName.setOnClickListener { viewModel.setEvent(LoginEvent.ChangeServerNameClickEvent) }
+        binding.txtSignupWithUsername.setOnClickListener { viewModel.setEvent(LoginEvent.LoginWithUsernameClickEvent) }
 
         binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی",
             setColor(com.emamagic.base.R.color.limoo_secondary), true) {
@@ -46,7 +46,7 @@ class LoginWithPhoneFragment :
 
         binding.txtTermsPolicy.clickPartOfText("شرایط و قوانین استفاده",
             setColor(com.emamagic.base.R.color.limoo_secondary), true) {
-            viewModel.submitTermsPolicyEvent()
+            viewModel.setEvent(LoginEvent.SubmitTermsPolicyEvent)
         }
         binding.inputEditText.setDrawableClickListener { countryPicker.mRlyClickConsumer.performClick() }
 
@@ -56,7 +56,7 @@ class LoginWithPhoneFragment :
 //        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
-    override fun invalidInputValue(message: String?, type: Any?): Boolean {
+    override fun invalidInput(message: String?, type: Any?): Boolean {
         binding.validatorInput.invalidateInput()
         return true
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -22,7 +23,6 @@ import com.emamagic.base.R
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.State
-import kotlinx.coroutines.flow.onEach
 
 abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT, VM : BaseViewModel<STATE, ACTION>> :
     Fragment() {
@@ -96,9 +96,9 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
 
     open fun disableUiComponent(type: Any?): Boolean = false
 
-    open fun emptyInputValue(type: Any?): Boolean = false
+    open fun invalidInput(message: String?, type: Any?): Boolean = false
 
-    open fun invalidInputValue(message: String?, type: Any?): Boolean = false
+    open fun invalidInput(@StringRes message: Int?, type: Any?): Boolean = false
 
     open fun showDialog(message: String, proceedTitle: String?, cancelTitle: String?): Boolean = false
 
@@ -127,14 +127,14 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
                 getExtras()
             )
             is BaseEffect.NavigateBack -> findNavController().navigateUp()
-            is BaseEffect.InvalidInputValue -> if (invalidInputValue(viewEffect.message, viewEffect.type))
-                throw Exception("BaseFragment -> InvalidInputValue Does Not Implemented")
+            is BaseEffect.InvalidInput.Error -> if (invalidInput(viewEffect.message, viewEffect.type))
+                throw Exception("BaseFragment -> InvalidInputError Does Not Implemented")
+            is BaseEffect.InvalidInput.Error2 -> if (invalidInput(viewEffect.resId, viewEffect.type))
+                throw Exception("BaseFragment -> InvalidInputError2 Does Not Implemented")
             is BaseEffect.NeedToSignIn ->
                 findNavController().navigate(
                     NavDeepLinkRequest.Builder.fromUri("android-app://limoo.im.app/signin".toUri()).build(),
                     NavOptions.Builder().setPopUpTo(findNavController().currentDestination?.id!!, true).build())
-            is BaseEffect.EmptyInputValue -> if (!emptyInputValue(viewEffect.type))
-                throw Exception("BaseFragment -> EmptyInputValue Does Not Implemented")
             else ->
                 if (!renderCustomViewEffect(viewEffect))
                     throw Exception("BaseFragment -> RenderViewEffect Does Not Implemented")

@@ -5,12 +5,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.emamagic.base.Logger;
 import com.emamagic.base.helpers.TypeFaceFactory;
 import im.limoo.emoji.view.EmojiEditText;
 
-public class FontEditText extends EmojiEditText {
+public class FontEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private KeyPreImeListener keyPreImeListener;
 

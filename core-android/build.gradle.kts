@@ -5,3 +5,7 @@ plugins {
 apply {
     from("$rootDir/android-common-build.gradle")
 }
+
+dependencies {
+    api(Libs.appAuth)
+}
