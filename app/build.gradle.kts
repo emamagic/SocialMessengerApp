@@ -58,7 +58,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -68,9 +68,10 @@ dependencies {
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
     implementation(project(Modules.cache))
-    implementation(project(Modules.base))
+    implementation(project(Modules.commonUi))
 
     // Features
+    implementation(project(Modules.splash))
     implementation(project(Modules.login))
     implementation(project(Modules.profile))
     implementation(project(Modules.conversation))

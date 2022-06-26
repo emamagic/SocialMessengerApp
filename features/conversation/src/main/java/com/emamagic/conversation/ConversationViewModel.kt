@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ConversationViewModel @Inject constructor(
-): BaseViewModel<ConversationState, ConversationAction>() {
+): BaseViewModel<ConversationState, ConversationAction, ConversationRouter.Routes>() {
 
     init {
         viewModelScope.launch {

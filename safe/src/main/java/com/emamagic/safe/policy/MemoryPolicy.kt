@@ -4,7 +4,7 @@ import com.emamagic.safe.util.SafeWrapper
 import java.util.*
 
 data class MemoryPolicy<ResultType>(
-    val shouldRefresh: (oldValue: SafeWrapper<ResultType>) -> Boolean = { false },
+    val shouldRefresh: (current: SafeWrapper<ResultType>?) -> Boolean = { false },
     val expires: Long = -1
 )  {
     private val createAt: Date = Date()

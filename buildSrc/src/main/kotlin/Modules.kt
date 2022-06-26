@@ -1,6 +1,6 @@
 object Modules {
     const val app = ":app"
-    const val base = ":base"
+    const val commonUi = ":common-ui"
     const val core = ":core"
     const val navigation = ":navigation"
     const val cache = ":cache"
@@ -12,6 +12,7 @@ object Modules {
     const val login = ":features:login"
     const val profile = ":features:profile"
     const val conversation = ":features:conversation"
+    const val splash = ":features:splash"
     const val mvi = ":mvi"
     const val data = ":data"
     const val coreAndroid = ":core-android"

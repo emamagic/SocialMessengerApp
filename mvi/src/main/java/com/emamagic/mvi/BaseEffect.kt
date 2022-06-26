@@ -1,7 +1,5 @@
 package com.emamagic.mvi
 
-import androidx.annotation.StringRes
-import androidx.navigation.NavDirections
 
 sealed interface BaseEffect {
 
@@ -24,10 +22,6 @@ sealed interface BaseEffect {
 
     data class HideLoading(val type: Any? = null) : BaseEffect
 
-    data class NavigateTo(val directions: NavDirections) : BaseEffect
-
-    object NavigateBack : BaseEffect
-
     object HideKeyboard : BaseEffect
 
     data class EnableUiComponent(val type: Any? = null) : BaseEffect
@@ -40,7 +34,7 @@ sealed interface BaseEffect {
 
     sealed class InvalidInput : BaseEffect {
         data class Error(val message: String? = null, val type: Any? = null) : InvalidInput()
-        data class Error2(@StringRes val resId: Int? = null, val type: Any? = null) : InvalidInput()
+        data class Error2(val resId: Int? = null, val type: Any? = null) : InvalidInput()
     }
 }
 /*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/

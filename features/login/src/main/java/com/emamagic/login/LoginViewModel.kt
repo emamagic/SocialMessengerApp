@@ -13,13 +13,10 @@ import com.emamagic.domain.interactors.*
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
-import com.emamagic.login.phone.LoginWithPhoneFragmentDirections
-import com.emamagic.login.user_name.LoginWithUsernameFragmentDirections
 import com.emamagic.mvi.LoginEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import net.openid.appauth.ResponseTypeValues
 import javax.inject.Inject
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
@@ -32,15 +29,11 @@ class LoginViewModel @Inject constructor(
     private val verifyOtp: VerifyOtp,
     private val loginWithPhoneNumber: LoginWithPhoneNumber,
     private val loginWithUsername: LoginWithUsername,
-    private val saveToCache: SaveToCache,
+    private val saveAnyToCache: SaveAnyToCache,
     private val loginWithKeycloak: LoginWithKeycloak,
-) : BaseViewModel<LoginState, LoginEvent>() {
+) : BaseViewModel<LoginState, LoginEvent, LoginRouter.Routes>() {
 
     private lateinit var G_phoneNumber: String
-
-    init {
-        getServerConfigEvent()
-    }
 
     override fun createInitialState() = LoginState.initialize()
 
@@ -74,11 +67,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun changeServerNameClickedEvent() = viewModelScope.launch {
-        navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToChangeServerNameFragment())
+//        navigateTo(LoginByPhoneFragmentDirections.actionToChangeServerNameFragment())
     }
 
     private fun loginWithUsernameClickedEvent() = viewModelScope.launch {
-        navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToLoginWithUsernameFragment())
+//        navigateTo(LoginByPhoneFragmentDirections.actionToLoginByUsernameFragment())
     }
 
     private fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = withLoadingScope {
@@ -89,12 +82,8 @@ class LoginViewModel @Inject constructor(
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
         else countryCode + phoneNum
         loginWithPhoneNumber(LoginWithPhoneNumber.Params(G_phoneNumber)).manageResult {
-            navigateTo(LoginWithPhoneFragmentDirections.actionLoginWithPhoneFragmentToOtpFragment())
+//            navigateTo(LoginByPhoneFragmentDirections.actionToOtpFragment())
         }
-    }
-
-    private fun getServerConfigEvent() = withLoadingScope {
-        updateServerConfig("https://test.limonadapp.ir").manageResult()
     }
 
     private fun submitTermsPolicyEvent() = withLoadingScope {
@@ -121,7 +110,7 @@ class LoginViewModel @Inject constructor(
             return@withLoadingScope
         }
         loginWithUsername(LoginWithUsername.Params(username, pass)).manageResult {
-            navigateTo(LoginWithUsernameFragmentDirections.actionOtpFragmentToConversationFragment())
+//            navigateTo(LoginByUsernameFragmentDirections.actionToConversationFragment())
         }
     }
 
@@ -134,7 +123,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginWithPhoneClickedEvent() = withLoadingScope {
-        setEffect { BaseEffect.NavigateBack }
+//        setEffect { BaseEffect.NavigateBack }
     }
 
 
@@ -146,7 +135,8 @@ class LoginViewModel @Inject constructor(
             return@launch
         }
         setEffect { BaseEffect.ShowLoading() }
-        updateServerConfig(host).manageResult { serverConfig ->
+        updateServerConfig(UpdateServerConfig.Params(host, true)).manageResult { serverConfig ->
+            setState { copy(defaultAuthType = serverConfig.config.defaultAuthServices, deploymentType = serverConfig.config.deploymentType) }
 //            val authTypes = serverConfig.config.authServices
 //                .replace("[", "")
 //                .replace("]", "")
@@ -179,7 +169,7 @@ class LoginViewModel @Inject constructor(
 //                }
 //                 setState for LoginWithPhoneFragment
 //            } else {
-                setEffect { BaseEffect.NavigateBack }
+//                setEffect { BaseEffect.NavigateBack }
 //            }
         }
     }
@@ -193,7 +183,7 @@ class LoginViewModel @Inject constructor(
         scope: String,
         responseType: String
     ) = viewModelScope.launch {
-        saveToCache(SaveToCache.Params(PrefKeys.CertAlias, alias)).manageResult { succeeded ->
+        saveAnyToCache(SaveAnyToCache.Params(PrefKeys.CertAlias, alias)).manageResult { succeeded ->
             if (!succeeded) setEffect { BaseEffect.Toast("could not save alias") }
             setEffect { LoginEffect.PerformAuthorization(authorizationEndpoint,tokenEndpoint, redirectUri, clientId, scope, responseType) }
         }
@@ -222,7 +212,7 @@ class LoginViewModel @Inject constructor(
             Settings.Secure.ANDROID_ID
         )
         verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId)).manageResult {
-            navigateTo(LoginWithUsernameFragmentDirections.actionOtpFragmentToConversationFragment())
+//            navigateTo(LoginByUsernameFragmentDirections.actionToConversationFragment())
         }
     }
 

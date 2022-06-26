@@ -5,7 +5,7 @@ import com.emamagic.cache.cache.CacheFactory
 import com.orhanobut.hawk.Hawk
 
 
-val pref: SharedPreferences by lazy { CacheFactory.getPrefs() }
+val pref: SharedPreferences by lazy { CacheFactory.create() }
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
     val editor = this.edit()
@@ -23,6 +23,7 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
         is Boolean -> edit { it.putBoolean(key, value) }
         is Float -> edit { it.putFloat(key, value) }
         is Long -> edit { it.putLong(key, value) }
+        // todo remove hawk
         else -> Hawk.put(key, value)
         //throw UnsupportedOperationException("Not yet implemented")
     }

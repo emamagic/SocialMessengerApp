@@ -10,7 +10,7 @@ import com.emamagic.conversation.databinding.FragmentConversationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ConversationFragment: BaseFragment<FragmentConversationBinding, ConversationState, ConversationAction, ConversationViewModel>() {
+class ConversationFragment: BaseFragment<FragmentConversationBinding, ConversationState, ConversationAction, ConversationRouter.Routes, ConversationViewModel>() {
 
     override val viewModel: ConversationViewModel by viewModels()
 
@@ -26,5 +26,6 @@ class ConversationFragment: BaseFragment<FragmentConversationBinding, Conversati
 
 
     }
+
 
 }

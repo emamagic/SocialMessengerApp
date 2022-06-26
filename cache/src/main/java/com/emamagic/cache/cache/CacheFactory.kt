@@ -24,7 +24,7 @@ object CacheFactory {
         Hawk.init(app)
     }
 
-    fun getPrefs(): SharedPreferences {
+    fun create(): SharedPreferences {
         if (!this::app.isInitialized) throw Exception("PrefInitializer Does Not Initialize")
         return PreferenceManager.getDefaultSharedPreferences(app.applicationContext)
     }

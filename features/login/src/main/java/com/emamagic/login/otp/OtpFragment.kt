@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.base.base.BaseFragment
+import com.emamagic.login.LoginRouter
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
@@ -16,9 +17,9 @@ import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
 class OtpFragment :
-    BaseFragment<FragmentOtpBinding, LoginState, LoginEvent, LoginViewModel>()  {
+    BaseFragment<FragmentOtpBinding, LoginState, LoginEvent, LoginRouter.Routes, LoginViewModel>()  {
 
-    override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_modules)
+    override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_graph)
     private var expirationTimer: ExpirationTimer? = null
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {

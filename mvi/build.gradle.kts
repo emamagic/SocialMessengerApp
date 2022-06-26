@@ -1,13 +1,9 @@
 plugins {
-    id("com.android.library")
+    id("java-library")
+    id("org.jetbrains.kotlin.jvm")
 }
 
-apply {
-    from("$rootDir/android-common-build.gradle")
-}
-
-dependencies {
-
-    implementation(Libs.navigation_component_fragment)
-
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }

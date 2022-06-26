@@ -11,10 +11,15 @@ class UpdateServerConfig @Inject constructor(
     @Bridge
     private val userRepository: UserRepository,
     dispatchers: AppCoroutineDispatchers
-): ResultInteractor<String, ServerConfig>(dispatchers) {
+) : ResultInteractor<UpdateServerConfig.Params, ServerConfig>(dispatchers) {
 
-    override suspend fun buildUseCase(params: String): ResultWrapper<ServerConfig> =
-        userRepository.updateServerUpdate(params)
+    override suspend fun buildUseCase(params: Params): ResultWrapper<ServerConfig> =
+        userRepository.updateServerConfig(params)
 
+
+    data class Params(
+        val serverHost: String,
+        val shouldRefresh: Boolean
+    )
 
 }

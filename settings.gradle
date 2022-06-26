@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "Limoo"
 include (
         ':app',
-        ':base',
+        ':common-ui',
         ':cache',
         ':safe',
         ':domain',
@@ -33,6 +33,7 @@ include (
         'features:workspace-approval',
         'features:workspace-create',
         'features:workspace-add-member',
+        'features:splash',
         ':mvi',
         ':data',
         ':core-android',

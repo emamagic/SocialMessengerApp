@@ -4,7 +4,6 @@ import com.emamagic.cache.cache.data_store.setUser
 import com.emamagic.cache.cache.preferences.pref
 import com.emamagic.cache.cache.preferences.set
 import com.emamagic.core.AuthUserScope
-import com.emamagic.core.Bridge
 import com.emamagic.core.ResultWrapper
 import com.emamagic.data_android.interceptor.Const
 import com.emamagic.data_android.interceptor.network.RestProvider
@@ -14,10 +13,7 @@ import com.emamagic.data_android.interceptor.toResult
 import com.emamagic.domain.entities.ServerConfig
 import com.emamagic.domain.entities.User
 import com.emamagic.domain.entities.Workspace
-import com.emamagic.domain.interactors.LoginWithPhoneNumber
-import com.emamagic.domain.interactors.LoginWithUsername
-import com.emamagic.domain.interactors.SaveToCache
-import com.emamagic.domain.interactors.VerifyOtp
+import com.emamagic.domain.interactors.*
 import com.emamagic.domain.publisher.Event
 import com.emamagic.domain.publisher.NotificationCenter
 import com.emamagic.domain.repositories.UserRepository
@@ -35,12 +31,13 @@ class UserRepositoryImpl @Inject constructor(
         NotificationCenter.subscribe(this, Const.LOGGED_OUT)
     }
 
-    override suspend fun updateServerUpdate(serverHost: String): ResultWrapper<ServerConfig> {
-        restProvider.setBaseUrlAndApiUrl(serverHost)
-        return fresh {
+    override suspend fun updateServerConfig(params: UpdateServerConfig.Params): ResultWrapper<ServerConfig> {
+        restProvider.setBaseUrlAndApiUrl(params.serverHost)
+        return get("serverConfig", memoryPolicy = MemoryPolicy(shouldRefresh = { params.shouldRefresh })) {
             restProvider.configService.getServerConfig().toResponse()
         }.toResult(onSuccess = {
             val config = it.config
+            restProvider.setBaseUrlAndApiUrl(config.server.getServerHost())
             restProvider.setBaseFileServerUrl(config.fileServerUrl)
         })
     }
@@ -55,17 +52,12 @@ class UserRepositoryImpl @Inject constructor(
             .toResponse()
     }.toResult()
 
-    override suspend fun getCurrentUser(shouldFetch: Boolean): ResultWrapper<User> = get(
-        "CurrentUser",
-        memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })
-    ) {
+    override suspend fun getCurrentUser(): ResultWrapper<User> = fresh {
         restProvider.userService.getCurrentUser().toResponse()
     }.toResult(onSuccess = { user -> setUser(user) })
 
-    override suspend fun getMyWorkspaces(shouldFetch: Boolean): ResultWrapper<List<Workspace>> =
-        get("MyWorkspaces",
-            memoryPolicy = MemoryPolicy(shouldRefresh = { shouldFetch })
-        ) {
+    override suspend fun getMyWorkspaces(): ResultWrapper<List<Workspace>> =
+        fresh {
             restProvider.userService.getMyWorkspaces().toResponse()
         }.toResult()
 
@@ -79,7 +71,7 @@ class UserRepositoryImpl @Inject constructor(
         restProvider.userService.getSessionByKeycloak().toResponse()
     }.toResult()
 
-    override suspend fun saveToCache(data: SaveToCache.Params): ResultWrapper<Boolean> {
+    override suspend fun saveToCache(data: SaveAnyToCache.Params): ResultWrapper<Boolean> {
         return try {
             pref[data.key] = data.value
             ResultWrapper.Success(true)

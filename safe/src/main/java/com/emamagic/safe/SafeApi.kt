@@ -195,8 +195,12 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         memoryPolicy: MemoryPolicy<ResultType>? = null,
         call: () -> Response<ResultType>
     ): SafeWrapper<ResultType> {
-        if (key != null)
+        if (key != null && memoryPolicy == null) {
             General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        }
+        if (key != null && memoryPolicy != null && !memoryPolicy.shouldRefresh(null)){
+            General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        }
         var safe: SafeWrapper<ResultType>
         return try {
             val response = call()
@@ -234,8 +238,12 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         call: () -> Response<RequestType>,
         noinline converter: (RequestType) -> ResultType
     ): SafeWrapper<ResultType> {
-        if (key != null)
+        if (key != null && memoryPolicy == null) {
             General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        }
+        if (key != null && memoryPolicy != null && !memoryPolicy.shouldRefresh(null)){
+            General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
+        }
         var safe: SafeWrapper<ResultType>
         return try {
             val response = call()
@@ -268,6 +276,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     }
 
+    // todo for 500 status code
     suspend fun <T> retryIO(
         retryPolicy: RetryPolicy = RetryPolicy(),
         coroutineScope: CoroutineScope?,

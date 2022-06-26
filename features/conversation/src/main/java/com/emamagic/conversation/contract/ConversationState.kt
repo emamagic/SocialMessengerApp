@@ -4,7 +4,7 @@ import com.emamagic.mvi.State
 
 data class ConversationState(
     val t: String
-) : com.emamagic.mvi.State {
+) : State {
     companion object {
         fun initialize() =
             ConversationState(

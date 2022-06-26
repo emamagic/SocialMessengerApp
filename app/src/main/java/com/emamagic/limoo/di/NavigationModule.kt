@@ -1,0 +1,17 @@
+package com.emamagic.limoo.di
+
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object NavigationModule {
+
+    @Provides
+    @Singleton
+    fun provideAppRouter() = com.emamagic.limoo.approuter.SplashRouter()
+
+}

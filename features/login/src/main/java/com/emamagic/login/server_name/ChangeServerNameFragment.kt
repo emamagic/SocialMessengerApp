@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.emamagic.base.base.BaseFragment
 import com.emamagic.core_android.keycloak.AuthStateManager
+import com.emamagic.login.LoginRouter
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
@@ -23,9 +24,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChangeServerNameFragment :
-    BaseFragment<FragmentChangeServerNameBinding, LoginState, LoginEvent, LoginViewModel>() {
+    BaseFragment<FragmentChangeServerNameBinding, LoginState, LoginEvent, LoginRouter.Routes, LoginViewModel>() {
 
-    override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_modules)
+    override val viewModel: LoginViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.login_graph)
 
     @Inject
     lateinit var lazyAuthService: Lazy<AuthorizationService>
@@ -42,9 +43,7 @@ class ChangeServerNameFragment :
     }
 
     override fun renderViewState(viewState: LoginState) {
-        viewState.serverConfigUpdated?.let {
 
-        }
     }
 
     override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
