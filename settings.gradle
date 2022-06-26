@@ -28,7 +28,7 @@ include (
         ':cookie-jar',
         ':features:login',
         ':features:profile',
-        ':features:conversation',
+        ':features:conversations',
         'features:onboarding',
         'features:workspace-approval',
         'features:workspace-create',

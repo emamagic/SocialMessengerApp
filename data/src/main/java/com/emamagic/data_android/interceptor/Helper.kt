@@ -13,9 +13,10 @@ import com.emamagic.safe.util.SafeWrapper
 import com.google.gson.Gson
 import retrofit2.Response
 import com.emamagic.core.Error
+import com.emamagic.safe.util.IResponse
 
-fun <T> Response<T>.toResponse(): com.emamagic.safe.util.Response<T> =
-    object : com.emamagic.safe.util.Response<T> {
+fun <T> Response<T>.toResponse(): IResponse<T> =
+    object : IResponse<T> {
         override fun isSuccessful(): Boolean =
             this@toResponse.isSuccessful
 
@@ -84,20 +85,29 @@ fun ErrorEntity?.toError(): Error {
 }
 
 suspend fun <T,E> SafeWrapper<T>.toResult(
-    onSuccess: (suspend (T) -> Unit)? = null,
-    onFailed: ((Error) -> Unit)? = null,
+    doOnSuccess: (suspend (T) -> Unit)? = null,
+    doOnFailed: ((Error) -> Unit)? = null,
+    tryIfFailed: (() -> E?)? = null,
     shouldReturn: E? = null
 ): ResultWrapper<E> =
     when (this) {
         is SafeWrapper.Success -> {
-            onSuccess?.invoke(data!!)
+            Log.e("TAG", "toResult: ")
+            doOnSuccess?.invoke(data!!)
             val mData = shouldReturn ?: data!! as E
             ResultWrapper.Success(mData)
         }
         is SafeWrapper.Failed -> {
-            val error = error.toError()
-            onFailed?.invoke(error)
-            ResultWrapper.Failed(error)
+            if (tryIfFailed != null) {
+                val newResult = tryIfFailed()
+                if (newResult == null)
+                ResultWrapper.Failed(Error(message = "data is null"))
+                else ResultWrapper.Success(newResult)
+            } else {
+                val error = error.toError()
+                doOnFailed?.invoke(error)
+                ResultWrapper.Failed(error)
+            }
         }
         is SafeWrapper.LoadingFetch -> TODO()
     }

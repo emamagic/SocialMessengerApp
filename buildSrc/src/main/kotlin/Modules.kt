@@ -11,7 +11,7 @@ object Modules {
     const val countryPicker = ":country-picker"
     const val login = ":features:login"
     const val profile = ":features:profile"
-    const val conversation = ":features:conversation"
+    const val conversation = ":features:conversations"
     const val splash = ":features:splash"
     const val mvi = ":mvi"
     const val data = ":data"

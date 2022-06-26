@@ -5,7 +5,14 @@ import com.emamagic.navigation.router.Router
 
 interface LoginRouter: Router {
 
-    interface Routes : Route
+    sealed class Routes : Route {
+        object LoginViaPhoneNumberToLoginViaUsername: Routes()
+        object LoginViaPhoneNumberToChangeServer: Routes()
+        object LoginViaPhoneNumberToOtp: Routes()
+        object OtpToConversations: Routes()
+        object UsernameToConversations: Routes()
+        object ChangeServerToConversations: Routes()
+    }
 
 
 }

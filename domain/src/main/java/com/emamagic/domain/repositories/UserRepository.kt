@@ -20,5 +20,6 @@ interface UserRepository {
 
     suspend fun getSessionByKeycloak(): ResultWrapper<Boolean>
 
-    suspend fun saveToCache(data: SaveAnyToCache.Params): ResultWrapper<Boolean>
+    suspend fun saveAlias(data: SaveAlias.Params): ResultWrapper<Boolean>
+
 }

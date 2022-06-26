@@ -4,13 +4,8 @@
     android:id="@+id/splash_graph"
     app:startDestination="@id/splash_fragment">
 
-
     <fragment
         android:id="@+id/splash_fragment"
-        android:name="com.emamagic.splash.SplashFragment">
-        <action
-            android:id="@+id/action_to_phone_fragment"
-            app:destination="@id/login_graph" />
-    </fragment>
+        android:name="com.emamagic.splash.SplashFragment"/>
 
 </navigation>

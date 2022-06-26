@@ -21,7 +21,7 @@ object CacheFactory {
 
     fun create(application: Application) {
         app = application
-        Hawk.init(app)
+        Hawk.init(app).build()
     }
 
     fun create(): SharedPreferences {

@@ -74,14 +74,18 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
     abstract fun handleEvent(event: ACTION)
 
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(success: (suspend (T) -> Unit)? = null) {
+    protected suspend fun <T> ResultWrapper<T>.manageResult(failed: (suspend () -> Unit)? = null, success: (suspend (T) -> Unit)? = null, anyWay: (suspend () -> Unit)? = null) {
         when (this) {
             is ResultWrapper.Success -> {
                 success?.invoke(data!!)
+                anyWay?.invoke()
             }
             is ResultWrapper.Failed -> {
+                Log.e("TAG", "manageResult: $error")
                 setEffect { BaseEffect.HideLoading() }
                 onError(error!!)
+                failed?.invoke()
+                anyWay?.invoke()
             }
             is ResultWrapper.LoadingFetch -> TODO()
 

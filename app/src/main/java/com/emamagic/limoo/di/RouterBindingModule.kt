@@ -1,5 +1,6 @@
 package com.emamagic.limoo.di
 
+import com.emamagic.login.LoginRouter
 import com.emamagic.navigation.router.Router
 import com.emamagic.splash.SplashRouter
 import dagger.Binds
@@ -16,4 +17,8 @@ abstract class RouterBindingModule {
     @IntoSet
     @Binds
     abstract fun bindSplashRouter(splashRouter: SplashRouter): Router
+
+    @IntoSet
+    @Binds
+    abstract fun bindLoginRouter(loginRouter: LoginRouter): Router
 }

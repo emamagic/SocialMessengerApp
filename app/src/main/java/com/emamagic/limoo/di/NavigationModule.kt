@@ -1,5 +1,7 @@
 package com.emamagic.limoo.di
 
+import com.emamagic.limoo.approuter.LoginRouterImpl
+import com.emamagic.limoo.approuter.SplashRouterImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +14,12 @@ object NavigationModule {
 
     @Provides
     @Singleton
-    fun provideAppRouter() = com.emamagic.limoo.approuter.SplashRouter()
+    fun provideSplashRouter() = SplashRouterImpl()
+
+
+    @Provides
+    @Singleton
+    fun provideLoginRouter() = LoginRouterImpl()
+
 
 }

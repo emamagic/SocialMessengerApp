@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import com.emamagic.navigation.route.DeepLink
 import com.emamagic.navigation.route.Route
 
-interface Router<T> {
+interface Router {
     fun pop(instance: Fragment)
-    fun push(instance: Fragment, route: T)
+    fun push(instance: Fragment, route: Route)
 }

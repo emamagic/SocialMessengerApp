@@ -5,13 +5,12 @@
     app:startDestination="@id/splash_graph">
 
     <include
+        app:graph="@navigation/splash_graph"/>
+
+    <include
         app:graph="@navigation/login_graph"/>
 
     <include
-        app:graph="@navigation/splash_graph"/>
-
-    <fragment android:id="@+id/conversation_fragment"
-        android:name="com.emamagic.conversation.ConversationFragment"/>
-
+        app:graph="@navigation/conversations_graph"/>
 
 </navigation>

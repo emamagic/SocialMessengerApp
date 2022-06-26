@@ -138,11 +138,11 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         }
     }
 
-    private fun navigate(Route: Route) {
+    private fun navigate(route: Route) {
         routers.forEach {
-            when (Route) {
+            when (route) {
                 is Route.Back -> it.pop(this)
-                else -> it.push(this, Route)
+                else -> it.push(this, route)
             }
         }
     }

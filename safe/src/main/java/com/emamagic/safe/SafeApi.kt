@@ -1,5 +1,6 @@
 package com.emamagic.safe
 
+import android.util.Log
 import com.emamagic.safe.connectivity.Connectivity
 import com.emamagic.safe.connectivity.ConnectivityPublisher
 import com.emamagic.safe.error.*
@@ -7,7 +8,7 @@ import com.emamagic.safe.policy.CachePolicy
 import com.emamagic.safe.policy.MemoryPolicy
 import com.emamagic.safe.policy.RetryPolicy
 import com.emamagic.safe.util.General
-import com.emamagic.safe.util.Response
+import com.emamagic.safe.util.IResponse
 import com.emamagic.safe.util.SafeWrapper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +25,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         key: String,
         retryPolicy: RetryPolicy,
         memoryPolicy: MemoryPolicy<ResultType>,
-        remoteFetch: suspend () -> Response<ResultType>
+        remoteFetch: suspend () -> IResponse<ResultType>
     ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse(key = key, memoryPolicy = memoryPolicy) {
@@ -39,7 +40,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         key: String,
         retryPolicy: RetryPolicy,
         memoryPolicy: MemoryPolicy<ResultType>,
-        remoteFetch: suspend () -> Response<RequestType>,
+        remoteFetch: suspend () -> IResponse<RequestType>,
         mapping: (RequestType) -> ResultType,
     ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
@@ -53,7 +54,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     override suspend fun <ResultType> fresh(
         retryPolicy: RetryPolicy,
-        remoteFetch: suspend () -> Response<ResultType>
+        remoteFetch: suspend () -> IResponse<ResultType>
     ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
             handleResponse {
@@ -66,7 +67,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
 
     override suspend fun <ResultType, RequestType> fresh(
         retryPolicy: RetryPolicy,
-        remoteFetch: suspend () -> Response<RequestType>,
+        remoteFetch: suspend () -> IResponse<RequestType>,
         mapping: (RequestType) -> ResultType
     ): SafeWrapper<ResultType> =
         withContext(Dispatchers.IO) {
@@ -193,7 +194,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     private inline fun <ResultType> handleResponse(
         key: String? = null,
         memoryPolicy: MemoryPolicy<ResultType>? = null,
-        call: () -> Response<ResultType>
+        call: () -> IResponse<ResultType>
     ): SafeWrapper<ResultType> {
         if (key != null && memoryPolicy == null) {
             General.cache[key]?.let { result -> return result as SafeWrapper<ResultType> }
@@ -235,7 +236,7 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
     private inline fun <RequestType, ResultType> handleResponse(
         key: String? = null,
         memoryPolicy: MemoryPolicy<ResultType>? = null,
-        call: () -> Response<RequestType>,
+        call: () -> IResponse<RequestType>,
         noinline converter: (RequestType) -> ResultType
     ): SafeWrapper<ResultType> {
         if (key != null && memoryPolicy == null) {
@@ -288,7 +289,8 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
         repeat(retryPolicy.times - 1) { index ->
             try {
                 return block()
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
+                Log.e("TAG", "retryIO: ${e.code} ${e.stackTraceToString()}")
                 if (index == retryPolicy.times - 2) {
                     ConnectivityPublisher.notifySubscribers(Connectivity(General.DISCONNECT))
                 }

@@ -18,12 +18,11 @@ private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) 
  */
 operator fun SharedPreferences.set(key: String, value: Any?) {
     when (value) {
-        is String? -> edit { it.putString(key, value) }
+        is String -> edit { it.putString(key, value) }
         is Int -> edit { it.putInt(key, value) }
         is Boolean -> edit { it.putBoolean(key, value) }
         is Float -> edit { it.putFloat(key, value) }
         is Long -> edit { it.putLong(key, value) }
-        // todo remove hawk
         else -> Hawk.put(key, value)
         //throw UnsupportedOperationException("Not yet implemented")
     }

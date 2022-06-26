@@ -1,5 +1,9 @@
 package com.emamagic.limoo.di
 
+import com.emamagic.limoo.approuter.LoginRouterImpl
+import com.emamagic.limoo.approuter.SplashRouterImpl
+import com.emamagic.login.LoginRouter
+import com.emamagic.splash.SplashRouter
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.migration.DisableInstallInCheck
@@ -9,15 +13,10 @@ import dagger.hilt.migration.DisableInstallInCheck
 abstract class RouterBinderModule {
 
     @Binds
-    abstract fun bindSplashRouter(splashRouter: com.emamagic.limoo.approuter.SplashRouter): com.emamagic.splash.SplashRouter
+    abstract fun bindSplashRouter(splashRouterImpl: SplashRouterImpl): SplashRouter
 
-//    @Binds
-//    abstract fun bindLoginRouter(appRouter: AppRoute): LoginRoute
-//
-//    @Binds
-//    abstract fun bindConversationRouter(appRouter: AppRoute): ConversationRoute
-//
-//    @Binds
-//    abstract fun bindProfileRouter(appRouter: AppRoute): ProfileRoute
+    @Binds
+    abstract fun bindLoginRouter(loginRouterImpl: LoginRouterImpl): LoginRouter
+
 
 }

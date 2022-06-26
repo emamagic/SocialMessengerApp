@@ -29,7 +29,7 @@ class LoginViewModel @Inject constructor(
     private val verifyOtp: VerifyOtp,
     private val loginWithPhoneNumber: LoginWithPhoneNumber,
     private val loginWithUsername: LoginWithUsername,
-    private val saveAnyToCache: SaveAnyToCache,
+    private val saveAlias: SaveAlias,
     private val loginWithKeycloak: LoginWithKeycloak,
 ) : BaseViewModel<LoginState, LoginEvent, LoginRouter.Routes>() {
 
@@ -67,11 +67,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun changeServerNameClickedEvent() = viewModelScope.launch {
-//        navigateTo(LoginByPhoneFragmentDirections.actionToChangeServerNameFragment())
+        routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToChangeServer)
     }
 
     private fun loginWithUsernameClickedEvent() = viewModelScope.launch {
-//        navigateTo(LoginByPhoneFragmentDirections.actionToLoginByUsernameFragment())
+        routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToLoginViaUsername)
     }
 
     private fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = withLoadingScope {
@@ -82,7 +82,7 @@ class LoginViewModel @Inject constructor(
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
         else countryCode + phoneNum
         loginWithPhoneNumber(LoginWithPhoneNumber.Params(G_phoneNumber)).manageResult {
-//            navigateTo(LoginByPhoneFragmentDirections.actionToOtpFragment())
+            routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToOtp)
         }
     }
 
@@ -110,7 +110,7 @@ class LoginViewModel @Inject constructor(
             return@withLoadingScope
         }
         loginWithUsername(LoginWithUsername.Params(username, pass)).manageResult {
-//            navigateTo(LoginByUsernameFragmentDirections.actionToConversationFragment())
+            routerDelegate.pushRoute(LoginRouter.Routes.UsernameToConversations)
         }
     }
 
@@ -135,7 +135,7 @@ class LoginViewModel @Inject constructor(
             return@launch
         }
         setEffect { BaseEffect.ShowLoading() }
-        updateServerConfig(UpdateServerConfig.Params(host, true)).manageResult { serverConfig ->
+        updateServerConfig(UpdateServerConfig.Params(host, true)).manageResult (success = { serverConfig ->
             setState { copy(defaultAuthType = serverConfig.config.defaultAuthServices, deploymentType = serverConfig.config.deploymentType) }
 //            val authTypes = serverConfig.config.authServices
 //                .replace("[", "")
@@ -171,7 +171,7 @@ class LoginViewModel @Inject constructor(
 //            } else {
 //                setEffect { BaseEffect.NavigateBack }
 //            }
-        }
+        })
     }
 
     fun processSSlCertResult(
@@ -183,10 +183,8 @@ class LoginViewModel @Inject constructor(
         scope: String,
         responseType: String
     ) = viewModelScope.launch {
-        saveAnyToCache(SaveAnyToCache.Params(PrefKeys.CertAlias, alias)).manageResult { succeeded ->
-            if (!succeeded) setEffect { BaseEffect.Toast("could not save alias") }
-            setEffect { LoginEffect.PerformAuthorization(authorizationEndpoint,tokenEndpoint, redirectUri, clientId, scope, responseType) }
-        }
+        if (!alias.isNullOrEmpty()) { saveAlias(SaveAlias.Params(alias)).manageResult() }
+        setEffect { LoginEffect.PerformAuthorization(authorizationEndpoint,tokenEndpoint, redirectUri, clientId, scope, responseType) }
     }
 
     private fun loginWithKeycloakEvent() = viewModelScope.launch {
@@ -212,7 +210,7 @@ class LoginViewModel @Inject constructor(
             Settings.Secure.ANDROID_ID
         )
         verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId)).manageResult {
-//            navigateTo(LoginByUsernameFragmentDirections.actionToConversationFragment())
+            routerDelegate.pushRoute(LoginRouter.Routes.OtpToConversations)
         }
     }
 

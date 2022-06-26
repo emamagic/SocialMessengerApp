@@ -1,9 +1,10 @@
 package com.emamagic.data_android.interceptor.repositories
 
-import com.emamagic.cache.cache.data_store.setUser
+import com.emamagic.cache.cache.preferences.get
 import com.emamagic.cache.cache.preferences.pref
 import com.emamagic.cache.cache.preferences.set
 import com.emamagic.core.AuthUserScope
+import com.emamagic.core.PrefKeys
 import com.emamagic.core.ResultWrapper
 import com.emamagic.data_android.interceptor.Const
 import com.emamagic.data_android.interceptor.network.RestProvider
@@ -35,7 +36,7 @@ class UserRepositoryImpl @Inject constructor(
         restProvider.setBaseUrlAndApiUrl(params.serverHost)
         return get("serverConfig", memoryPolicy = MemoryPolicy(shouldRefresh = { params.shouldRefresh })) {
             restProvider.configService.getServerConfig().toResponse()
-        }.toResult(onSuccess = {
+        }.toResult(doOnSuccess = {
             val config = it.config
             restProvider.setBaseUrlAndApiUrl(config.server.getServerHost())
             restProvider.setBaseFileServerUrl(config.fileServerUrl)
@@ -52,9 +53,10 @@ class UserRepositoryImpl @Inject constructor(
             .toResponse()
     }.toResult()
 
-    override suspend fun getCurrentUser(): ResultWrapper<User> = fresh {
+    override suspend fun getCurrentUser(): ResultWrapper<User> = get("currentUser") {
         restProvider.userService.getCurrentUser().toResponse()
-    }.toResult(onSuccess = { user -> setUser(user) })
+    }.toResult(doOnSuccess = { pref[PrefKeys.CURRENT_USER] = it }
+        ,tryIfFailed = { pref[PrefKeys.CURRENT_USER] })
 
     override suspend fun getMyWorkspaces(): ResultWrapper<List<Workspace>> =
         fresh {
@@ -71,9 +73,9 @@ class UserRepositoryImpl @Inject constructor(
         restProvider.userService.getSessionByKeycloak().toResponse()
     }.toResult()
 
-    override suspend fun saveToCache(data: SaveAnyToCache.Params): ResultWrapper<Boolean> {
+    override suspend fun saveAlias(data: SaveAlias.Params): ResultWrapper<Boolean> {
         return try {
-            pref[data.key] = data.value
+            pref[PrefKeys.CertAlias] = data.alias
             ResultWrapper.Success(true)
         } catch (t: Throwable) {
             ResultWrapper.Success(false)

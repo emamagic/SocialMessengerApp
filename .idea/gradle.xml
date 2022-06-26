@@ -22,7 +22,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/emoji" />
             <option value="$PROJECT_DIR$/features" />
-            <option value="$PROJECT_DIR$/features/conversation" />
+            <option value="$PROJECT_DIR$/features/conversations" />
             <option value="$PROJECT_DIR$/features/login" />
             <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/profile" />

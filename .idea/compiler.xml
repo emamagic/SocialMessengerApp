@@ -30,7 +30,7 @@
       <module name="Limoo.entity" target="11" />
       <module name="Limoo.entity.main" target="11" />
       <module name="Limoo.entity.test" target="11" />
-      <module name="Limoo.features.conversation" target="11" />
+      <module name="Limoo.features.conversations" target="11" />
       <module name="Limoo.features.login" target="11" />
       <module name="Limoo.features.onboarding" target="11" />
       <module name="Limoo.features.profile" target="11" />

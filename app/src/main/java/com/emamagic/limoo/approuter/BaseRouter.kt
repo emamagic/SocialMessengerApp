@@ -10,6 +10,7 @@ import com.emamagic.navigation.lifecycle.consume
 import com.emamagic.navigation.router.Router
 import java.io.Serializable
 
+const val TAG = "BaseRouter"
 abstract class BaseRouter: Router {
 
 //    @get:IdRes

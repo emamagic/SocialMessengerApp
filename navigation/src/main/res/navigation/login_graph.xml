@@ -2,19 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_graph"
-    app:startDestination="@id/login_by_phone_fragment">
-
-    <action android:id="@+id/action_to_login" app:destination="@id/login_graph"/>
+    app:startDestination="@id/login_via_phone_number_fragment">
 
     <fragment
-        android:id="@+id/login_by_phone_fragment"
-        android:name="com.emamagic.login.phone.LoginByPhoneFragment">
+        android:id="@+id/login_via_phone_number_fragment"
+        android:name="com.emamagic.login.phone.LoginViaPhoneNumberFragment">
         <action
             android:id="@+id/action_to_change_server_name_fragment"
             app:destination="@id/change_server_name_fragment" />
         <action
-            android:id="@+id/action_to_login_by_username_fragment"
-            app:destination="@id/login_by_username_fragment" />
+            android:id="@+id/action_to_login_via_username_fragment"
+            app:destination="@id/login_via_username_fragment" />
         <action
             android:id="@+id/action_to_otp_fragment"
             app:destination="@id/otp_fragment" />
@@ -31,20 +29,12 @@
         android:name="com.emamagic.login.server_name.ChangeServerNameFragment"/>
 
 
-    <fragment android:id="@+id/login_by_username_fragment"
-        android:name="com.emamagic.login.user_name.LoginByUsernameFragment">
-        <action
-            android:id="@+id/action_to_conversation_fragment"
-            app:destination="@id/conversation_fragment" />
-    </fragment>
+    <fragment android:id="@+id/login_via_username_fragment"
+        android:name="com.emamagic.login.user_name.LoginViaUsernameFragment"/>
 
 
     <fragment android:id="@+id/otp_fragment"
-        android:name="com.emamagic.login.otp.OtpFragment">
-        <action
-            android:id="@+id/action_to_conversation_fragment"
-            app:destination="@id/conversation_fragment" />
-    </fragment>
+        android:name="com.emamagic.login.otp.OtpFragment"/>
 
     <dialog android:id="@+id/terms_policy_fragment"
         android:name="com.emamagic.login.policy.TermsPolicyDialog">
