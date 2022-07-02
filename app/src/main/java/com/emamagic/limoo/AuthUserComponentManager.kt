@@ -1,7 +1,7 @@
 package com.emamagic.limoo
 
-import com.emamagic.data_android.interceptor.network.auth.UserAuth
-import com.emamagic.data_android.interceptor.network.auth.UserAuthSession
+import com.emamagic.data.network.auth.UserAuth
+import com.emamagic.data.network.auth.UserAuthSession
 import com.emamagic.limoo.di.AuthUserComponent
 import dagger.hilt.internal.GeneratedComponentManager
 import kotlinx.coroutines.CoroutineScope

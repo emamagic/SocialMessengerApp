@@ -79,17 +79,17 @@ abstract class SafeApi : GeneralErrorHandlerImpl() {
             }, mapping)
         }
 
-    inline fun <ResultType, RequestType> stream(
+    fun <ResultType, RequestType> stream(
         cachePolicy: CachePolicy = CachePolicy(),
-        crossinline localFetch: () -> Flow<ResultType>,
+        localFetch: () -> Flow<ResultType>,
         retryPolicy: RetryPolicy = RetryPolicy(),
-        crossinline remoteFetch: suspend () -> RequestType,
-        crossinline mapping: (RequestType) -> ResultType,
-        crossinline localStore: suspend (RequestType) -> Unit,
-        crossinline localDelete: suspend () -> Unit,
-        crossinline shouldFetch: (ResultType) -> Boolean = { true },
-        crossinline onFetchSuccess: () -> Unit = { },
-        crossinline onFetchFailed: (ErrorEntity) -> Unit = { }
+        remoteFetch: suspend () -> RequestType,
+        mapping: (RequestType) -> ResultType,
+        localStore: suspend (RequestType) -> Unit = {},
+        localDelete: suspend () -> Unit = {},
+        shouldFetch: (ResultType) -> Boolean = { true },
+        onFetchSuccess: () -> Unit = { },
+        onFetchFailed: (ErrorEntity) -> Unit = { }
     ) = channelFlow {
 
         when (cachePolicy.type) {

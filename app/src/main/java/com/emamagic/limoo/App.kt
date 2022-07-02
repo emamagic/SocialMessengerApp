@@ -1,7 +1,6 @@
 package com.emamagic.limoo
 
 import androidx.multidex.MultiDexApplication
-import com.emamagic.cache.cache.CacheFactory
 import com.emamagic.limoo.appinitializers.AppInitializers
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.emamagic.base.Logger;
 import com.emamagic.base.helpers.TypeFaceFactory;
 import im.limoo.emoji.view.EmojiEditText;
 
@@ -58,7 +57,7 @@ public class FontEditText extends androidx.appcompat.widget.AppCompatEditText {
             super.setText(text, type);
         } catch (Exception e) {
             setText("I tried, but your OEM just sucks because they modify the framework components and therefore causing the app to crash!" + ".\nFastHub");
-            Logger.exception(e);
+//            Logger.exception(e);
             //TODO: log this exception
         }
     }

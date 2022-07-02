@@ -1,8 +1,8 @@
 package com.emamagic.limoo.di
 
 import android.content.Context
-import com.emamagic.cache.cache.preferences.get
-import com.emamagic.cache.cache.preferences.pref
+import com.emamagic.cache.cache.get
+import com.emamagic.cache.cache.pref
 import com.emamagic.core.PrefKeys
 import com.emamagic.core_android.keycloak.AuthStateManager
 import com.emamagic.core_android.keycloak.CertificateManager

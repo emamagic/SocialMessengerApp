@@ -12,6 +12,7 @@ buildscript {
         classpath(Build.safe_args)
         classpath(Build.hilt)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.7.0")
         // NOTE: Do not place your base dependencies here; they belong
         // in the individual module build.gradle files
     }

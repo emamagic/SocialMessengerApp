@@ -32,7 +32,7 @@ object Versions {
     const val paging = "3.1.1"
     const val annotation = "1.3.0"
     const val glide = "4.12.0"
-    const val room = "2.4.2"
+    const val room = "2.5.0-alpha02"
     const val lottie = "3.4.0"
     const val work_manager = "2.7.1"
     const val leak_canary = "2.8.1"

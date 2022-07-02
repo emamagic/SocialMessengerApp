@@ -99,9 +99,9 @@ object Libs {
     // Pref
     const val pref_manager = "androidx.preference:preference-ktx:${Versions.pref_manager}"
     const val hawk = "com.orhanobut:hawk:${Versions.hawk}"
-    const val data_store = "androidx.datastore:datastore-preferences:${Versions.data_store}"
-    const val data_store_proto = "androidx.datastore:datastore:${Versions.data_store}"
-    const val proto = "com.google.protobuf:protobuf-javalite:${Versions.proto}"
+//    const val data_store = "androidx.datastore:datastore-preferences:${Versions.data_store}"
+//    const val data_store_proto = "androidx.datastore:datastore:${Versions.data_store}"
+//    const val proto = "com.google.protobuf:protobuf-javalite:${Versions.proto}"
 
     // PersistentCookieJar
     const val persistent_cookie_jar = "com.github.franmontiel:PersistentCookieJar:${Versions.persistent_cookie_jar}"

@@ -3,6 +3,7 @@ plugins {
     kotlin ("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.dokka")
 }
 
 apply {
@@ -79,10 +80,10 @@ dependencies {
 
     implementation(Libs.multidex)
     implementation(Libs.coil)
+    implementation(Libs.timber)
     implementation(Libs.hilt)
     kapt(Libs.hilt_kapt)
     debugImplementation(Libs.leak_canary)
-
 
 }
 

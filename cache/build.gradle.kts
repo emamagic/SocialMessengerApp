@@ -15,9 +15,6 @@ dependencies {
     implementation(Libs.java_x)
     implementation(Libs.pref_manager)
     implementation(Libs.hawk)
-    implementation(Libs.data_store_proto)
-    implementation(Libs.data_store)
-    api(Libs.proto)
 
 }
 

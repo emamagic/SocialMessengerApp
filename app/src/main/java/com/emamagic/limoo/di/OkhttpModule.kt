@@ -4,9 +4,9 @@ import android.content.Context
 import coil.Coil
 import coil.ImageLoader
 import com.emamagic.limoo.BuildConfig
-import com.emamagic.data_android.interceptor.network.auth.AppAuthenticator
-import com.emamagic.data_android.interceptor.network.interceptor.ConnectivityInterceptor
-import com.emamagic.data_android.interceptor.network.interceptor.HostSelectionInterceptor
+import com.emamagic.data.network.auth.AppAuthenticator
+import com.emamagic.data.network.interceptor.ConnectivityInterceptor
+import com.emamagic.data.network.interceptor.HostSelectionInterceptor
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import dagger.Module
 import dagger.Provides

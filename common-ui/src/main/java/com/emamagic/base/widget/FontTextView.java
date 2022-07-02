@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
-
-import com.emamagic.base.Logger;
 import com.emamagic.base.helpers.InputHelper;
 import com.emamagic.base.helpers.TypeFaceFactory;
 import com.emamagic.base.helpers.ViewHelper;
@@ -58,7 +56,7 @@ public class FontTextView extends AppCompatTextView {
             super.setText(text, type);
         } catch (Exception e) {
             setText("");
-            Logger.exception(e);
+//            Logger.exception(e);
             //TODO: log this exception
         }
     }

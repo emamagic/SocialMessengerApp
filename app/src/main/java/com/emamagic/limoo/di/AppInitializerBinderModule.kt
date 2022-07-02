@@ -2,6 +2,7 @@ package com.emamagic.limoo.di
 
 import com.emamagic.base.appinitializer.AppInitializer
 import com.emamagic.limoo.appinitializers.CacheInitializer
+import com.emamagic.limoo.appinitializers.ServerConfigInitializer
 import com.emamagic.limoo.appinitializers.TypeFaceInitializer
 import dagger.Binds
 import dagger.Module
@@ -20,5 +21,14 @@ abstract class AppInitializerBinderModule {
     @Binds
     @IntoSet
     abstract fun bindCacheInitializer(cacheInitializer: CacheInitializer): AppInitializer
+
+    @Binds
+    @IntoSet
+    abstract fun bindServerConfigInitializer(serverConfigInitializer: ServerConfigInitializer): AppInitializer
+
+//    @Binds
+//    @IntoSet
+//    abstract fun bindTimberInitializer(timberInitializer: TimberInitializer): AppInitializer
+
 
 }

@@ -14,7 +14,7 @@ sealed class LoginEvent : EVENT {
     data class TypingUserNameOrPassEvent(val username: String, val pass: String): LoginEvent()
     data class ChangeServerNameEvent(val host: String): LoginEvent()
     object LoginWithKeycloakEvent: LoginEvent()
-    data class SubmitOtpEvent(val code: String): LoginEvent()
+    data class SubmitOtpEvent(val code: String, val deviceId: String): LoginEvent()
     object OtpExpiredEvent: LoginEvent()
 
 

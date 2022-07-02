@@ -1,9 +1,8 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.core.AuthUserScope
-import com.emamagic.data_android.interceptor.network.RestProvider
-import com.emamagic.data_android.interceptor.repositories.ConversationRepositoryImpl
-import com.emamagic.data_android.interceptor.repositories.UserRepositoryImpl
+import com.emamagic.data.repositories.ConversationRepositoryImpl
+import com.emamagic.data.repositories.UserRepositoryImpl
 import com.emamagic.domain.repositories.ConversationRepository
 import com.emamagic.domain.repositories.UserRepository
 import dagger.Binds

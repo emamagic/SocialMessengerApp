@@ -20,11 +20,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    @ApplicationContext
-    private val context: Context,
     private val updateServerConfig: UpdateServerConfig,
     private val verifyOtp: VerifyOtp,
     private val loginWithPhoneNumber: LoginWithPhoneNumber,
@@ -49,7 +46,7 @@ class LoginViewModel @Inject constructor(
             LoginEvent.LoginWithPhoneNumberClickEvent -> loginWithPhoneClickedEvent()
             is LoginEvent.ChangeServerNameEvent -> changeServerNameClickedEvent(event.host)
             LoginEvent.LoginWithKeycloakEvent -> loginWithKeycloakEvent()
-            is LoginEvent.SubmitOtpEvent -> submitOtpEvent(event.code)
+            is LoginEvent.SubmitOtpEvent -> submitOtpEvent(event.code, event.deviceId)
             LoginEvent.OtpExpiredEvent -> otpExpired()
         }.exhaustive
     }
@@ -199,16 +196,11 @@ class LoginViewModel @Inject constructor(
 
     }
 
-    private fun submitOtpEvent(code: String) = withLoadingScope {
+    private fun submitOtpEvent(code: String, deviceId: String) = withLoadingScope {
         if (code.length != 5) {
             setEffect { BaseEffect.InvalidInput.Error() }
             return@withLoadingScope
         }
-        @SuppressLint("HardwareIds")
-        val deviceId = Settings.Secure.getString(
-            context.applicationContext.contentResolver,
-            Settings.Secure.ANDROID_ID
-        )
         verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId)).manageResult {
             routerDelegate.pushRoute(LoginRouter.Routes.OtpToConversations)
         }

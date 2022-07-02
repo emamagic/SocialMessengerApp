@@ -2,6 +2,7 @@ package com.emamagic.login.otp
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.Settings
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +26,13 @@ class OtpFragment :
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
         expirationTimer = ExpirationTimer(binding.txtTimer) { viewModel.setEvent(LoginEvent.OtpExpiredEvent) }
         expirationTimer?.start()
-        binding.btnSubmit.setOnClickListener { viewModel.setEvent(LoginEvent.SubmitOtpEvent(binding.squareFieldPin.text.toString())) }
+        binding.btnSubmit.setOnClickListener {
+            val deviceId = Settings.Secure.getString(
+                requireContext().contentResolver,
+                Settings.Secure.ANDROID_ID
+            )
+            viewModel.setEvent(LoginEvent.SubmitOtpEvent(binding.squareFieldPin.text.toString(), deviceId))
+        }
     }
 
     override fun renderViewState(viewState: LoginState) {

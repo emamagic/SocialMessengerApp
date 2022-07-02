@@ -52,7 +52,7 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
 
     protected fun setState(reduce: STATE.() -> STATE) {
         val newState = currentState.reduce()
-        _uiState.value = newState
+        _uiState.update { newState }
     }
 
     protected fun setEffect(builder: () -> BaseEffect) {
@@ -87,7 +87,7 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
                 failed?.invoke()
                 anyWay?.invoke()
             }
-            is ResultWrapper.LoadingFetch -> TODO()
+            is ResultWrapper.FetchLoading -> TODO()
 
         }
     }

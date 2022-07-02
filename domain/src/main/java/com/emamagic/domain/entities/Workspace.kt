@@ -1,36 +1,42 @@
 package com.emamagic.domain.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Workspace(
-    val defaultConversationId: String,
-    val description: String,
-    val displayName: String,
-    val iconHash: String,
-    val id: String,
-    val invitationStyle: String,
-    val isInvitation: Boolean,
-    val myMembership: MyMembership,
-    val name: String,
-    val organizationId: String,
-    val timelineActive: Boolean,
-    val timelineConversationId: String,
-    val workerNode: WorkerNode
-)
+    @PrimaryKey
+    override val id: String,
+    val defaultConversationId: String? = null,
+    val description: String? = null,
+    val displayName: String? = null,
+    val iconHash: String? = null,
+    val invitationStyle: String? = null,
+    val isInvitation: Boolean? = null,
+    val myMembership: MyMembership? = null,
+    val name: String? = null,
+    val organizationId: String? = null,
+    val timelineActive: Boolean? = null,
+    val timelineConversationId: String? = null,
+    val workerNode: WorkerNode? = null
+): BaseEntity
+
 data class WorkerNode(
-    val apiUrl: String,
-    val fileUrl: String,
-    val websocketUrl: String
+    val apiUrl: String? = null,
+    val fileUrl: String? = null,
+    val websocketUrl: String? = null
 )
 data class MyMembership(
-    val availability: String,
-    val avatarHash: String,
-    val deleteAt: Long,
-    val email: String,
-    val lastActivityDate: Long,
-    val nickname: String,
-    val notifyProps: NotifyProps,
-    val phoneNumber: String,
-    val position: String,
-    val roles: List<String>,
-    val userId: String,
-    val workspaceId: String
+    val availability: String? = null,
+    val avatarHash: String? = null,
+    val deleteAt: Long? = null,
+    val email: String? = null,
+    val lastActivityDate: Long? = null,
+    val nickname: String? = null,
+    val notifyProps: NotifyProps? = null,
+    val phoneNumber: String? = null,
+    val position: String? = null,
+    val roles: List<String>? = null,
+    val userId: String? = null,
+    val workspaceId: String? = null
 )

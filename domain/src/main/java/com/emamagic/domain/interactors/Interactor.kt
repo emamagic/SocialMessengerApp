@@ -6,7 +6,7 @@ import com.emamagic.core.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
-
+// todo should we return flow for some interactor that we want to combine some useCase in viewModel??
 abstract class Interactor<in ParamsType>(private val dispatcher: AppCoroutineDispatchers) {
 
     suspend operator fun invoke(

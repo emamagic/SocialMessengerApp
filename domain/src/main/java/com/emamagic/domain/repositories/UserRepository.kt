@@ -3,6 +3,7 @@ package com.emamagic.domain.repositories
 import com.emamagic.core.ResultWrapper
 import com.emamagic.domain.entities.*
 import com.emamagic.domain.interactors.*
+import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
@@ -14,7 +15,7 @@ interface UserRepository {
 
     suspend  fun getCurrentUser(): ResultWrapper<User>
 
-    suspend fun getMyWorkspaces(): ResultWrapper<List<Workspace>>
+    fun getMyWorkspaces(): Flow<ResultWrapper<List<Workspace>>>
 
     suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean>
 
