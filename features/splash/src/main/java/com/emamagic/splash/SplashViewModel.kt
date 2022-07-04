@@ -1,51 +1,68 @@
 package com.emamagic.splash
 
-import android.util.Log
 import com.emamagic.base.base.BaseViewModel
+import android.util.Log
 import com.emamagic.core.succeeded
+import com.emamagic.domain.entities.OrganizationEntity
+import com.emamagic.domain.entities.WorkspaceEntity
 import com.emamagic.domain.interactors.GetCurrentUser
+import com.emamagic.domain.interactors.GetOrganizations
 import com.emamagic.domain.interactors.GetWorkspaces
-import com.emamagic.domain.interactors.UpdateServerConfig
-import com.emamagic.mvi.BaseEffect
 import com.emamagic.splash.contract.SplashEvent
 import com.emamagic.splash.contract.SplashState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.zip
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val getCurrentUser: GetCurrentUser,
-    private val getWorkspaces: GetWorkspaces
+    private val getWorkspaces: GetWorkspaces,
+    private val getOrganizations: GetOrganizations,
 ) : BaseViewModel<SplashState, SplashEvent, SplashRouter.Routes>() {
 
     init {
         withLoadingScope {
                 getCurrentUser(Unit).manageResult(success = {
                     // todo check -> get workspaces and check for signup ...
-                    getWorkspaces().collect {
-                        Log.e("TAG", "my workspaces: ${it.error}", )
-                        it.data?.forEach { workspace ->
-                            Log.e("TAG", "my workspaces: ${workspace.displayName}", )
-                        }
-                    }
-//                    routerDelegate.pushRoute(SplashRouter.Routes.ToConversations)
+                    flowOf(getWorkspaces(Unit)).zip(flowOf(getOrganizations(Unit))) { workspacesResult, organizationResult ->
+                         if (workspacesResult.succeeded && organizationResult.succeeded) {
+                             val workspaces = workspacesResult.data!!
+                             val organization = organizationResult.data!!
+                             if (isItFromWorkspaceLink()) {
+                                 // todo goto select workspace
+                             } else if (hasAnyAcceptedWorkspace(workspaces) || hasAnyOrganization(organization)) {
+                                 routerDelegate.pushRoute(SplashRouter.Routes.ToConversations)
+                             } else { // undefined state
+                                 setState { copy(closeApp = true) }
+                             }
+                         } else {
+                             setState { copy(closeApp = true) }
+                         }
+                     }.collect()
                 }, failed = {
-                    // todo check if this server sets default login to phoneNumber or username or ... and then pass parameter to LoginViaPhoneNumberFragment to process it
-                    routerDelegate.pushRoute(SplashRouter.Routes.ToLoginViaPhoneNumber)
+                    routerDelegate.pushRoute(SplashRouter.Routes.ToLogin)
                 })
         }
     }
 
     override fun createInitialState(): SplashState = SplashState.initialize()
 
-    override fun handleEvent(event: SplashEvent) {
+    override fun handleEvent(event: SplashEvent) {}
 
+    private fun hasAnyAcceptedWorkspace(workspaces: List<WorkspaceEntity>): Boolean {
+        val invitedWorkspace = workspaces.filter { it.isInvitation }
+        return workspaces.size > invitedWorkspace.size
     }
 
+    private fun isItFromWorkspaceLink(): Boolean {
+        return false
+    }
+
+    private fun hasAnyOrganization(organizations: List<OrganizationEntity>): Boolean {
+        return organizations.isNotEmpty()
+    }
 
 }

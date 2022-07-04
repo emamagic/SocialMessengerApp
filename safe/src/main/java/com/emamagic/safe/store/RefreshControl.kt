@@ -8,6 +8,7 @@ class RefreshControl(
     private var lastUpdateDate: Date? = null
 ) : ITimeLimitedResource {
     companion object {
+        // detached RefreshControl with 5 mins rate
         val DEFAULT_REFRESH_RATE_MS = TimeUnit.MINUTES.toMillis(5)
     }
 

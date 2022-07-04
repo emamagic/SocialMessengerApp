@@ -18,7 +18,7 @@ abstract class Interactor<in ParamsType>(private val dispatcher: AppCoroutineDis
     protected abstract suspend fun buildUseCase(params: ParamsType): ResultWrapper<*>
 
 }
-
+// todo can we inject ApplicationDispatcher here
 abstract class ResultInteractor<in ParamsType, ReturnType>(private val dispatcher: AppCoroutineDispatchers) {
     suspend operator fun invoke(params: ParamsType): ResultWrapper<ReturnType> =
         withContext(dispatcher.io) {

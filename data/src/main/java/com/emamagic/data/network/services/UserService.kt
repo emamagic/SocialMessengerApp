@@ -1,7 +1,8 @@
 package com.emamagic.data.network.services
 
+import com.emamagic.domain.entities.OrganizationEntity
 import com.emamagic.domain.entities.User
-import com.emamagic.domain.entities.Workspace
+import com.emamagic.domain.entities.WorkspaceEntity
 import com.emamagic.domain.interactors.LoginWithPhoneNumber
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -23,7 +24,10 @@ interface UserService {
     suspend fun getCurrentUser(): Response<User>
 
     @GET("user/my_workspaces")
-    suspend fun getMyWorkspaces(): List<Workspace>
+    suspend fun getMyWorkspaces(): Response<List<WorkspaceEntity>>
+
+    @GET("user/my_organizations")
+    suspend fun getMyOrganizations(): Response<List<OrganizationEntity>>
 
     @FormUrlEncoded
     @POST("j_spring_security_check")
@@ -34,5 +38,10 @@ interface UserService {
 
     @POST("session/by_keycloak")
     suspend fun getSessionByKeycloak(): Response<ResponseBody>
+
+    @GET("workspace/items/{workspace_id}")
+    suspend fun getWorkspaceById(
+        @Path("workspace_id") workspaceId: String
+    ): WorkspaceEntity
 
 }

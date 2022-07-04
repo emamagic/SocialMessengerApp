@@ -4,20 +4,20 @@ import androidx.databinding.ViewDataBinding
 import com.airbnb.epoxy.DataBindingEpoxyModel
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
-import com.emamagic.domain.entities.Conversation
+import com.emamagic.domain.entities.ConversationEntity
 
-class ConversationsController: PagingDataEpoxyController<Conversation>() {
+class ConversationsController: PagingDataEpoxyController<ConversationEntity>() {
 
 
-    override fun buildItemModel(currentPosition: Int, item: Conversation?): EpoxyModel<*> {
+    override fun buildItemModel(currentPosition: Int, item: ConversationEntity?): EpoxyModel<*> {
         return RowConversation(
-            conversation = item!!,
+            conversationEntity = item!!,
             onClick = { conversationId ->  }
         )
     }
 
     data class RowConversation(
-        val conversation: Conversation,
+        val conversationEntity: ConversationEntity,
         val onClick: (Int) -> Unit
     ): DataBindingEpoxyModel() {
 

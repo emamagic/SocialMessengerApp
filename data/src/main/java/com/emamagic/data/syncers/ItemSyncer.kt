@@ -75,31 +75,31 @@ data class ItemSyncerResult<ET : BaseEntity>(
     val updated: List<ET> = emptyList()
 )
 
-//fun <LocalType : BaseEntity, NetworkType, Key> syncerForEntity(
-//    entityDao: BaseDao<LocalType>,
-//    localEntityToKey: suspend (LocalType) -> Key?,
-//    networkEntityToKey: suspend (NetworkType) -> Key,
-//    networkEntityToLocalEntity: suspend (NetworkType, Long?) -> LocalType,
-//) = ItemSyncer(
-//    entityDao::insert,
-//    entityDao::update,
-//    entityDao::deleteEntity,
-//    localEntityToKey,
-//    networkEntityToKey,
-//    networkEntityToLocalEntity
-//)
-//
-//fun <Type : BaseEntity, Key> syncerForEntity(
-//    entityDao: BaseDao<Type>,
-//    entityToKey: suspend (Type) -> Key?,
-//    mapper: suspend (Type, Long?) -> Type
-//) = ItemSyncer(
-//    entityDao::insert,
-//    entityDao::update,
-//    entityDao::deleteEntity,
-//    entityToKey,
-//    entityToKey,
-//    mapper
-//)
+fun <LocalType : BaseEntity, NetworkType, Key> syncerForEntity(
+    entityDao: BaseDao<LocalType>,
+    localEntityToKey: suspend (LocalType) -> Key?,
+    networkEntityToKey: suspend (NetworkType) -> Key,
+    networkEntityToLocalEntity: suspend (NetworkType, Long?) -> LocalType,
+) = ItemSyncer(
+    entityDao::insert,
+    entityDao::update,
+    entityDao::deleteEntity,
+    localEntityToKey,
+    networkEntityToKey,
+    networkEntityToLocalEntity
+)
+
+fun <Type : BaseEntity, Key> syncerForEntity(
+    entityDao: BaseDao<Type>,
+    entityToKey: suspend (Type) -> Key?,
+    mapper: suspend (Type, Long?) -> Type
+) = ItemSyncer(
+    entityDao::insert,
+    entityDao::update,
+    entityDao::deleteEntity,
+    entityToKey,
+    entityToKey,
+    mapper
+)
 
 

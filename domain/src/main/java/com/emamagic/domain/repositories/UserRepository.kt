@@ -15,7 +15,11 @@ interface UserRepository {
 
     suspend  fun getCurrentUser(): ResultWrapper<User>
 
-    fun getMyWorkspaces(): Flow<ResultWrapper<List<Workspace>>>
+    suspend fun getMyOrganizationWithWorkspaces(): ResultWrapper<OrganizationWithWorkspaces>
+
+    suspend fun getMyWorkspaces(): ResultWrapper<List<WorkspaceEntity>>
+
+    suspend fun getMyOrganizations(): ResultWrapper<List<OrganizationEntity>>
 
     suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean>
 

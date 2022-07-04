@@ -2,28 +2,22 @@ package com.emamagic.data.repositories
 
 import android.util.Log
 import com.emamagic.cache.cache.*
-import com.emamagic.core.AuthUserScope
-import com.emamagic.core.PrefKeys
-import com.emamagic.core.ResultWrapper
+import com.emamagic.core.*
 import com.emamagic.data.Const
+import com.emamagic.data.db.dao.OrganizationDao
 import com.emamagic.data.db.dao.WorkspaceDao
 import com.emamagic.data.network.RestProvider
 import com.emamagic.data.network.auth.UserAuthSession
-import com.emamagic.data.syncers.networkBoundResource
+import com.emamagic.data.toError
 import com.emamagic.data.toResponse
 import com.emamagic.data.toResult
-import com.emamagic.domain.entities.ServerConfig
-import com.emamagic.domain.entities.User
-import com.emamagic.domain.entities.Workspace
+import com.emamagic.domain.entities.*
 import com.emamagic.domain.interactors.*
 import com.emamagic.domain.publisher.Event
 import com.emamagic.domain.publisher.NotificationCenter
 import com.emamagic.domain.repositories.UserRepository
 import com.emamagic.safe.SafeApi
 import com.emamagic.safe.policy.MemoryPolicy
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 // todo implement logger for logging stuff
 // todo implement status like Complatable in Rxjava
@@ -31,12 +25,36 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val restProvider: RestProvider,
     private val authSession: UserAuthSession,
-    private val workspaceDao: WorkspaceDao
+    private val workspaceDao: WorkspaceDao,
+    private val organizationDao: OrganizationDao,
 ) : SafeApi(), UserRepository, NotificationCenter.NotificationCenterDelegate {
 
     init {
         NotificationCenter.subscribe(this, Const.LOGGED_OUT)
     }
+//
+//    val workspaceStore = StoreBuilder.from(
+//        fetcher = Fetcher.of {
+//            restProvider.userService.getMyWorkspaces()
+//        },
+//        sourceOfTruth = SourceOfTruth.of(
+//            reader = { workspaceDao.getWorkspaces() },
+//            writer = { key, workspaces -> workspaceDao.insert(workspaces) },
+//            delete = workspaceDao::delete,
+//            deleteAll = workspaceDao::deleteAll
+//        )
+//    ).build()
+//
+//    val workspaceResource = ResourceGroup<Unit, String, Workspace>(
+//        remoteGroupFetch = { restProvider.userService.getMyWorkspaces() },
+//        localGroupFetch = { workspaceDao.getWorkspaces() },
+//        localGroupStore = workspaceDao::insert,
+//        remoteFetch = { workspaceId, _ -> restProvider.userService.getWorkspaceById(workspaceId) },
+//        localFetch = { workspaceId, _ -> workspaceDao.getWorkspaceById(workspaceId) },
+//        localStore = workspaceDao::insert,
+//        localDelete = workspaceDao::deleteAll
+//    )
+
 
     override suspend fun updateServerConfig(params: UpdateServerConfig.Params): ResultWrapper<ServerConfig> {
         restProvider.setBaseUrlAndApiUrl(params.serverHost)
@@ -64,15 +82,24 @@ class UserRepositoryImpl @Inject constructor(
     }.toResult(doOnSuccess = { pref[PrefKeys.CURRENT_USER] = it }
         ,tryIfFailed = { pref[PrefKeys.CURRENT_USER] })
 
-    override fun getMyWorkspaces(): Flow<ResultWrapper<List<Workspace>>> = networkBoundResource(
-        this,
-        databaseQuery = { workspaceDao.getAWorkspaces() },
-        networkCall = { restProvider.userService.getMyWorkspaces() },
-        saveCallResult = { workspaceDao.insert(it) }
-    ).catch {
-        // todo implement this error
-        Log.e("TAG", "getMyWorkspaces: ${it.stackTraceToString()}", )
+    override suspend fun getMyOrganizationWithWorkspaces(): ResultWrapper<OrganizationWithWorkspaces> {
+        return try {
+            val entity = organizationDao.getOrganizationWithWorkspaces()
+            Log.e("TAG", "getMyOrganizationWithWorkspaces: ${entity}", )
+            ResultWrapper.Success(entity)
+        } catch (t: Throwable) {
+            Log.e("TAG", "getMyOrganizationWithWorkspaces: ${t.stackTraceToString()}", )
+            ResultWrapper.Failed(getError(t).toError())
+        }
     }
+
+    override suspend fun getMyWorkspaces(): ResultWrapper<List<WorkspaceEntity>> = fresh {
+        restProvider.userService.getMyWorkspaces().toResponse()
+    }.toResult(doOnSuccess = workspaceDao::insert, tryIfFailed = { workspaceDao.getWorkspaces() })
+
+    override suspend fun getMyOrganizations(): ResultWrapper<List<OrganizationEntity>> = fresh {
+        restProvider.userService.getMyOrganizations().toResponse()
+    }.toResult(doOnSuccess = organizationDao::insert, tryIfFailed = { organizationDao.getOrganizations() })
 
     override suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean> =
         fresh {

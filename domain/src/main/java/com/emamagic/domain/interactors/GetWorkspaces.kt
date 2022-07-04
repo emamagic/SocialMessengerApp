@@ -1,20 +1,19 @@
 package com.emamagic.domain.interactors
 
-import com.emamagic.core.AppCoroutineDispatchers
-import com.emamagic.core.Bridge
-import com.emamagic.core.ResultWrapper
-import com.emamagic.domain.entities.Workspace
+import com.emamagic.core.*
+import com.emamagic.domain.entities.OrganizationWithWorkspaces
+import com.emamagic.domain.entities.WorkspaceEntity
 import com.emamagic.domain.repositories.UserRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetWorkspaces @Inject constructor(
     @Bridge
-    private val userRepository: UserRepository
-) {
+    private val userRepository: UserRepository,
+    dispatchers: AppCoroutineDispatchers
+): ResultInteractor<Unit, List<WorkspaceEntity>>(dispatchers) {
 
-    operator fun invoke(): Flow<ResultWrapper<List<Workspace>>> =
-        userRepository.getMyWorkspaces()
+    override suspend fun buildUseCase(params: Unit): ResultWrapper<List<WorkspaceEntity>> = userRepository.getMyWorkspaces()
 
 }

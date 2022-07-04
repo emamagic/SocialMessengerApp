@@ -10,7 +10,7 @@ object Modules {
     const val domain = ":domain"
     const val countryPicker = ":country-picker"
     const val login = ":features:login"
-    const val profile = ":features:profile"
+    const val chat = ":features:chat"
     const val conversation = ":features:conversations"
     const val splash = ":features:splash"
     const val mvi = ":mvi"

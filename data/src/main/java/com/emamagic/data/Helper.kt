@@ -87,16 +87,18 @@ fun ErrorEntity?.toError(): Error {
 suspend fun <T,E> SafeWrapper<T>.toResult(
     doOnSuccess: (suspend (T) -> Unit)? = null,
     doOnFailed: ((Error) -> Unit)? = null,
-    tryIfFailed: (() -> E?)? = null,
+    tryIfFailed: (suspend () -> E?)? = null,
     shouldReturn: E? = null
 ): ResultWrapper<E> =
     when (this) {
         is SafeWrapper.Success -> {
+            Log.e("TAG", "toResult: Success")
             doOnSuccess?.invoke(data!!)
             val mData = shouldReturn ?: data!! as E
             ResultWrapper.Success(mData)
         }
         is SafeWrapper.Failed -> {
+            Log.e("TAG", "toResult: Failed")
             if (tryIfFailed != null) {
                 val newResult = tryIfFailed()
                 if (newResult == null)

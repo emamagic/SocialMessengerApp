@@ -74,7 +74,7 @@ dependencies {
     // Features
     implementation(project(Modules.splash))
     implementation(project(Modules.login))
-    implementation(project(Modules.profile))
+    implementation(project(Modules.chat))
     implementation(project(Modules.conversation))
 
 

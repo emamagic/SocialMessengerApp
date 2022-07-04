@@ -19,7 +19,7 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashState, SplashEve
     }
 
     override fun renderViewState(viewState: SplashState) {
-
+        if (viewState.closeApp) { requireActivity().finish() }
     }
 
 }

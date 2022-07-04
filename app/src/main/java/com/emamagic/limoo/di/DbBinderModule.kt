@@ -14,11 +14,12 @@ import javax.inject.Singleton
 @Module
 abstract class DbBinderModule {
 
+    @Singleton
+    @Binds
+    abstract fun provideDatabaseTransactionRunner(runner: RoomTransactionRunner): DatabaseTransactionRunner
+
     @Binds
     abstract fun bindAppDatabase(db: AppRoomDatabase): AppDatabase
 
 
-    @Singleton
-    @Binds
-    abstract fun provideDatabaseTransactionRunner(runner: RoomTransactionRunner): DatabaseTransactionRunner
 }

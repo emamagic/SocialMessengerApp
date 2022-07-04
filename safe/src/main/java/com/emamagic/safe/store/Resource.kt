@@ -1,7 +1,6 @@
 package com.emamagic.safe.store
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 
 class Resource<in Input, out Output>(
     private val remoteFetch: suspend (Input) -> Output?,
@@ -14,6 +13,7 @@ class Resource<in Input, out Output>(
     init { refreshControl.addListener(this) }
 
     // Public API
+    // todo handle http exception
     suspend fun query(args: Input, force: Boolean = false): Flow<Output?> = flow {
         if (!force) {
             fetchFromLocal(args)?.run { emit(this) }

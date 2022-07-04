@@ -16,7 +16,7 @@ class SplashRouterImpl: BaseRouter(), SplashRouter {
     override fun push(instance: Fragment, route: Route) {
         if (route is SplashRouter.Routes) { // todo or you can use hashMap for multibinding and get right Router in BaseFragment
             when (route) {
-                SplashRouter.Routes.ToLoginViaPhoneNumber -> DeepLink.ACTION_TO_LOGIN.toUri()
+                SplashRouter.Routes.ToLogin -> DeepLink.ACTION_TO_LOGIN.toUri()
                 SplashRouter.Routes.ToConversations -> DeepLink.ACTION_TO_CONVERSATIONS.toUri()
                 else -> null
             }?.let {

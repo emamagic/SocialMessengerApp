@@ -12,6 +12,7 @@ class ResourceGroup<in Input, in Key, out Output>(
     localDelete: suspend () -> Unit,
     private val refreshControl: RefreshControl = RefreshControl()
 ) : ITimeLimitedResource by refreshControl {
+
     private val groupResource = Resource(
         remoteGroupFetch,
         localGroupFetch,

@@ -3,11 +3,11 @@ package com.emamagic.splash.contract
 import com.emamagic.mvi.State
 
 data class SplashState(
-    val test: String
+    val closeApp: Boolean
 ) : State {
     companion object {
         fun initialize() = SplashState(
-            test = "test"
+            closeApp = false
         )
     }
 }

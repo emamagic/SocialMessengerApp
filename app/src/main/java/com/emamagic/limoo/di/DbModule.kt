@@ -5,6 +5,7 @@ import android.os.Debug
 import androidx.room.Room
 import com.emamagic.data.db.AppDatabase
 import com.emamagic.data.db.AppRoomDatabase
+import com.emamagic.data.db.dao.OrganizationDao
 import com.emamagic.data.db.dao.WorkspaceDao
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,8 @@ object DbModule {
 
     @Provides
     fun provideWorkspaceDao(db: AppDatabase): WorkspaceDao = db.getWorkspaceDao()
+
+    @Provides
+    fun provideOrganizationDao(db: AppDatabase): OrganizationDao = db.getOrganizationDao()
 
 }
