@@ -18,9 +18,9 @@ sealed interface BaseEffect {
         val message: String
     ) : BaseEffect
 
-    data class ShowLoading(val isDim: Boolean = false, val type: Any? = null) : BaseEffect
+    data class ShowLoading(val isDim: Boolean = false, val type: Any? = null, val scope: Int = 0) : BaseEffect
 
-    data class HideLoading(val type: Any? = null) : BaseEffect
+    data class HideLoading(val type: Any? = null, val scope: Int = 0) : BaseEffect
 
     object HideKeyboard : BaseEffect
 
@@ -28,9 +28,7 @@ sealed interface BaseEffect {
 
     data class DisableUiComponent(val type: Any? = null) : BaseEffect
 
-    object NeedToSignUp : BaseEffect
-
-    object NeedToSignIn : BaseEffect
+    object NeedToLogin : BaseEffect
 
     sealed class InvalidInput : BaseEffect {
         data class Error(val message: String? = null, val type: Any? = null) : InvalidInput()

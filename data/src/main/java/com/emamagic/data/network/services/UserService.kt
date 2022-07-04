@@ -3,7 +3,7 @@ package com.emamagic.data.network.services
 import com.emamagic.domain.entities.OrganizationEntity
 import com.emamagic.domain.entities.User
 import com.emamagic.domain.entities.WorkspaceEntity
-import com.emamagic.domain.interactors.LoginWithPhoneNumber
+import com.emamagic.domain.interactors.LoginViaPhoneNumber
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface UserService {
 
     @POST("user/phone_verification")
-    suspend fun loginWithPhoneNumber(@Body phoneNumber: LoginWithPhoneNumber.Params): Response<ResponseBody>
+    suspend fun loginWithPhoneNumber(@Body phoneNumber: LoginViaPhoneNumber.Params): Response<ResponseBody>
 
     @POST("j_spring_otptoken_security_check")
     suspend fun verifyOtp(

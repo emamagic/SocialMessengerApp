@@ -6,7 +6,7 @@ import com.emamagic.core.ResultWrapper
 import com.emamagic.domain.repositories.UserRepository
 import javax.inject.Inject
 
-class LoginWithKeycloak @Inject constructor(
+class LoginViaKeycloak @Inject constructor(
     @Bridge
     private val userRepository: UserRepository,
     dispatchers: AppCoroutineDispatchers

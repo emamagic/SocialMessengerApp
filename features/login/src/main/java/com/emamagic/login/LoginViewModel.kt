@@ -1,21 +1,17 @@
 package com.emamagic.login
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.provider.Settings
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.emamagic.base.base.BaseViewModel
-import com.emamagic.core.PrefKeys
 import com.emamagic.core.exhaustive
+import com.emamagic.core_android.ToastScope
 import com.emamagic.core_android.isValidPhoneNumber
 import com.emamagic.domain.interactors.*
-import com.emamagic.mvi.BaseEffect
 import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
+import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.LoginEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,15 +20,19 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val updateServerConfig: UpdateServerConfig,
     private val verifyOtp: VerifyOtp,
-    private val loginWithPhoneNumber: LoginWithPhoneNumber,
-    private val loginWithUsername: LoginWithUsername,
+    private val loginViaPhoneNumber: LoginViaPhoneNumber,
+    private val loginViaUsername: LoginViaUsername,
     private val saveAlias: SaveAlias,
-    private val loginWithKeycloak: LoginWithKeycloak,
+    private val loginViaKeycloak: LoginViaKeycloak,
 ) : BaseViewModel<LoginState, LoginEvent, LoginRouter.Routes>() {
 
     private lateinit var G_phoneNumber: String
 
     override fun createInitialState() = LoginState.initialize()
+
+    init {
+//        setEffect { BaseEffect.ShowLoading(scope = ToastScope.MODULE_SCOPE) }
+    }
 
     override fun handleEvent(event: LoginEvent) {
         when (event) {
@@ -78,7 +78,7 @@ class LoginViewModel @Inject constructor(
         }
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
         else countryCode + phoneNum
-        loginWithPhoneNumber(LoginWithPhoneNumber.Params(G_phoneNumber)).manageResult {
+        loginViaPhoneNumber(LoginViaPhoneNumber.Params(G_phoneNumber)).manageResult {
             routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToOtp)
         }
     }
@@ -106,7 +106,7 @@ class LoginViewModel @Inject constructor(
             setEffect { BaseEffect.InvalidInput.Error(type = false) }
             return@withLoadingScope
         }
-        loginWithUsername(LoginWithUsername.Params(username, pass)).manageResult {
+        loginViaUsername(LoginViaUsername.Params(username, pass)).manageResult {
             routerDelegate.pushRoute(LoginRouter.Routes.UsernameToConversations)
         }
     }
@@ -185,7 +185,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginWithKeycloakEvent() = viewModelScope.launch {
-        loginWithKeycloak(Unit).manageResult {
+        loginViaKeycloak(Unit).manageResult {
             Log.e("TAG", "loginWithKeycloakEvent: successfully")
         }
     }

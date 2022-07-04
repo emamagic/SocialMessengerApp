@@ -6,5 +6,6 @@ import com.emamagic.navigation.route.Route
 
 interface Router {
     fun pop(instance: Fragment)
+    fun pushToLogin(instance: Fragment)
     fun push(instance: Fragment, route: Route)
 }

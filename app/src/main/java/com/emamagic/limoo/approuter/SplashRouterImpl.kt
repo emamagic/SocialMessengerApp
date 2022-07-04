@@ -3,7 +3,10 @@ package com.emamagic.limoo.approuter
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.findNavController
+import com.emamagic.limoo.R
 import com.emamagic.navigation.exception.IllegalRouteException
 import com.emamagic.navigation.route.DeepLink
 import com.emamagic.navigation.route.Route
@@ -21,7 +24,7 @@ class SplashRouterImpl: BaseRouter(), SplashRouter {
                 else -> null
             }?.let {
                 try {
-                    instance.findNavController().navigate(it)
+                    instance.findNavController().navigate(it, NavOptions.Builder().setPopUpTo(com.emamagic.navigation.R.id.splash_graph, true).build())
                 } catch (t: Throwable) {
                     Log.e(TAG, "push: ${t.stackTraceToString()}")
                 }

@@ -31,7 +31,6 @@ class LoginViaPhoneNumberFragment :
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
         setupCountryPicker()
-        Log.e(TAG, "onFragmentCreated: ${arguments?.getString("a")}")
         binding.inputEditText.onTextChange {
             viewModel.setEvent(LoginEvent.TypingPhoneNumberEvent(it))
         }

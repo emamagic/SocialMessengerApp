@@ -67,7 +67,7 @@ class UserRepositoryImpl @Inject constructor(
         })
     }
 
-    override suspend fun loginWithPhoneNumber(phoneNumber: LoginWithPhoneNumber.Params): ResultWrapper<Boolean> =
+    override suspend fun loginViaPhoneNumber(phoneNumber: LoginViaPhoneNumber.Params): ResultWrapper<Boolean> =
         fresh {
             restProvider.userService.loginWithPhoneNumber(phoneNumber).toResponse()
         }.toResult(shouldReturn = true)
@@ -101,7 +101,7 @@ class UserRepositoryImpl @Inject constructor(
         restProvider.userService.getMyOrganizations().toResponse()
     }.toResult(doOnSuccess = organizationDao::insert, tryIfFailed = { organizationDao.getOrganizations() })
 
-    override suspend fun loginWithUserName(username: LoginWithUsername.Params): ResultWrapper<Boolean> =
+    override suspend fun loginViaUserName(username: LoginViaUsername.Params): ResultWrapper<Boolean> =
         fresh {
             restProvider.userServiceCoordinator.loginWithUserName(username.username, username.pass)
                 .toResponse()

@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: ViewModel(), RoutedViewModel,
     CoroutinesLoadingRunner {
 
@@ -82,8 +83,10 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
             }
             is ResultWrapper.Failed -> {
                 Log.e("TAG", "manageResult: $error")
-                setEffect { BaseEffect.HideLoading() }
-                onError(error!!)
+                if (failed == null && anyWay == null) {
+                    setEffect { BaseEffect.HideLoading() }
+                    onError(error!!)
+                }
                 failed?.invoke()
                 anyWay?.invoke()
             }
@@ -91,18 +94,15 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
 
         }
     }
-
-    private fun onError(error: Error) {
+    // todo handle onError when user needToSignup or login
+    fun onError(error: Error) {
         val message: String = if (!error.display_message.isNullOrEmpty()) error.display_message!!
         else if (!error.message.isNullOrEmpty()) error.message!!
         else "${error.throwable?.message}  ${error.throwable?.cause} \n ${error.throwable?.stackTraceToString()}"
         Log.e("TAG", "Error -> message: $message  statusCode: ${error.statusCode} errorType: ${error.errorType}")
         when (error.statusCode) {
             HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                setEffect { BaseEffect.NeedToSignIn }
-            }
-            427 -> {
-                setEffect { BaseEffect.NeedToSignUp }
+                routerDelegate.pushRoute(Route.NeedToLogin as ROUTER)
             }
             else -> {
                 setEffect {

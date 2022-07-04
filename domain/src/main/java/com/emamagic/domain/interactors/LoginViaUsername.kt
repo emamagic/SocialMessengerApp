@@ -6,13 +6,13 @@ import com.emamagic.core.ResultWrapper
 import com.emamagic.domain.repositories.UserRepository
 import javax.inject.Inject
 
-class LoginWithUsername @Inject constructor(
+class LoginViaUsername @Inject constructor(
     @Bridge
     private val userRepository: UserRepository,
     dispatchers: AppCoroutineDispatchers
-): Interactor<LoginWithUsername.Params>(dispatchers) {
+): Interactor<LoginViaUsername.Params>(dispatchers) {
 
-    override suspend fun buildUseCase(params: Params): ResultWrapper<*> = userRepository.loginWithUserName(params)
+    override suspend fun buildUseCase(params: Params): ResultWrapper<*> = userRepository.loginViaUserName(params)
 
     data class Params(
         val username: String,

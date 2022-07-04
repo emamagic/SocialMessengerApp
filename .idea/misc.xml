@@ -28,6 +28,7 @@
         <entry key="features/conversation/src/main/res/layout/fragment_conversation.xml" value="0.34322916666666664" />
         <entry key="features/conversations/src/main/res/layout/fragment_conversations.xml" value="0.21041666666666667" />
         <entry key="features/login/src/main/res/layout/fragment_change_server_name.xml" value="0.22" />
+        <entry key="features/login/src/main/res/layout/fragment_login_via_phone_number.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_login_with_phone.xml" value="0.1" />
         <entry key="features/login/src/main/res/layout/fragment_login_with_username.xml" value="0.22" />
         <entry key="features/login/src/main/res/layout/fragment_otp.xml" value="0.34322916666666664" />

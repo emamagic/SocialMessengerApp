@@ -7,15 +7,15 @@ import com.emamagic.domain.repositories.UserRepository
 import com.google.gson.annotations.SerializedName
 import javax.inject.Inject
 
-class LoginWithPhoneNumber @Inject constructor(
+class LoginViaPhoneNumber @Inject constructor(
     @Bridge
     private val userRepository: UserRepository,
     dispatchers: AppCoroutineDispatchers
-): Interactor<LoginWithPhoneNumber.Params>(dispatchers) {
+): Interactor<LoginViaPhoneNumber.Params>(dispatchers) {
 
 
     override suspend fun buildUseCase(params: Params): ResultWrapper<*> =
-        userRepository.loginWithPhoneNumber(params)
+        userRepository.loginViaPhoneNumber(params)
 
 
     data class Params(

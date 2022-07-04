@@ -17,6 +17,7 @@ import androidx.navigation.*
 import androidx.navigation.fragment.findNavController
 import com.emamagic.base.*
 import com.emamagic.base.R
+import com.emamagic.core_android.ToastScope
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.State
@@ -109,8 +110,16 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
     private fun renderDefaultViewEffect(viewEffect: BaseEffect) {
         when (viewEffect) {
             is BaseEffect.Toast -> Toast.makeText(requireContext(), viewEffect.message, Toast.LENGTH_SHORT).show()
-            is BaseEffect.ShowLoading -> showLoading(viewEffect.isDim, viewEffect.type)
-            is BaseEffect.HideLoading -> hideLoading(viewEffect.type)
+            is BaseEffect.ShowLoading -> {
+//                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
+//                showLoading(viewEffect.isDim, viewEffect.type)
+//                else showLoadingModuleScope(viewEffect.isDim)
+            }
+            is BaseEffect.HideLoading -> {
+//                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
+//                    hideLoading(viewEffect.type)
+//                else hideLoadingModuleScope()
+            }
             is BaseEffect.HideKeyboard -> hideKeyboard()
             is BaseEffect.Dialog ->
                 if (!showDialog(viewEffect.message, viewEffect.proceedTitle, viewEffect.cancelTitle))
@@ -128,7 +137,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
                 throw Exception("BaseFragment -> InvalidInputError Does Not Implemented")
             is BaseEffect.InvalidInput.Error2 -> if (invalidInput(viewEffect.resId, viewEffect.type))
                 throw Exception("BaseFragment -> InvalidInputError2 Does Not Implemented")
-            is BaseEffect.NeedToSignIn ->
+            is BaseEffect.NeedToLogin ->
                 findNavController().navigate(
                     NavDeepLinkRequest.Builder.fromUri("android-app://limoo.im.app/login".toUri()).build(),
                     NavOptions.Builder().setPopUpTo(findNavController().currentDestination?.id!!, true).build())
@@ -142,6 +151,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         routers.forEach {
             when (route) {
                 is Route.Back -> it.pop(this)
+                is Route.NeedToLogin -> it.pushToLogin(this)
                 else -> it.push(this, route)
             }
         }
@@ -156,9 +166,18 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         requireActivity().onBackPressedDispatcher.addCallback(owner, callback!!)
     }
 
+    private fun showLoadingModuleScope(isDim: Boolean = false) {
+        if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
+        loading.visible()
+    }
+
     open fun showLoading(isDim: Boolean = false, type: Any?) {
         if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
         loading.visible()
+    }
+
+    private fun hideLoadingModuleScope() {
+        loading.gone()
     }
 
     open fun hideLoading(type: Any?) {
