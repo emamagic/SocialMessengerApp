@@ -54,8 +54,8 @@ android {
         abortOnError = false
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Releases.javaVersion
+        targetCompatibility = Releases.javaVersion
     }
 
     kotlinOptions {

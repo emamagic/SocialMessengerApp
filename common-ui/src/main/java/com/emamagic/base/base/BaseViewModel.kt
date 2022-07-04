@@ -75,19 +75,16 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
     abstract fun handleEvent(event: ACTION)
 
 
-    protected suspend fun <T> ResultWrapper<T>.manageResult(failed: (suspend () -> Unit)? = null, success: (suspend (T) -> Unit)? = null, anyWay: (suspend () -> Unit)? = null) {
+    protected suspend fun <T> ResultWrapper<T>.manageResult(failed: (suspend (Error) -> Unit)? = null, success: (suspend (T?) -> Unit)? = null, anyWay: (suspend () -> Unit)? = null) {
         when (this) {
             is ResultWrapper.Success -> {
-                success?.invoke(data!!)
+                success?.invoke(data)
                 anyWay?.invoke()
             }
             is ResultWrapper.Failed -> {
                 Log.e("TAG", "manageResult: $error")
-                if (failed == null && anyWay == null) {
-                    setEffect { BaseEffect.HideLoading() }
-                    onError(error!!)
-                }
-                failed?.invoke()
+                onError(error!!)
+                failed?.invoke(error!!)
                 anyWay?.invoke()
             }
             is ResultWrapper.FetchLoading -> TODO()
@@ -122,13 +119,13 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
     ) {
         super.withLoadingScope(
             loadingUpdater = {
-                setEffect { BaseEffect.ShowLoading() }
+//                setEffect { BaseEffect.ShowLoading() }
             },
             onError = {
 
             },
             onComplete = {
-                setEffect { BaseEffect.HideLoading() }
+//                setEffect { BaseEffect.HideLoading() }
             },
             block = block)
     }

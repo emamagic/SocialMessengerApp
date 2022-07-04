@@ -111,14 +111,14 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
         when (viewEffect) {
             is BaseEffect.Toast -> Toast.makeText(requireContext(), viewEffect.message, Toast.LENGTH_SHORT).show()
             is BaseEffect.ShowLoading -> {
-//                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
-//                showLoading(viewEffect.isDim, viewEffect.type)
-//                else showLoadingModuleScope(viewEffect.isDim)
+                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
+                showLoading(viewEffect.isDim, viewEffect.type)
+                else showLoadingModuleScope(viewEffect.isDim)
             }
             is BaseEffect.HideLoading -> {
-//                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
-//                    hideLoading(viewEffect.type)
-//                else hideLoadingModuleScope()
+                if (viewEffect.scope == ToastScope.VIEW_SCOPE)
+                    hideLoading(viewEffect.type)
+                else hideLoadingModuleScope()
             }
             is BaseEffect.HideKeyboard -> hideKeyboard()
             is BaseEffect.Dialog ->

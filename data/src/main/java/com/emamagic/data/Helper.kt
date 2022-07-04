@@ -98,14 +98,16 @@ suspend fun <T,E> SafeWrapper<T>.toResult(
             ResultWrapper.Success(mData)
         }
         is SafeWrapper.Failed -> {
+            val error = error.toError()
             Log.e("TAG", "toResult: Failed")
             if (tryIfFailed != null) {
                 val newResult = tryIfFailed()
-                if (newResult == null)
-                ResultWrapper.Failed(Error(message = "data is null"))
+                if (newResult == null) {
+                    doOnFailed?.invoke(error)
+                    ResultWrapper.Failed(error)
+                }
                 else ResultWrapper.Success(newResult)
             } else {
-                val error = error.toError()
                 doOnFailed?.invoke(error)
                 ResultWrapper.Failed(error)
             }

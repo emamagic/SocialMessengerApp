@@ -23,6 +23,11 @@ class SplashViewModel @Inject constructor(
     private val getOrganizations: GetOrganizations,
 ) : BaseViewModel<SplashState, SplashEvent, SplashRouter.Routes>() {
 
+    override fun createInitialState(): SplashState = SplashState.initialize()
+
+    override fun handleEvent(event: SplashEvent) {}
+
+
     init {
         withLoadingScope {
                 getCurrentUser(Unit).manageResult(success = {
@@ -43,14 +48,13 @@ class SplashViewModel @Inject constructor(
                          }
                      }.collect()
                 }, failed = {
-                    routerDelegate.pushRoute(SplashRouter.Routes.ToLogin)
+                    if (it.statusCode == 427) { // user need to signup
+                        routerDelegate.pushRoute(SplashRouter.Routes.ToLogin)
+                    }
                 })
         }
     }
 
-    override fun createInitialState(): SplashState = SplashState.initialize()
-
-    override fun handleEvent(event: SplashEvent) {}
 
     private fun hasAnyAcceptedWorkspace(workspaces: List<WorkspaceEntity>): Boolean {
         val invitedWorkspace = workspaces.filter { it.isInvitation }

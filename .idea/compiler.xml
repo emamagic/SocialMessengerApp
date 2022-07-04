@@ -11,10 +11,10 @@
       <module name="Limoo.common-ui" target="11" />
       <module name="Limoo.conversation" target="11" />
       <module name="Limoo.cookie-jar" target="11" />
-      <module name="Limoo.core" target="11" />
+      <module name="Limoo.core" target="1.8" />
       <module name="Limoo.core-android" target="11" />
-      <module name="Limoo.core.main" target="11" />
-      <module name="Limoo.core.test" target="11" />
+      <module name="Limoo.core.main" target="1.8" />
+      <module name="Limoo.core.test" target="1.8" />
       <module name="Limoo.country-picker" target="11" />
       <module name="Limoo.countrycodepicker" target="11" />
       <module name="Limoo.data" target="11" />
@@ -23,9 +23,9 @@
       <module name="Limoo.data.network" target="11" />
       <module name="Limoo.data.repository-impl" target="11" />
       <module name="Limoo.db" target="11" />
-      <module name="Limoo.domain" target="11" />
-      <module name="Limoo.domain.main" target="11" />
-      <module name="Limoo.domain.test" target="11" />
+      <module name="Limoo.domain" target="1.8" />
+      <module name="Limoo.domain.main" target="1.8" />
+      <module name="Limoo.domain.test" target="1.8" />
       <module name="Limoo.emoji" target="11" />
       <module name="Limoo.entity" target="11" />
       <module name="Limoo.entity.main" target="11" />
@@ -44,7 +44,7 @@
       <module name="Limoo.libs.emoji" target="11" />
       <module name="Limoo.libs.safe" target="11" />
       <module name="Limoo.navigation" target="11" />
-      <module name="Limoo.safe" target="11" />
+      <module name="Limoo.safe" target="1.8" />
       <module name="Limoo.signin" target="11" />
       <module name="Limoo.signup" target="11" />
     </bytecodeTargetLevel>

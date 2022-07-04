@@ -133,7 +133,9 @@ class LoginViewModel @Inject constructor(
         }
         setEffect { BaseEffect.ShowLoading() }
         updateServerConfig(UpdateServerConfig.Params(host, true)).manageResult (success = { serverConfig ->
-            setState { copy(defaultAuthType = serverConfig.config.defaultAuthServices, deploymentType = serverConfig.config.deploymentType) }
+            serverConfig?.let {
+                setState { copy(defaultAuthType = serverConfig.config.defaultAuthServices, deploymentType = serverConfig.config.deploymentType) }
+            }
 //            val authTypes = serverConfig.config.authServices
 //                .replace("[", "")
 //                .replace("]", "")

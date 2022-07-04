@@ -4,7 +4,7 @@ sealed class ResultWrapper<T>(
     val data: T? = null,
     val error: Error? = null
 ) {
-    class Success<T>(data: T) : ResultWrapper<T>(data = data)
+    class Success<T>(data: T?) : ResultWrapper<T>(data = data)
     class Failed<T>(error: Error, data: T? = null) : ResultWrapper<T>(error = error, data = data)
     class FetchLoading<T>(data: T? = null) : ResultWrapper<T>(data = data)
 
