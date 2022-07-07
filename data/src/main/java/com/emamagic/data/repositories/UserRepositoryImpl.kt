@@ -31,7 +31,10 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getServerConfig(params: GetServerConfig.Params): ResultWrapper<ServerConfig> {
-        params.serverHost?.let { restProvider.setBaseUrlAndApiUrl(it) }
+        params.serverHost?.let {
+            restProvider.setBaseUrlAndApiUrl(it)
+            pref[PrefKeys.HOST] = it
+        }
         return get(
             "serverConfig",
             memoryPolicy = MemoryPolicy(shouldRefresh = { params.shouldRefresh })

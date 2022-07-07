@@ -22,5 +22,6 @@ object CacheFactory {
         return PreferenceManager.getDefaultSharedPreferences(app.applicationContext)
     }
 
+    fun isCacheInitialized(): Boolean = this::app.isInitialized
 
 }

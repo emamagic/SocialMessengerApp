@@ -186,54 +186,54 @@ class LoginViewModel @Inject constructor(
             setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_HOST) }
             return@launch
         }
-        setEffect { BaseEffect.ShowLoading() }
+//        setEffect { BaseEffect.ShowLoading() }
         getServerConfig(
             GetServerConfig.Params(
                 host,
                 true
             )
         ).manageResult(success = { serverConfig ->
-            serverConfig?.let {
-                setState {
-                    copy(
-                        defaultAuthType = serverConfig.config.defaultAuthServices,
-                        deploymentType = serverConfig.config.deploymentType
-                    )
-                }
-            }
-//            val authTypes = serverConfig.config.authServices
-//                .replace("[", "")
-//                .replace("]", "")
-//                .split(",")
-//            setState {
-//                copy(
-//                    serverConfigUpdated = serverConfig.getServerHost(),
-//                    authTypes = authTypes
-//                )
-//            }
-//            if (serverConfig.config.authType.equals("keycloak", true)) {
-//                val keycloak = serverConfig.config.keycloakConfig
-//                val authorizationEndpoint =
-//                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/auth"
-//                val tokenEndpoint =
-//                    keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/token"
-//                val resource = keycloak.resource
-//                val redirectUri = context.getString(R.string.keycloak_redirect_uri)
-//                val scope = context.getString(R.string.keycloak_scope)
-//                val responseType = ResponseTypeValues.CODE
-//                setEffect {
-//                    LoginEffect.Keycloak(
-//                        authorizationEndpoint,
-//                        tokenEndpoint,
-//                        redirectUri,
-//                        resource,
-//                        scope,
-//                        responseType
+            routerDelegate.popRoute()
+//            serverConfig?.let {
+//                setState {
+//                    copy(
+//                        defaultAuthType = serverConfig.config.defaultAuthServices,
+//                        deploymentType = serverConfig.config.deploymentType
 //                    )
 //                }
-//                 setState for LoginWithPhoneFragment
-//            } else {
-//                setEffect { BaseEffect.NavigateBack }
+//                val authTypes = serverConfig.config.authServices
+//                    .replace("[", "")
+//                    .replace("]", "")
+//                    .split(",")
+//                setState {
+//                    copy(
+//                        serverConfigUpdated = serverConfig.getServerHost(),
+//                        authTypes = authTypes
+//                    )
+//                }
+//                if (serverConfig.config.authType.equals("keycloak", true)) {
+//                    val keycloak = serverConfig.config.keycloakConfig
+//                    val authorizationEndpoint =
+//                        keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/auth"
+//                    val tokenEndpoint =
+//                        keycloak.authServerUrl + "realms/" + keycloak.realm + "/protocol/openid-connect/token"
+//                    val resource = keycloak.resource
+//                    val redirectUri = context.getString(R.string.keycloak_redirect_uri)
+//                    val scope = context.getString(R.string.keycloak_scope)
+//                    val responseType = ResponseTypeValues.CODE
+//                    setEffect {
+//                        LoginEffect.Keycloak(
+//                            authorizationEndpoint,
+//                            tokenEndpoint,
+//                            redirectUri,
+//                            resource,
+//                            scope,
+//                            responseType
+//                        )
+//                    }
+//                } else {
+//                    setEffect { BaseEffect.NavigateBack }
+//                }
 //            }
         })
     }

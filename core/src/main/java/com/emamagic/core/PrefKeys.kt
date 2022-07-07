@@ -8,5 +8,6 @@ object PrefKeys {
     const val CURRENT_USER = "current_user"
     const val CERT_AlIAS = "certificate_alias"
     const val INTRO_SEEN = "intro_seen"
+    const val HOST = "host"
 
 }
