@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
                 is ResultWrapper.Success -> {
                     when (checkLoginProcess()) {
                         CheckLoginProcess.LoginProcessResult.GoToConversation -> routerDelegate.pushRoute(LoginRouter.Routes.ToConversations)
-                        CheckLoginProcess.LoginProcessResult.GoToSignup -> routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
+                        CheckLoginProcess.LoginProcessResult.GoToIntro -> routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
                         CheckLoginProcess.LoginProcessResult.GoToWorkspaceCreate -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceCreate)
                         CheckLoginProcess.LoginProcessResult.GoToWorkspaceSelect -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceSelect)
                     }

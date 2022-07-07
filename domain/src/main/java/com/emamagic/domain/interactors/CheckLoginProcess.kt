@@ -4,7 +4,6 @@ import com.emamagic.core.AppCoroutineDispatchers
 import com.emamagic.core.succeeded
 import com.emamagic.domain.entities.OrganizationEntity
 import com.emamagic.domain.entities.WorkspaceEntity
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.zip
@@ -59,13 +58,13 @@ class CheckLoginProcess @Inject constructor(
         return if (hasIntroBeenSeen) {
             LoginProcessResult.GoToConversation
         } else {
-            LoginProcessResult.GoToSignup
+            LoginProcessResult.GoToIntro
         }
     }
 
     sealed class LoginProcessResult {
         object GoToConversation: LoginProcessResult()
-        object GoToSignup: LoginProcessResult()
+        object GoToIntro: LoginProcessResult()
         object GoToWorkspaceSelect: LoginProcessResult()
         object GoToWorkspaceCreate: LoginProcessResult()
     }

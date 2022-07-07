@@ -60,7 +60,7 @@ class SignupViewModel @Inject constructor(
             CheckLoginProcess.LoginProcessResult.GoToConversation -> routerDelegate.pushRoute(SignupRouter.Routes.ToConversation)
             CheckLoginProcess.LoginProcessResult.GoToWorkspaceCreate -> routerDelegate.pushRoute(SignupRouter.Routes.ToWorkspaceCreate)
             CheckLoginProcess.LoginProcessResult.GoToWorkspaceSelect -> routerDelegate.pushRoute(SignupRouter.Routes.ToWorkspaceSelect)
-            CheckLoginProcess.LoginProcessResult.GoToSignup -> TODO()
+            CheckLoginProcess.LoginProcessResult.GoToIntro -> TODO()
         }.exhaustive
     }
 

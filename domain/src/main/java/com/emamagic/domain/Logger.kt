@@ -1,5 +1,5 @@
 package com.emamagic.domain
-
+// todo handle sentry here
 interface Logger {
 
     fun setup(debugMode: Boolean)
