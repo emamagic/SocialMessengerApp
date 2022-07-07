@@ -34,9 +34,6 @@ class SplashViewModel @Inject constructor(
                 failed = { // HTTP_UNAUTHORIZED status handled in BaseViewModel
                 if (it.statusCode == LimooHttpCode.HTTP_SIGNUP) { // user need to signup
                     routerDelegate.pushRoute(SplashRouter.Routes.ToSignup)
-                } else { // unKnown error
-                    setEffect { BaseEffect.Toast("UnKnown Error") }
-                    setState { copy(closeApp = true) }
                 }
             })
         }

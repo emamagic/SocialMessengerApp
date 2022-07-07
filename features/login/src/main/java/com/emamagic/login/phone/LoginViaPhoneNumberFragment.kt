@@ -60,8 +60,10 @@ class LoginViaPhoneNumberFragment :
 //        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
-    override fun invalidInput(message: String?, type: Any?): Boolean {
-        binding.validatorInput.invalidateInput()
+    override fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean {
+        if (type == LoginState.INVALID_PHONE_NUMBER) {
+            binding.validatorInput.invalidateInput()
+        }
         return true
     }
 

@@ -135,7 +135,7 @@ class LoginViewModel @Inject constructor(
 
     private fun submitPhoneNumberEvent(phoneNum: String, countryCode: String) = withLoadingScope {
         if (!phoneNum.isValidPhoneNumber()) {
-            setEffect { BaseEffect.InvalidInput.Error() }
+            setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_PHONE_NUMBER) }
             return@withLoadingScope
         }
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
@@ -154,18 +154,13 @@ class LoginViewModel @Inject constructor(
 
     // ---------------- singin with username ----------------
 
-    /**
-     * BaseEffect.EmptyInputValue ->
-     * true -> username is empty
-     * false -> pass is empty
-     **/
     private fun submitUserNameEvent(username: String, pass: String) = withLoadingScope {
         if (username.isEmpty()) {
-            setEffect { BaseEffect.InvalidInput.Error(type = true) }
+            setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_USERNAME) }
             return@withLoadingScope
         }
         if (pass.isEmpty()) {
-            setEffect { BaseEffect.InvalidInput.Error(type = false) }
+            setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_PASS) }
             return@withLoadingScope
         }
         loginViaUsername(LoginViaUsername.Params(username, pass)).manageResult ( success = { init() })
@@ -188,7 +183,7 @@ class LoginViewModel @Inject constructor(
 
     private fun changeServerNameClickedEvent(host: String) = viewModelScope.launch {
         if (host.trim().isEmpty() || host.trim().contains(" ")) {
-            setEffect { BaseEffect.InvalidInput.Error() }
+            setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_HOST) }
             return@launch
         }
         setEffect { BaseEffect.ShowLoading() }
@@ -281,13 +276,13 @@ class LoginViewModel @Inject constructor(
 
     private fun submitOtpEvent(code: String, deviceId: String) = withLoadingScope {
         if (code.length != 5) {
-            setEffect { BaseEffect.InvalidInput.Error() }
+            setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_OTP_CODE) }
             return@withLoadingScope
         }
         val result = verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId))
         when (result) {
             is ResultWrapper.FetchLoading -> TODO()
-            is ResultWrapper.Failed ->  setEffect { BaseEffect.InvalidInput.Error("invalid otp code") } // invalid otp code or ...
+            is ResultWrapper.Failed ->  setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_OTP_CODE) } // invalid otp code or ...
             is ResultWrapper.Success -> init()
         }.exhaustive
     }

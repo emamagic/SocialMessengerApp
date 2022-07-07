@@ -15,6 +15,11 @@ data class LoginState(
     val closeApp: Boolean
 ) : State {
     companion object {
+        const val INVALID_PHONE_NUMBER = 0
+        const val INVALID_USERNAME = 1
+        const val INVALID_PASS = 2
+        const val INVALID_HOST = 3
+        const val INVALID_OTP_CODE = 4
         fun initialize(): LoginState =
             LoginState(
                 authType = AuthType.ALL,

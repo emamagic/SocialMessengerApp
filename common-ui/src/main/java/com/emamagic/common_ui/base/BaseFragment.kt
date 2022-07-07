@@ -101,9 +101,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
 
     open fun disableUiComponent(type: Any?): Boolean = false
 
-    open fun invalidInput(message: String?, type: Any?): Boolean = false
-
-    open fun invalidInput(@StringRes message: Int?, type: Any?): Boolean = false
+    open fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean = false
 
     open fun showDialog(message: String, proceedTitle: String?, cancelTitle: String?): Boolean = false
 
@@ -135,10 +133,8 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
             is BaseEffect.DisableUiComponent ->
                 if (!disableUiComponent(viewEffect.type))
                     throw Exception("BaseFragment -> DisableUiComponent Does Not Implemented")
-            is BaseEffect.InvalidInput.Error -> if (invalidInput(viewEffect.message, viewEffect.type))
+            is BaseEffect.InvalidInput -> if (!invalidInput(viewEffect.message, viewEffect.resId, viewEffect.type))
                 throw Exception("BaseFragment -> InvalidInputError Does Not Implemented")
-            is BaseEffect.InvalidInput.Error2 -> if (invalidInput(viewEffect.resId, viewEffect.type))
-                throw Exception("BaseFragment -> InvalidInputError2 Does Not Implemented")
             is BaseEffect.NeedToLogin ->
                 findNavController().navigate(
                     NavDeepLinkRequest.Builder.fromUri("android-app://limoo.im.app/login".toUri()).build(),

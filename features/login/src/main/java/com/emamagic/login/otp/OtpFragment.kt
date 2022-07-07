@@ -39,7 +39,7 @@ class OtpFragment :
 
     }
 
-    override fun invalidInput(message: String?, type: Any?): Boolean {
+    override fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean {
         Toast.makeText(requireContext(), "کد وارد شده صحیح نمی باشد.", Toast.LENGTH_SHORT).show()
         return true
     }

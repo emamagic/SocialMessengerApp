@@ -30,10 +30,8 @@ sealed interface BaseEffect {
 
     object NeedToLogin : BaseEffect
 
-    sealed class InvalidInput : BaseEffect {
-        data class Error(val message: String? = null, val type: Any? = null) : InvalidInput()
-        data class Error2(val resId: Int? = null, val type: Any? = null) : InvalidInput()
-    }
+    data class InvalidInput(val message: String? = null, val resId: Int? = null, val type: Any? = null) : BaseEffect
+
 }
 /*-------------------------------------- CUSTOM EFFECT FOR EVERY FEATURE --------------------------------------*/
 

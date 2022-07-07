@@ -46,11 +46,12 @@ class LoginViaUsernameFragment :
         return true
     }
 
-    override fun invalidInput(message: Int?, type: Any?): Boolean {
+    override fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean {
         type as Boolean
         if (type) binding.validatorInputUsername.invalidateInput()
         else binding.validatorInputPassword.invalidateInput()
         return true
     }
+
 
 }

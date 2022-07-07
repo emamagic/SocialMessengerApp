@@ -70,7 +70,7 @@ class ChangeServerNameFragment :
         return true
     }
 
-    override fun invalidInput(message: String?, type: Any?): Boolean {
+    override fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean {
         binding.validatorInput.invalidateInput()
         return true
     }
