@@ -105,8 +105,9 @@ suspend fun <T,E> SafeWrapper<T>.toResult(
                 if (newResult == null) {
                     doOnFailed?.invoke(error)
                     ResultWrapper.Failed(error)
+                } else {
+                    ResultWrapper.Success(newResult)
                 }
-                else ResultWrapper.Success(newResult)
             } else {
                 doOnFailed?.invoke(error)
                 ResultWrapper.Failed(error)

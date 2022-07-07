@@ -74,8 +74,9 @@ dependencies {
     // Features
     implementation(project(Modules.splash))
     implementation(project(Modules.login))
-    implementation(project(Modules.chat))
+    implementation(project(Modules.signup))
     implementation(project(Modules.conversation))
+    implementation(project(Modules.chat))
 
 
     implementation(Libs.multidex)

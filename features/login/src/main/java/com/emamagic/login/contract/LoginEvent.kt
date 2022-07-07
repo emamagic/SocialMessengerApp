@@ -16,6 +16,7 @@ sealed class LoginEvent : EVENT {
     object LoginWithKeycloakEvent: LoginEvent()
     data class SubmitOtpEvent(val code: String, val deviceId: String): LoginEvent()
     object OtpExpiredEvent: LoginEvent()
+    object InitEvent: LoginEvent()
 
 
 }

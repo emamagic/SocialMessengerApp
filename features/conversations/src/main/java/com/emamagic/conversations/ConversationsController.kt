@@ -21,7 +21,7 @@ class ConversationsController: PagingDataEpoxyController<ConversationEntity>() {
         val onClick: (Int) -> Unit
     ): DataBindingEpoxyModel() {
 
-        override fun getDefaultLayout(): Int = com.emamagic.base.R.layout.row_conversation
+        override fun getDefaultLayout(): Int = com.emamagic.common_ui.R.layout.row_conversation
 
         override fun setDataBindingVariables(binding: ViewDataBinding?) {
 

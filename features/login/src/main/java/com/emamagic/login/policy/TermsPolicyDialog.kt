@@ -3,7 +3,7 @@ package com.emamagic.login.policy
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
-import com.emamagic.base.base.BaseDialogFragment
+import com.emamagic.common_ui.base.BaseDialogFragment
 import com.emamagic.login.databinding.DialogTermsPolicyBinding
 
 class TermsPolicyDialog: BaseDialogFragment<DialogTermsPolicyBinding>() {

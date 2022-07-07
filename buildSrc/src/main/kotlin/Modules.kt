@@ -13,6 +13,7 @@ object Modules {
     const val chat = ":features:chat"
     const val conversation = ":features:conversations"
     const val splash = ":features:splash"
+    const val signup = ":features:signup"
     const val mvi = ":mvi"
     const val data = ":data"
     const val coreAndroid = ":core-android"

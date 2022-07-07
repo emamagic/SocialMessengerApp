@@ -15,12 +15,19 @@ data class Config(
     val compatibleVersion: String? = null,
     val showPublicPanelOnInitialLoading: Boolean? = false,
     val authType: String,
+    @SerializedName("authServices")
     val authServices: String,
     val defaultAuthServices: String,
     val keycloakConfig: KeycloakConfig?,
     val server: Server
 ) {
     val minPasswordLength: Int = passwordThreshold.toInt()
+
+    val isLoginViaPhoneNumberAllowed
+            get() = authServices.contains("phonenumber")
+
+    val isLoginViaUsernameAllowed
+        get() = authServices.contains("userpass")
 }
 
 data class KeycloakConfig(

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.emamagic.base.widget.FontTextView
+        <com.emamagic.common_ui.widget.FontTextView
             android:id="@+id/txt_directed_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

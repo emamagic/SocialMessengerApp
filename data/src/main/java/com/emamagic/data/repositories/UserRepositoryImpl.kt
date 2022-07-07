@@ -1,11 +1,8 @@
 package com.emamagic.data.repositories
 
-import android.util.Log
-import com.dropbox.android.external.store4.*
 import com.emamagic.cache.cache.*
 import com.emamagic.core.*
 import com.emamagic.data.*
-import com.emamagic.data.Const.DEFAULT_KEY
 import com.emamagic.data.db.dao.OrganizationDao
 import com.emamagic.data.db.dao.WorkspaceDao
 import com.emamagic.data.network.RestProvider
@@ -17,7 +14,6 @@ import com.emamagic.domain.publisher.NotificationCenter
 import com.emamagic.domain.repositories.UserRepository
 import com.emamagic.safe.SafeApi
 import com.emamagic.safe.policy.MemoryPolicy
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 // todo implement logger for logging stuff
@@ -34,8 +30,8 @@ class UserRepositoryImpl @Inject constructor(
         NotificationCenter.subscribe(this, Const.LOGGED_OUT)
     }
 
-    override suspend fun updateServerConfig(params: UpdateServerConfig.Params): ResultWrapper<ServerConfig> {
-        restProvider.setBaseUrlAndApiUrl(params.serverHost)
+    override suspend fun getServerConfig(params: GetServerConfig.Params): ResultWrapper<ServerConfig> {
+        params.serverHost?.let { restProvider.setBaseUrlAndApiUrl(it) }
         return get(
             "serverConfig",
             memoryPolicy = MemoryPolicy(shouldRefresh = { params.shouldRefresh })
@@ -60,8 +56,14 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentUser(): ResultWrapper<User> = get("currentUser") {
         restProvider.userService.getCurrentUser().toResponse()
-    }.toResult(doOnSuccess = { pref[PrefKeys.CURRENT_USER] = it }
-        ,tryIfFailed = { pref[PrefKeys.CURRENT_USER] })
+    }.toResult(doOnSuccess = {
+        pref[PrefKeys.CURRENT_USER] = it
+        authSession.login(it.id, it.avatarHash)
+    }, tryIfFailed = {
+        val user: User? = pref[PrefKeys.CURRENT_USER]
+        if (user != null) { authSession.login(user.id, user.avatarHash) }
+        user
+    })
 
 
     override suspend fun getMyWorkspaces(): ResultWrapper<List<WorkspaceEntity>> = fresh {
@@ -86,12 +88,18 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun saveAlias(data: SaveAlias.Params): ResultWrapper<Boolean> {
         return try {
-            pref[PrefKeys.CertAlias] = data.alias
+            pref[PrefKeys.CERT_AlIAS] = data.alias
             ResultWrapper.Success(true)
         } catch (t: Throwable) {
             ResultWrapper.Success(false)
         }
     }
+
+    override suspend fun isLoggedIn(): Boolean = authSession.isLoggedIn()
+
+    override suspend fun hasIntroBeenSeen(): Boolean = pref[PrefKeys.INTRO_SEEN, false] as Boolean
+
+    override suspend fun userSawIntro() { pref[PrefKeys.INTRO_SEEN] = true }
 
     override fun receiveData(event: Event) {
         when (event.id) {

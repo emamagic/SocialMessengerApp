@@ -10,6 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.emamagic.common_ui.widget.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="conversationFragment"/>
+
         <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/recycler_conversation"
             android:layout_width="0dp"

@@ -1,13 +1,13 @@
 package com.emamagic.limoo.di
 
-import com.emamagic.login.LoginRouter
+import com.emamagic.login.contract.LoginRouter
 import com.emamagic.navigation.router.Router
-import com.emamagic.splash.SplashRouter
+import com.emamagic.signup.contract.SignupRouter
+import com.emamagic.splash.contract.SplashRouter
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dagger.hilt.migration.DisableInstallInCheck
 import dagger.multibindings.IntoSet
 
 @InstallIn(SingletonComponent::class)
@@ -21,4 +21,8 @@ abstract class RouterBindingModule {
     @IntoSet
     @Binds
     abstract fun bindLoginRouter(loginRouter: LoginRouter): Router
+
+    @IntoSet
+    @Binds
+    abstract fun bindSignupRouter(signupRouter: SignupRouter): Router
 }

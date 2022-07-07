@@ -21,7 +21,7 @@ object KeycloakModule {
 
     @Provides
     fun provideAuthorizationService(@ApplicationContext context: Context): AuthorizationService {
-        val alias = pref[PrefKeys.CertAlias, ""]
+        val alias = pref[PrefKeys.CERT_AlIAS, ""]
         val sslContext = CertificateManager.getCertificateSLLContext(context, alias)
         val connectionBuilder = KeycloakConnectionBuilder(sslContext.socketFactory)
         val appAuthConfiguration = AppAuthConfiguration.Builder().setConnectionBuilder(connectionBuilder).build()

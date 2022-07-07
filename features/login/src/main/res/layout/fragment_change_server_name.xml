@@ -34,7 +34,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.emamagic.base.widget.FontTextView
+                <com.emamagic.common_ui.widget.FontTextView
                     android:id="@+id/appCompatTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_signupF_logo" />
 
-                <com.emamagic.base.widget.FontTextView
+                <com.emamagic.common_ui.widget.FontTextView
                     android:id="@+id/appCompatTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
 
-                <com.emamagic.base.widget.LimooValidatorInput
+                <com.emamagic.common_ui.widget.LimooValidatorInput
                     android:id="@+id/validator_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     app:state_fail="@drawable/bg_signup_phone_number_failed"
                     app:state_focused="@drawable/bg_signup_phone_number_focused">
 
-                    <com.emamagic.base.widget.FontTextView
+                    <com.emamagic.common_ui.widget.FontTextView
                         android:id="@+id/titleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                         android:textSize="@dimen/limoo_14s"
                         android:textStyle="bold" />
 
-                    <com.emamagic.base.widget.FontEditText
+                    <com.emamagic.common_ui.widget.FontEditText
                         android:id="@+id/inputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/limoo_input_height"
@@ -95,7 +95,7 @@
                         android:textColorHint="@color/limoo_grey_4" />
 
 
-                    <com.emamagic.base.widget.FontTextView
+                    <com.emamagic.common_ui.widget.FontTextView
                         android:id="@+id/validatorText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,10 +107,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/edt_signupF_server_name" />
 
 
-                </com.emamagic.base.widget.LimooValidatorInput>
+                </com.emamagic.common_ui.widget.LimooValidatorInput>
 
 
-                <com.emamagic.base.widget.FontTextView
+                <com.emamagic.common_ui.widget.FontTextView
                     android:id="@+id/txt_terms_policy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <com.emamagic.base.widget.progress_button.FontButtonWithProgress
+                    <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
                         android:id="@+id/btn_submit"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/limoo_button_height"
@@ -147,7 +147,7 @@
                         android:textSize="@dimen/limoo_16s"
                         android:layout_marginBottom="@dimen/limoo_medium_margin" />
 
-                    <com.emamagic.base.widget.FontTextView
+                    <com.emamagic.common_ui.widget.FontTextView
                         android:id="@+id/txt_signup_with_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

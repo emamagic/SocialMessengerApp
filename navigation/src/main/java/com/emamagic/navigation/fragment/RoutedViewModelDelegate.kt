@@ -1,5 +1,6 @@
 package com.emamagic.navigation.fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.emamagic.navigation.lifecycle.LiveDataEvent
@@ -12,10 +13,18 @@ class RoutedViewModelDelegate<ROUTE : Route> : RoutedViewModel {
         get() = _route
 
     fun pushRoute(route: ROUTE) {
-        _route.value = LiveDataEvent(route)
+        try {
+            _route.value = LiveDataEvent(route)
+        } catch (t: Throwable) {
+            Log.e("TAG", "pushRoute: ${t.stackTraceToString()}")
+        }
     }
 
     fun popRoute() {
-        _route.value = LiveDataEvent(Route.Back)
+        try {
+            _route.value = LiveDataEvent(Route.Back)
+        } catch (t: Throwable) {
+            Log.e("TAG", "popRoute: ${t.stackTraceToString()}")
+        }
     }
 }

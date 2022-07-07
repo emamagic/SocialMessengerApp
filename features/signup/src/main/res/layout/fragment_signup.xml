@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingLeft="@dimen/limoo_root_padding"
+        android:paddingRight="@dimen/limoo_root_padding"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_profileF_logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_limoo_place_holder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.emamagic.common_ui.widget.FontTextView
+                android:id="@+id/txt_upload_edit_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_medium_margin"
+                android:text="@string/upload_edit_image"
+                android:textColor="@color/limoo_grey_3"
+                android:textSize="@dimen/limoo_11s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_profileF_logo" />
+
+
+            <com.emamagic.common_ui.widget.LimooValidatorInput
+                android:id="@+id/validator_input_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:gravity="right"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/txt_upload_edit_image"
+                app:state_default="@drawable/bg_signup_phone_number_default"
+                app:state_fail="@drawable/bg_signup_phone_number_failed"
+                app:state_focused="@drawable/bg_signup_phone_number_focused">
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/titleText_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textSize="@dimen/limoo_14s"
+                    android:textStyle="bold" />
+
+                <com.emamagic.common_ui.widget.FontEditText
+                    android:id="@+id/inputEditText_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/limoo_input_height"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:hint="@string/enter_name"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textColorHint="@color/limoo_grey_4"
+                    android:textSize="@dimen/limoo_input_text_size" />
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/validatorText_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:text="@string/enter_name"
+                    android:textColor="@color/limoo_error_state"
+                    android:textSize="@dimen/limoo_12s"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_signupF_server_name" />
+
+            </com.emamagic.common_ui.widget.LimooValidatorInput>
+
+            <com.emamagic.common_ui.widget.LimooValidatorInput
+                android:id="@+id/validator_input_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:gravity="right"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/validator_input_username"
+                app:state_default="@drawable/bg_signup_phone_number_default"
+                app:state_fail="@drawable/bg_signup_phone_number_failed"
+                app:state_focused="@drawable/bg_signup_phone_number_focused">
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/titleText_family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/family"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textSize="@dimen/limoo_14s"
+                    android:textStyle="bold" />
+
+                <com.emamagic.common_ui.widget.FontEditText
+                    android:id="@+id/inputEditText_family"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/limoo_input_height"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:hint="@string/write_your_family"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textColorHint="@color/limoo_grey_4"
+                    android:textSize="@dimen/limoo_input_text_size" />
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/validatorText_family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:text="@string/write_your_family"
+                    android:textColor="@color/limoo_error_state"
+                    android:textSize="@dimen/limoo_12s"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_signupF_server_name" />
+
+            </com.emamagic.common_ui.widget.LimooValidatorInput>
+
+            <com.emamagic.common_ui.widget.LimooValidatorInput
+                android:id="@+id/validator_input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/limoo_small_margin"
+                android:layout_marginBottom="30dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+                app:layout_constraintTop_toBottomOf="@+id/validator_input_family"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:state_default="@drawable/bg_signup_phone_number_default"
+                app:state_fail="@drawable/bg_signup_phone_number_failed"
+                app:state_focused="@drawable/bg_signup_phone_number_focused">
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/titleText_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textSize="@dimen/limoo_14s"
+                    android:textStyle="bold" />
+
+                <com.emamagic.common_ui.widget.FontEditText
+                    android:id="@+id/inputEditText_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/limoo_input_height"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/example_email"
+                    android:textColor="@color/limoo_secondary_dark"
+                    android:textColorHint="@color/limoo_grey_4"
+                    android:textSize="@dimen/limoo_input_text_size" />
+
+                <com.emamagic.common_ui.widget.FontTextView
+                    android:id="@+id/validatorText_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limoo_small_margin"
+                    android:text="@string/wrong_email"
+                    android:textColor="@color/limoo_error_state"
+                    android:textSize="@dimen/limoo_12s"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_signupF_server_name" />
+
+            </com.emamagic.common_ui.widget.LimooValidatorInput>
+
+            <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/limoo_button_height"
+                android:layout_marginBottom="@dimen/limoo_very_large_margin"
+                android:enabled="false"
+                android:background="@drawable/bg_limoo_disable_submit"
+                android:gravity="center"
+                android:text="@string/profile_completed"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_16s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/validator_input_email"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>

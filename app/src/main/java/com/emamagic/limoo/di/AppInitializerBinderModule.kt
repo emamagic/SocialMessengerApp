@@ -1,6 +1,6 @@
 package com.emamagic.limoo.di
 
-import com.emamagic.base.appinitializer.AppInitializer
+import com.emamagic.common_ui.appinitializer.AppInitializer
 import com.emamagic.limoo.appinitializers.CacheInitializer
 import com.emamagic.limoo.appinitializers.ServerConfigInitializer
 import com.emamagic.limoo.appinitializers.TypeFaceInitializer

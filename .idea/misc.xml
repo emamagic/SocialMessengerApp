@@ -14,6 +14,10 @@
         <entry key="base/src/main/res/drawable/ic_limoo_place_holder.xml" value="0.158" />
         <entry key="base/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
         <entry key="base/src/main/res/layout/layout_validator.xml" value="0.3421875" />
+        <entry key="common-ui/src/main/res/layout/dialog_alert.xml" value="0.34322916666666664" />
+        <entry key="common-ui/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
+        <entry key="common-ui/src/main/res/layout/layout_validator.xml" value="0.34322916666666664" />
+        <entry key="common-ui/src/main/res/layout/row_conversation.xml" value="0.34322916666666664" />
         <entry key="core/src/main/res/drawable/bg_corroct_toast.xml" value="0.2005" />
         <entry key="core/src/main/res/drawable/bg_limoo_disable_submit.xml" value="0.1945" />
         <entry key="core/src/main/res/drawable/bg_signup_phone_number_default.xml" value="0.1945" />
@@ -27,13 +31,32 @@
         <entry key="emoji/src/main/res/drawable/selector_emoji_travel.xml" value="0.2235" />
         <entry key="features/conversation/src/main/res/layout/fragment_conversation.xml" value="0.34322916666666664" />
         <entry key="features/conversations/src/main/res/layout/fragment_conversations.xml" value="0.21041666666666667" />
+        <entry key="features/intro/src/main/res/drawable/bg_intro_next.xml" value="0.21" />
+        <entry key="features/intro/src/main/res/drawable/dot_background.xml" value="0.21" />
+        <entry key="features/intro/src/main/res/drawable/ic_intro_one_logo.xml" value="0.21" />
+        <entry key="features/intro/src/main/res/drawable/ic_intro_three_logo.xml" value="0.21" />
+        <entry key="features/intro/src/main/res/drawable/ic_intro_two_logo.xml" value="0.21" />
+        <entry key="features/intro/src/main/res/layout/dot_layout.xml" value="0.34322916666666664" />
+        <entry key="features/intro/src/main/res/layout/fragment_intro_one.xml" value="0.34322916666666664" />
+        <entry key="features/intro/src/main/res/layout/fragment_intro_two.xml" value="0.34322916666666664" />
+        <entry key="features/login/src/main/res/drawable/bg_intro_next.xml" value="0.2285" />
+        <entry key="features/login/src/main/res/drawable/dot_background.xml" value="0.2285" />
+        <entry key="features/login/src/main/res/drawable/ic_intro_three_logo.xml" value="0.2285" />
+        <entry key="features/login/src/main/res/layout/dialog_terms_policy.xml" value="0.21041666666666667" />
+        <entry key="features/login/src/main/res/layout/dot_layout.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_change_server_name.xml" value="0.22" />
+        <entry key="features/login/src/main/res/layout/fragment_intro_one.xml" value="0.34322916666666664" />
+        <entry key="features/login/src/main/res/layout/fragment_intro_parent.xml" value="0.3421875" />
+        <entry key="features/login/src/main/res/layout/fragment_intro_three.xml" value="0.34322916666666664" />
+        <entry key="features/login/src/main/res/layout/fragment_intro_two.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_login_via_phone_number.xml" value="0.34322916666666664" />
+        <entry key="features/login/src/main/res/layout/fragment_login_via_username.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_login_with_phone.xml" value="0.1" />
         <entry key="features/login/src/main/res/layout/fragment_login_with_username.xml" value="0.22" />
         <entry key="features/login/src/main/res/layout/fragment_otp.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_signin_with_server_name.xml" value="0.34322916666666664" />
         <entry key="features/login/src/main/res/layout/fragment_signin_with_user_name.xml" value="0.2765625" />
+        <entry key="features/login/src/main/res/layout/fragment_signup.xml" value="0.3421875" />
         <entry key="features/profile/src/main/res/layout/fragment_signup.xml" value="0.21041666666666667" />
         <entry key="features/signin/src/main/res/drawable/ic_arrow_doown.xml" value="0.133" />
         <entry key="features/signin/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.133" />
@@ -46,6 +69,12 @@
         <entry key="features/signin/src/main/res/layout/fragment_signin_with_user_name.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_signin_with_username.xml" value="0.34322916666666664" />
         <entry key="features/signin/src/main/res/layout/fragment_signup_phone.xml" value="0.34322916666666664" />
+        <entry key="features/signup/src/main/res/drawable/ic_intro_two_logo.xml" value="0.236" />
+        <entry key="features/signup/src/main/res/layout/dot_layout.xml" value="0.21041666666666667" />
+        <entry key="features/signup/src/main/res/layout/fragment_intro_one.xml" value="0.21041666666666667" />
+        <entry key="features/signup/src/main/res/layout/fragment_intro_parent.xml" value="0.21041666666666667" />
+        <entry key="features/signup/src/main/res/layout/fragment_intro_three.xml" value="0.21041666666666667" />
+        <entry key="features/signup/src/main/res/layout/fragment_intro_two.xml" value="0.34322916666666664" />
         <entry key="features/signup/src/main/res/layout/fragment_signup.xml" value="0.34322916666666664" />
         <entry key="features/splash/src/main/res/layout/fragment_splash.xml" value="0.34322916666666664" />
       </map>

@@ -29,7 +29,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/appCompatTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_signupF_logo" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/txt_signup_with_server_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
 
-            <com.emamagic.base.widget.LimooValidatorInput
+            <com.emamagic.common_ui.widget.LimooValidatorInput
                 android:id="@+id/validator_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 app:state_fail="@drawable/bg_signup_phone_number_failed"
                 app:state_focused="@drawable/bg_signup_phone_number_focused">
 
-                <com.emamagic.base.widget.FontTextView
+                <com.emamagic.common_ui.widget.FontTextView
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     android:textStyle="bold" />
 
 
-                <com.emamagic.base.widget.ClickableDrawableEditText
+                <com.emamagic.common_ui.widget.ClickableDrawableEditText
                     android:id="@+id/inputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/limoo_input_height"
@@ -107,7 +107,7 @@
                     android:textSize="@dimen/limoo_input_text_size" />
 
 
-                <com.emamagic.base.widget.FontTextView
+                <com.emamagic.common_ui.widget.FontTextView
                     android:id="@+id/validatorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,9 +117,9 @@
                     android:textSize="@dimen/limoo_12s"
                     android:visibility="invisible" />
 
-            </com.emamagic.base.widget.LimooValidatorInput>
+            </com.emamagic.common_ui.widget.LimooValidatorInput>
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/txt_terms_policy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/validator_input"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
-            <com.emamagic.base.widget.progress_button.FontButtonWithProgress
+            <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/limoo_button_height"
@@ -148,7 +148,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/txt_signup_with_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

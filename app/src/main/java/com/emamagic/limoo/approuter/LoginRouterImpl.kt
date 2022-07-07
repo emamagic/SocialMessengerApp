@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.emamagic.login.LoginRouter
+import com.emamagic.login.contract.LoginRouter
 import com.emamagic.login.phone.LoginViaPhoneNumberFragmentDirections
 import com.emamagic.navigation.exception.IllegalRouteException
 import com.emamagic.navigation.route.DeepLink
@@ -19,15 +20,18 @@ class LoginRouterImpl: BaseRouter(), LoginRouter {
         if (route is LoginRouter.Routes) {
             when (route) {
                 LoginRouter.Routes.LoginViaPhoneNumberToChangeServer -> LoginViaPhoneNumberFragmentDirections.actionToChangeServerNameFragment()
-                LoginRouter.Routes.OtpToConversations -> DeepLink.ACTION_TO_CONVERSATIONS.toUri()
+                LoginRouter.Routes.ToConversations -> DeepLink.ACTION_TO_CONVERSATIONS.toUri()
                 LoginRouter.Routes.LoginViaPhoneNumberToLoginViaUsername -> LoginViaPhoneNumberFragmentDirections.actionToLoginViaUsernameFragment()
                 LoginRouter.Routes.LoginViaPhoneNumberToOtp -> LoginViaPhoneNumberFragmentDirections.actionToOtpFragment()
-                LoginRouter.Routes.UsernameToConversations -> DeepLink.ACTION_TO_CONVERSATIONS.toUri()
+                LoginRouter.Routes.ToSignup -> DeepLink.ACTION_TO_SIGNUP.toUri()
+                LoginRouter.Routes.ToWorkspaceSelect -> DeepLink.ACTION_TO_WORKSPACE_SELECT.toUri()
+                LoginRouter.Routes.ToWorkspaceCreate -> DeepLink.ACTION_TO_WORKSPACE_CREATE.toUri()
                 else -> null
             }?.let {
                 try {
                     when (it) {
-                        is Uri -> instance.findNavController().navigate(it)
+                        is Uri -> instance.findNavController().navigate(it, NavOptions.Builder().setPopUpTo(
+                            com.emamagic.navigation.R.id.login_graph, true).build())
                         is NavDirections -> instance.findNavController().navigate(it)
                         else -> null
                     }

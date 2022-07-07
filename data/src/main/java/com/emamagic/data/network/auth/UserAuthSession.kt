@@ -11,17 +11,15 @@ class UserAuthSession @Inject constructor() {
     private val _currentAuth = MutableStateFlow<UserAuth>(UserAuth.Unauthenticated)
     val currentAuth = _currentAuth.asStateFlow()
 
-    fun login(userId: String, password: String) {
-        // Always success for testing
+    fun login(userId: String, avatarHash: String?) {
         _currentAuth.tryEmit(
             UserAuth.Authenticated(
                 id = userId,
-                credential = "credential://mock"
+                avatarHash = avatarHash
             )
         )
     }
     fun logout() {
-        // Always success for testing
         _currentAuth.tryEmit(UserAuth.Unauthenticated)
     }
 

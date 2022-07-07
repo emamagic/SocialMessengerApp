@@ -2,47 +2,109 @@ package com.emamagic.login
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.emamagic.base.base.BaseViewModel
-import com.emamagic.core.exhaustive
+import com.emamagic.common_ui.base.BaseViewModel
+import com.emamagic.core.*
 import com.emamagic.core_android.ToastScope
 import com.emamagic.core_android.isValidPhoneNumber
+import com.emamagic.domain.entities.ServerConfig
 import com.emamagic.domain.interactors.*
 import com.emamagic.login.contract.LoginEvent
+import com.emamagic.login.contract.LoginRouter
 import com.emamagic.login.contract.LoginState
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.mvi.LoginEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val updateServerConfig: UpdateServerConfig,
+    private val getServerConfig: GetServerConfig,
     private val verifyOtp: VerifyOtp,
     private val loginViaPhoneNumber: LoginViaPhoneNumber,
     private val loginViaUsername: LoginViaUsername,
     private val saveAlias: SaveAlias,
     private val loginViaKeycloak: LoginViaKeycloak,
+    private val getCurrentUser: GetCurrentUser,
+    private val checkLoginProcess: CheckLoginProcess
 ) : BaseViewModel<LoginState, LoginEvent, LoginRouter.Routes>() {
 
     private lateinit var G_phoneNumber: String
 
     override fun createInitialState() = LoginState.initialize()
 
-    init {
-//        setEffect { BaseEffect.ShowLoading(scope = ToastScope.MODULE_SCOPE) }
+    private fun init() {
+        setEffect { BaseEffect.ShowLoading(scope = ToastScope.MODULE_SCOPE) }
+        withLoadingScope {
+            when (val result = getCurrentUser(Unit)) {
+                is ResultWrapper.FetchLoading -> TODO()
+                is ResultWrapper.Failed -> checkIfLoginNeeded(result.error!!)
+                is ResultWrapper.Success -> {
+                    when (checkLoginProcess()) {
+                        CheckLoginProcess.LoginProcessResult.GoToConversation -> routerDelegate.pushRoute(LoginRouter.Routes.ToConversations)
+                        CheckLoginProcess.LoginProcessResult.GoToSignup -> routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
+                        CheckLoginProcess.LoginProcessResult.GoToWorkspaceCreate -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceCreate)
+                        CheckLoginProcess.LoginProcessResult.GoToWorkspaceSelect -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceSelect)
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun checkIfLoginNeeded(error: Error) {
+        getServerConfig {
+            when (error.statusCode) {
+                HttpURLConnection.HTTP_UNAUTHORIZED -> {
+                    if (it.config.isLoginViaPhoneNumberAllowed) { // do nothing
+                    } else if (it.config.isLoginViaUsernameAllowed) {
+                        routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToLoginViaUsername)
+                    } else {
+                        setEffect { BaseEffect.Toast("you are not allowed to login") }
+                        setState { copy(closeApp = true) }
+                    }
+                }
+                LimooHttpCode.HTTP_SIGNUP -> {
+                    routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
+                } else -> {
+                    // TODO() unknown status
+                }
+            }
+            setEffect { BaseEffect.HideLoading(scope = ToastScope.MODULE_SCOPE) }
+        }
+    }
+
+    private suspend fun checkForWorkspaceLink() {
+        // todo workspace-link
+    }
+
+    private suspend fun getServerConfig(call: (ServerConfig) -> Unit) {
+        val result = getServerConfig(GetServerConfig.Params(null, true))
+        if (result.succeeded) {
+            call.invoke(result.data!!)
+        } else { // no network or ...
+            setEffect { BaseEffect.Toast("check your connectivity dude") }
+            setState { copy(closeApp = true) }
+        }
     }
 
     override fun handleEvent(event: LoginEvent) {
         when (event) {
+            LoginEvent.InitEvent -> init()
             is LoginEvent.TypingPhoneNumberEvent -> typingPhoneNumberEvent(event.phoneNumber)
             LoginEvent.ChangeServerNameClickEvent -> changeServerNameClickedEvent()
             LoginEvent.LoginWithUsernameClickEvent -> loginWithUsernameClickedEvent()
-            is LoginEvent.SubmitPhoneNumberEvent -> submitPhoneNumberEvent(event.phoneNumber, event.countryCode)
+            is LoginEvent.SubmitPhoneNumberEvent -> submitPhoneNumberEvent(
+                event.phoneNumber,
+                event.countryCode
+            )
             LoginEvent.SubmitTermsPolicyEvent -> submitTermsPolicyEvent()
             is LoginEvent.SubmitUserNameEvent -> submitUserNameEvent(event.username, event.pass)
-            is LoginEvent.TypingUserNameOrPassEvent -> typingUserNameOrPassEvent(event.username, event.pass)
+            is LoginEvent.TypingUserNameOrPassEvent -> typingUserNameOrPassEvent(
+                event.username,
+                event.pass
+            )
             LoginEvent.LoginWithPhoneNumberClickEvent -> loginWithPhoneClickedEvent()
             is LoginEvent.ChangeServerNameEvent -> changeServerNameClickedEvent(event.host)
             LoginEvent.LoginWithKeycloakEvent -> loginWithKeycloakEvent()
@@ -78,9 +140,9 @@ class LoginViewModel @Inject constructor(
         }
         G_phoneNumber = if (phoneNum.length == 11) countryCode + phoneNum.substring(1)
         else countryCode + phoneNum
-        loginViaPhoneNumber(LoginViaPhoneNumber.Params(G_phoneNumber)).manageResult {
+        loginViaPhoneNumber(LoginViaPhoneNumber.Params(G_phoneNumber)).manageResult(success = {
             routerDelegate.pushRoute(LoginRouter.Routes.LoginViaPhoneNumberToOtp)
-        }
+        })
     }
 
     private fun submitTermsPolicyEvent() = withLoadingScope {
@@ -106,9 +168,7 @@ class LoginViewModel @Inject constructor(
             setEffect { BaseEffect.InvalidInput.Error(type = false) }
             return@withLoadingScope
         }
-        loginViaUsername(LoginViaUsername.Params(username, pass)).manageResult {
-            routerDelegate.pushRoute(LoginRouter.Routes.UsernameToConversations)
-        }
+        loginViaUsername(LoginViaUsername.Params(username, pass)).manageResult ( success = { init() })
     }
 
     private fun typingUserNameOrPassEvent(userName: String, pass: String) = withLoadingScope {
@@ -132,9 +192,19 @@ class LoginViewModel @Inject constructor(
             return@launch
         }
         setEffect { BaseEffect.ShowLoading() }
-        updateServerConfig(UpdateServerConfig.Params(host, true)).manageResult (success = { serverConfig ->
+        getServerConfig(
+            GetServerConfig.Params(
+                host,
+                true
+            )
+        ).manageResult(success = { serverConfig ->
             serverConfig?.let {
-                setState { copy(defaultAuthType = serverConfig.config.defaultAuthServices, deploymentType = serverConfig.config.deploymentType) }
+                setState {
+                    copy(
+                        defaultAuthType = serverConfig.config.defaultAuthServices,
+                        deploymentType = serverConfig.config.deploymentType
+                    )
+                }
             }
 //            val authTypes = serverConfig.config.authServices
 //                .replace("[", "")
@@ -182,8 +252,19 @@ class LoginViewModel @Inject constructor(
         scope: String,
         responseType: String
     ) = viewModelScope.launch {
-        if (!alias.isNullOrEmpty()) { saveAlias(SaveAlias.Params(alias)).manageResult() }
-        setEffect { LoginEffect.PerformAuthorization(authorizationEndpoint,tokenEndpoint, redirectUri, clientId, scope, responseType) }
+        if (!alias.isNullOrEmpty()) {
+            saveAlias(SaveAlias.Params(alias)).manageResult()
+        }
+        setEffect {
+            LoginEffect.PerformAuthorization(
+                authorizationEndpoint,
+                tokenEndpoint,
+                redirectUri,
+                clientId,
+                scope,
+                responseType
+            )
+        }
     }
 
     private fun loginWithKeycloakEvent() = viewModelScope.launch {
@@ -203,9 +284,18 @@ class LoginViewModel @Inject constructor(
             setEffect { BaseEffect.InvalidInput.Error() }
             return@withLoadingScope
         }
-        verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId)).manageResult {
-            routerDelegate.pushRoute(LoginRouter.Routes.OtpToConversations)
-        }
+        val result = verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId))
+        when (result) {
+            is ResultWrapper.FetchLoading -> TODO()
+            is ResultWrapper.Failed ->  setEffect { BaseEffect.InvalidInput.Error("invalid otp code") } // invalid otp code or ...
+            is ResultWrapper.Success -> init()
+        }.exhaustive
     }
+
+
+    // ---------------- signup ----------------
+
+
+    // ---------------- intro ----------------
 
 }

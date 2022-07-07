@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/appCompatTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/txt_sms_sent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 app:lineThickness="1dp"
                 app:noOfFields="5" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/txt_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/squareField_pin"
                 tools:text="00:45" />
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/text_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
 
-            <com.emamagic.base.widget.progress_button.FontButtonWithProgress
+            <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/limoo_button_height"

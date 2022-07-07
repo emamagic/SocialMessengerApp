@@ -2,15 +2,14 @@ package com.emamagic.login.phone
 
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import com.emamagic.base.clickPartOfText
-import com.emamagic.base.getDrawableCompat
-import com.emamagic.base.onTextChange
-import com.emamagic.base.setColor
-import com.emamagic.base.base.BaseFragment
-import com.emamagic.login.LoginRouter
+import com.emamagic.common_ui.base.BaseFragment
+import com.emamagic.common_ui.clickPartOfText
+import com.emamagic.common_ui.getDrawableCompat
+import com.emamagic.common_ui.onTextChange
+import com.emamagic.common_ui.setColor
+import com.emamagic.login.contract.LoginRouter
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.R
 import com.emamagic.login.contract.LoginEvent
@@ -30,6 +29,7 @@ class LoginViaPhoneNumberFragment :
 
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.setEvent(LoginEvent.InitEvent)
         setupCountryPicker()
         binding.inputEditText.onTextChange {
             viewModel.setEvent(LoginEvent.TypingPhoneNumberEvent(it))
@@ -41,14 +41,14 @@ class LoginViaPhoneNumberFragment :
         binding.txtSignupWithUsername.setOnClickListener { viewModel.setEvent(LoginEvent.LoginWithUsernameClickEvent) }
 
         binding.txtTermsPolicy.clickPartOfText("قوانین حریم خصوصی",
-            setColor(com.emamagic.base.R.color.limoo_secondary), true) {
+            setColor(com.emamagic.common_ui.R.color.limoo_secondary), true) {
 //            val intent = Intent(Intent.ACTION_VIEW)
 //            intent.data = Uri.parse("")
 //            startActivity(intent)
         }
 
         binding.txtTermsPolicy.clickPartOfText("شرایط و قوانین استفاده",
-            setColor(com.emamagic.base.R.color.limoo_secondary), true) {
+            setColor(com.emamagic.common_ui.R.color.limoo_secondary), true) {
             viewModel.setEvent(LoginEvent.SubmitTermsPolicyEvent)
         }
         binding.inputEditText.setDrawableClickListener { countryPicker.mRlyClickConsumer.performClick() }
@@ -56,6 +56,7 @@ class LoginViaPhoneNumberFragment :
     }
 
     override fun renderViewState(viewState: LoginState) {
+        if (viewState.closeApp) { requireActivity().finish() }
 //        if (viewState.serverConfigLoaded) toasty("serverConfig loadded")
     }
 
@@ -75,14 +76,14 @@ class LoginViaPhoneNumberFragment :
     }
 
     private fun setupCountryPicker() {
-        setCountryFlag(com.emamagic.base.R.drawable.ic_iran_flag)
+        setCountryFlag(com.emamagic.common_ui.R.drawable.ic_iran_flag)
         countryPicker = CountryCodePicker(
             requireContext()
         )
 //        countryPicker.typeFace = TypeFaceImpl.getTypeface()
         countryPicker.hideNameCode(true)
         countryPicker.hidePhoneCode(true)
-        countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.base.R.string.default_country_code))
+        countryPicker.setDefaultCountryUsingNameCodeAndApply(getString(com.emamagic.common_ui.R.string.default_country_code))
         countryPicker.setOnCountrySelected(this)
     }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="intro_three_title_when_only_define_organization" translatable="false">سازمان شما!</string>
+    <string name="intro_three_description_when_only_define_organization" translatable="false">هرکدام از تیم\u200cها،دپارتمان\u200cها یا پروژه\u200cهای سازمان شما میتوانند فضای کاری جدا داشته باشند. وارد سازمان شوید و فضای کاری مورد نظر خود را انتخاب کنید و در آن عضو شوید.</string>
+    <string name="submit_server_name" translatable="false">ورود به سازمان</string>
+</resources>

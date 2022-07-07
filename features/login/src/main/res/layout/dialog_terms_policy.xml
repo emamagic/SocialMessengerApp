@@ -21,14 +21,14 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <com.emamagic.base.widget.FontTextView
+            <com.emamagic.common_ui.widget.FontTextView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textDirection="rtl"
                 tools:text="@string/privacy_policy_description" />
 
-            <com.emamagic.base.widget.progress_button.FontButtonWithProgress
+            <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
                 android:id="@+id/btn_ok"
                 style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="wrap_content"

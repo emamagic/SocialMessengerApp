@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.emamagic.workspace_add_member.test", appContext.packageName)
+        assertEquals("com.emamagic.signup.test", appContext.packageName)
     }
 }

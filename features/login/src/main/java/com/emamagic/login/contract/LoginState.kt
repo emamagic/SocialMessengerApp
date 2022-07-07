@@ -11,7 +11,8 @@ data class LoginState(
     var defaultAuthType: String,
     @DeploymentType
     var deploymentType: String,
-    var minPasswordLength: Int
+    var minPasswordLength: Int,
+    val closeApp: Boolean
 ) : State {
     companion object {
         fun initialize(): LoginState =
@@ -19,7 +20,8 @@ data class LoginState(
                 authType = AuthType.ALL,
                 defaultAuthType = AuthType.PHONE_NUMBER,
                 deploymentType = DeploymentType.SAAS,
-                minPasswordLength = 0
+                minPasswordLength = 0,
+                closeApp = false
             )
     }
 }

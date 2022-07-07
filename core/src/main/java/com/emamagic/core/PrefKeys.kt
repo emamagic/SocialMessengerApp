@@ -6,6 +6,7 @@ object PrefKeys {
     const val USER_ID = "user_id"
     const val CURRENT_WORKSPACE_ID = "current_workspace_id"
     const val CURRENT_USER = "current_user"
-    const val CertAlias = "certificate_alias"
+    const val CERT_AlIAS = "certificate_alias"
+    const val INTRO_SEEN = "intro_seen"
 
 }

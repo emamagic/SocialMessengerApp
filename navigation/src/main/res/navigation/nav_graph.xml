@@ -13,4 +13,8 @@
     <include
         app:graph="@navigation/conversations_graph"/>
 
+    <include
+        app:graph="@navigation/signup_graph"/>
+
+
 </navigation>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_introF"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="25dp"
+            android:layoutDirection="rtl"
+            app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.emamagic.signup.intro.indicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/limoo_medium_margin"
+            android:layout_marginBottom="25dp"
+            android:layoutDirection="rtl"
+            app:dotsColor="#D9D9D9"
+            app:dotsCornerRadius="20dp"
+            app:dotsSize="10dp"
+            app:dotsSpacing="6dp"
+            app:dotsWidthFactor="3.8"
+            app:layout_constraintBottom_toTopOf="@+id/barrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:progressMode="true"
+            app:selectedDotColor="@color/limoo_primary" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="btn_intro_nex, btn_intro_skip, btn_signupF_submit" />
+
+        <com.emamagic.common_ui.widget.FontButton
+            android:id="@+id/btn_intro_nex"
+            android:layout_width="59dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_intro_next"
+            android:text="@string/next"
+            android:textColor="#093153"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_intro_skip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_intro_skip" />
+
+        <com.emamagic.common_ui.widget.FontButton
+            android:id="@+id/btn_intro_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="56dp"
+            android:background="@color/transparent"
+            android:text="@string/ignore"
+            android:textColor="#505254"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
+            android:id="@+id/btn_signupF_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/limoo_button_height"
+            android:layout_marginBottom="@dimen/limoo_very_large_margin"
+            android:background="@drawable/bg_limoo_enable_submit"
+            android:gravity="center"
+            app:is_enable="true"
+            android:text="@string/create_workspace"
+            android:textColor="@color/limoo_secondary_dark"
+            android:textSize="@dimen/limoo_16s"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

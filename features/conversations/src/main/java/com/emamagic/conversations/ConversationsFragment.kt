@@ -3,7 +3,7 @@ package com.emamagic.conversations
 import android.os.Bundle
 import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import com.emamagic.base.base.BaseFragment
+import com.emamagic.common_ui.base.BaseFragment
 import com.emamagic.conversations.databinding.FragmentConversationsBinding
 import com.emamagic.conversations.contract.ConversationsEvent
 import com.emamagic.conversations.contract.ConversationsState

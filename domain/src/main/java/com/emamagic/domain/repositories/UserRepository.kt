@@ -6,7 +6,7 @@ import com.emamagic.domain.interactors.*
 
 interface UserRepository {
 
-    suspend fun updateServerConfig(params: UpdateServerConfig.Params): ResultWrapper<ServerConfig>
+    suspend fun getServerConfig(params: GetServerConfig.Params): ResultWrapper<ServerConfig>
 
     suspend fun loginViaPhoneNumber(phoneNumber: LoginViaPhoneNumber.Params): ResultWrapper<Boolean>
 
@@ -23,5 +23,11 @@ interface UserRepository {
     suspend fun getSessionByKeycloak(): ResultWrapper<Boolean>
 
     suspend fun saveAlias(data: SaveAlias.Params): ResultWrapper<Boolean>
+
+    suspend fun isLoggedIn(): Boolean
+
+    suspend fun hasIntroBeenSeen(): Boolean
+
+    suspend fun userSawIntro()
 
 }

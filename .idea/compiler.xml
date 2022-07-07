@@ -33,12 +33,14 @@
       <module name="Limoo.features.all-thread" target="11" />
       <module name="Limoo.features.chat" target="11" />
       <module name="Limoo.features.conversations" target="11" />
+      <module name="Limoo.features.intro" target="11" />
       <module name="Limoo.features.login" target="11" />
       <module name="Limoo.features.onboarding" target="11" />
       <module name="Limoo.features.siginup" target="11" />
       <module name="Limoo.features.signup" target="11" />
       <module name="Limoo.features.splash" target="11" />
       <module name="Limoo.features.workspace-select" target="11" />
+      <module name="Limoo.intro" target="11" />
       <module name="Limoo.libs.cookie-jar" target="11" />
       <module name="Limoo.libs.countrycodepicker" target="11" />
       <module name="Limoo.libs.emoji" target="11" />

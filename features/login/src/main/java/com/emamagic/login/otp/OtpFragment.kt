@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import com.emamagic.base.base.BaseFragment
-import com.emamagic.login.LoginRouter
+import com.emamagic.common_ui.base.BaseFragment
+import com.emamagic.login.contract.LoginRouter
 import com.emamagic.login.LoginViewModel
 import com.emamagic.login.contract.LoginEvent
 import com.emamagic.login.contract.LoginState
