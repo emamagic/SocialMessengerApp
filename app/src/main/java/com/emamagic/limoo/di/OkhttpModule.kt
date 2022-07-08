@@ -1,8 +1,6 @@
 package com.emamagic.limoo.di
 
 import android.content.Context
-import coil.Coil
-import coil.ImageLoader
 import com.emamagic.limoo.BuildConfig
 import com.emamagic.data.network.auth.AppAuthenticator
 import com.emamagic.data.network.interceptor.ConnectivityInterceptor
@@ -75,9 +73,6 @@ object OkhttpModule {
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
             .build()
-        Coil.setImageLoader {
-            ImageLoader.Builder(applicationContext).okHttpClient(client).build()
-        }
         return client
     }
 

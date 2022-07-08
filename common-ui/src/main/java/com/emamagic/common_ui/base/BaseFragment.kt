@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -35,7 +34,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
     lateinit var routers: Set<@JvmSuppressWildcards Router>
     private var _binding: DB? = null
     protected val binding: DB get() = _binding!!
-    private lateinit var loading: FrameLayout
+    private var _loading: FrameLayout? = null
     private var callback: OnBackPressedCallback? = null
     protected val TAG = this.javaClass.simpleName
 
@@ -52,7 +51,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val loadingId = resources.getIdentifier("loading", "id",requireActivity().packageName)
-        loading = requireActivity().getRootView().findViewById(loadingId)!!
+        _loading = requireActivity().getRootView().findViewById(loadingId)!!
 
         viewModel.uiState.collectWhileStarted(this, ::renderViewState)
         viewModel.uiEffect.collectWhileStarted(this, ::renderDefaultViewEffect)
@@ -165,26 +164,27 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
     }
 
     private fun showLoadingModuleScope(isDim: Boolean = false) {
-        if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
-        loading.visible()
+        if (isDim) _loading?.setBackgroundColor(setColor(R.color.dim_color))
+        _loading?.visible()
     }
 
     open fun showLoading(isDim: Boolean = false, type: Any?) {
-        if (isDim) loading.setBackgroundColor(setColor(R.color.dim_color))
-        loading.visible()
+        if (isDim) _loading?.setBackgroundColor(setColor(R.color.dim_color))
+        _loading?.visible()
     }
 
     private fun hideLoadingModuleScope() {
-        loading.gone()
+        _loading?.gone()
     }
 
     open fun hideLoading(type: Any?) {
-        loading.gone()
+        _loading?.gone()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _loading = null
         if (callback != null) {
             callback?.isEnabled = false
             callback?.remove()

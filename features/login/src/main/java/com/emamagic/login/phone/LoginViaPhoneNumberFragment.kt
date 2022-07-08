@@ -28,7 +28,6 @@ class LoginViaPhoneNumberFragment :
     private lateinit var countryPicker: CountryCodePicker
 
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.setEvent(LoginEvent.InitEvent)
         setupCountryPicker()
         binding.inputEditText.onTextChange {
             viewModel.setEvent(LoginEvent.TypingPhoneNumberEvent(it))

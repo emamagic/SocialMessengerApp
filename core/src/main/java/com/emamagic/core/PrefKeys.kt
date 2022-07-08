@@ -9,5 +9,6 @@ object PrefKeys {
     const val CERT_AlIAS = "certificate_alias"
     const val INTRO_SEEN = "intro_seen"
     const val HOST = "host"
+    const val FILE_SERVER_ADDRESS = "file_server_address"
 
 }

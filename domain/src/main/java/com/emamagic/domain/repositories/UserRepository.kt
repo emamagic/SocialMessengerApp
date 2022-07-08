@@ -30,4 +30,7 @@ interface UserRepository {
 
     suspend fun userSawIntro()
 
+    suspend fun signupUser(params: SignupUser.Params): ResultWrapper<User>
+
+
 }

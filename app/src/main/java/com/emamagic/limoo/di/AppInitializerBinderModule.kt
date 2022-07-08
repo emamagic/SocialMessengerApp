@@ -1,9 +1,7 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.common_ui.appinitializer.AppInitializer
-import com.emamagic.limoo.appinitializers.CacheInitializer
-import com.emamagic.limoo.appinitializers.ServerConfigInitializer
-import com.emamagic.limoo.appinitializers.TypeFaceInitializer
+import com.emamagic.limoo.appinitializers.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,6 +23,14 @@ abstract class AppInitializerBinderModule {
     @Binds
     @IntoSet
     abstract fun bindServerConfigInitializer(serverConfigInitializer: ServerConfigInitializer): AppInitializer
+
+    @Binds
+    @IntoSet
+    abstract fun bindImageLoaderInitializer(imageLoaderInitializer: ImageLoaderInitializer): AppInitializer
+
+    @Binds
+    @IntoSet
+    abstract fun bindUploaderInitializer(uploaderInitializer: UploaderInitializer): AppInitializer
 
 //    @Binds
 //    @IntoSet

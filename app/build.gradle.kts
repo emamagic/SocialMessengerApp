@@ -70,6 +70,8 @@ dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.cache))
     implementation(project(Modules.commonUi))
+    implementation(project(Modules.imageLoader))
+    implementation(project(Modules.uploader))
 
     // Features
     implementation(project(Modules.splash))
@@ -80,7 +82,6 @@ dependencies {
 
 
     implementation(Libs.multidex)
-    implementation(Libs.coil)
     implementation(Libs.timber)
     implementation(Libs.hilt)
     kapt(Libs.hilt_kapt)

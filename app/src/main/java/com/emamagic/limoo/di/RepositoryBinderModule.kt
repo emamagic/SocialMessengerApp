@@ -2,8 +2,10 @@ package com.emamagic.limoo.di
 
 import com.emamagic.core.AuthUserScope
 import com.emamagic.data.repositories.ConversationRepositoryImpl
+import com.emamagic.data.repositories.FileRepositoryImpl
 import com.emamagic.data.repositories.UserRepositoryImpl
 import com.emamagic.domain.repositories.ConversationRepository
+import com.emamagic.domain.repositories.FileRepository
 import com.emamagic.domain.repositories.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -21,6 +23,9 @@ abstract class RepositoryBinderModule {
     @Binds
     abstract fun bindConversationRepository(conversationRepositoryImpl: ConversationRepositoryImpl): ConversationRepository
 
+    @AuthUserScope
+    @Binds
+    abstract fun bindFileRepository(fileRepositoryImpl: FileRepositoryImpl): FileRepository
 
 
 }

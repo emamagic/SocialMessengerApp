@@ -104,6 +104,12 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun userSawIntro() { pref[PrefKeys.INTRO_SEEN] = true }
 
+    override suspend fun signupUser(params: SignupUser.Params): ResultWrapper<User> = fresh {
+        restProvider.userService.signup(params).toResponse()
+    }.toResult(doOnSuccess = {
+        pref[PrefKeys.CURRENT_USER] = it
+    })
+
     override fun receiveData(event: Event) {
         when (event.id) {
             Const.LOGGED_OUT -> {

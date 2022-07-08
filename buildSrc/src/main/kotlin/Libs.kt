@@ -115,4 +115,8 @@ object Libs {
 
     // AppAuth
     const val appAuth = "net.openid:appauth:${Versions.appAuth}"
+
+    // Uploader
+    const val uploader = "net.gotev:uploadservice:${Versions.uploader}"
+    const val uploader_okhttp = "net.gotev:uploadservice-okhttp:${Versions.uploader}"
 }

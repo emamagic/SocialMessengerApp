@@ -69,6 +69,9 @@ class RestProvider @Inject constructor(
 //        TMP_FILE_SERVER_ADDRESS = mFileServerAddress
     }
 
+    val baseFileServerUrl
+        get() = BASE_FILE_SERVER_ADDRESS
+
     private fun isHostChanged(host: String) =
         this::TMP_HOST.isInitialized && TMP_HOST != host
 

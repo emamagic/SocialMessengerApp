@@ -91,7 +91,6 @@ class LoginViewModel @Inject constructor(
 
     override fun handleEvent(event: LoginEvent) {
         when (event) {
-            LoginEvent.InitEvent -> init()
             is LoginEvent.TypingPhoneNumberEvent -> typingPhoneNumberEvent(event.phoneNumber)
             LoginEvent.ChangeServerNameClickEvent -> changeServerNameClickedEvent()
             LoginEvent.LoginWithUsernameClickEvent -> loginWithUsernameClickedEvent()

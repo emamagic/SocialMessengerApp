@@ -4,6 +4,7 @@ import com.emamagic.domain.entities.OrganizationEntity
 import com.emamagic.domain.entities.User
 import com.emamagic.domain.entities.WorkspaceEntity
 import com.emamagic.domain.interactors.LoginViaPhoneNumber
+import com.emamagic.domain.interactors.SignupUser
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -43,5 +44,8 @@ interface UserService {
     suspend fun getWorkspaceById(
         @Path("workspace_id") workspaceId: String
     ): WorkspaceEntity
+
+    @POST("user/signup")
+    suspend fun signup(@Body userInfo: SignupUser.Params): Response<User>
 
 }

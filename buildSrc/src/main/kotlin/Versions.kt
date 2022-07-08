@@ -44,5 +44,6 @@ object Versions {
     const val rx_java = "3.0.0"
     const val coil = "2.1.0"
     const val appAuth = "0.11.1"
+    const val uploader = "4.7.0"
 
 }

@@ -1,6 +1,7 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.core.Bridge
+import com.emamagic.domain.repositories.FileRepository
 import com.emamagic.domain.repositories.UserRepository
 import com.emamagic.limoo.AuthUserComponentManager
 import dagger.Module
@@ -21,5 +22,15 @@ object EntryBridgeModule {
         return EntryPoints
             .get(authUserComponentManager, AuthEntryPoint::class.java)
             .getUserRepository()
+    }
+
+    @Bridge
+    @Provides
+    fun provideFileRepository(
+        authUserComponentManager: AuthUserComponentManager
+    ): FileRepository {
+        return EntryPoints
+            .get(authUserComponentManager, AuthEntryPoint::class.java)
+            .getFileRepository()
     }
 }
