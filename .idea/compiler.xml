@@ -39,6 +39,7 @@
       <module name="Limoo.features.siginup" target="11" />
       <module name="Limoo.features.signup" target="11" />
       <module name="Limoo.features.splash" target="11" />
+      <module name="Limoo.features.workspace-create" target="11" />
       <module name="Limoo.features.workspace-select" target="11" />
       <module name="Limoo.file-manager" target="11" />
       <module name="Limoo.image-loader" target="11" />

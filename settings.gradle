@@ -33,6 +33,7 @@ include (
         ':features:all-thread',
         ':features:splash',
         ':features:signup',
+        ':features:workspace-create',
         ':file-manager',
         ':mvi',
         ':data',

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/root_view"
+        android:background="@color/default_color"
+        android:paddingLeft="@dimen/limoo_root_padding"
+        android:paddingRight="@dimen/limoo_root_padding">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="8dp"
+            android:background="@drawable/bg_tab_border"
+            android:layout_marginTop="@dimen/limoo_large_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_tab_border"
+                app:tabGravity="fill"
+                app:tabIndicator="@drawable/bg_tab_indicator"
+                app:tabIndicatorColor="@color/limoo_secondary"
+                app:tabIndicatorGravity="stretch"
+                app:tabInlineLabel="true"
+                app:tabMode="fixed" />
+
+        </FrameLayout>
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="@dimen/limoo_small_margin"
+            app:layout_constraintBottom_toTopOf="@+id/keyboard_sensitive_items"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/keyboard_sensitive_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/limoo_very_large_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_pager"
+            app:layout_constraintVertical_chainStyle="spread_inside">
+
+            <com.emamagic.common_ui.widget.progress_button.FontButtonWithProgress
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/limoo_button_height"
+                android:gravity="center"
+                android:background="@drawable/bg_limoo_disable_submit"
+                android:enabled="false"
+                android:text="@string/crete_organization_workspace"
+                android:textColor="@color/limoo_secondary_dark"
+                android:textSize="@dimen/limoo_16s"/>
+
+            <com.emamagic.common_ui.widget.FontTextView
+                android:id="@+id/txt_create_later"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/limoo_large_margin"
+                android:text="بعدا میسازم"
+                android:textColor="@color/limoo_grey_3"
+                android:textSize="@dimen/limoo_12s"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

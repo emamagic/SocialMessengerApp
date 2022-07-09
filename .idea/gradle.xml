@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/features/login" />
             <option value="$PROJECT_DIR$/features/signup" />
             <option value="$PROJECT_DIR$/features/splash" />
+            <option value="$PROJECT_DIR$/features/workspace-create" />
             <option value="$PROJECT_DIR$/features/workspace-select" />
             <option value="$PROJECT_DIR$/file-manager" />
             <option value="$PROJECT_DIR$/mvi" />

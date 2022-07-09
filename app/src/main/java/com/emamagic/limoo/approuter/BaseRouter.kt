@@ -22,6 +22,11 @@ abstract class BaseRouter: Router {
         instance.findNavController().popBackStack()
     }
 
+    override fun pushToSignup(instance: Fragment) {
+        val navController = instance.findNavController()
+        navController.navigate(DeepLink.ACTION_TO_SIGNUP.toUri(), NavOptions.Builder().setPopUpTo(navController.currentDestination!!.id, true).build())
+    }
+
     override fun pushToLogin(instance: Fragment) {
         val navController = instance.findNavController()
         navController.navigate(DeepLink.ACTION_TO_LOGIN.toUri(), NavOptions.Builder().setPopUpTo(navController.currentDestination!!.id, true).build())

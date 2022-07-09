@@ -30,12 +30,19 @@ class FileRepositoryImpl @Inject constructor(
 ) : FileRepository {
 
     private fun toAttachments(bodyString: String): List<Attachment> =
-        Gson().fromJson(bodyString, Array<Attachment>::class.java).asList()
+        Gson().fromJson(bodyString, Array<Attachment>::class.java).asList().also {
+            it.map { attachment ->
+                attachment.url = "${fileServerUrl}?mode=view&hash=${attachment.hash}"
+                attachment.thumbnailUrl = "${fileServerUrl}/thumbnail??mode=view*hash=${attachment.hash}"
+            }
+        }
+
+    private val fileServerUrl get() = "${restProvider.baseFileServerUrl}files"
 
     override fun uploadFile(params: UploadFile.Params): Flow<ResultWrapper<List<Attachment>>> =
         callbackFlow {
             val observer =
-                MultipartUploadRequest(context, "${restProvider.baseFileServerUrl}files").apply {
+                MultipartUploadRequest(context, fileServerUrl).apply {
                     params.filesPath.forEach { filePath ->
                         addFileToUpload(filePath, "file[]")
                     }
@@ -73,7 +80,7 @@ class FileRepositoryImpl @Inject constructor(
                             override fun onCompletedWhileNotObserving() {}
                         })
 
-            awaitClose { observer.unregister() }
+//            awaitClose { observer.unregister() }
         }
 
 

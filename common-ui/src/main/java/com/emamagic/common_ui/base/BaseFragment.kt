@@ -149,6 +149,7 @@ abstract class BaseFragment<DB : ViewDataBinding, STATE : State, ACTION : EVENT,
             when (route) {
                 is Route.Back -> it.pop(this)
                 is Route.NeedToLogin -> it.pushToLogin(this)
+                is Route.NeedToSignup -> it.pushToSignup(this)
                 else -> it.push(this, route)
             }
         }

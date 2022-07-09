@@ -28,8 +28,8 @@ object NavigationModule {
 //    @Singleton
 //    fun provideWorkspaceSelectRouter() = WorkspaceSelectRouterImpl()
 //
-//    @Provides
-//    @Singleton
-//    fun provideWorkspaceCreateRouter() = WorkspaceCreateRouterImpl()
+    @Provides
+    @Singleton
+    fun provideWorkspaceCreateRouter() = WorkspaceCreateRouterImpl()
 
 }

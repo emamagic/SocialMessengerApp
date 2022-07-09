@@ -38,19 +38,24 @@ fun ErrorEntity?.toError(): Error {
     val errorType: String? = this!!::class.simpleName
     when (this) {
         is ErrorEntity.Api -> {
-            (throwable as HttpException).errorBody?.let {
+            if (throwable is HttpException) {
                 try {
                     error =
-                        Gson().fromJson((throwable as HttpException).errorBody, Error::class.java)
+                        Gson().fromJson(
+                            (throwable as HttpException).errorBody,
+                            Error::class.java
+                        )
                     message = error?.message
                     displayMessage = error?.display_message
-                    statusCode = error?.statusCode
+                    statusCode = error?.status_code
                 } catch (t: Throwable) {
                     message = "Wrong Error Model Sent"
                     displayMessage = "Error Happened"
                     statusCode = (this.throwable as HttpException).code
                 }
+
             }
+
         }
         is ErrorEntity.Network -> {
             throwable =
@@ -75,7 +80,7 @@ fun ErrorEntity?.toError(): Error {
         id = error?.id,
         message = message,
         requestId = error?.requestId,
-        statusCode = statusCode,
+        status_code = statusCode,
         isOauth = error?.isOauth,
         i18n_key = error?.i18n_key,
         display_message = displayMessage,
@@ -84,7 +89,7 @@ fun ErrorEntity?.toError(): Error {
     )
 }
 
-suspend fun <T,E> SafeWrapper<T>.toResult(
+suspend fun <T, E> SafeWrapper<T>.toResult(
     doOnSuccess: (suspend (T) -> Unit)? = null,
     doOnFailed: ((Error) -> Unit)? = null,
     tryIfFailed: (suspend () -> E?)? = null,

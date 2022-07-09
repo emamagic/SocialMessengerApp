@@ -19,9 +19,6 @@ class ConversationsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             setEffect { BaseEffect.HideLoading(scope = ToastScope.MODULE_SCOPE) }
-//            store.dispatch(ConversationAction.GetMyWorkspaces)
-//            delay(5000)
-//            onError(Error(statusCode = 401))
         }
     }
 

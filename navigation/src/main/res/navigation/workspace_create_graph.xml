@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/workspace_create_graph"
+    app:startDestination="@id/workspace_create_fragment">
+
+    <fragment
+        android:id="@+id/workspace_create_fragment"
+        android:name="com.emamagic.workspace_create.WorkspaceCreateFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="android-app-limoo://workspace_create"/>
+    </fragment>
+
+
+</navigation>

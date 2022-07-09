@@ -16,5 +16,7 @@
     <include
         app:graph="@navigation/signup_graph"/>
 
+    <include
+        app:graph="@navigation/workspace_create_graph"/>
 
 </navigation>

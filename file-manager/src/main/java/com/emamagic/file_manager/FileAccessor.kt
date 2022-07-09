@@ -6,7 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-class MediaHelper constructor(
+class FileAccessor constructor(
     private val lifecycleOwner: LifecycleOwner,
     private val registry: ActivityResultRegistry
 ): DefaultLifecycleObserver {

@@ -18,7 +18,6 @@ class SplashRouterImpl: BaseRouter(), SplashRouter {
         if (route is SplashRouter.Routes) { // todo or you can use hashMap for multibinding and get right Router in BaseFragment
             when (route) {
                 SplashRouter.Routes.ToConversations -> DeepLink.ACTION_TO_CONVERSATIONS.toUri()
-                SplashRouter.Routes.ToSignup -> DeepLink.ACTION_TO_SIGNUP.toUri()
                 SplashRouter.Routes.ToWorkspaceCreate -> DeepLink.ACTION_TO_WORKSPACE_CREATE.toUri()
                 SplashRouter.Routes.ToWorkspaceSelect -> DeepLink.ACTION_TO_WORKSPACE_SELECT.toUri()
                 else -> null

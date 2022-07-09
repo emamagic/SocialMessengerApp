@@ -7,7 +7,6 @@ interface SplashRouter: Router {
 
     sealed class Routes: Route {
         object ToConversations: Routes()
-        object ToSignup: Routes()
         object ToWorkspaceSelect: Routes()
         object ToWorkspaceCreate: Routes()
     }

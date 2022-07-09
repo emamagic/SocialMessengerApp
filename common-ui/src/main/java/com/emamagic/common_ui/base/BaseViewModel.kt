@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import coil.network.HttpException
 import com.emamagic.core.*
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.BaseEffect
@@ -91,15 +92,18 @@ abstract class BaseViewModel<STATE : State, ACTION : EVENT, ROUTER : Route>: Vie
 
         }
     }
-    // todo this should be private
-    fun onError(error: Error) {
+    // todo take signup here
+    private fun onError(error: Error) {
         val message: String = if (!error.display_message.isNullOrEmpty()) error.display_message!!
         else if (!error.message.isNullOrEmpty()) error.message!!
         else "${error.throwable?.message}  ${error.throwable?.cause} \n ${error.throwable?.stackTraceToString()}"
-        Log.e("TAG", "Error -> message: $message  statusCode: ${error.statusCode} errorType: ${error.errorType}")
-        when (error.statusCode) {
+        Log.e("TAG", "Error -> message: $message  statusCode: ${error.status_code} errorType: ${error.errorType}")
+        when (error.status_code) {
             HttpURLConnection.HTTP_UNAUTHORIZED -> {
                 routerDelegate.pushRoute(Route.NeedToLogin as ROUTER)
+            }
+            LimooHttpCode.HTTP_SIGNUP -> {
+                routerDelegate.pushRoute(Route.NeedToSignup as ROUTER)
             }
             else -> {
                 setEffect {

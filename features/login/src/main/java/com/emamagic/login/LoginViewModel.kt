@@ -44,7 +44,6 @@ class LoginViewModel @Inject constructor(
                 is ResultWrapper.Success -> {
                     when (checkLoginProcess()) {
                         CheckLoginProcess.LoginProcessResult.GoToConversation -> routerDelegate.pushRoute(LoginRouter.Routes.ToConversations)
-                        CheckLoginProcess.LoginProcessResult.GoToIntro -> routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
                         CheckLoginProcess.LoginProcessResult.GoToWorkspaceCreate -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceCreate)
                         CheckLoginProcess.LoginProcessResult.GoToWorkspaceSelect -> routerDelegate.pushRoute(LoginRouter.Routes.ToWorkspaceSelect)
                     }
@@ -55,7 +54,7 @@ class LoginViewModel @Inject constructor(
 
     private suspend fun checkIfLoginNeeded(error: Error) {
         getServerConfig {
-            when (error.statusCode) {
+            when (error.status_code) {
                 HttpURLConnection.HTTP_UNAUTHORIZED -> {
                     if (it.config.isLoginViaPhoneNumberAllowed) { // do nothing
                     } else if (it.config.isLoginViaUsernameAllowed) {
@@ -281,7 +280,13 @@ class LoginViewModel @Inject constructor(
         val result = verifyOtp(VerifyOtp.Params(code, G_phoneNumber, deviceId))
         when (result) {
             is ResultWrapper.FetchLoading -> TODO()
-            is ResultWrapper.Failed ->  setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_OTP_CODE) } // invalid otp code or ...
+            is ResultWrapper.Failed ->  {
+                if (result.error?.status_code == LimooHttpCode.HTTP_SIGNUP) {
+                    routerDelegate.pushRoute(LoginRouter.Routes.ToSignup)
+                } else {
+                    setEffect { BaseEffect.InvalidInput(type = LoginState.INVALID_OTP_CODE) }
+                }
+            }
             is ResultWrapper.Success -> init()
         }.exhaustive
     }

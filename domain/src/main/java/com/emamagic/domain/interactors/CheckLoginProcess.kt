@@ -13,26 +13,24 @@ import javax.inject.Inject
 class CheckLoginProcess @Inject constructor(
     private val getWorkspaces: GetWorkspaces,
     private val getOrganizations: GetOrganizations,
-    private val introStatus: IntroStatus,
     private val dispatchers: AppCoroutineDispatchers
 ) {
 
     suspend operator fun invoke(): LoginProcessResult = withContext(dispatchers.io) {
-        val hasIntroBeenSeen = introStatus.hasIntroBeenSeen()
         flowOf(getWorkspaces(Unit)).zip(flowOf(getOrganizations(Unit))) { workspacesResult, organizationResult ->
             if (workspacesResult.succeeded && hasAnyWorkspace(workspacesResult.data!!)) {
                 if (hasAnyAcceptedWorkspace(workspacesResult.data!!)) {
-                    goConversationOrIntro(hasIntroBeenSeen)
+                    LoginProcessResult.GoToConversation
                 } else {
                     if (organizationResult.succeeded && hasAnyOrganization(organizationResult.data!!)) {
-                        goConversationOrIntro(hasIntroBeenSeen)
+                        LoginProcessResult.GoToConversation
                     } else {
                         LoginProcessResult.GoToWorkspaceSelect
                     }
                 }
             } else {
                 if (organizationResult.succeeded && hasAnyOrganization(organizationResult.data!!)) {
-                    goConversationOrIntro(hasIntroBeenSeen)
+                    LoginProcessResult.GoToConversation
                 } else {
                     LoginProcessResult.GoToWorkspaceCreate
                 }
@@ -54,17 +52,8 @@ class CheckLoginProcess @Inject constructor(
         return workspaces.isNotEmpty()
     }
 
-    private fun goConversationOrIntro(hasIntroBeenSeen: Boolean): LoginProcessResult {
-        return if (hasIntroBeenSeen) {
-            LoginProcessResult.GoToConversation
-        } else {
-            LoginProcessResult.GoToIntro
-        }
-    }
-
     sealed class LoginProcessResult {
         object GoToConversation: LoginProcessResult()
-        object GoToIntro: LoginProcessResult()
         object GoToWorkspaceSelect: LoginProcessResult()
         object GoToWorkspaceCreate: LoginProcessResult()
     }

@@ -77,6 +77,7 @@ dependencies {
     implementation(project(Modules.signup))
     implementation(project(Modules.conversation))
     implementation(project(Modules.chat))
+    implementation(project(Modules.workspaceCreate))
 
 
     implementation(Libs.uploader_okhttp)

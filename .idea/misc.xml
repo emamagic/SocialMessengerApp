@@ -18,6 +18,8 @@
         <entry key="common-ui/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
         <entry key="common-ui/src/main/res/layout/layout_validator.xml" value="0.34322916666666664" />
         <entry key="common-ui/src/main/res/layout/row_conversation.xml" value="0.34322916666666664" />
+        <entry key="common-ui/src/main/res/layout/row_item_spinner_workspace.xml" value="0.34322916666666664" />
+        <entry key="common-ui/src/main/res/layout/searchable_list_dialog.xml" value="0.34322916666666664" />
         <entry key="core/src/main/res/drawable/bg_corroct_toast.xml" value="0.2005" />
         <entry key="core/src/main/res/drawable/bg_limoo_disable_submit.xml" value="0.1945" />
         <entry key="core/src/main/res/drawable/bg_signup_phone_number_default.xml" value="0.1945" />
@@ -77,6 +79,13 @@
         <entry key="features/signup/src/main/res/layout/fragment_intro_two.xml" value="0.34322916666666664" />
         <entry key="features/signup/src/main/res/layout/fragment_signup.xml" value="0.34322916666666664" />
         <entry key="features/splash/src/main/res/layout/fragment_splash.xml" value="0.34322916666666664" />
+        <entry key="features/workspace-create/src/main/res/drawable/bg_tab_border.xml" value="0.2005" />
+        <entry key="features/workspace-create/src/main/res/drawable/bg_tab_indicator.xml" value="0.2005" />
+        <entry key="features/workspace-create/src/main/res/drawable/ic_arrow_down_black.xml" value="0.2005" />
+        <entry key="features/workspace-create/src/main/res/drawable/ic_place_holder_organiz.xml" value="0.2005" />
+        <entry key="features/workspace-create/src/main/res/layout/fragment_create_worksapce.xml" value="0.3421875" />
+        <entry key="features/workspace-create/src/main/res/layout/fragment_default_workspace.xml" value="0.3421875" />
+        <entry key="features/workspace-create/src/main/res/layout/fragment_organization_workspace.xml" value="0.34322916666666664" />
       </map>
     </option>
   </component>

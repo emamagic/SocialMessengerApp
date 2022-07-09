@@ -17,18 +17,33 @@ class SignupFragment: BaseFragment<FragmentSignupBinding, SignupState, SignupEve
 
     override val viewModel: SignupViewModel by hiltNavGraphViewModels(com.emamagic.navigation.R.id.signup_graph)
 
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        viewModel.setEvent(SignupEvent.UserPickedAvatar(it))
+    }
+
     override fun onFragmentCreated(view: View, savedInstanceState: Bundle?) {
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            viewModel.setEvent(SignupEvent.UserPickedAvatar(it))
+
+        binding.imgProfileFLogo.setOnClickListener { getContent.launch("image/*") }
+
+        binding.btnSubmit.setOnClickListener {
+            viewModel.setEvent(SignupEvent.Signup(binding.inputEditTextUsername.text.toString(), binding.inputEditTextFamily.text.toString(), binding.inputEditTextEmail.text.toString()))
         }
-        binding.imgProfileFLogo.setOnClickListener {
-            getContent.launch("image/*")
-        }
+
+
     }
 
     override fun renderViewState(viewState: SignupState) {
-        if (!viewState.avatarHash.isNullOrEmpty()) {
-            binding.imgProfileFLogo.load("https://test.limonadapp.ir/fileserver/api/v1/files?mode=view&hash=${viewState.avatarHash}")
+        if (!viewState.avatarUrl.isNullOrEmpty()) {
+            binding.imgProfileFLogo.load(viewState.avatarUrl)
         }
+    }
+
+    override fun invalidInput(message: String?, resId: Int?, type: Any?): Boolean {
+        when (type) {
+            SignupState.FIRST_NAME_INVALID -> binding.validatorInputUsername.invalidate()
+            SignupState.LAST_NAME_INVALID -> binding.validatorTextFamily.invalidate()
+            SignupState.EMAIL_INVALID -> binding.validatorInputEmail.invalidateInput()
+        }
+        return true
     }
 }

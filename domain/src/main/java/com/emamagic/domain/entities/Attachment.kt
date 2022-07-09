@@ -1,7 +1,5 @@
 package com.emamagic.domain.entities
 
-import com.google.gson.annotations.SerializedName
-
 class Attachment(
     val hash: String,
     val name: String,
@@ -12,15 +10,8 @@ class Attachment(
     val createAt: String? = null,
     val userId: String? = null,
     val hasPreviewImage: Boolean? = null,
-    val threadRootId: String? = null,
-//    val metadata: JSONObject? = null
+    val threadRootId: String? = null
 ) {
-//
-//    @SerializedName(value = "mime_type", alternate = ["contentType"])
-//    val mimeType: String = _mimeType ?: MediaHelper.getMimeType(name) ?: ""
-//        get() {
-//            //field set by reflection can be null
-//            return field ?: (MediaHelper.getMimeType(name) ?: "")
-//        }
-
+    var url: String? = null
+    var thumbnailUrl: String? = null
 }

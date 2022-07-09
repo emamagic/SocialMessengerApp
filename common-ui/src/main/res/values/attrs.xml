@@ -16,15 +16,20 @@
         <attr name="is_enable" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="CircleColorImageView">
-        <attr name="circleColor" format="color" />
-        <attr name="foregroundImageTintColor" format="color" />
-    </declare-styleable>
-
     <declare-styleable name="LimooValidatorInput">
         <attr name="state_default" format="integer" />
         <attr name="state_focused" format="integer" />
         <attr name="state_fail" format="integer" />
     </declare-styleable>
 
+        <declare-styleable name="CircleImageView">
+            <attr name="civ_border_width" format="dimension" />
+            <attr name="civ_border_color" format="color" />
+            <attr name="civ_border_overlay" format="boolean" />
+            <attr name="civ_circle_background_color" format="color" />
+        </declare-styleable>
+
+    <declare-styleable name="SearchableSpinner">
+        <attr name="hintText" format="string"/>
+    </declare-styleable>
 </resources>

@@ -21,7 +21,6 @@ class SignupUser @Inject constructor(
         var firstName: String? = null,
         var lastName: String? = null,
         var email: String? = null,
-        var phoneNumber: String? = null,
         var avatarHash: String? = null
     )
 

@@ -11,6 +11,8 @@ object Modules {
     const val countryPicker = ":country-picker"
     const val login = ":features:login"
     const val chat = ":features:chat"
+    const val workspaceSelect = ":features:workspace-select"
+    const val workspaceCreate = ":features:workspace-create"
     const val conversation = ":features:conversations"
     const val splash = ":features:splash"
     const val signup = ":features:signup"
