@@ -18,11 +18,11 @@ dependencies {
 
     implementation(project(Modules.emoji))
     implementation(project(Modules.core))
-    implementation(project(Modules.imageLoader))
     implementation(Libs.swipe_refresh)
     api(project(Modules.coreAndroid))
     api(project(Modules.mvi))
     api(project(Modules.navigation))
+    api(Libs.coil)
     implementation(Libs.life_cycle_scope)
 
     api(Libs.epoxy)

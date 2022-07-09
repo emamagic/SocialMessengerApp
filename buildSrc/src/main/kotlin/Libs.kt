@@ -45,6 +45,7 @@ object Libs {
     // LifeCycle Scope
     const val life_cycle_scope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.coroutine_scope}"
     const val life_cycle_scope_common = "androidx.lifecycle:lifecycle-common:${Versions.coroutine_scope}"
+    const val life_cycle_process = "androidx.lifecycle:lifecycle-process:${Versions.coroutine_scope}"
 
     // ViewModel Scope
     const val view_model_scope = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.coroutine_scope}"

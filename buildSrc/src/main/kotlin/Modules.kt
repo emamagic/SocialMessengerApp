@@ -17,7 +17,5 @@ object Modules {
     const val mvi = ":mvi"
     const val data = ":data"
     const val coreAndroid = ":core-android"
-    const val imageLoader = ":image-loader"
-    const val uploader = ":uploader"
     const val fileManager = ":file-manager"
 }

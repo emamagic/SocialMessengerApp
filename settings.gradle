@@ -33,8 +33,6 @@ include (
         ':features:all-thread',
         ':features:splash',
         ':features:signup',
-        ':image-loader',
-        ':uploader',
         ':file-manager',
         ':mvi',
         ':data',

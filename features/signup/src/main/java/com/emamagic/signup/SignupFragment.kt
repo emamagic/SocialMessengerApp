@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import coil.load
 import com.emamagic.common_ui.base.BaseFragment
 import com.emamagic.signup.contract.SignupEvent
 import com.emamagic.signup.contract.SignupRouter
@@ -26,6 +27,8 @@ class SignupFragment: BaseFragment<FragmentSignupBinding, SignupState, SignupEve
     }
 
     override fun renderViewState(viewState: SignupState) {
-
+        if (!viewState.avatarHash.isNullOrEmpty()) {
+            binding.imgProfileFLogo.load("https://test.limonadapp.ir/fileserver/api/v1/files?mode=view&hash=${viewState.avatarHash}")
+        }
     }
 }

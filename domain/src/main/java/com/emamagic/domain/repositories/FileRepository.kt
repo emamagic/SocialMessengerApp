@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface FileRepository {
 
-    fun uploadFile(params: UploadFile.Params): ResultWrapper<List<Attachment>>
+    fun uploadFile(params: UploadFile.Params): Flow<ResultWrapper<List<Attachment>>>
 }

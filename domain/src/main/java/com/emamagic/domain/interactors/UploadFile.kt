@@ -12,11 +12,14 @@ class UploadFile @Inject constructor(
     private val fileRepository: FileRepository
 ) {
 
-    operator fun invoke(params: Params): ResultWrapper<List<Attachment>> = fileRepository.uploadFile(params)
+    operator fun invoke(filePath: String): Flow<ResultWrapper<List<Attachment>>> =
+        fileRepository.uploadFile(Params(listOf(filePath)))
+
+    operator fun invoke(filesPath: List<String>): Flow<ResultWrapper<List<Attachment>>> =
+        fileRepository.uploadFile(Params(filesPath))
 
     data class Params(
-        val data: String,
-        val fileName: String
+        val filesPath: List<String>
     )
 
 }

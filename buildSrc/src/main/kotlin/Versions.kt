@@ -20,7 +20,7 @@ object Versions {
     const val multidex = "2.0.1"
     const val java_x = "1"
     const val kotlin = "1.6.20"
-    const val coroutine_scope = "2.4.0"
+    const val coroutine_scope = "2.6.0-alpha01"
     const val kotlin_coroutines = "1.6.1"
     const val store_version = "4.0.5"
     const val gson = "2.9.0"

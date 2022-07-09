@@ -31,11 +31,9 @@
             <option value="$PROJECT_DIR$/features/splash" />
             <option value="$PROJECT_DIR$/features/workspace-select" />
             <option value="$PROJECT_DIR$/file-manager" />
-            <option value="$PROJECT_DIR$/image-loader" />
             <option value="$PROJECT_DIR$/mvi" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/safe" />
-            <option value="$PROJECT_DIR$/uploader" />
           </set>
         </option>
       </GradleProjectSettings>

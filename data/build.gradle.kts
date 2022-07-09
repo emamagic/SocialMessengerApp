@@ -12,7 +12,6 @@ dependencies {
 
     api(project(Modules.cookieJar))
     implementation(project(Modules.domain))
-    implementation(project(Modules.uploader))
     implementation(Libs.gson_converter)
     api(Libs.room)
     implementation(Libs.room_coroutine)
@@ -25,5 +24,7 @@ dependencies {
     implementation(Libs.gson)
     implementation(Libs.store_4)
     api(Libs.logging_interceptor)
+    implementation(Libs.uploader)
+    implementation(Libs.life_cycle_process)
 
 }
