@@ -8,7 +8,7 @@ object Versions {
     const val junit_4 = "4.13.2"
     const val androidx_junit = "1.1.3"
     const val androidx_espresso = "3.4.0"
-    const val tools = "7.2.0"
+    const val tools = "7.2.1"
     const val gradle = "1.6.10"
     const val hilt = "2.42"
     const val hilt_nav_graph_scope = "1.0.0"
