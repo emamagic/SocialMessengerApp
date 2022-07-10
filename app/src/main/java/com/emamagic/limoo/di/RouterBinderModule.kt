@@ -4,7 +4,7 @@ import com.emamagic.limoo.approuter.*
 import com.emamagic.login.contract.LoginRouter
 import com.emamagic.signup.contract.SignupRouter
 import com.emamagic.splash.contract.SplashRouter
-import com.emamagic.workspace_create.contract.WorkspaceCreateRouter
+import com.emamagic.workspace.contract.WorkspaceRouter
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.migration.DisableInstallInCheck
@@ -23,7 +23,7 @@ abstract class RouterBinderModule {
     abstract fun bindSignupRouter(signupRouterImpl: SignupRouterImpl): SignupRouter
 
     @Binds
-    abstract fun bindWorkspaceCreateRouter(workspaceCreateRouterImpl: WorkspaceCreateRouterImpl): WorkspaceCreateRouter
+    abstract fun bindWorkspaceCreateRouter(workspaceCreateRouterImpl: WorkspaceRouterImpl): WorkspaceRouter
 
 //    @Binds
 //    abstract fun bindWorkspaceSelectRouter(workspaceSelectRouterImpl: WorkspaceSelectRouterImpl): WorkspaceSel

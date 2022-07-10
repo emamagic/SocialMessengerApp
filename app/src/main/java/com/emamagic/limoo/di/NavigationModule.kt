@@ -30,6 +30,6 @@ object NavigationModule {
 //
     @Provides
     @Singleton
-    fun provideWorkspaceCreateRouter() = WorkspaceCreateRouterImpl()
+    fun provideWorkspaceCreateRouter() = WorkspaceRouterImpl()
 
 }

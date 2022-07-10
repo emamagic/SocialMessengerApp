@@ -3,6 +3,7 @@ package com.emamagic.limoo.di
 import com.emamagic.data.network.RestProvider
 import com.emamagic.domain.repositories.FileRepository
 import com.emamagic.domain.repositories.UserRepository
+import com.emamagic.domain.repositories.WorkspaceRepository
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 
@@ -11,5 +12,6 @@ import dagger.hilt.InstallIn
 interface AuthEntryPoint {
     fun getUserRepository(): UserRepository
     fun getFileRepository(): FileRepository
+    fun getWorkspaceRepository(): WorkspaceRepository
     fun getRestProvider(): RestProvider
 }

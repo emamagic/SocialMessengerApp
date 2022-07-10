@@ -3,8 +3,8 @@ package com.emamagic.data.network.services
 import com.emamagic.domain.entities.OrganizationEntity
 import com.emamagic.domain.entities.User
 import com.emamagic.domain.entities.WorkspaceEntity
-import com.emamagic.domain.interactors.LoginViaPhoneNumber
-import com.emamagic.domain.interactors.SignupUser
+import com.emamagic.domain.interactors.login.LoginViaPhoneNumber
+import com.emamagic.domain.interactors.login.SignupUser
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*

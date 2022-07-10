@@ -9,6 +9,10 @@ import com.emamagic.data.network.RestProvider
 import com.emamagic.data.network.auth.UserAuthSession
 import com.emamagic.domain.entities.*
 import com.emamagic.domain.interactors.*
+import com.emamagic.domain.interactors.login.LoginViaPhoneNumber
+import com.emamagic.domain.interactors.login.LoginViaUsername
+import com.emamagic.domain.interactors.login.SignupUser
+import com.emamagic.domain.interactors.login.VerifyOtp
 import com.emamagic.domain.publisher.Event
 import com.emamagic.domain.publisher.NotificationCenter
 import com.emamagic.domain.repositories.UserRepository

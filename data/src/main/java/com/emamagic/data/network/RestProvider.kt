@@ -5,6 +5,7 @@ import com.emamagic.core.resettableManager
 import com.emamagic.data.di.RetrofitFactory
 import com.emamagic.data.network.services.ConfigService
 import com.emamagic.data.network.services.UserService
+import com.emamagic.data.network.services.WorkspaceService
 import com.google.gson.JsonObject
 import dagger.Lazy
 import okhttp3.Call
@@ -79,11 +80,14 @@ class RestProvider @Inject constructor(
         this::TMP_FILE_SERVER_ADDRESS.isInitialized && TMP_FILE_SERVER_ADDRESS != fileServerAddress
 
 
+    // todo retrofit.create() -> every get is create new one??
     val userService: UserService
         get() = retrofit.create()
     val userServiceCoordinator: UserService
         get() = coordinatorRetrofit.create()
     val configService: ConfigService
+        get() = retrofit.create()
+    val workspaceService: WorkspaceService
         get() = retrofit.create()
 
 

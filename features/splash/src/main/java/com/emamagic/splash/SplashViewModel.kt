@@ -1,8 +1,8 @@
 package com.emamagic.splash
 
 import com.emamagic.common_ui.base.BaseViewModel
-import com.emamagic.core.LimooHttpCode
 import com.emamagic.domain.interactors.*
+import com.emamagic.domain.interactors.login.CheckLoginProcess
 import com.emamagic.splash.contract.SplashEvent
 import com.emamagic.splash.contract.SplashRouter
 import com.emamagic.splash.contract.SplashState

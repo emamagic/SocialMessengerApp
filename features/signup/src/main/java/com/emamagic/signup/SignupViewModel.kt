@@ -8,6 +8,9 @@ import com.emamagic.core.exhaustive
 import com.emamagic.core.succeeded
 import com.emamagic.core_android.ToastScope
 import com.emamagic.domain.interactors.*
+import com.emamagic.domain.interactors.login.CheckLoginProcess
+import com.emamagic.domain.interactors.login.IntroStatus
+import com.emamagic.domain.interactors.login.SignupUser
 import com.emamagic.mvi.BaseEffect
 import com.emamagic.signup.contract.SignupEvent
 import com.emamagic.signup.contract.SignupRouter

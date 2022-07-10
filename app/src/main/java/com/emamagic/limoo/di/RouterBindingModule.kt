@@ -4,7 +4,7 @@ import com.emamagic.login.contract.LoginRouter
 import com.emamagic.navigation.router.Router
 import com.emamagic.signup.contract.SignupRouter
 import com.emamagic.splash.contract.SplashRouter
-import com.emamagic.workspace_create.contract.WorkspaceCreateRouter
+import com.emamagic.workspace.contract.WorkspaceRouter
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -29,5 +29,5 @@ abstract class RouterBindingModule {
 
     @IntoSet
     @Binds
-    abstract fun bindWorkspaceCreateRouter(workspaceCreateRouter: WorkspaceCreateRouter): Router
+    abstract fun bindWorkspaceCreateRouter(workspaceRouter: WorkspaceRouter): Router
 }

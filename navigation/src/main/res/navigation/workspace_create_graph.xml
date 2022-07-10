@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/workspace_create_fragment"
-        android:name="com.emamagic.workspace_create.WorkspaceCreateFragment">
+        android:name="com.emamagic.workspace.create.WorkspaceCreateFragment">
         <deepLink
             android:id="@+id/deepLink"
             app:uri="android-app-limoo://workspace_create"/>
