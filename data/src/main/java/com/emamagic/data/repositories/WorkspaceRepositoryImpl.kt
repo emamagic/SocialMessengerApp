@@ -6,6 +6,7 @@ import com.emamagic.data.network.RestProvider
 import com.emamagic.data.toResponse
 import com.emamagic.data.toResult
 import com.emamagic.domain.entities.WorkspaceEntity
+import com.emamagic.domain.interactors.workspace.CreateWorkspace
 import com.emamagic.domain.interactors.workspace.SwitchWorkspace
 import com.emamagic.domain.repositories.WorkspaceRepository
 import com.emamagic.safe.SafeApi
@@ -23,6 +24,10 @@ class WorkspaceRepositoryImpl @Inject constructor(
 
     override suspend fun switchWorkspace(params: SwitchWorkspace.Params): ResultWrapper<WorkspaceEntity> = fresh {
         restProvider.workspaceService.getWorkspaceById(params.id).toResponse()
+    }.toResult()
+
+    override suspend fun createWorkspace(params: CreateWorkspace.Params): ResultWrapper<WorkspaceEntity> = fresh {
+        restProvider.workspaceService.createWorkspace(params).toResponse()
     }.toResult()
 
 

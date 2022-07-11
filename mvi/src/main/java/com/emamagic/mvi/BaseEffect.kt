@@ -54,3 +54,8 @@ sealed class LoginEffect : BaseEffect {
         val responseType: String
     ) : LoginEffect()
 }
+
+
+sealed class WorkspaceEffect : BaseEffect {
+    data class Init(val canCreateOrgWorkspace: Boolean): WorkspaceEffect()
+}

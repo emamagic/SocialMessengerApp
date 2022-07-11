@@ -2,11 +2,15 @@ package com.emamagic.workspace.create
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import coil.load
 import com.emamagic.common_ui.base.BaseFragment
 import com.emamagic.common_ui.base.BasePagerAdapter
 import com.emamagic.core_android.onTabSelected
+import com.emamagic.mvi.BaseEffect
+import com.emamagic.mvi.WorkspaceEffect
 import com.emamagic.workspace.WorkspaceViewModel
 import com.emamagic.workspace.contract.WorkspaceEvent
 import com.emamagic.workspace.contract.WorkspaceRouter
@@ -36,33 +40,41 @@ class WorkspaceCreateFragment: BaseFragment<FragmentWorkspaceCreateBinding, Work
             }
         }
 
-        tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) {tab, position ->
+        tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> {}
                 1 -> {}
             }
         }
-
-
     }
 
     override fun renderViewState(viewState: WorkspaceState) {
-        if (viewState.canCreateOrgWorkspace) {
-            organizationWorkspaceFragment = OrganizationWorkspaceFragment()
-        }
-        defaultWorkspaceFragment = DefaultWorkspaceFragment()
-        fragments.add(defaultWorkspaceFragment)
 
-        if (::organizationWorkspaceFragment.isInitialized) {
-            fragments.add(organizationWorkspaceFragment)
+    }
+
+    override fun renderCustomViewEffect(viewEffect: BaseEffect): Boolean {
+        when (viewEffect) {
+            is WorkspaceEffect.Init -> {
+                if (viewEffect.canCreateOrgWorkspace) {
+                    organizationWorkspaceFragment = OrganizationWorkspaceFragment()
+                }
+                defaultWorkspaceFragment = DefaultWorkspaceFragment()
+                fragments.add(defaultWorkspaceFragment)
+
+                if (::organizationWorkspaceFragment.isInitialized) {
+                    fragments.add(organizationWorkspaceFragment)
+                }
+                pagerAdapter = BasePagerAdapter(
+                    fragments,
+                    childFragmentManager,
+                    viewLifecycleOwner.lifecycle
+                )
+                binding.viewPager.adapter = pagerAdapter
+                tabLayoutMediator.attach()
+            }
+            else -> {}
         }
-        pagerAdapter = BasePagerAdapter(
-            fragments,
-            childFragmentManager,
-            viewLifecycleOwner.lifecycle
-        )
-        binding.viewPager.adapter = pagerAdapter
-        tabLayoutMediator.attach()
+        return true
     }
 
     override fun onDestroyView() {

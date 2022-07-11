@@ -3,9 +3,11 @@ package com.emamagic.workspace.contract
 import com.emamagic.mvi.State
 
 data class WorkspaceState(
-    val canCreateOrgWorkspace: Boolean
-): State {
+    val avatarUrl: String?
+) : State {
     companion object {
-        fun initialize() = WorkspaceState(canCreateOrgWorkspace = false)
+        fun initialize() = WorkspaceState(
+            avatarUrl = null
+        )
     }
 }

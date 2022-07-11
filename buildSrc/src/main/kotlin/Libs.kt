@@ -78,15 +78,12 @@ object Libs {
     // Annotation
     const val annotationx = "androidx.annotation:annotation:${Versions.annotation}"
 
-    // Glide
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val glide_kapt = "com.github.bumptech.glide:compiler:${Versions.glide}"
-
     // Room
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val room_kapt = "androidx.room:room-compiler:${Versions.room}"
     const val room_coroutine = "androidx.room:room-ktx:${Versions.room}"
     const val room_common = "androidx.room:room-common:${Versions.room}"
+    const val room_paging = "androidx.room:room-paging:${Versions.room}"
 
     // Lottie
     const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"

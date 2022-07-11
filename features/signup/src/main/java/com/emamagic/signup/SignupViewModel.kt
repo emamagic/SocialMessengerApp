@@ -50,7 +50,7 @@ class SignupViewModel @Inject constructor(
     override fun handleEvent(event: SignupEvent) {
         when (event) {
             SignupEvent.UserSawIntro -> userSawIntro()
-            is SignupEvent.UserPickedAvatar -> uploadAvatar(event.uri)
+            is SignupEvent.UserPickedAvatar -> uploadUserAvatar(event.uri)
             is SignupEvent.Signup -> validateIfNeeded(event.firstName, event.lastName, event.email)
         }
     }
@@ -72,7 +72,7 @@ class SignupViewModel @Inject constructor(
     }
 
 
-    private fun uploadAvatar(uri: Uri) = withLoadingScope {
+    private fun uploadUserAvatar(uri: Uri) = withLoadingScope {
         uploadFile(uri.toString()).collect {
             if (it.succeeded) {
                 val attachment = it.data!![0]
