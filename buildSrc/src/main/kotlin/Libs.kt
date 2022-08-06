@@ -75,6 +75,9 @@ object Libs {
     const val epoxy_paging = "com.airbnb.android:epoxy-paging3:${Versions.epoxy}"
     const val paging_common = "androidx.paging:paging-common:${Versions.paging}"
 
+    // Paging
+    const val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+
     // Annotation
     const val annotationx = "androidx.annotation:annotation:${Versions.annotation}"
 

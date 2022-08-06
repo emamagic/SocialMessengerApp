@@ -1,5 +1,6 @@
 package com.emamagic.splash
 
+import android.util.Log
 import com.emamagic.common_ui.base.BaseViewModel
 import com.emamagic.domain.interactors.*
 import com.emamagic.domain.interactors.login.CheckLoginProcess

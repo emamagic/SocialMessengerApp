@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
         DeepLink.ACTION_TO_WORKSPACE_SELECT,
         DeepLink.ACTION_TO_WORKSPACE_CREATE,
         DeepLink.ACTION_TO_WORKSPACE_ADD_MEMBER,
-        DeepLink.ACTION_TO_CHAT,
         DeepLink.ACTION_TO_ALL_THREAD
 })
 @Retention(RetentionPolicy.SOURCE)
@@ -23,6 +22,5 @@ public @interface DeepLink {
     String ACTION_TO_WORKSPACE_SELECT = InternalDeepLink.DOMAIN + "workspace_select";
     String ACTION_TO_WORKSPACE_CREATE = InternalDeepLink.DOMAIN + "workspace_create";
     String ACTION_TO_WORKSPACE_ADD_MEMBER = InternalDeepLink.DOMAIN + "workspace_add_member";
-    String ACTION_TO_CHAT = InternalDeepLink.DOMAIN + "chat";
     String ACTION_TO_ALL_THREAD = InternalDeepLink.DOMAIN + "all_thread";
 }

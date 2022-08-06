@@ -13,4 +13,6 @@ interface WorkspaceRepository {
 
     suspend fun createWorkspace(params: CreateWorkspace.Params): ResultWrapper<WorkspaceEntity>
 
+    suspend fun getMyWorkspaces(): ResultWrapper<List<WorkspaceEntity>>
+
 }

@@ -12,7 +12,7 @@ import retrofit2.http.Path
 interface WorkspaceService {
 
     @GET("workspace/items/{workspace_id}")
-    suspend fun getWorkspaceById(@Path("workspace_id") workspaceId: String): Response<WorkspaceEntity>
+    suspend fun findWorkspaceById(@Path("workspace_id") workspaceId: String): Response<WorkspaceEntity>
 
     @GET("workspace/items/{workspace_id}/unread")
     suspend fun getWorkspaceUnread(@Path("workspace_id") workspaceId: String): Response<WorkspaceUnread>

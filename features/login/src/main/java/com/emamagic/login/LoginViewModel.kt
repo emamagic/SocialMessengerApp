@@ -293,9 +293,4 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    // ---------------- signup ----------------
-
-
-    // ---------------- intro ----------------
-
 }

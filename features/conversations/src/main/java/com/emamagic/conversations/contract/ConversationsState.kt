@@ -1,14 +1,15 @@
 package com.emamagic.conversations.contract
 
+import com.emamagic.conversations.ConversationWrapper
 import com.emamagic.mvi.State
 
 data class ConversationsState(
-    val t: String
+    val conversations: List<ConversationWrapper>
 ) : State {
     companion object {
         fun initialize() =
             ConversationsState(
-                t = ""
+                conversations = emptyList()
             )
     }
 }

@@ -27,19 +27,19 @@ class WorkspaceViewModel @Inject constructor(
     override fun createInitialState(): WorkspaceState = WorkspaceState.initialize()
 
     init {
-        setEffect { BaseEffect.ShowLoading(scope = ToastScope.MODULE_SCOPE) }
-        withLoadingScope {
-            val currentWorkspace = getCurrentWorkspace()
-            if (currentWorkspace.succeeded) {
-                if (currentWorkspace.data!!.organizationId.isNullOrEmpty()) {
-                    setEffect { WorkspaceEffect.Init(false) }
-                } else {
-                    setEffect { WorkspaceEffect.Init(true) }
-                }
-            }
-            setEffect { WorkspaceEffect.Init(false) }
-            setEffect { BaseEffect.HideLoading(scope = ToastScope.MODULE_SCOPE) }
-        }
+//        setEffect { BaseEffect.ShowLoading(scope = ToastScope.MODULE_SCOPE) }
+//        withLoadingScope {
+//            val currentWorkspace = getCurrentWorkspace(Unit)
+//            if (currentWorkspace.succeeded) {
+//                if (currentWorkspace.data!!.organizationId.isNullOrEmpty()) {
+//                    setEffect { WorkspaceEffect.Init(false) }
+//                } else {
+//                    setEffect { WorkspaceEffect.Init(true) }
+//                }
+//            }
+//            setEffect { WorkspaceEffect.Init(false) }
+//            setEffect { BaseEffect.HideLoading(scope = ToastScope.MODULE_SCOPE) }
+//        }
     }
 
     override fun handleEvent(event: WorkspaceEvent) {

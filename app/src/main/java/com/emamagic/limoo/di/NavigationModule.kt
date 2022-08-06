@@ -32,4 +32,8 @@ object NavigationModule {
     @Singleton
     fun provideWorkspaceCreateRouter() = WorkspaceRouterImpl()
 
+    @Provides
+    @Singleton
+    fun provideConversationRouter() = ConversationRouterImpl()
+
 }

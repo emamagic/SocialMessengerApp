@@ -21,6 +21,8 @@
     <dimen name="limoo_input_height">40dp</dimen>
     <dimen name="limoo_input_text_size">12sp</dimen>
 
+    <dimen name="icon_size">24sp</dimen>
+
 
 
 </resources>

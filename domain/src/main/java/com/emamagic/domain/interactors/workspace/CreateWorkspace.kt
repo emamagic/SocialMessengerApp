@@ -9,8 +9,8 @@ import com.emamagic.domain.repositories.WorkspaceRepository
 import javax.inject.Inject
 
 class CreateWorkspace @Inject constructor(
-    private val workspaceRepository: WorkspaceRepository,
     @Bridge
+    private val workspaceRepository: WorkspaceRepository,
     dispatchers: AppCoroutineDispatchers
 ): ResultInteractor<CreateWorkspace.Params, WorkspaceEntity>(dispatchers) {
 

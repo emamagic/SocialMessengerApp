@@ -26,7 +26,6 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val restProvider: RestProvider,
     private val authSession: UserAuthSession,
-    private val workspaceDao: WorkspaceDao,
     private val organizationDao: OrganizationDao,
 ) : SafeApi(), UserRepository, NotificationCenter.NotificationCenterDelegate {
 
@@ -72,10 +71,6 @@ class UserRepositoryImpl @Inject constructor(
         user
     })
 
-
-    override suspend fun getMyWorkspaces(): ResultWrapper<List<WorkspaceEntity>> = fresh {
-        restProvider.userService.getMyWorkspaces().toResponse()
-    }.toResult(doOnSuccess = workspaceDao::insert, tryIfFailed = { workspaceDao.getWorkspaces() })
 
     override suspend fun getMyOrganizations(): ResultWrapper<List<OrganizationEntity>> = fresh {
         restProvider.userService.getMyOrganizations().toResponse()

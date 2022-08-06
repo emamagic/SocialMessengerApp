@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/chat_graph"
+    app:startDestination="@id/chat_fragment">
+
+    <fragment
+        android:id="@+id/chat_fragment"
+        android:name="com.emamagic.chat.ChatFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://test.limonadapp.ir/Limonad/workspace/{workspaceName}/conversation/{conversationId}/message/{messageId}"/>
+        <argument
+            android:name="workspaceName"
+            app:argType="string"/>
+        <argument
+            android:name="conversationId"
+            app:argType="string"/>
+        <argument
+            android:name="messageId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

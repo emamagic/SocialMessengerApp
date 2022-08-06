@@ -40,11 +40,9 @@ android {
 //            buildConfigField ("String", "BASE_FILE_SERVER_URL", "https://alpha.limonadapp.ir/fileserver/")
 //            applicationIdSuffix = ".alpha"
 //        }
-//        getByName("debug") {
-//            resValue("string", "host", "test.limonadapp.ir")
-//            buildConfigField("String", "BASE_FILE_SERVER_URL", "https://test.limonadapp.ir/fileserver/")
-//            applicationIdSuffix = ".debug"
-//        }
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+        }
     }
 
     buildFeatures {

@@ -1,6 +1,7 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.core.Bridge
+import com.emamagic.domain.repositories.ConversationRepository
 import com.emamagic.domain.repositories.FileRepository
 import com.emamagic.domain.repositories.UserRepository
 import com.emamagic.domain.repositories.WorkspaceRepository
@@ -43,5 +44,15 @@ object EntryBridgeModule {
         return EntryPoints
             .get(authUserComponentManager, AuthEntryPoint::class.java)
             .getWorkspaceRepository()
+    }
+
+    @Bridge
+    @Provides
+    fun provideConversationRepository(
+        authUserComponentManager: AuthUserComponentManager
+    ): ConversationRepository {
+        return EntryPoints
+            .get(authUserComponentManager, AuthEntryPoint::class.java)
+            .getConversationRepository()
     }
 }

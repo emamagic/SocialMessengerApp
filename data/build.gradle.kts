@@ -16,7 +16,7 @@ dependencies {
     api(Libs.room)
     implementation(Libs.room_coroutine)
     kapt(Libs.room_kapt)
-    kapt(Libs.room_paging)
+    implementation(Libs.room_paging)
     api(project(Modules.safe))
     implementation(project(Modules.cache))
     api(Libs.retrofit)

@@ -438,6 +438,7 @@
     <color name="limoo_secondary_light">#9DB4D2</color>
     <color name="limoo_secondary_dark">#172A4D</color>
 
+    <color name="limoo_dark">#121212</color>
     <color name="disable_background">#F3F5F7</color>
 
 </resources>

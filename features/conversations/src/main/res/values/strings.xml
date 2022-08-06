@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pinned_groups">گروه‌های سنجاق‌ شده</string>
+    <string name="public_groups">گروه‌های عمومی</string>
+    <string name="private_groups">گروه‌های خصوصی</string>
+    <string name="direct_messages">پیام‌های شخصی</string>
+    <string name="group_messages">پیام‌های گروهی</string>
+    <string name="town_square_fa">میدان شهر</string>
+    <string name="bot_groups">بات ها</string>
+    <string name="town_square_en">Town Square</string>
+</resources>

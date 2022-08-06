@@ -1,5 +1,6 @@
 package com.emamagic.limoo.di
 
+import com.emamagic.conversations.ConversationsRouter
 import com.emamagic.login.contract.LoginRouter
 import com.emamagic.navigation.router.Router
 import com.emamagic.signup.contract.SignupRouter
@@ -30,4 +31,8 @@ abstract class RouterBindingModule {
     @IntoSet
     @Binds
     abstract fun bindWorkspaceCreateRouter(workspaceRouter: WorkspaceRouter): Router
+
+    @IntoSet
+    @Binds
+    abstract fun bindConversationRouter(conversationRouter: ConversationsRouter): Router
 }

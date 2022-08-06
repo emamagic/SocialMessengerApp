@@ -4,6 +4,7 @@ import com.emamagic.core.resettableLazy
 import com.emamagic.core.resettableManager
 import com.emamagic.data.di.RetrofitFactory
 import com.emamagic.data.network.services.ConfigService
+import com.emamagic.data.network.services.ConversationService
 import com.emamagic.data.network.services.UserService
 import com.emamagic.data.network.services.WorkspaceService
 import com.google.gson.JsonObject
@@ -88,6 +89,8 @@ class RestProvider @Inject constructor(
     val configService: ConfigService
         get() = retrofit.create()
     val workspaceService: WorkspaceService
+        get() = retrofit.create()
+    val conversationService: ConversationService
         get() = retrofit.create()
 
 
