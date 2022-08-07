@@ -35,6 +35,7 @@
         <entry key="core/src/main/res/layout/layout_toast.xml" value="0.34322916666666664" />
         <entry key="emoji/src/main/res/drawable/selector_emoji_travel.xml" value="0.2235" />
         <entry key="features/chat/src/main/res/layout/fragment_chat.xml" value="0.1" />
+        <entry key="features/chat/src/main/res/layout/row_chat.xml" value="0.2598958333333333" />
         <entry key="features/conversation/src/main/res/layout/fragment_conversation.xml" value="0.34322916666666664" />
         <entry key="features/conversations/src/main/res/layout/fragment_conversations.xml" value="0.21041666666666667" />
         <entry key="features/conversations/src/main/res/layout/row_conversation.xml" value="0.3421875" />

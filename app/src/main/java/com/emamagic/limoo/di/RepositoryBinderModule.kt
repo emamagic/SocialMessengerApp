@@ -1,14 +1,8 @@
 package com.emamagic.limoo.di
 
 import com.emamagic.core.AuthUserScope
-import com.emamagic.data.repositories.ConversationRepositoryImpl
-import com.emamagic.data.repositories.FileRepositoryImpl
-import com.emamagic.data.repositories.UserRepositoryImpl
-import com.emamagic.data.repositories.WorkspaceRepositoryImpl
-import com.emamagic.domain.repositories.ConversationRepository
-import com.emamagic.domain.repositories.FileRepository
-import com.emamagic.domain.repositories.UserRepository
-import com.emamagic.domain.repositories.WorkspaceRepository
+import com.emamagic.data.repositories.*
+import com.emamagic.domain.repositories.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,5 +26,9 @@ abstract class RepositoryBinderModule {
     @AuthUserScope
     @Binds
     abstract fun bindWorkspaceRepository(workspaceRepositoryImpl: WorkspaceRepositoryImpl): WorkspaceRepository
+
+    @AuthUserScope
+    @Binds
+    abstract fun bindMessageRepository(messageRepositoryImpl: MessageRepositoryImpl): MessageRepository
 
 }

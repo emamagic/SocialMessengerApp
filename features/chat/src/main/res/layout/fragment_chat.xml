@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,23 +12,11 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.emamagic.common_ui.widget.FontTextView
-            android:id="@+id/workspaceId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
-
-        <com.emamagic.common_ui.widget.FontTextView
-            android:id="@+id/conversationId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
-
-        <com.emamagic.common_ui.widget.FontTextView
-            android:id="@+id/messageId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

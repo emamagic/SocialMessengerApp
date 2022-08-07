@@ -1,5 +1,7 @@
 package com.emamagic.chat
 
+import androidx.paging.PagingData
+import com.emamagic.domain.entities.MessageEntity
 import com.emamagic.mvi.EVENT
 import com.emamagic.mvi.State
 import com.emamagic.navigation.route.Route
@@ -9,17 +11,17 @@ interface ChatContract {
 
     sealed class ChatEvent: EVENT {
 
-        object GetMyWorkspaces: ChatEvent()
+        data class LoadMessage(val workspaceId: String, val conversationId: String): ChatEvent()
 
     }
 
     data class ChatState(
-        val conversations: List<String>
+        val messages: PagingData<MessageEntity>?
     ) : State {
         companion object {
             fun initialize() =
                 ChatState(
-                    conversations = emptyList()
+                    messages = null
                 )
         }
     }

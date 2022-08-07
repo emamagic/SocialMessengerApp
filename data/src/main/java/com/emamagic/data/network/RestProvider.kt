@@ -3,10 +3,7 @@ package com.emamagic.data.network
 import com.emamagic.core.resettableLazy
 import com.emamagic.core.resettableManager
 import com.emamagic.data.di.RetrofitFactory
-import com.emamagic.data.network.services.ConfigService
-import com.emamagic.data.network.services.ConversationService
-import com.emamagic.data.network.services.UserService
-import com.emamagic.data.network.services.WorkspaceService
+import com.emamagic.data.network.services.*
 import com.google.gson.JsonObject
 import dagger.Lazy
 import okhttp3.Call
@@ -91,6 +88,8 @@ class RestProvider @Inject constructor(
     val workspaceService: WorkspaceService
         get() = retrofit.create()
     val conversationService: ConversationService
+        get() = retrofit.create()
+    val messageService: MessageService
         get() = retrofit.create()
 
 

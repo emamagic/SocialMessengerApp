@@ -40,7 +40,6 @@ class ConversationsViewModel @Inject constructor(
                     flowOf(ResultWrapper.Failed(it.error!!))
                 }
             }.collectLatest { result ->
-                Log.e("TAG", "ttttttttt:2 ${result.succeeded} ${result.data?.size}", )
                 if (result.succeeded && result.data!!.isNotEmpty()) {
                     currentList.clear()
                     currentList.addAll(result.data!!)

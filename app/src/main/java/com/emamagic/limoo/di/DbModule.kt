@@ -5,9 +5,7 @@ import android.os.Debug
 import androidx.room.Room
 import com.emamagic.data.db.AppDatabase
 import com.emamagic.data.db.AppRoomDatabase
-import com.emamagic.data.db.dao.ConversationDao
-import com.emamagic.data.db.dao.OrganizationDao
-import com.emamagic.data.db.dao.WorkspaceDao
+import com.emamagic.data.db.dao.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +38,9 @@ object DbModule {
     @Provides
     fun provideConversationDao(db: AppDatabase): ConversationDao = db.getConversationDao()
 
+    @Provides
+    fun provideMessageDao(db: AppDatabase): MessageDao = db.getMessageDao()
+
+    @Provides
+    fun provideMessageRemoteKeysDao(db: AppDatabase): MessageRemoteKeysDao = db.getMessageRemoteKeysDao()
 }
