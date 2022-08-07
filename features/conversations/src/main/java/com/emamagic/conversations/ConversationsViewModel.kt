@@ -1,5 +1,6 @@
 package com.emamagic.conversations
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.emamagic.common_ui.base.BaseViewModel
 import com.emamagic.conversations.contract.ConversationsEvent
@@ -34,11 +35,12 @@ class ConversationsViewModel @Inject constructor(
             setEffect { BaseEffect.HideLoading(scope = ToastScope.MODULE_SCOPE) }
             flowOf(currentWorkspace(Unit)).flatMapLatest {
                 if (it.succeeded) {
-                    flowOf(myConversations(GetMyConversations.Params(it.data!!.id)))
+                    myConversations(GetMyConversations.Params(it.data!!.id))
                 } else {
                     flowOf(ResultWrapper.Failed(it.error!!))
                 }
             }.collectLatest { result ->
+                Log.e("TAG", "ttttttttt:2 ${result.succeeded} ${result.data?.size}", )
                 if (result.succeeded && result.data!!.isNotEmpty()) {
                     currentList.clear()
                     currentList.addAll(result.data!!)

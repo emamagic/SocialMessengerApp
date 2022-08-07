@@ -12,7 +12,7 @@ import com.emamagic.domain.entities.WorkspaceEntity
         ConversationEntity::class,
         WorkspaceEntity::class,
         OrganizationEntity::class
-    ], version = 13, exportSchema = false
+    ], version = 18, exportSchema = false
 )
 @TypeConverters(Converter::class)
 abstract class AppRoomDatabase : RoomDatabase(), AppDatabase

@@ -12,5 +12,5 @@ interface ConversationService {
     suspend fun getConversations(
         @Path("workspace_id") workspaceId: String,
         @Query("include_archived") includeArchived: Boolean = true
-    ): Response<List<ConversationEntity>>
+    ): List<ConversationEntity>
 }

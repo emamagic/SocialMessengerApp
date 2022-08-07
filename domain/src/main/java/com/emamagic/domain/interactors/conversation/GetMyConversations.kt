@@ -6,15 +6,15 @@ import com.emamagic.core.ResultWrapper
 import com.emamagic.domain.entities.ConversationEntity
 import com.emamagic.domain.interactors.ResultInteractor
 import com.emamagic.domain.repositories.ConversationRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetMyConversations @Inject constructor(
     @Bridge
-    private val conversationRepository: ConversationRepository,
-    dispatchers: AppCoroutineDispatchers
-): ResultInteractor<GetMyConversations.Params, List<ConversationEntity>>(dispatchers) {
+    private val conversationRepository: ConversationRepository
+) {
 
-    override suspend fun buildUseCase(params: Params): ResultWrapper<List<ConversationEntity>> =
+    operator fun invoke(params: Params): Flow<ResultWrapper<List<ConversationEntity>>> =
         conversationRepository.getMyConversations(params)
 
     data class Params(
