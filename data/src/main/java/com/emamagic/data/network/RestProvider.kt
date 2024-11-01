@@ -51,7 +51,7 @@ class RestProvider @Inject constructor(
 //    }
 
     fun setBaseUrlAndApiUrl(host: String) {
-        val mHost = "$host/Limonad/"
+        val mHost = "$host/"
         BASE_URL = mHost
         API_URL = BASE_URL + "api/v1/"
         if (isHostChanged(host)) {
@@ -98,7 +98,7 @@ class RestProvider @Inject constructor(
         val jsonContent = JsonObject().toString()
         val body = jsonContent.toRequestBody(jsonType)
         val okhttpRequest = Request.Builder()
-            .url("https://test.limonadapp.ir/Limonad/j_spring_jwt_security_check")
+            .url("https://base_url")
             .addHeader("Refresh", refreshToken)
             .post(body)
             .build()
